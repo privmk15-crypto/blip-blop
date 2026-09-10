@@ -24,7 +24,11 @@ jobs:
         run: cmake -S . -B build
 
       - name: Build
-        run: cmake --build build --parallel
+        # Capped (rather than unbounded --parallel) to avoid overloading
+        # this shared 2-4 vCPU runner: an unbounded parallel build of this
+        # project's ~170 translation units was observed to get the whole
+        # `make` process tree SIGTERM'd by the runner during Etap 1 CI.
+        run: cmake --build build --parallel 2
 
   windows:
     runs-on: windows-latest
@@ -45,13 +49,15 @@ jobs:
         run: cmake --build build --config Release --parallel
 
       # This is the actual check for the WIN32-subsystem fix made in Etap 1.
-      # A WIN32 (GUI subsystem) target on MSVC needs a WinMain entry point;
-      # SDL2 headers rename the app's main() to SDL_main via a macro, and the
-      # real WinMain is normally supplied by linking SDL2main. This project
-      # does not currently link SDL2main or define SDL_MAIN_HANDLED, so it is
-      # not assumed this links cleanly - it must be confirmed here, not
-      # assumed. If this step fails, the cause is very likely a missing
-      # SDL2main link (an existing condition, not introduced by Etap 1).
+      # A WIN32 (GUI subsystem) target on MSVC needs an entry point the
+      # linker can resolve. An earlier attempt linked SDL2main to supply
+      # WinMain (relying on SDL2 renaming main to SDL_main), but a CI run
+      # showed that rename doesn't fire in this toolchain, causing a
+      # duplicate `main` plus an unresolved `SDL_main`. The CMakeLists now
+      # instead sets /ENTRY:mainCRTStartup on MSVC so the linker uses the
+      # normal C runtime startup (which calls the existing main()) under
+      # the WINDOWS subsystem. This step still shouldn't be assumed to pass
+      # - it must be confirmed here, not assumed.
       - name: Verify Windows executable was actually produced
         shell: pwsh
         run: |

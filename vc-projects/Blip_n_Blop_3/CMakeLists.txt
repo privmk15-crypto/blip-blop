@@ -24,24 +24,29 @@ if(WIN32)
     # as a console app and showed a console window behind the game. Fixed as
     # part of the Etap 1 audit; no gameplay or architecture change.
     #
-    # Consequence of a real WIN32 subsystem target: SDL2's SDL_main.h
-    # `#define`s main to SDL_main on Windows (pulled in transitively via
-    # SDL.h), so the actual WinMain entry point must come from the SDL2main
-    # static library, or the link fails with an unresolved WinMain symbol.
-    # vcpkg's sdl2 port always installs SDL2main alongside SDL2, so find and
-    # link it explicitly rather than relying on it being pulled in
-    # implicitly. SDL2main must be linked before SDL2 in the library list.
-    find_library(SDL2MAIN_LIBRARIES SDL2main)
-    if(NOT SDL2MAIN_LIBRARIES)
-        message(FATAL_ERROR
-            "SDL2main library not found. It is required to provide the "
-            "WinMain entry point for this WIN32-subsystem target. If SDL2 "
-            "was installed via vcpkg, this should be installed alongside "
-            "SDL2 automatically; check the vcpkg toolchain/triplet setup.")
+    # Consequence of a real WIN32 subsystem target on MSVC: the linker's
+    # default entry point becomes WinMainCRTStartup, which expects a
+    # WinMain(). This project has a plain int main(argc, argv) (see
+    # blip_n_blop_3.cpp) and relies on neither SDL_MAIN_HANDLED nor an
+    # observed rename of main to SDL_main by SDL2's headers in this
+    # toolchain, so linking SDL2main here previously caused a duplicate
+    # `main` (LNK2005) plus an unresolved `SDL_main` (LNK2019) - confirmed
+    # via an actual CI run. Rather than depend on that header/macro
+    # behavior, tell the MSVC linker to use the normal C runtime startup
+    # (mainCRTStartup, which calls main()) instead of the WinMain-based one.
+    # This keeps the GUI subsystem (still set via /SUBSYSTEM:WINDOWS by
+    # WIN32 above - that's what actually suppresses the console window,
+    # independent of the entry point) while requiring no SDL2main link and
+    # no source changes.
+    if(MSVC)
+        set(BLIPBLOP_WIN32_LINK_FLAGS "/ENTRY:mainCRTStartup")
     endif()
 
     add_executable(blipblop WIN32 ${SRC} ${MENUS_SRC})
-    target_link_libraries(blipblop PUBLIC ${SDL2MAIN_LIBRARIES} ${SDL2_LIBRARIES})
+    target_link_libraries(blipblop PUBLIC ${SDL2_LIBRARIES})
+    if(BLIPBLOP_WIN32_LINK_FLAGS)
+        set_target_properties(blipblop PROPERTIES LINK_FLAGS "${BLIPBLOP_WIN32_LINK_FLAGS}")
+    endif()
 
     target_link_libraries(blipblop PUBLIC ${SDL2MIXER_LIBRARIES})
 

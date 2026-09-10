@@ -37,8 +37,14 @@ jobs:
 
       # windows-latest runners ship with vcpkg preinstalled and
       # VCPKG_INSTALLATION_ROOT pointing to it.
+      #
+      # sdl2-mixer needs the mpg123 and libvorbis features explicitly -
+      # without them the resulting SDL2_mixer.dll can't decode the .mp3
+      # files under vc-projects/Blip_n_Blop_3/data, so music would silently
+      # fail to play in the packaged build. .appveyor.yml already installs
+      # these same features for the legacy AppVeyor build; match it here.
       - name: Install dependencies (vcpkg)
-        run: vcpkg install sdl2:x64-windows sdl2-mixer:x64-windows
+        run: vcpkg install sdl2:x64-windows "sdl2-mixer[mpg123,libvorbis]:x64-windows"
 
       - name: Configure
         run: >

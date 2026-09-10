@@ -1,0 +1,63 @@
+name: Build
+
+# Etap 1 scope: configure + build only, on Linux and Windows.
+# No test step is included because the project does not currently have an
+# automated test suite.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsdl2-dev libsdl2-mixer-dev
+
+      - name: Configure
+        run: cmake -S . -B build
+
+      - name: Build
+        run: cmake --build build --parallel
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # windows-latest runners ship with vcpkg preinstalled and
+      # VCPKG_INSTALLATION_ROOT pointing to it.
+      - name: Install dependencies (vcpkg)
+        run: vcpkg install sdl2:x64-windows sdl2-mixer:x64-windows
+
+      - name: Configure
+        run: >
+          cmake -S . -B build -A x64
+          -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      # This is the actual check for the WIN32-subsystem fix made in Etap 1.
+      # A WIN32 (GUI subsystem) target on MSVC needs a WinMain entry point;
+      # SDL2 headers rename the app's main() to SDL_main via a macro, and the
+      # real WinMain is normally supplied by linking SDL2main. This project
+      # does not currently link SDL2main or define SDL_MAIN_HANDLED, so it is
+      # not assumed this links cleanly - it must be confirmed here, not
+      # assumed. If this step fails, the cause is very likely a missing
+      # SDL2main link (an existing condition, not introduced by Etap 1).
+      - name: Verify Windows executable was actually produced
+        shell: pwsh
+        run: |
+          $exe = "build/vc-projects/Blip_n_Blop_3/Release/blipblop.exe"
+          if (-not (Test-Path $exe)) {
+            Write-Error "Expected binary not found at $exe - the WIN32-subsystem build did not produce an executable."
+            exit 1
+          }
+          Write-Host "OK: found $exe"

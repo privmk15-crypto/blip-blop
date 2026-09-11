@@ -71,6 +71,7 @@
 #include "restore.h"
 #include "screen_shake.h"
 #include "scroll.h"
+#include "scroll_lock.h"
 #include "texte_cool.h"
 #include "tir_bb.h"
 #include "tir_bb_vache.h"
@@ -252,7 +253,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     etape_timer = 0;
     go_.Reset();
 
-    scroll_locked = false;
+    g_scroll_lock.Release();
     scroll_speed = 0;
     no_scroll1 = false;
     no_scroll2 = false;
@@ -1423,13 +1424,17 @@ void Game::manageCollisions() {
 //-----------------------------------------------------------------------------
 
 void Game::updateLock() {
-    if (!scroll_locked) return;
+    if (!g_scroll_lock.active()) return;
 
-    if ((cond_end_lock == 0 && list_ennemis.empty()) ||
-        (cond_end_lock == 1 && list_gen_ennemis.empty()) ||
-        (cond_end_lock == 2 && game_flag[flag_end_lock] == val_end_lock) ||
-        (cond_end_lock == 3 && game_flag[flag_end_lock] >= val_end_lock)) {
-        scroll_locked = false;
+    int cond = g_scroll_lock.cond();
+    int flag = g_scroll_lock.flag();
+    int val = g_scroll_lock.val();
+
+    if ((cond == 0 && list_ennemis.empty()) ||
+        (cond == 1 && list_gen_ennemis.empty()) ||
+        (cond == 2 && game_flag[flag] == val) ||
+        (cond == 3 && game_flag[flag] >= val)) {
+        g_scroll_lock.Release();
         go_.Come();
     }
 }

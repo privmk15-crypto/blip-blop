@@ -75,11 +75,8 @@ int			scr_offset;			// = offset % 640
 
 int			scroll_speed;
 
-bool		scroll_locked;
-int			x_lock;
-int			cond_end_lock;
-int			flag_end_lock;
-int			val_end_lock;
+// scroll_locked/x_lock/cond_end_lock/flag_end_lock/val_end_lock moved to
+// scroll_lock.cpp (ScrollLock) - Stage 2 ownership migration.
 
 bool		no_scroll1;
 bool		no_scroll2;

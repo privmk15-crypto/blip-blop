@@ -15,14 +15,10 @@
 ******************************************************************/
 
 #include "event_lock.h"
-#include "globals.h"
+#include "scroll_lock.h"
 #include "ben_debug.h"
 
 void EventLock::doEvent()
 {
-	scroll_locked = true;
-	x_lock = x_activation;
-	cond_end_lock = cond;
-	flag_end_lock = flag;
-	val_end_lock = val;
+	g_scroll_lock.Engage(x_activation, cond, flag, val);
 }

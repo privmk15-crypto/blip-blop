@@ -93,11 +93,8 @@ extern int			scr_offset;			// = offset % 640
 
 extern int			scroll_speed;
 
-extern bool			scroll_locked;
-extern int			x_lock;
-extern int			cond_end_lock;
-extern int			flag_end_lock;
-extern int			val_end_lock;
+// scroll_locked/x_lock/cond_end_lock/flag_end_lock/val_end_lock moved into
+// ScrollLock (scroll_lock.h) as part of the Stage 2 ownership migration.
 
 extern bool			no_scroll1;			// Pour arrêter le scroll quand
 extern bool			no_scroll2;			// blip ou blop meure

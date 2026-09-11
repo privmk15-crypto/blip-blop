@@ -26,6 +26,7 @@
 #include "sprite.h"
 #include "globals.h"
 #include "scroll.h"
+#include "scroll_lock.h"
 #include "ben_debug.h"
 #include <SDL2/SDL.h>
 
@@ -110,9 +111,9 @@ void drawScrolling()
 
 void updateScrolling(bool forceOk)
 {
-	if (scroll_locked) {
-		if (offset < x_lock)
-			offset = x_lock;
+	if (g_scroll_lock.active()) {
+		if (offset < g_scroll_lock.x())
+			offset = g_scroll_lock.x();
 	} else if (scroll_speed != 0 && forceOk) {
 		offset += scroll_speed;
 	} else if (list_joueurs.size() > 0) {

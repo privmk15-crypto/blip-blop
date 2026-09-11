@@ -99,7 +99,7 @@ void EnnemiBisouAuto::onMeure()
 	int gox;
 
 	if (dx <= 0)
-		gox = offset - 640;
+		gox = offset - SCREEN_W;
 	else
 		gox = offset + 900;
 

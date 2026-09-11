@@ -93,8 +93,8 @@ void FondSnorkSas1::affiche(RenderQueue& rq)
 	r.top		= 222 - etape;
 	r.left		= 0;
 
-	if (x + 53 > offset + 640)
-		largeur = offset + 640 - x;
+	if (x + 53 > offset + SCREEN_W)
+		largeur = offset + SCREEN_W - x;
 	else if (x < offset) {
 		largeur = 53;
 		r.left = offset - x;
@@ -150,8 +150,8 @@ void FondSnorkSas2::affiche(RenderQueue& rq)
 	r.top		= 222 - etape;
 	r.left		= 0;
 
-	if (x + 53 > offset + 640)
-		largeur = offset + 640 - x;
+	if (x + 53 > offset + SCREEN_W)
+		largeur = offset + SCREEN_W - x;
 	else if (x < offset) {
 		largeur = 53;
 		r.left = offset - x;

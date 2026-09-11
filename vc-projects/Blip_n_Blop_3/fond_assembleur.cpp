@@ -53,8 +53,8 @@ void FondAssembleur::affiche(RenderQueue& rq)
 	r.top		= etape;
 	r.left		= 0;
 
-	if (x + 75 > offset + 640)
-		largeur = offset + 640 - x;
+	if (x + 75 > offset + SCREEN_W)
+		largeur = offset + SCREEN_W - x;
 	else
 		largeur = 75;
 

@@ -392,7 +392,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     */
     Sprite* s = g_game_state.entities().list_joueurs()[0];
     offset = s->x;
-    offset -= (offset % 640);
+    offset -= (offset % SCREEN_W);
 
     n_img = 0;
     xTex = 0;

@@ -118,7 +118,7 @@ void EnnemiBisouNuage::onNormal()
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 4, 10)];
 	}
 
-	if (etape_shoot >= wait_shoot && x <= offset + 640) {
+	if (etape_shoot >= wait_shoot && x <= offset + SCREEN_W) {
 		TirNuage * s = new TirNuage();
 
 		s->x = x;

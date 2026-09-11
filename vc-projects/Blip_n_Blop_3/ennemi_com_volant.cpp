@@ -53,7 +53,7 @@ void EnnemiCOMVolant::onAvance()
 		} else {
 			y_cible = 100 + rand() % 200;;
 		}
-	} else if ((dir == SENS_DROITE) && (x + speed > offset + 640 || mur_opaque(x + speed, y))) {
+	} else if ((dir == SENS_DROITE) && (x + speed > offset + SCREEN_W || mur_opaque(x + speed, y))) {
 		dir = SENS_GAUCHE;
 		attack = false;
 		if (tete_turc != NULL) {

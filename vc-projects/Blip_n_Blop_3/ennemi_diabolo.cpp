@@ -163,7 +163,7 @@ void EnnemiDiabolo::onAvance()
 
 	if (x - 10 < xmin || mur_opaque(x - 10, y)) {
 		dir = SENS_DROITE;
-	} else if (x + 10 > offset + 640 || mur_opaque(x + 10, y)) {
+	} else if (x + 10 > offset + SCREEN_W || mur_opaque(x + 10, y)) {
 		dir = SENS_GAUCHE;
 	}
 
@@ -181,7 +181,7 @@ void EnnemiDiabolo::onAvance()
 
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_droite,8,4)];
 
-		if ( mur_opaque( x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + 640))
+		if ( mur_opaque( x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;*/
 	}
 

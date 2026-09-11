@@ -91,6 +91,21 @@ extern SDL::Surface  *	videoA;			// cache video
 extern int			offset;				// offset courant du scroll
 extern int			scr_offset;			// = offset % 640
 
+// Etap 4 (Full HD prep, step 2): single named constant for the width of
+// the visible screen/camera viewport (backSurface is still 640x480 -
+// see picture.h's XPIC_MAX/YPIC_MAX, untouched at this step). Replaces
+// scattered literal 640 at "is this actor past the right/left edge of
+// the visible screen" call sites (enemy/shot AI turnaround checks,
+// fond_* edge clipping, the camera clamp in scroll.cpp/game.cpp).
+// Deliberately NOT used yet for: XPIC_MAX/YPIC_MAX (picture.h),
+// CreatePrimary()/backSurface/win_size (graphics.cpp/blip_n_blop_3.cpp,
+// reserved for a later step), vbuffer_wide's 840-wide scroll cache
+// buffer (scroll.cpp - a different, already-named concept, mixed with
+// literal 640 in ways that need separate, careful review), or any of
+// cine_player/rpg_player/character_selection/screen_shake/menus/HUD
+// (not yet audited for this constant).
+constexpr int		SCREEN_W = 640;
+
 extern int			scroll_speed;
 
 // scroll_locked/x_lock/cond_end_lock/flag_end_lock/val_end_lock moved into

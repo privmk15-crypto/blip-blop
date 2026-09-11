@@ -100,7 +100,7 @@ void EnnemiBulbizarreHeros::onAvance()
 	//
 	if (x - 1 < xmin || mur_opaque(x - 1, y))
 		dir = SENS_DROITE;
-	else if (x + 1 > offset + 640 || mur_opaque(x + 1, y))
+	else if (x + 1 > offset + SCREEN_W || mur_opaque(x + 1, y))
 		dir = SENS_GAUCHE;
 
 	if (dir == SENS_DROITE) {

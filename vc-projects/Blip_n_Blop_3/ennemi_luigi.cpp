@@ -275,7 +275,7 @@ void EnnemiLuigi::onAvance()
 			}
 			else
 			{
-				if (x + encaissement/100 < offset + 640)
+				if (x + encaissement/100 < offset + SCREEN_W)
 				{
 					marche(encaissement/100);
 				}
@@ -316,7 +316,7 @@ void EnnemiLuigi::onMeure()
 		tombe();
 		if (x - 3 < xmin || mur_opaque(x - 3, y)) {
 			dir = SENS_DROITE;
-		} else if (x + 3 > offset + 640 || mur_opaque(x + 3, y)) {
+		} else if (x + 3 > offset + SCREEN_W || mur_opaque(x + 3, y)) {
 			dir = SENS_GAUCHE;
 		}
 		if (dir == SENS_DROITE) {
@@ -638,7 +638,7 @@ void EnnemiLuigi::onAttack()
 		onAvance();
 		return;
 	}
-	else if ( x + speed > offset + 640 || mur_opaque( x+speed, y))
+	else if ( x + speed > offset + SCREEN_W || mur_opaque( x+speed, y))
 	{
 		etape=0;
 		ss_etape=0;

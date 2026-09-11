@@ -72,7 +72,7 @@ void EnnemiMariotapette::onAvance()
 	if (x - speed < xmin || mur_opaque(x - speed, y)) {
 		dir = SENS_DROITE;
 		speed = 1;
-	} else if (x + speed > offset + 640 || mur_opaque(x + speed, y)) {
+	} else if (x + speed > offset + SCREEN_W || mur_opaque(x + speed, y)) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}
@@ -163,7 +163,7 @@ void EnnemiMariotapette::onAvance()
 	}
 
 	if (encaissement >= MULTIPLICATEUR_RECUL_SOL) {
-		if (x + encaissement / MULTIPLICATEUR_RECUL_SOL < offset + 640) {
+		if (x + encaissement / MULTIPLICATEUR_RECUL_SOL < offset + SCREEN_W) {
 			x += encaissement / MULTIPLICATEUR_RECUL_SOL;
 		}
 		/*else
@@ -205,7 +205,7 @@ void EnnemiMariotapette::onAvance()
 			}
 			else
 			{
-				if (x + encaissement/100 < offset + 640)
+				if (x + encaissement/100 < offset + SCREEN_W)
 				{
 					marche(encaissement/100);
 				}
@@ -264,7 +264,7 @@ void EnnemiMariotapette::onMeure()
 				if (x - speed < xmin || mur_opaque(x - speed, y)) {
 					dir = SENS_DROITE;
 					speed = 2;
-				} else if (x + speed > offset + 640 || mur_opaque(x + speed, y)) {
+				} else if (x + speed > offset + SCREEN_W || mur_opaque(x + speed, y)) {
 					dir = SENS_GAUCHE;
 					speed = 2;
 				}
@@ -326,7 +326,7 @@ void EnnemiMariotapette::onCharge()
 		encaissement = 0;
 		onAvance();
 		return;
-	} else if (x + speed > offset + 640 || mur_opaque(x + speed, y)) {
+	} else if (x + speed > offset + SCREEN_W || mur_opaque(x + speed, y)) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 		etape = 0;
@@ -385,7 +385,7 @@ void EnnemiMariotapette::onSaute()
 		speed = 1;
 	}
 
-	else if (/*(dir==SENS_DROITE)&&*/(x + speed > offset + 640 || mur_opaque(x + speed, y))) {
+	else if (/*(dir==SENS_DROITE)&&*/(x + speed > offset + SCREEN_W || mur_opaque(x + speed, y))) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}

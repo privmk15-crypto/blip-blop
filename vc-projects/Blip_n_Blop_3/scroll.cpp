@@ -48,8 +48,8 @@ void drawScrolling()
 	//
 	if (offset < 0)
 		offset = 0;
-	else if (offset > g_game_state.level().size() - 640)
-		offset = g_game_state.level().size() - 640;
+	else if (offset > g_game_state.level().size() - SCREEN_W)
+		offset = g_game_state.level().size() - SCREEN_W;
 
 	int	x1 = offset % vbuffer_wide;
 	int x2 = (offset + 640) % vbuffer_wide;
@@ -125,7 +125,7 @@ void updateScrolling(bool forceOk)
 		}
 
 		x_moy /= g_game_state.entities().list_joueurs().size();
-		x_moy -= 320;	// Pour centrer (320=640/2)
+		x_moy -= SCREEN_W / 2;	// Pour centrer
 
 		if (x_moy > offset) {
 			if ((x_moy - offset) >= 2)
@@ -137,6 +137,6 @@ void updateScrolling(bool forceOk)
 
 	if (offset < 0)
 		offset = 0;
-	else if (offset > g_game_state.level().size() - 640)
-		offset = g_game_state.level().size() - 640;
+	else if (offset > g_game_state.level().size() - SCREEN_W)
+		offset = g_game_state.level().size() - SCREEN_W;
 }

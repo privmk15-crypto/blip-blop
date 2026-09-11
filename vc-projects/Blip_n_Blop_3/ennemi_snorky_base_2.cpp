@@ -98,7 +98,7 @@ void EnnemiSnorkyBase2::onAvance()
 
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_droite, 8, 4)];
 
-		if (mur_opaque(x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + 640))
+		if (mur_opaque(x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;
 	}
 

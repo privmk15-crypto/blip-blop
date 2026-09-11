@@ -41,8 +41,8 @@ void FondPokeCiel::affiche(RenderQueue& rq)
 	r.top		= 0;
 	r.left		= etape;
 
-	if (x + 192 > offset + 640) {
-		largeur = offset + 640 - x;
+	if (x + 192 > offset + SCREEN_W) {
+		largeur = offset + SCREEN_W - x;
 	}
 
 	else if (x < offset) {

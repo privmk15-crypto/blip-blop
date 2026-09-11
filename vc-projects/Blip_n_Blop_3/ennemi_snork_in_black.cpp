@@ -114,7 +114,7 @@ void EnnemiSnorkInBlack::onAvance()
 
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_marche_droite, 4, 4)];
 
-		if (mur_opaque(x + SNORK_IN_BLACK_SPEED, y) || (x + SNORK_IN_BLACK_SPEED > offset + 640))
+		if (mur_opaque(x + SNORK_IN_BLACK_SPEED, y) || (x + SNORK_IN_BLACK_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;
 	}
 

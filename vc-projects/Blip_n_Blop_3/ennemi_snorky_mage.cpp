@@ -120,7 +120,7 @@ void EnnemiSnorkyMage::onAvance()
 	} else {
 		x += SNORKY_MAGE_SPEED;
 
-		if (mur_opaque(x + SNORKY_MAGE_SPEED, y) || (x + SNORKY_MAGE_SPEED > offset + 640))
+		if (mur_opaque(x + SNORKY_MAGE_SPEED, y) || (x + SNORKY_MAGE_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;
 	}
 

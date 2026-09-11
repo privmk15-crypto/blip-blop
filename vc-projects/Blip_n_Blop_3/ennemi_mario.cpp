@@ -211,7 +211,7 @@ void EnnemiMario::onAvance()
 
 				case 4:
 					if (dir == SENS_DROITE) {
-						attack_etape = 1 + (offset + 640 - x) / 100;
+						attack_etape = 1 + (offset + SCREEN_W - x) / 100;
 					} else {
 						attack_etape = 1 + (x - offset) / 100;
 					}
@@ -370,7 +370,7 @@ void EnnemiMario::onCharge()
 		onAvance();
 		return;
 	}
-	else if ( x + speed > offset + 640 || mur_opaque( x+speed, y))
+	else if ( x + speed > offset + SCREEN_W || mur_opaque( x+speed, y))
 	{
 		dir = SENS_GAUCHE;
 		speed=1;
@@ -426,7 +426,7 @@ void EnnemiMario::onSaute()
 		speed = 1;
 	}
 
-	else if ((dir == SENS_DROITE) && (x + speed > offset + 640 || mur_opaque(x + speed, y))) {
+	else if ((dir == SENS_DROITE) && (x + speed > offset + SCREEN_W || mur_opaque(x + speed, y))) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}
@@ -832,7 +832,7 @@ void EnnemiMario::onRafaleverticaledouble()
 			if ((dir == SENS_DROITE) && (x + (attack_etape + 1) * 100 + 20 > offset + 620)) {
 				attack_phase = 1;
 				attack_ss_etape = 0;
-				attack_etape = 1 + (offset + 640 - x) / 100;
+				attack_etape = 1 + (offset + SCREEN_W - x) / 100;
 			} else if ((dir == SENS_GAUCHE) && (x - (attack_etape + 1) * 100 - 20 < offset + 20)) {
 				attack_phase = 1;
 				attack_ss_etape = 0;
@@ -887,7 +887,7 @@ void EnnemiMario::onRafaleverticaleinverser()
 
 			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		} else {
-			int x_cible = offset + 640 - attack_etape * 100 - rand() % 20;
+			int x_cible = offset + SCREEN_W - attack_etape * 100 - rand() % 20;
 			if (x_cible > x - 20) {
 				etape = 0;
 				ss_etape = 0;
@@ -1027,7 +1027,7 @@ void EnnemiMario::onRafaleberserker()
 			if ((y + dy) > 435) {
 				attack_phase = 5;
 				if (dir == SENS_DROITE) {
-					attack_etape = 1 + (640 - x) / 100;
+					attack_etape = 1 + (SCREEN_W - x) / 100;
 				} else {
 					attack_etape = 1 + x / 100;
 				}
@@ -1112,7 +1112,7 @@ void EnnemiMario::onPluiedefeu()
 				if ((dir == SENS_DROITE) && (x + (attack_etape + 1) * 100 + 20 > 620)) {
 					attack_phase ++;
 					attack_ss_etape = 0;
-					attack_etape = 1 + (offset + 640 - x) / 100;
+					attack_etape = 1 + (offset + SCREEN_W - x) / 100;
 				} else if ((dir == SENS_GAUCHE) && (x - (attack_etape + 1) * 100 - 20 < 20)) {
 					attack_phase ++;
 					attack_ss_etape = 0;

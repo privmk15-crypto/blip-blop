@@ -50,7 +50,7 @@ void EnnemiPikachu::onAvance()
 	//
 	if (x - SPEED < xmin || mur_opaque(x - SPEED, y))
 		dir = SENS_DROITE;
-	else if (x + SPEED > offset + 640 || mur_opaque(x + SPEED, y))
+	else if (x + SPEED > offset + SCREEN_W || mur_opaque(x + SPEED, y))
 		dir = SENS_GAUCHE;
 
 	if (dir == SENS_DROITE) {

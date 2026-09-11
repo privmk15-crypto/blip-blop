@@ -86,7 +86,7 @@ void EnnemiSnorkyHyporider::onAvance()
 
 		pic = g_game_state.picture_banks().ennemis()[286];
 
-		if (mur_opaque(x + HYPORIDER_SPEED, y) || (x + HYPORIDER_SPEED > offset + 640))
+		if (mur_opaque(x + HYPORIDER_SPEED, y) || (x + HYPORIDER_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;
 	}
 
@@ -158,7 +158,7 @@ void EnnemiSnorkyHyporider::onCharge()
 	if (attack_etape > 40) {
 		nageoire = 0;
 		if (dir == SENS_DROITE) {
-			if (mur_opaque(x + HYPORIDER_SPEED, y) || (x + HYPORIDER_SPEED > offset + 640)) {
+			if (mur_opaque(x + HYPORIDER_SPEED, y) || (x + HYPORIDER_SPEED > offset + SCREEN_W)) {
 				etape = 0;
 				ss_etape = 0;
 				etat = ETAT_AVANCE;
@@ -211,7 +211,7 @@ void EnnemiSnorkyHyporider::onCarbonise()
 		pic = g_game_state.picture_banks().ennemis()[325];
 	}
 
-	if ((x - 6 < xmin) || (x + 6 > offset + 640)) {
+	if ((x - 6 < xmin) || (x + 6 > offset + SCREEN_W)) {
 		a_detruire = true;
 	}
 

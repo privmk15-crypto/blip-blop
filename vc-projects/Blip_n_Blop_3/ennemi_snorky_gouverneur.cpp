@@ -98,7 +98,7 @@ void EnnemiSnorkyGouverneur::onAvance()
 
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_gouverneur_marche_droite, 6, 4)];
 
-		if (mur_opaque(x + GOUVERNEUR_SPEED, y) || (x + GOUVERNEUR_SPEED > offset + 640))
+		if (mur_opaque(x + GOUVERNEUR_SPEED, y) || (x + GOUVERNEUR_SPEED > offset + SCREEN_W))
 			dir = SENS_GAUCHE;
 	}
 

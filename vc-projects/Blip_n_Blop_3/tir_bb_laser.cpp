@@ -61,7 +61,7 @@ void TirBBLaser::setDir(int d)
 
 		case 2:		// Droite
 
-			while (nx > offset - 5 && nx < offset + 645 && !mur_opaque(nx, ny))
+			while (nx > offset - 5 && nx < offset + SCREEN_W + 5 && !mur_opaque(nx, ny))
 				nx += 8;
 
 			largeur = nx - x;
@@ -92,7 +92,7 @@ void TirBBLaser::setDir(int d)
 
 		case 6:		// Gauche
 
-			while (nx > offset - 5 && nx < offset + 645 && !mur_opaque(nx, ny))
+			while (nx > offset - 5 && nx < offset + SCREEN_W + 5 && !mur_opaque(nx, ny))
 				nx -= 8;
 
 			largeur = x - nx;
@@ -157,7 +157,7 @@ void TirBBLaser::affiche(RenderQueue& rq)
 
 		case 1:				// Bas/droite ---------------------------
 
-			while (nx > offset - 20 && nx < offset + 660 &&
+			while (nx > offset - 20 && nx < offset + SCREEN_W + 20 &&
 			        ny > -50 && ny < 500 && !mur_opaque(nx, ny)) {
 				draw(nx, ny, g_game_state.picture_banks().bb()[144 + etape]);
 				nx += 8;
@@ -172,20 +172,20 @@ void TirBBLaser::affiche(RenderQueue& rq)
 			r.left	 = 0;
 			r.bottom = 6;
 
-			if (xx + largeur > 640)
-				r.right = 640 - xx;
+			if (xx + largeur > SCREEN_W)
+				r.right = SCREEN_W - xx;
 			else
 				r.right = largeur;
 
 			backSurface->BltFast(xx, y, surf, &r, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
-			if (xx + largeur < 640)
+			if (xx + largeur < SCREEN_W)
 				draw(x + largeur, y + 3, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 3:				// Haut/droite --------------------------
 
-			while (nx > offset - 20 && nx < offset + 660 &&
+			while (nx > offset - 20 && nx < offset + SCREEN_W + 20 &&
 			        ny > -20 && ny < 500 && !mur_opaque(nx, ny)) {
 				draw(nx, ny, g_game_state.picture_banks().bb()[148 + etape]);
 				nx += 8;
@@ -215,7 +215,7 @@ void TirBBLaser::affiche(RenderQueue& rq)
 
 		case 5:				// Haut/gauche --------------------------
 
-			while (nx > offset - 20 && nx < offset + 660 &&
+			while (nx > offset - 20 && nx < offset + SCREEN_W + 20 &&
 			        ny > -20 && ny < 500 && !mur_opaque(nx, ny)) {
 				draw(nx, ny, g_game_state.picture_banks().bb()[144 + etape]);
 				nx -= 8;
@@ -244,7 +244,7 @@ void TirBBLaser::affiche(RenderQueue& rq)
 
 		case 7:				// Bas/gauche ---------------------------
 
-			while (nx > offset - 20 && nx < offset + 660 &&
+			while (nx > offset - 20 && nx < offset + SCREEN_W + 20 &&
 			        ny > -50 && ny < 500 && !mur_opaque(nx, ny)) {
 				draw(nx, ny, g_game_state.picture_banks().bb()[148 + etape]);
 				nx -= 8;

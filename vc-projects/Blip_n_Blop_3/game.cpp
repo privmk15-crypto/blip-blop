@@ -1123,8 +1123,8 @@ void Game::updateTeteTurc() {
     static int ntete_turc = 0;
 
     if (g_game_state.entities().list_joueurs().empty()) {
-        dummyPlayer.x = offset + 320;
-        dummyPlayer.y = g_game_state.level().y_plat()[0][offset + 320];
+        dummyPlayer.x = offset + SCREEN_W / 2;
+        dummyPlayer.y = g_game_state.level().y_plat()[0][offset + SCREEN_W / 2];
         tete_turc = &dummyPlayer;
         return;
     }

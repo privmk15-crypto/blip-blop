@@ -382,7 +382,7 @@ void EnnemiSnorkInBlackBoss::onTombe()
 	//debug <<"x: "<<x <<" y: "<< y <<"\n";
 
 
-	if ((x > (snork_in_black_position_x[position] - tolerance)) && (x < (snork_in_black_position_x[position] + tolerance)) && (y > (snork_in_black_position_y[position] - tolerance)) && (y < (snork_in_black_position_y[position] + tolerance))) {
+	if ((x > (snork_in_black_position_x[position] - SNORK_BOSS_TOLERANCE)) && (x < (snork_in_black_position_x[position] + SNORK_BOSS_TOLERANCE)) && (y > (snork_in_black_position_y[position] - SNORK_BOSS_TOLERANCE)) && (y < (snork_in_black_position_y[position] + SNORK_BOSS_TOLERANCE))) {
 		etat = ETAT_AVANCE;
 		etape = 0;
 		ss_etape = 0;
@@ -537,7 +537,7 @@ void EnnemiSnorkInBlackBoss::onMeure()
 
 		x += dx;
 
-		if ((x > (snork_in_black_position_x[position] - tolerance)) && (x < (snork_in_black_position_x[position] + tolerance)) && (y > (snork_in_black_position_y[position] - tolerance)) && (y < (snork_in_black_position_y[position] + tolerance))) {
+		if ((x > (snork_in_black_position_x[position] - SNORK_BOSS_TOLERANCE)) && (x < (snork_in_black_position_x[position] + SNORK_BOSS_TOLERANCE)) && (y > (snork_in_black_position_y[position] - SNORK_BOSS_TOLERANCE)) && (y < (snork_in_black_position_y[position] + SNORK_BOSS_TOLERANCE))) {
 			//etat = ETAT_MEURE;
 			etape = 0;
 			ss_etape = 0;

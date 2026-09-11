@@ -27,7 +27,14 @@
 //-----------------------------------------------------------------------------
 
 //#define SNORK_IN_BLACK_MAX_TIR		6
-#define tolerance		5
+// Renamed from the generic `tolerance` (Etap 3 build fix): collided
+// with an identifier of the same name pulled in transitively once this
+// translation unit gained a globals.h include (SDL2/libstdc++ system
+// header, not anything in this codebase - verified via a full-repo
+// grep finding no other definition of `tolerance` anywhere). Every
+// sibling constant in this file family is already prefixed/uppercase;
+// this one was the sole lowercase, unprefixed outlier.
+#define SNORK_BOSS_TOLERANCE		5
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe EnnemiSnorkyInBlackBoss

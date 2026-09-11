@@ -26,10 +26,21 @@
  *		migration so far (ScreenShake, ScrollLock, Level, Weather,
  *		RpgTrigger, HoldFire, PlayerToggles).
  *
- *		No .cpp file: every method here is a trivial reference-
- *		returning accessor, so there's nothing to place out-of-line -
- *		unlike this migration's siblings, which ported real logic
- *		(tremblement(), plat(), etc.) out of globals.cpp.
+ *		Needs an out-of-line destructor (entity_manager.cpp), even
+ *		though every accessor here is trivial: several members are
+ *		std::list<std::unique_ptr<T>> where T (Event, Bulle,
+ *		TirBBVache, Explosion, Vehicule, GenEnnemi, GenBonus) is only
+ *		forward-declared here. An implicitly-generated (inline)
+ *		destructor would need those types complete wherever it's
+ *		first instantiated - which, since GameState's single instance
+ *		is defined in game_state.cpp, would be game_state.cpp, which
+ *		doesn't include the real headers. Declaring ~EntityManager()
+ *		here and defining it (= default is enough) in
+ *		entity_manager.cpp, which does include them, defers that
+ *		instantiation to a translation unit where it can succeed.
+ *		(Confirmed the hard way: this exact shape failed CI with
+ *		"invalid application of 'sizeof' to incomplete type" for
+ *		every unique_ptr<T> member, pointing at game_state.cpp.)
  *
  *		Owned by GameState (game_state.h) as g_game_state.entities().
  *		Most writers of these lists are Event subclasses
@@ -58,6 +69,10 @@ class GenBonus;
 
 class EntityManager {
    public:
+    // Declared here, defined (= default) in entity_manager.cpp - see the
+    // class-level comment for why this can't just be implicit/inline.
+    ~EntityManager();
+
     // FIXME (carried over from globals.h): vector instead of an owning
     // container because Couille* isn't owned here - see the original
     // "FIXME: make it owning?" note this replaces.

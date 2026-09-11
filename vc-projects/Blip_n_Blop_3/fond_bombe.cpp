@@ -36,10 +36,10 @@ void FondBombe::update()
 	if (armed) {
 		if (tete_turc != NULL) {
 			if ((tete_turc->x > x - 50) && (tete_turc->x < x + 50) && (tete_turc->y > y - 10) && (tete_turc->y < y + 51)) {
-				game_flag[0] ++;
+				g_game_state.game_flags()[0] ++;
 				armed = false;
 				Bonus * bonus;
-				switch (game_flag[0]) {
+				switch (g_game_state.game_flags()[0]) {
 					case 1:
 						bonus = new BonusFusil();
 						break;
@@ -50,8 +50,8 @@ void FondBombe::update()
 
 					case 3:
 						bonus = new BonusVache();
-						save_time = game_flag[FLAG_TIMER];
-						game_flag[FLAG_GEN_OFF] = 1;
+						save_time = g_game_state.game_flags()[FLAG_TIMER];
+						g_game_state.game_flags()[FLAG_GEN_OFF] = 1;
 						break;
 				}
 				bonus->x = x;
@@ -84,10 +84,10 @@ void FondBombe::update()
 		}
 
 
-		if (game_flag[FLAG_TIMER] < 40) {
+		if (g_game_state.game_flags()[FLAG_TIMER] < 40) {
 			ss_etape_warning ++;
-			if (game_flag[FLAG_TIMER] / 3 > 0) {
-				ss_etape_warning %= game_flag[FLAG_TIMER] / 3;
+			if (g_game_state.game_flags()[FLAG_TIMER] / 3 > 0) {
+				ss_etape_warning %= g_game_state.game_flags()[FLAG_TIMER] / 3;
 			} else {
 				ss_etape_warning = 0;
 			}
@@ -97,7 +97,7 @@ void FondBombe::update()
 				etape_warning %= 10;
 			}
 		}
-		/*else if (game_flag[FLAG_TIMER] <40)
+		/*else if (g_game_state.game_flags()[FLAG_TIMER] <40)
 		{
 
 			ss_etape_warning ++;
@@ -110,10 +110,10 @@ void FondBombe::update()
 				etape_warning %= 8;
 			}
 		}*/
-		seconde  = game_flag[FLAG_TIMER];
+		seconde  = g_game_state.game_flags()[FLAG_TIMER];
 		centieme = etape_compteur;
-	} else if (game_flag[0] == 3) {
-		game_flag[FLAG_TIMER] = save_time;
+	} else if (g_game_state.game_flags()[0] == 3) {
+		g_game_state.game_flags()[FLAG_TIMER] = save_time;
 	}
 
 }
@@ -128,26 +128,26 @@ void FondBombe::affiche()
 		draw(x, y, pbk_niveau[anim_nuke[etape_nuke]]);
 
 
-		if (game_flag[FLAG_TIMER] >= 100) {
+		if (g_game_state.game_flags()[FLAG_TIMER] >= 100) {
 			draw(x + 6, y - 27, pbk_niveau[80]);
 			draw(x + 11, y - 27, pbk_niveau[80]);
 			draw(x + 16, y - 27, pbk_niveau[80]);
 			draw(x + 21, y - 27, pbk_niveau[80]);
 		} else {
-			draw(x + 6, y - 27, pbk_niveau[71 + game_flag[FLAG_TIMER] / 10]);
-			draw(x + 11, y - 27, pbk_niveau[71 + game_flag[FLAG_TIMER] % 10]);
+			draw(x + 6, y - 27, pbk_niveau[71 + g_game_state.game_flags()[FLAG_TIMER] / 10]);
+			draw(x + 11, y - 27, pbk_niveau[71 + g_game_state.game_flags()[FLAG_TIMER] % 10]);
 			draw(x + 16, y - 27, pbk_niveau[80 - etape_compteur / 10]);
 			draw(x + 21, y - 27, pbk_niveau[80 - etape_compteur % 10]);
 		}
 
-		if (game_flag[FLAG_TIMER] < 40) {
+		if (g_game_state.game_flags()[FLAG_TIMER] < 40) {
 			draw(x, y - 35, pbk_niveau[anim_warning[etape_warning]]);
 		}
-		/*else if (game_flag[FLAG_TIMER] < 40)
+		/*else if (g_game_state.game_flags()[FLAG_TIMER] < 40)
 		{
 			draw(x, y -35, pbk_niveau[anim_warning[etape_warning]]);
 		}*/
-		else if (game_flag[FLAG_TIMER] < 60) {
+		else if (g_game_state.game_flags()[FLAG_TIMER] < 60) {
 			draw(x , y - 35, pbk_niveau[118]);
 		}
 	} else {

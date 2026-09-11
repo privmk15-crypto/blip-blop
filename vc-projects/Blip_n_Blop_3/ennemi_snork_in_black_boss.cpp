@@ -67,7 +67,7 @@ void EnnemiSnorkInBlackBoss::update()
 
 void EnnemiSnorkInBlackBoss::onAvance()
 {
-	if (game_flag[0] == 1) {
+	if (g_game_state.game_flags()[0] == 1) {
 		if (ss_etape == 0 && etape == 0) {
 			sbk_niveau.play(0);
 		}
@@ -80,15 +80,15 @@ void EnnemiSnorkInBlackBoss::onAvance()
 		}
 
 		if (etape >= 18) {
-			game_flag[0] = 2;
+			g_game_state.game_flags()[0] = 2;
 			etape = 0;
 			ss_etape = 0;
 			mbk_niveau.play(1);
-			game_flag[FLAG_TIMER] = 50;
+			g_game_state.game_flags()[FLAG_TIMER] = 50;
 		} else {
 			pic = pbk_ennemis[383 + etape];
 		}
-	} else if (game_flag[0] == 2) {
+	} else if (g_game_state.game_flags()[0] == 2) {
 		etape ++;
 		if (etape > 20) {
 			if (attack) {
@@ -414,11 +414,11 @@ void EnnemiSnorkInBlackBoss::onTombe()
 void EnnemiSnorkInBlackBoss::onMeure()
 {
 	col_on = false;
-	if (game_flag[0] == 2 && !saut) {
+	if (g_game_state.game_flags()[0] == 2 && !saut) {
 		int destination = 0;
 
 		if (destination == position) {
-			game_flag[0] = 3;
+			g_game_state.game_flags()[0] = 3;
 
 			if (position == 0 || position == 2) {
 				dir = SENS_DROITE;
@@ -520,7 +520,7 @@ void EnnemiSnorkInBlackBoss::onMeure()
 			lat_grav = 0;
 			return;
 		}
-	} else if (game_flag[0] == 2 && saut) {
+	} else if (g_game_state.game_flags()[0] == 2 && saut) {
 		lat_grav += 1;
 		lat_grav %= LATENCE_GRAVITE;
 
@@ -552,7 +552,7 @@ void EnnemiSnorkInBlackBoss::onMeure()
 		} else {
 			pic = pbk_ennemis[anime(anim_snork_in_black_boss_saute_gauche, 4, 6)];
 		}
-	} else if (game_flag[0] == 3) {
+	} else if (g_game_state.game_flags()[0] == 3) {
 		shark = true;
 		x_shark += 5;
 
@@ -563,9 +563,9 @@ void EnnemiSnorkInBlackBoss::onMeure()
 		}
 
 		if (x_shark > 6800) {
-			game_flag[0] = 4;
+			g_game_state.game_flags()[0] = 4;
 		}
-	} else if (game_flag[0] == 4) {
+	} else if (g_game_state.game_flags()[0] == 4) {
 		x_shark += 5;
 	}
 }

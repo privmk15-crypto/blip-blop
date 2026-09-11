@@ -47,14 +47,14 @@ void EnnemiPrincesse::update()
 
 	}
 
-	if (game_flag[1]) {
+	if (g_game_state.game_flags()[1]) {
 		updateADetruire();
 	}
 }
 
 void EnnemiPrincesse::onAvance()
 {
-	//if (game_flag[0])
+	//if (g_game_state.game_flags()[0])
 	//{
 	// Si plus de plateformes on passe dans l'etat TOMBE
 	//
@@ -84,7 +84,7 @@ void EnnemiPrincesse::onAvance()
 		speed=1;
 	}*/
 
-	if (game_flag[1]) {
+	if (g_game_state.game_flags()[1]) {
 		if (x  > offset + 820) {
 			TexteCool * txt = new TexteCool();
 			txt->ntxt = 517;
@@ -186,8 +186,8 @@ void EnnemiPrincesse::onMeure()
 			txt->ntxt = 519;
 			g_game_state.entities().list_txt_cool().emplace_back(txt);
 			a_detruire = true;
-			if (game_flag[3] > 0) {
-				game_flag[2] = 1;
+			if (g_game_state.game_flags()[3] > 0) {
+				g_game_state.game_flags()[2] = 1;
 			}
 
 			Bonus * bonus = new BonusVache();
@@ -214,7 +214,7 @@ void EnnemiPrincesse::estTouche(Tir * tir)
 	static const int dx_giclure [] = { 0, 10, 15, 10, 0, -10, -15, -10 };
 	static const int dy_giclure [] = { -15, -25, -25, -25, -35, -25, -25, -25 };
 
-	if (game_flag[1]) {
+	if (g_game_state.game_flags()[1]) {
 		Ennemi::estTouche(tir);
 	}
 	gicle(tir, dx_giclure, dy_giclure);

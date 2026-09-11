@@ -35,9 +35,9 @@ public:
 		if (cond == 0)
 			return true;
 		else if (cond == 1)
-			return (game_flag[flag] == val);
+			return (g_game_state.game_flags()[flag] == val);
 		else
-			return (game_flag[flag] >= val);
+			return (g_game_state.game_flags()[flag] >= val);
 	};
 
 	virtual void doEvent()

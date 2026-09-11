@@ -86,8 +86,8 @@ protected:
 
 	int		vic_x;			// Pour obtenir la victoire il faut avoir :
 	int		vic_flag1;		// offset >= vic_x
-	int		vic_val1;		// ET game_flag[vic_flag1] == vic_val1
-	int		vic_flag2;		// ET game_flag[vic_flag2] == vic_val2
+	int		vic_val1;		// ET g_game_state.game_flags()[vic_flag1] == vic_val1
+	int		vic_flag2;		// ET g_game_state.game_flags()[vic_flag2] == vic_val2
 	int		vic_val2;
 
 	int		wait_for_victory;	// Pour que la partie ne s'achève pas immédiatement

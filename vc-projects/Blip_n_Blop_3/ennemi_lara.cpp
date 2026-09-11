@@ -106,7 +106,7 @@ void EnnemiLara::onAvance()
 
 		pics = true;
 	}
-	if (game_flag[0] == 1) {
+	if (g_game_state.game_flags()[0] == 1) {
 		//cree la tete de rayman et attendre
 
 		if (!tete_rayman) {
@@ -120,36 +120,36 @@ void EnnemiLara::onAvance()
 				tete_rayman = true;
 			}
 		}
-	} else if (game_flag[0] == 2) {
+	} else if (g_game_state.game_flags()[0] == 2) {
 		ss_etape ++;
 		ss_etape %= 6;
 		if (ss_etape == 0) {
 			etape ++;
 			if (etape > 9) {
-				game_flag[0] = 3;
+				g_game_state.game_flags()[0] = 3;
 				etape = 0;
 				/*
 								mbk_niveau.stop();
 								mbk_niveau.play( 0);
 				*/
-				game_flag[FLAG_TIMER] = 180;
+				g_game_state.game_flags()[FLAG_TIMER] = 180;
 			} else {
 				numero_image_buste = anim_lara_bouton[etape];
 			}
 		}
-	} else if (game_flag[0] == 3) {
+	} else if (g_game_state.game_flags()[0] == 3) {
 		ss_etape ++;
 		ss_etape %= 6;
 		if (ss_etape == 0) {
 			etape ++;
 			if (etape > 10) {
-				game_flag[0] = 4;
+				g_game_state.game_flags()[0] = 4;
 				etape = 0;
 			} else {
 				numero_image_buste = anim_lara_degaine[etape];
 			}
 		}
-	} else if (game_flag[0] == 4) {
+	} else if (g_game_state.game_flags()[0] == 4) {
 
 		wait_for_attack++;
 		if ((wait_for_attack > ATTACK_DELAY) && (tete_turc != NULL)) {
@@ -321,9 +321,9 @@ void EnnemiLara::onAvance()
 			}
 		}
 //		colFromPic();
-	} else if (game_flag[0] == 7) {
+	} else if (g_game_state.game_flags()[0] == 7) {
 		a_detruire = true;
-		game_flag[FLAG_NB_KILL]++;
+		g_game_state.game_flags()[FLAG_NB_KILL]++;
 	}
 }
 
@@ -349,14 +349,14 @@ void EnnemiLara::onTire()
 
 void EnnemiLara::onMeure()
 {
-	game_flag[0] = 5;
+	g_game_state.game_flags()[0] = 5;
 	a_detruire = true;
 }
 
 
 void EnnemiLara::affiche()
 {
-	if (game_flag[0] < 6) {
+	if (g_game_state.game_flags()[0] < 6) {
 		draw(x, y - 102, pbk_ennemis[numero_image_buste]);
 	}
 

@@ -242,7 +242,7 @@ bool RPGPlayer::updateScene()
 				int val = std::stoi(buffer2_.substr(pos + 1));
                                 buffer2_ = buffer2_.substr(0, pos);
 
-				game_flag[std::stoi(buffer2_)] = val;
+				g_game_state.game_flags()[std::stoi(buffer2_)] = val;
 //				debug<<"Flag "<<atoi(buffer2)<<"="<<val<<"\n";
 			} else {
 				error(buffer1_);

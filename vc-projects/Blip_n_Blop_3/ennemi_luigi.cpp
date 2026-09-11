@@ -25,7 +25,7 @@ EnnemiLuigi::EnnemiLuigi(): speed(1), etape_speed(0), attack_delay(50 + rand() %
 
 void EnnemiLuigi::update()
 {
-	if (game_flag[0] == 7)
+	if (g_game_state.game_flags()[0] == 7)
 		a_detruire = true;
 
 	//debug<<"u\n";
@@ -87,10 +87,10 @@ void EnnemiLuigi::onAvance()
 		speed = 1;
 	}
 
-	if (game_flag[0] >= 3) {
+	if (g_game_state.game_flags()[0] >= 3) {
 		wait_for_attack++;
 	} else if (x < offset + 600) {
-		game_flag[0] = 2;
+		g_game_state.game_flags()[0] = 2;
 	}
 
 	if ((wait_for_attack >= attack_delay) && (tete_turc != NULL)) {
@@ -311,7 +311,7 @@ void EnnemiLuigi::onAvance()
 
 void EnnemiLuigi::onMeure()
 {
-	if (game_flag[1] == 0) {
+	if (g_game_state.game_flags()[1] == 0) {
 		tombe();
 		if (x - 3 < xmin || mur_opaque(x - 3, y)) {
 			dir = SENS_DROITE;
@@ -327,25 +327,25 @@ void EnnemiLuigi::onMeure()
 		}
 		if ((plat2(x, y) == 0) && (x > 1500) && (x < 1550)) {
 			dir = SENS_GAUCHE;
-			game_flag[1] = 1;
+			g_game_state.game_flags()[1] = 1;
 			attack_delay = 0;
 		}
-	} else if (game_flag[1] == 1) {
+	} else if (g_game_state.game_flags()[1] == 1) {
 		attack_delay ++;
 		if (attack_delay >= EXPLOSE_DELAY) {
-			game_flag[1] = 2;
+			g_game_state.game_flags()[1] = 2;
 			dir = SENS_DROITE;
 		} else {
 			pic = pbk_ennemis[anime(anim_luigi_mort, 8, 6)];
 		}
-	} else if (game_flag[1] == 2) {
+	} else if (g_game_state.game_flags()[1] == 2) {
 		marche(3);
 		pic = pbk_ennemis[anime(anim_luigi_marche_mort_droite, 4, 8)];
 		if (x > offset + 680) {
-			game_flag[1] = 3;
+			g_game_state.game_flags()[1] = 3;
 			attack_delay = 0;
 		}
-	} else if (game_flag[1] == 3) {
+	} else if (g_game_state.game_flags()[1] == 3) {
 		attack_delay ++;
 		if (attack_delay >= NOMBRE_GICLURES) {
 			Ennemi * sonic = new EnnemiVoiturePacman();

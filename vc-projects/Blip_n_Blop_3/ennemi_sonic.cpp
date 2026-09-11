@@ -26,14 +26,14 @@ EnnemiSonic::EnnemiSonic(): speed(1), etape_speed(0), attack_delay(50 + rand() %
 
 void EnnemiSonic::update()
 {
-	if (game_flag[0] == 7)
+	if (g_game_state.game_flags()[0] == 7)
 		a_detruire = true;
 
 	if (wait_sang_tombe < 400) {
 		wait_sang_tombe++;
 		return;
-	} else if (game_flag[0] < 4) {
-		game_flag[0] = 4;
+	} else if (g_game_state.game_flags()[0] < 4) {
+		g_game_state.game_flags()[0] = 4;
 	}
 
 	if (blood > 0)
@@ -187,7 +187,7 @@ void EnnemiSonic::onAvance()
 	if ((ring > 0) && (pv < 9000)) {
 		if (ring % 30 == 0) {
 			onBalancering();
-//			game_flag[FLAG_BONUS] = 6;
+//			g_game_state.game_flags()[FLAG_BONUS] = 6;
 		}
 		ring--;
 	}
@@ -217,7 +217,7 @@ void EnnemiSonic::onAvance()
 
 void EnnemiSonic::onMeure()
 {
-	if (game_flag[2] == 0) {
+	if (g_game_state.game_flags()[2] == 0) {
 		tombe();
 		if (x - speed < xmin || mur_opaque(x - speed, y)) {
 			dir = SENS_DROITE;
@@ -248,12 +248,12 @@ void EnnemiSonic::onMeure()
 		}
 
 		if ((plat2(x, y) == 0) && (x > 1600) && (x < 1630)) {
-			game_flag[2] = 1;
+			g_game_state.game_flags()[2] = 1;
 			etape = 0;
 			ss_etape = 0;
 			dir = SENS_GAUCHE;
 		}
-	} else if (game_flag[2] == 1) {
+	} else if (g_game_state.game_flags()[2] == 1) {
 		y -= 1;
 		ss_etape ++;
 		ss_etape %= 5;
@@ -261,7 +261,7 @@ void EnnemiSonic::onMeure()
 			tremblement((etape / 5) + 2);
 			etape ++;
 			if (etape >= 43) {
-				game_flag[2] = 2;
+				g_game_state.game_flags()[2] = 2;
 				a_detruire = true;
 			} else {
 				pic = pbk_ennemis[sonic_anim_super_saien[etape]];

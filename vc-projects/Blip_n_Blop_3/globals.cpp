@@ -94,7 +94,8 @@ bool		no_scroll2;
 // phase/slow_phase moved to phase_clock.cpp (PhaseClock) - Stage 2
 // ownership migration.
 
-int				game_flag[11];
+// game_flag[11] moved to game_flags.cpp (GameFlags) - Stage 2 ownership
+// migration.
 
 // hold_fire/flag_hold_fire/val_hold_fire moved to hold_fire.cpp (HoldFire).
 

@@ -12,7 +12,7 @@ EnnemiVoiturePacman::EnnemiVoiturePacman(): invoc_pacman(false)
 
 void EnnemiVoiturePacman::update()
 {
-	if ((game_flag[2] == 1) || (game_flag[2] == 2)) {
+	if ((g_game_state.game_flags()[2] == 1) || (g_game_state.game_flags()[2] == 2)) {
 		etape ++;
 		if (etape > 160) {
 			tombeVoiture();
@@ -27,17 +27,17 @@ void EnnemiVoiturePacman::update()
 			} else if (plat2(x, y + dy) == 1) {
 				y = plat(x, y + dy);
 
-				game_flag[2] = 3;
+				g_game_state.game_flags()[2] = 3;
 
 				etape = 0;
 				ss_etape = 0;
 			}
 		}
-	} else if (game_flag[2] == 3) {
+	} else if (g_game_state.game_flags()[2] == 3) {
 		wait_end++;
 
-		if (wait_end >= 250 && game_flag[0] < 6) {
-			game_flag[0] = 6;
+		if (wait_end >= 250 && g_game_state.game_flags()[0] < 6) {
+			g_game_state.game_flags()[0] = 6;
 		}
 		/*
 			etape ++;
@@ -45,10 +45,10 @@ void EnnemiVoiturePacman::update()
 			{
 				etape = 0;
 				ss_etape = 0;
-				game_flag[2] = 4;
+				g_game_state.game_flags()[2] = 4;
 			}
 		}
-		else if (game_flag[2] == 4)
+		else if (g_game_state.game_flags()[2] == 4)
 		{
 			ss_etape ++;
 			ss_etape %= 8;
@@ -58,12 +58,12 @@ void EnnemiVoiturePacman::update()
 				etape ++;
 				if (etape > 4)
 				{
-					game_flag[2] = 5;
+					g_game_state.game_flags()[2] = 5;
 					etape --;
 				}
 			}
 		}
-		else if (game_flag[2] >=5)
+		else if (g_game_state.game_flags()[2] >=5)
 		{
 			if (!invoc_pacman)
 			{
@@ -108,7 +108,7 @@ int EnnemiVoiturePacman::degats()
 
 void EnnemiVoiturePacman::affiche()
 {
-	if (game_flag[2] >= 4) {
+	if (g_game_state.game_flags()[2] >= 4) {
 		draw(x + 48, y - 82, pbk_ennemis[217 + etape]);
 	}
 	Sprite::affiche();

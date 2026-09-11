@@ -17,6 +17,7 @@
 
 #include "gen_ennemi_tmp.h"
 #include "event_ennemi.h"
+#include "game_state.h"
 
 #ifndef SENS_GAUCHE
 #define SENS_GAUCHE		0
@@ -26,7 +27,7 @@
 
 void GenEnnemiTMP::update()
 {
-	if (game_flag[FLAG_GEN_OFF] != 0)
+	if (g_game_state.game_flags()[FLAG_GEN_OFF] != 0)
 		return;
 
 	t += 1;

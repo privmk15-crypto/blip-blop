@@ -19,13 +19,13 @@ void EnnemiSmurfCostaud::update()
 	if (blood > 0)
 		blood -= 1;
 
-	if (game_flag[0] != 0) {
+	if (g_game_state.game_flags()[0] != 0) {
 		etape_shoot += 1;
 
-		if (game_flag[2] == 0) {
+		if (g_game_state.game_flags()[2] == 0) {
 			mbk_niveau.play(2);
-			game_flag[2] = 1;
-			game_flag[FLAG_TIMER] = 40;
+			g_game_state.game_flags()[2] = 1;
+			g_game_state.game_flags()[FLAG_TIMER] = 40;
 		}
 	}
 
@@ -101,7 +101,7 @@ void EnnemiSmurfCostaud::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_smurf, dy_giclure_smurf);
 
 	if (pv <= 0) {
-		game_flag[1]++;
+		g_game_state.game_flags()[1]++;
 	}
 }
 

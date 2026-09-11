@@ -18,6 +18,7 @@
 #define _EventSetFlag_
 
 #include "event.h"
+#include "game_state.h"
 
 class EventSetFlag : public Event
 {
@@ -28,7 +29,7 @@ public:
 
 	virtual void doEvent()
 	{
-		game_flag[flag] = val;
+		g_game_state.game_flags()[flag] = val;
 	};
 };
 

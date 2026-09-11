@@ -21,14 +21,14 @@ void EnnemiRayman::update()
 	if (blood > 0)
 		blood -= 1;
 
-	if (x < 10930 && game_flag[3] == 0) {
-		game_flag[3] = 1;
+	if (x < 10930 && g_game_state.game_flags()[3] == 0) {
+		g_game_state.game_flags()[3] = 1;
 	}
 
 	switch (etat) {
 		case ETAT_NORMAL:
 		case ETAT_AVANCE:
-			if (game_flag[0] > 0) {
+			if (g_game_state.game_flags()[0] > 0) {
 				onAvance();
 			}
 			break;
@@ -53,8 +53,8 @@ void EnnemiRayman::update()
 
 void EnnemiRayman::onAvance()
 {
-	if ((game_flag[1] <= dorkemon) && (game_flag[0] == 2) && (game_flag[1] > 0)) {
-		if (game_flag[1] == 4) {
+	if ((g_game_state.game_flags()[1] <= dorkemon) && (g_game_state.game_flags()[0] == 2) && (g_game_state.game_flags()[1] > 0)) {
+		if (g_game_state.game_flags()[1] == 4) {
 			EnnemiBulbizarreHeros * bulbizarre = new EnnemiBulbizarreHeros();
 
 			bulbizarre->x = x - 10;
@@ -65,10 +65,10 @@ void EnnemiRayman::onAvance()
 			g_game_state.enemy_stats().Add();
 
 			mbk_niveau.play(1);
-			game_flag[FLAG_TIMER] = 70;
+			g_game_state.game_flags()[FLAG_TIMER] = 70;
 
 			dorkemon --;
-		} else if (game_flag[1] == 3) {
+		} else if (g_game_state.game_flags()[1] == 3) {
 			EnnemiFlamecheHeros * flameche = new EnnemiFlamecheHeros();
 
 			flameche->x = x - 10;
@@ -88,7 +88,7 @@ void EnnemiRayman::onAvance()
 
 			dorkemon -= 2;
 
-		} else if (game_flag[1] == 1) {
+		} else if (g_game_state.game_flags()[1] == 1) {
 			EnnemiPikachuHeros * pika = new EnnemiPikachuHeros();
 
 			g_game_state.enemy_stats().Add();
@@ -99,8 +99,8 @@ void EnnemiRayman::onAvance()
 			g_game_state.entities().list_ennemis().emplace_back(pika);
 			dorkemon --;
 		}
-	} else if ((game_flag[0] <= 2) && (game_flag[1] == 0) /*&& (game_flag[2]>=0*/) {
-		if (game_flag[0] == 2) {
+	} else if ((g_game_state.game_flags()[0] <= 2) && (g_game_state.game_flags()[1] == 0) /*&& (g_game_state.game_flags()[2]>=0*/) {
+		if (g_game_state.game_flags()[0] == 2) {
 			if ((pv > PV_SOUS_CRITIQUE) || ((pv > PV_CRITIQUE) && (poing1) && ((x - offset < 80) || (x - offset > 600)))) {
 				// Si plus de plateformes on passe dans l'etat TOMBE
 				//
@@ -166,7 +166,7 @@ void EnnemiRayman::onAvance()
 
 					g_game_state.entities().list_giclures().emplace_back(s);
 
-					game_flag[0] = 1;
+					g_game_state.game_flags()[0] = 1;
 					poing1 = 0;
 				}
 				wait_for_attack++;
@@ -213,7 +213,7 @@ void EnnemiRayman::onAvance()
 					s->x = x;
 
 					g_game_state.entities().list_giclures().emplace_back(s);
-					game_flag[0] = 1;
+					g_game_state.game_flags()[0] = 1;
 					poing2 = 0;
 				}
 
@@ -270,7 +270,7 @@ void EnnemiRayman::onAvance()
 
 					g_game_state.entities().list_giclures().emplace_back(s);
 
-					game_flag[0] = 1;
+					g_game_state.game_flags()[0] = 1;
 					pieds = 0;
 				}
 
@@ -297,8 +297,8 @@ void EnnemiRayman::onAvance()
 			pic = pbk_ennemis[209 + etape];
 		}
 
-		if (game_flag[3] == 1) { //x-offset<450)
-//			game_flag[0]=2;
+		if (g_game_state.game_flags()[3] == 1) { //x-offset<450)
+//			g_game_state.game_flags()[0]=2;
 			col_on = false;
 		}
 	}
@@ -321,7 +321,7 @@ void EnnemiRayman::onMeure()
 		tete->x = x;
 		tete->y = y - 60;
                 g_game_state.entities().list_giclures().emplace_back(tete);
-		game_flag[3] = 2;
+		g_game_state.game_flags()[3] = 2;
 	}
 
 	if (ss_etape == 0) {
@@ -512,7 +512,7 @@ void EnnemiRayman::estTouche(Tir * tir)
 	static const int dx_giclure [] = { 0, 0, 4, 0, 0, 0, -4, 0 };
 	static const int dy_giclure [] = { -15, -15, -15, -15, -15, -15, -15, -15 };
 
-	if (game_flag[1] == 0) {
+	if (g_game_state.game_flags()[1] == 0) {
 		Ennemi::estTouche(tir);
 		gicle(tir, dx_giclure, dy_giclure);
 	}

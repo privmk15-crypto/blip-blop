@@ -131,7 +131,7 @@ void EnnemiPikachuHeros::onMeure()
 			grave(x, y, pic);
 
 		a_detruire = true;
-		game_flag[1] --;
+		g_game_state.game_flags()[1] --;
 	} else {
 		if (dir == SENS_DROITE)
 			pic = pbk_ennemis[280 + etape];

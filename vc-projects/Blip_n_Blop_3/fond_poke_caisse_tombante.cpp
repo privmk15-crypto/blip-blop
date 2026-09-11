@@ -28,7 +28,7 @@ FondPokeCaisseTombante::FondPokeCaisseTombante()
 
 void FondPokeCaisseTombante::update()
 {
-	if (game_flag[2] > 2) {
+	if (g_game_state.game_flags()[2] > 2) {
 		if ((y < 100) && (etape <= UNLOCK_DELAY)) {
 			y += 2;
 		} else {

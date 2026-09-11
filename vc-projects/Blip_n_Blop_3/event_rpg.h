@@ -33,7 +33,7 @@ public:
 		if (cond == 0)
 			return true;
 		else
-			return (game_flag[flag] == val);
+			return (g_game_state.game_flags()[flag] == val);
 	};
 
 	virtual void doEvent()

@@ -70,7 +70,7 @@ void EnnemiPrincesseguard::onAvance()
 		a_detruire = true;
 	}
 
-	if (game_flag[2]) {
+	if (g_game_state.game_flags()[2]) {
 		etat = ETAT_MEURE;
 		onMeure();
 		return;
@@ -135,7 +135,7 @@ void EnnemiPrincesseguard::onMeure()
 		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x]) {
 			grave(x, y, pic);
 			a_detruire = true;
-			game_flag[3] -= 1;
+			g_game_state.game_flags()[3] -= 1;
 		}
 	} else {
 

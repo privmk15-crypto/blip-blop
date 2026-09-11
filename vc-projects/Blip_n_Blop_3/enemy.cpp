@@ -79,7 +79,7 @@ void Ennemi::estTouche(Tir * tir)
 			}
 
 			// Incrémente le compteur
-			game_flag[FLAG_NB_KILL] += 1;
+			g_game_state.game_flags()[FLAG_NB_KILL] += 1;
 		}
 	}
 }

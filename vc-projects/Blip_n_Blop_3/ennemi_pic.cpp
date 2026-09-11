@@ -10,7 +10,7 @@ EnnemiPic::EnnemiPic(): y_origine(0)
 
 void EnnemiPic::update()
 {
-	if ((game_flag[0] == 3) || (game_flag[0] == 2)) {
+	if ((g_game_state.game_flags()[0] == 3) || (g_game_state.game_flags()[0] == 2)) {
 		if (-104 > y_origine) {
 			//les pics sont sortis inutiles de les faire monter plus
 		} else if (-96 > y_origine) {
@@ -33,7 +33,7 @@ void EnnemiPic::update()
 			y_origine -= 10;
 		}
 		colFromPic();
-	} else if (game_flag[0] >= 5) {
+	} else if (g_game_state.game_flags()[0] >= 5) {
 		if (-104 > y_origine) {
 			y += 10;
 			y_origine += 10;

@@ -24,7 +24,7 @@ void EnnemiBisouZombi::update()
 	if (blood > 0)
 		blood -= 1;
 
-	if (game_flag[0] == 7 && etat != ETAT_CARBONISE && etat != ETAT_CARBONISE_HAUT) {
+	if (g_game_state.game_flags()[0] == 7 && etat != ETAT_CARBONISE && etat != ETAT_CARBONISE_HAUT) {
 		etape = ss_etape = 0;
 
 		if (etat == ETAT_COUPE)
@@ -33,7 +33,7 @@ void EnnemiBisouZombi::update()
 			etat = ETAT_CARBONISE;
 	}
 
-	if (local_phase != g_game_state.phase_clock().phase() && game_flag[2] == 0) {
+	if (local_phase != g_game_state.phase_clock().phase() && g_game_state.game_flags()[2] == 0) {
 		etape_moan += 1;
 		etape_moan %= 200;
 
@@ -145,7 +145,7 @@ void EnnemiBisouZombi::estTouche(Tir * tir)
 		pv = 0;
 		col_on = false;
 
-		game_flag[FLAG_NB_KILL] += 1;
+		g_game_state.game_flags()[FLAG_NB_KILL] += 1;
 
 		if (etat == ETAT_RAMPE) {
 			etape = 0;

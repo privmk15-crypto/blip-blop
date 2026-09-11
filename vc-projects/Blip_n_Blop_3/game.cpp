@@ -264,7 +264,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
     n_cache = 0;
 
-    for (int i = 0; i <= 10; i++) game_flag[i] = 0;
+    for (int i = 0; i <= 10; i++) g_game_state.game_flags()[i] = 0;
 
     clearTexteCool();
 
@@ -508,7 +508,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         DDFlip();
         drawAll(false);
 
-        if ((type == LVL_BONUS && !skipped && game_flag[FLAG_TIMER] > 0) ||
+        if ((type == LVL_BONUS && !skipped && g_game_state.game_flags()[FLAG_TIMER] > 0) ||
             type == LVL_COMPLETE || type == LVL_LAST) {
             if (player1 != NULL) {
                 last_perfect1 = player1->perfect;
@@ -1029,7 +1029,7 @@ void Game::updateAll() {
     updateCheat();
     updateTremblements();
 
-    if (game_flag[FLAG_BULLES]) updateBulles();
+    if (g_game_state.game_flags()[FLAG_BULLES]) updateBulles();
 
     if (g_game_state.weather().type() == METEO_PLUIE || g_game_state.weather().type() == METEO_NEIGE) updateMeteo();
 
@@ -1099,7 +1099,7 @@ void Game::drawAll(bool flip) {
     DrawCollection(g_game_state.entities().list_fonds_statiques());
     DrawCollection(g_game_state.entities().list_fonds_animes());
 
-    if (game_flag[FLAG_BULLES]) {
+    if (g_game_state.game_flags()[FLAG_BULLES]) {
         DrawCollection(g_game_state.entities().list_bulles());
     }
 
@@ -1408,8 +1408,8 @@ void Game::updateLock() {
 
     if ((cond == 0 && g_game_state.entities().list_ennemis().empty()) ||
         (cond == 1 && g_game_state.entities().list_gen_ennemis().empty()) ||
-        (cond == 2 && game_flag[flag] == val) ||
-        (cond == 3 && game_flag[flag] >= val)) {
+        (cond == 2 && g_game_state.game_flags()[flag] == val) ||
+        (cond == 3 && g_game_state.game_flags()[flag] >= val)) {
         g_game_state.scroll_lock().Release();
         go_.Come();
     }
@@ -1420,7 +1420,7 @@ void Game::updateLock() {
 void Game::updateHoldFire() {
     if (!g_game_state.hold_fire().active()) return;
 
-    if (game_flag[g_game_state.hold_fire().flag()] == g_game_state.hold_fire().val()) g_game_state.hold_fire().Release();
+    if (g_game_state.game_flags()[g_game_state.hold_fire().flag()] == g_game_state.hold_fire().val()) g_game_state.hold_fire().Release();
 }
 
 //-----------------------------------------------------------------------------
@@ -1517,37 +1517,37 @@ void Game::drawDebugInfos() {
                     g_game_state.font_bank().rpg().print( backSurface, 10, 450, buffer);
 
 
-                    sprintf( buffer, "0-USER0 = %d", game_flag[FLAG_USER0]);
+                    sprintf( buffer, "0-USER0 = %d", g_game_state.game_flags()[FLAG_USER0]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 165, buffer);
 
-                    sprintf( buffer, "1-USER1 = %d", game_flag[FLAG_USER1]);
+                    sprintf( buffer, "1-USER1 = %d", g_game_state.game_flags()[FLAG_USER1]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 185, buffer);
 
-                    sprintf( buffer, "2-USER2 = %d", game_flag[FLAG_USER2]);
+                    sprintf( buffer, "2-USER2 = %d", g_game_state.game_flags()[FLAG_USER2]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 205, buffer);
 
-                    sprintf( buffer, "3-USER3 = %d", game_flag[FLAG_USER3]);
+                    sprintf( buffer, "3-USER3 = %d", g_game_state.game_flags()[FLAG_USER3]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 225, buffer);
 
-                    sprintf( buffer, "4-RESERVED = %d", game_flag[3]);
+                    sprintf( buffer, "4-RESERVED = %d", g_game_state.game_flags()[3]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 245, buffer);
 
-                    sprintf( buffer, "5-BONUS = %d", game_flag[FLAG_BONUS]);
+                    sprintf( buffer, "5-BONUS = %d", g_game_state.game_flags()[FLAG_BONUS]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 265, buffer);
 
-                    sprintf( buffer, "6-TIMER = %d", game_flag[FLAG_TIMER]);
+                    sprintf( buffer, "6-TIMER = %d", g_game_state.game_flags()[FLAG_TIMER]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 285, buffer);
 
-                    sprintf( buffer, "7-GEN_OFF = %d", game_flag[FLAG_GEN_OFF]);
+                    sprintf( buffer, "7-GEN_OFF = %d", g_game_state.game_flags()[FLAG_GEN_OFF]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 305, buffer);
 
-                    sprintf( buffer, "8-NB_KILL = %d", game_flag[FLAG_NB_KILL]);
+                    sprintf( buffer, "8-NB_KILL = %d", g_game_state.game_flags()[FLAG_NB_KILL]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 325, buffer);
 
-                    sprintf( buffer, "9-NB_ENN = %d", game_flag[FLAG_NB_ENN]);
+                    sprintf( buffer, "9-NB_ENN = %d", g_game_state.game_flags()[FLAG_NB_ENN]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 345, buffer);
 
-                    sprintf( buffer, "10-NB_GEN = %d", game_flag[FLAG_NB_GEN]);
+                    sprintf( buffer, "10-NB_GEN = %d", g_game_state.game_flags()[FLAG_NB_GEN]);
                     g_game_state.font_bank().rpg().print( backSurface, 440, 365, buffer);
 
                     sprintf( buffer, "Channels = %d",
@@ -1631,12 +1631,12 @@ void Game::updateVictoryAndDefeat() {
 
     // Victoire ?
     //
-    if (offset >= vic_x && game_flag[vic_flag1] == vic_val1 &&
-        game_flag[vic_flag2] == vic_val2) {
+    if (offset >= vic_x && g_game_state.game_flags()[vic_flag1] == vic_val1 &&
+        g_game_state.game_flags()[vic_flag2] == vic_val2) {
         g_game_state.hold_fire().Activate();
         wait_for_victory += 1;
 
-        if (game_flag[1] == 999) wait_for_victory = 200;
+        if (g_game_state.game_flags()[1] == 999) wait_for_victory = 200;
 
         if (wait_for_victory >= 200) niveau_fini = true;
     } else {
@@ -1647,20 +1647,20 @@ void Game::updateVictoryAndDefeat() {
 //-----------------------------------------------------------------------------
 
 void Game::updateFlags() {
-    game_flag[FLAG_NB_GEN] = g_game_state.entities().list_gen_ennemis().size();
-    game_flag[FLAG_NB_ENN] = g_game_state.entities().list_ennemis().size();
-    makeb_current_mode = game_flag[FLAG_BONUS];
+    g_game_state.game_flags()[FLAG_NB_GEN] = g_game_state.entities().list_gen_ennemis().size();
+    g_game_state.game_flags()[FLAG_NB_ENN] = g_game_state.entities().list_ennemis().size();
+    makeb_current_mode = g_game_state.game_flags()[FLAG_BONUS];
 
     // Le TIMER
     //
-    if (game_flag[FLAG_TIMER] > 0 && wait_for_victory == -1) {
+    if (g_game_state.game_flags()[FLAG_TIMER] > 0 && wait_for_victory == -1) {
         etape_timer += 1;
         etape_timer %= 80;
 
         if (etape_timer == 0) {
-            game_flag[FLAG_TIMER] -= 1;
+            g_game_state.game_flags()[FLAG_TIMER] -= 1;
 
-            if (game_flag[FLAG_TIMER] == 0 && niveau_bonus) niveau_fini = true;
+            if (g_game_state.game_flags()[FLAG_TIMER] == 0 && niveau_bonus) niveau_fini = true;
         }
     }
 }
@@ -1668,11 +1668,11 @@ void Game::updateFlags() {
 //-----------------------------------------------------------------------------
 
 void Game::drawTimer() {
-    if (game_flag[FLAG_TIMER] > 0) {
+    if (g_game_state.game_flags()[FLAG_TIMER] > 0) {
         char buffer[10];
 
         g_game_state.font_bank().cool().printC(backSurface, 320, 20, txt_data[TXT_TIME].c_str());
-        sprintf(buffer, "%d", game_flag[FLAG_TIMER]);
+        sprintf(buffer, "%d", g_game_state.game_flags()[FLAG_TIMER]);
         g_game_state.font_bank().cool().printC(backSurface, 320, 50, buffer);
     }
 }
@@ -1861,7 +1861,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
             killed_p2 = (100 * player2->getKilled()) / g_game_state.enemy_stats().created();
     }
 
-    if (!bonus || (game_flag[FLAG_TIMER] > 0 && !joueurs_morts)) {
+    if (!bonus || (g_game_state.game_flags()[FLAG_TIMER] > 0 && !joueurs_morts)) {
         if (showp1) obj_p1 = 50000;
         if (showp2) obj_p2 = 50000;
     }
@@ -1876,7 +1876,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
     if (fuckOff) {
         perfect_p1 = perfect_p2 = obj_p1 = obj_p2 = killed_p1 = killed_p2 = 0;
-        game_flag[FLAG_TIMER] = 0;
+        g_game_state.game_flags()[FLAG_TIMER] = 0;
     }
 
     while (!app_killed && (calc_p1 < 4 || calc_p2 < 4)) {
@@ -1929,7 +1929,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
             } else if (calc_p1 == 3) {
                 // Bonus temps restant
                 //
-                if (c_time_p1 >= game_flag[FLAG_TIMER])
+                if (c_time_p1 >= g_game_state.game_flags()[FLAG_TIMER])
                     calc_p1 = 4;  // Fini le calcul
                 else {
                     c_time_p1 += 1;
@@ -1974,7 +1974,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
             } else if (calc_p2 == 3) {
                 // Bonus temps restant
                 //
-                if (c_time_p2 >= game_flag[FLAG_TIMER])
+                if (c_time_p2 >= g_game_state.game_flags()[FLAG_TIMER])
                     calc_p2 = 4;  // Fini le calcul
                 else {
                     c_time_p2 += 1;
@@ -2025,7 +2025,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
             strcpy(buffer, "%");
             g_game_state.font_bank().rpg().printR(backSurface, xbasep1 + 220, 220, buffer);
 
-            if (game_flag[FLAG_TIMER] > 0) {
+            if (g_game_state.game_flags()[FLAG_TIMER] > 0) {
                 strcpy(buffer, "Time left");
                 g_game_state.font_bank().rpg().print(backSurface, xbasep1, 240, buffer);
                 sprintf(buffer, "%d", c_time_p1);
@@ -2078,7 +2078,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
             strcpy(buffer, "%");
             g_game_state.font_bank().rpg().printR(backSurface, xbasep2 + 220, 220, buffer);
 
-            if (game_flag[FLAG_TIMER] > 0) {
+            if (g_game_state.game_flags()[FLAG_TIMER] > 0) {
                 strcpy(buffer, "Time left");
                 g_game_state.font_bank().rpg().print(backSurface, xbasep2, 240, buffer);
                 sprintf(buffer, "%d", c_time_p2);

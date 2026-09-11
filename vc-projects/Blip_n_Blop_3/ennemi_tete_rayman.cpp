@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_tete___rayman.h"
+#include "game_state.h"
 
 
 EnnemiTeteRayman::EnnemiTeteRayman(): dx(3)
@@ -61,7 +62,7 @@ void EnnemiTeteRayman::onAvance()
 	//
 	if (dy > 0 && (plat(x, y + dy)) != 0) {
 		grave(x, y, pic);
-		game_flag[0] = 2;
+		g_game_state.game_flags()[0] = 2;
 		a_detruire = true;
 	}
 }
@@ -75,7 +76,7 @@ void EnnemiTeteRayman::onMeure()
 	if (ss_etape == 0) {
 		etape ++;
 		if (etape >= 6) {
-			game_flag[0] = 2;
+			g_game_state.game_flags()[0] = 2;
 			a_detruire = true;
 		} else {
 			pic = pbk_ennemis[179 + etape];

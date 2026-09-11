@@ -16,6 +16,7 @@
 
 
 #include "ennemi_com_heros.h"
+#include "game_state.h"
 
 
 EnnemiComHeros::EnnemiComHeros(): dorkeball(2)
@@ -124,7 +125,7 @@ void EnnemiComHeros::onMeure()
 		etape += 1;
 
 	if (etape >= 22) {
-		game_flag[1] --;
+		g_game_state.game_flags()[1] --;
 		a_detruire = true;
 	} else {
 		pic = pbk_ennemis[358 + etape];

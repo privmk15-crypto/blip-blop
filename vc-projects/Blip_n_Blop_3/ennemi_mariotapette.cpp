@@ -23,7 +23,7 @@ EnnemiMariotapette::EnnemiMariotapette(): speed(1), etape_speed(0), attack_delay
 
 void EnnemiMariotapette::update()
 {
-	if (game_flag[0] < 1) {
+	if (g_game_state.game_flags()[0] < 1) {
 		return;
 	}
 
@@ -258,7 +258,7 @@ void EnnemiMariotapette::onMeure()
 	} else {
 		tombe();
 
-		if (game_flag[0] >= 3) {
+		if (g_game_state.game_flags()[0] >= 3) {
 			if (!aide_luigi) {
 				if (x - speed < xmin || mur_opaque(x - speed, y)) {
 					dir = SENS_DROITE;
@@ -290,7 +290,7 @@ void EnnemiMariotapette::onMeure()
 	}
 
 	if ((!aide_luigi) && (nabo)) {
-		game_flag[3] = 1;
+		g_game_state.game_flags()[3] = 1;
 		aide_luigi = 1;
 		dir = SENS_DROITE;
 		Ennemi * luigi = new EnnemiLuigi();

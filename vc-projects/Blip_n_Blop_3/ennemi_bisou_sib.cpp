@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_sib.h"
+#include "game_state.h"
 
 
 #define ETAT_ATTENDS_MAL	100
@@ -11,9 +12,9 @@ static const int anim_cours [] = { 640, 641, 642, 641 };
 
 EnnemiBisouSIB::EnnemiBisouSIB()
 {
-	if (game_flag[FLAG_USER1] != 0) {
+	if (g_game_state.game_flags()[FLAG_USER1] != 0) {
 		etat = ETAT_ATTENDS_MAL;
-		game_flag[FLAG_USER1] = 0;
+		g_game_state.game_flags()[FLAG_USER1] = 0;
 	} else {
 		etat = ETAT_ATTENDS;
 	}
@@ -32,7 +33,7 @@ void EnnemiBisouSIB::update()
 			pic = pbk_ennemis[635];
 			colFromPic();
 
-			if (x < offset + 440 || game_flag[1] == 0)
+			if (x < offset + 440 || g_game_state.game_flags()[1] == 0)
 				etat = ETAT_RENTRE_MAL;
 
 			break;

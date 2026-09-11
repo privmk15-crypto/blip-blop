@@ -7,8 +7,9 @@
  *		Composition root for the Stage 2 ownership migration and the
  *		SOLE owner of ScreenShake, ScrollLock, Level, Weather,
  *		RpgTrigger, HoldFire, PlayerToggles, EntityManager, DebugStats,
- *		PhaseClock, EnemyStats and (as of the fonts migration) FontBank
- *		- the types extracted from globals.h so far.
+ *		PhaseClock, EnemyStats, FontBank and (as of the game_flag
+ *		migration) GameFlags - the types extracted from globals.h so
+ *		far.
  *
  *		Why one true owner rather than 7 independent globals: this
  *		exists to prepare for future multiplayer work via
@@ -44,6 +45,7 @@
 #include "enemy_stats.h"
 #include "entity_manager.h"
 #include "font_bank.h"
+#include "game_flags.h"
 #include "hold_fire.h"
 #include "level.h"
 #include "phase_clock.h"
@@ -77,6 +79,7 @@ class GameState {
     PhaseClock& phase_clock() { return phase_clock_; }
     EnemyStats& enemy_stats() { return enemy_stats_; }
     FontBank& font_bank() { return font_bank_; }
+    GameFlags& game_flags() { return game_flags_; }
 
    private:
     ScreenShake screen_shake_;
@@ -91,6 +94,7 @@ class GameState {
     PhaseClock phase_clock_;
     EnemyStats enemy_stats_;
     FontBank font_bank_;
+    GameFlags game_flags_;
 };
 
 // The single GameState for the current game session - the sole owner of

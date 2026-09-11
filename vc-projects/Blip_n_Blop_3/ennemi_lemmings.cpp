@@ -32,18 +32,18 @@ void EnnemiLemmings::update()
 
 	// Si 200+ lemmings tués, ils se suicident et arrêtent les générateurs
 	//
-	if (game_flag[FLAG_NB_KILL] >= 200 && etat != ETAT_MEURE && etat != ETAT_CARBONISE) {
+	if (g_game_state.game_flags()[FLAG_NB_KILL] >= 200 && etat != ETAT_MEURE && etat != ETAT_CARBONISE) {
 		suicide = true;
 		col_on = false;
 		ss_etape = 0;
 		etape = 0;
 		etat = ETAT_MEURE;
-		game_flag[FLAG_GEN_OFF] = 1;
+		g_game_state.game_flags()[FLAG_GEN_OFF] = 1;
 	}
 
-	if (game_flag[3] == 1) {
+	if (g_game_state.game_flags()[3] == 1) {
 		sbk_niveau.play(5);
-		game_flag[3] = 0;
+		g_game_state.game_flags()[3] = 0;
 	}
 
 	switch (etat) {
@@ -135,13 +135,13 @@ void EnnemiLemmings::onMeure()
 
 		a_detruire = true;
 
-		if (suicide && game_flag[0] == 0) {
+		if (suicide && g_game_state.game_flags()[0] == 0) {
 			Bonus * bonus = new BonusVache();
 			bonus->x = 1500;
 			bonus->y = -50;
 
 			g_game_state.entities().list_bonus().emplace_back(bonus);
-			game_flag[0] = 1;
+			g_game_state.game_flags()[0] = 1;
 		}
 	} else {
 		if (dir == SENS_GAUCHE)

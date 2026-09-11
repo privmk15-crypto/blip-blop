@@ -1,6 +1,7 @@
 
 #include "ennemi_smurf_cigogne.h"
 #include "ben_maths.h"
+#include "game_state.h"
 
 EnnemiSmurfCigogne::EnnemiSmurfCigogne() {
     pic = pbk_ennemis[355];
@@ -16,13 +17,13 @@ void EnnemiSmurfCigogne::update() {
         first = false;
     }
 
-    if (game_flag[1] < 5) return;
+    if (g_game_state.game_flags()[1] < 5) return;
 
     x += 4;
 
     y = base_y + sini(100, ((x - base_x) / 4) % 360);
 
-    if (x > offset + 750 && game_flag[0] < 3) {
-        game_flag[0] = 3;
+    if (x > offset + 750 && g_game_state.game_flags()[0] < 3) {
+        g_game_state.game_flags()[0] = 3;
     }
 }

@@ -131,7 +131,8 @@ extern bool			no_scroll2;			// blip ou blop meure
 // phase/slow_phase moved into PhaseClock (phase_clock.h) as part of the
 // Stage 2 ownership migration.
 
-extern int			game_flag[11];
+// game_flag[11] moved into GameFlags (game_flags.h) as part of the
+// Stage 2 ownership migration.
 
 // hold_fire/flag_hold_fire/val_hold_fire moved into HoldFire (hold_fire.h)
 // as part of the Stage 2 ownership migration.

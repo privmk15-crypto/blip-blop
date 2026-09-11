@@ -16,11 +16,11 @@ void EnnemiPoid::update()
 		onMeure();
 	} else {
 		pic = pbk_ennemis[169];
-		if (game_flag[0] < 3) {
+		if (g_game_state.game_flags()[0] < 3) {
 			y = -100;
 			x = 565;
 		}
-		if ((game_flag[0] == 3) || (game_flag[0] == 4)) {
+		if ((g_game_state.game_flags()[0] == 3) || (g_game_state.game_flags()[0] == 4)) {
 			//col_on = false;
 			if (y < 100) {
 				tombe2();
@@ -31,7 +31,7 @@ void EnnemiPoid::update()
 				etat = ETAT_MEURE;
 			}
 		}
-		/*else if(game_flag[0] == 5)
+		/*else if(g_game_state.game_flags()[0] == 5)
 		{
 			//a_detruire = true;
 			if (x > 1000)
@@ -52,7 +52,7 @@ void EnnemiPoid::update()
 void EnnemiPoid::onMeure()
 {
 	if ((mur_opaque(x, y + dy))) {
-		game_flag[0] = 7;
+		g_game_state.game_flags()[0] = 7;
 		ss_etape ++;
 		ss_etape %= 15;
 		if ((etape == 0) && (ss_etape == 1)) {
@@ -101,7 +101,7 @@ void EnnemiPoid::onMeure()
 				g_game_state.entities().list_giclures().emplace_back(s);
 			}
 		} else if (mur_opaque(x, y + dy * 25)) {
-			game_flag[0] = 6;
+			g_game_state.game_flags()[0] = 6;
 			pic = pbk_ennemis[199];
 			int i;
 			Sprite * s;

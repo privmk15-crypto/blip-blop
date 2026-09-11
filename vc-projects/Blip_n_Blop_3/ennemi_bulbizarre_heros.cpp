@@ -128,7 +128,7 @@ void EnnemiBulbizarreHeros::onMeure()
 		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x])
 			grave(x, y, pic);
 
-		game_flag[1] --;
+		g_game_state.game_flags()[1] --;
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)

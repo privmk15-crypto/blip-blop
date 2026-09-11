@@ -20,7 +20,7 @@ void EnnemiMario::update()
 {
 	xmin = offset + 40;
 
-	if (game_flag[0] == 0) {
+	if (g_game_state.game_flags()[0] == 0) {
 		tombe();
 		return;
 	}
@@ -350,7 +350,7 @@ void EnnemiMario::onAvance()
 
 void EnnemiMario::onMeure()
 {
-	game_flag[0] = 7;
+	g_game_state.game_flags()[0] = 7;
 }
 
 void EnnemiMario::onCharge()

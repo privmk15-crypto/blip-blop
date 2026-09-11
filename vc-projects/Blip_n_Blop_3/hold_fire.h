@@ -7,7 +7,7 @@
  *		Owns the "hold fire" state (hold_fire/flag_hold_fire/
  *		val_hold_fire, globals.h/.cpp before this migration): when
  *		active, Couille::fire logic won't let a player shoot until
- *		game_flag[flag()] == val() (checked in
+ *		g_game_state.game_flags()[flag()] == val() (checked in
  *		Game::updateHoldFire()), which then releases it.
  *
  *		Owned by GameState (game_state.h) as g_game_state.hold_fire()

@@ -19,7 +19,7 @@
  *
  *		This class only stores what was locked and whether it's
  *		active; the condition check itself (list_ennemis.empty(),
- *		game_flag[...], etc.) stays in Game::updateLock(), which
+ *		g_game_state.game_flags()[...], etc.) stays in Game::updateLock(), which
  *		already owns those other globals - ScrollLock isn't the
  *		right owner for logic that reads entity lists and game_flag.
  *

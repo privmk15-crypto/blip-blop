@@ -13,7 +13,7 @@ FondPokeAscenceur2::FondPokeAscenceur2()
 
 void FondPokeAscenceur2::update()
 {
-	if (game_flag[2] > 1) {
+	if (g_game_state.game_flags()[2] > 1) {
 		int		xtmp;
 
 		// Fait des allers/retour

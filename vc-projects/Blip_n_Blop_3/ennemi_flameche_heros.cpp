@@ -15,6 +15,7 @@
 
 
 #include "ennemi_flameche_heros.h"
+#include "game_state.h"
 
 
 EnnemiFlamecheHeros::EnnemiFlamecheHeros(): dorkeball(2)
@@ -122,7 +123,7 @@ void EnnemiFlamecheHeros::onMeure()
 		etape += 1;
 
 	if (etape >= 14) {
-		game_flag[1] --;
+		g_game_state.game_flags()[1] --;
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)

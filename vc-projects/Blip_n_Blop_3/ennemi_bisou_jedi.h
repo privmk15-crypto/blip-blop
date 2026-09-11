@@ -3,6 +3,7 @@
 #define _EnnemiBisouJedi_
 
 #include "enemy.h"
+#include "game_state.h"
 
 class EnnemiBisouJedi : public Ennemi
 {
@@ -39,8 +40,8 @@ public:
 				col_on = false;
 			} else {
 				intro = false;
-				game_flag[FLAG_USER1] = 1;
-				game_flag[FLAG_GEN_OFF] = 0;
+				g_game_state.game_flags()[FLAG_USER1] = 1;
+				g_game_state.game_flags()[FLAG_GEN_OFF] = 0;
 			}
 		} else {
 			EnnemiBisouJedi::update();
@@ -52,8 +53,8 @@ public:
 		EnnemiBisouJedi::estTouche(tir);
 
 		if (pv <= 0) {
-			game_flag[FLAG_USER1] = 2;
-			game_flag[FLAG_GEN_OFF] = 1;
+			g_game_state.game_flags()[FLAG_USER1] = 2;
+			g_game_state.game_flags()[FLAG_GEN_OFF] = 1;
 		}
 	}
 };

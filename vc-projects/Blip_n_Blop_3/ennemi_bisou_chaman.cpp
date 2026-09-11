@@ -26,12 +26,12 @@ EnnemiBisouChaman::EnnemiBisouChaman() : etape_shoot(0), nb_touch(0), n_pos(1)
 
 void EnnemiBisouChaman::update()
 {
-	game_flag[2] = 1;
+	g_game_state.game_flags()[2] = 1;
 
-	if (game_flag[0] == 1) {
+	if (g_game_state.game_flags()[0] == 1) {
 		mbk_niveau.play(1);
-		game_flag[0] = 2;
-		game_flag[FLAG_TIMER] = 50;
+		g_game_state.game_flags()[0] = 2;
+		g_game_state.game_flags()[FLAG_TIMER] = 50;
 	}
 
 	if (blood > 0)
@@ -381,8 +381,8 @@ void EnnemiBisouChaman::estTouche(Tir * tir)
 	nb_touch++;
 
 	if (etat == ETAT_MEURE || etat == ETAT_CARBONISE) {
-		game_flag[0] = 7;
-		game_flag[FLAG_GEN_OFF] = 1;
+		g_game_state.game_flags()[0] = 7;
+		g_game_state.game_flags()[FLAG_GEN_OFF] = 1;
 		sbk_niveau.play(19);
 	}
 }

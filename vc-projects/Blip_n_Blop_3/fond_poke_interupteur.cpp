@@ -41,7 +41,7 @@ void FondPokeInterupteur::update()
 	} else {
 		if (tete_turc != NULL) {
 			if ((tete_turc->x > x - 10) && (tete_turc->x < x + 33) && (tete_turc->y > y - 10) && (tete_turc->y < y + 51)) {
-				game_flag[2] ++;
+				g_game_state.game_flags()[2] ++;
 				etat = true;
 				sbk_niveau.play(2);
 			}
@@ -53,22 +53,22 @@ void FondPokeInterupteur::update()
 	if (x < offset - 100)
 		a_detruire = true;
 
-	if (game_flag[0] == 0) {
-		if (wait_msg || game_flag[2] == 0) {
-			game_flag[7] = 1;
+	if (g_game_state.game_flags()[0] == 0) {
+		if (wait_msg || g_game_state.game_flags()[2] == 0) {
+			g_game_state.game_flags()[7] = 1;
 		} else {
-			game_flag[7] = 0;
+			g_game_state.game_flags()[7] = 0;
 		}
 	}
 
-	if (!wait_msg && game_flag[2] == 0 && game_flag[6] <= 80) {
+	if (!wait_msg && g_game_state.game_flags()[2] == 0 && g_game_state.game_flags()[6] <= 80) {
 		wait_msg = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 104;
 		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	}
 
-	if (!ascenc_msg && wait_msg && game_flag[2] == 1) {
+	if (!ascenc_msg && wait_msg && g_game_state.game_flags()[2] == 1) {
 		ascenc_msg = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 105;
@@ -78,7 +78,7 @@ void FondPokeInterupteur::update()
 		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	}
 
-	if (!bravo && ascenc_msg && game_flag[0] == 1) {
+	if (!bravo && ascenc_msg && g_game_state.game_flags()[0] == 1) {
 		bravo = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 107;

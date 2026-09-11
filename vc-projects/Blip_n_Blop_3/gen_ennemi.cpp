@@ -31,7 +31,7 @@ GenEnnemi::GenEnnemi() : t(0), a_detruire(false)
 
 void GenEnnemi::update()
 {
-	if (game_flag[FLAG_GEN_OFF] != 0)
+	if (g_game_state.game_flags()[FLAG_GEN_OFF] != 0)
 		return;
 
 	t += 1;

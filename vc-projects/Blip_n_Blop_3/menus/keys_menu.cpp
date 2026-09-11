@@ -68,7 +68,19 @@ int KeysMenu::ProcessEvent() {
         }
         if (in.scanKey(DIK_RETURN) || in.scanAlias(ALIAS_P1_FIRE)) {
             if (items_.focused() == items_.size() - 1) {
-                return MenuType::Main;
+                // Fix: this used to return MenuType::Main, jumping
+                // straight past this menu's actual parent (Options).
+                // OptionsMenu::ProcessEvent() (options_menu.cpp) only
+                // resets its own active_menu_ back to options_menu_ on
+                // MenuType::Options - its MenuType::Main case just
+                // propagates Main upward unconditionally, so it never
+                // got a chance to un-focus this KeysMenu. The next
+                // time Options was entered, OptionsMenu's active_menu_
+                // was still this KeysMenu instance from before,
+                // showing P1/P2 keys again instead of the options
+                // panel - reported as "options znikają, od razu
+                // wchodzi w sterowanie gracza 1".
+                return MenuType::Options;
             }
             EditKey();
         }

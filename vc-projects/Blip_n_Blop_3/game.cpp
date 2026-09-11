@@ -88,10 +88,11 @@ Personnage dummyPlayer;
 
 //-----------------------------------------------------------------------------
 
+// player_manager_'s two slots are already null (PlayerManager's own
+// default member initializer) - no need to initialize them here, unlike
+// the player1(NULL)/player2(NULL) this replaces.
 Game::Game()
-    : player1(NULL),
-      player2(NULL),
-      next_goutte(0),
+    : next_goutte(0),
       next_flocon(0),
       show_fps(false),
       show_lists(false) {
@@ -122,21 +123,21 @@ void Game::jouePartie(int nbj, int idj) {
     g_game_state.sound_banks().current_zik() = -1;
 
     if (idj == 0)
-        player1 = new Blip();
+        player_manager_.player1() = new Blip();
     else
-        player1 = new Blop();
+        player_manager_.player1() = new Blop();
 
-    player1->ctrl = &ctrlP1_;
-    g_game_state.entities().list_joueurs().push_back(player1);
+    player_manager_.player1()->ctrl = &ctrlP1_;
+    g_game_state.entities().list_joueurs().push_back(player_manager_.player1());
 
     if (nbj == 2) {
         if (idj == 0)
-            player2 = new Blop();
+            player_manager_.player2() = new Blop();
         else
-            player2 = new Blip();
+            player_manager_.player2() = new Blip();
 
-        player2->ctrl = &ctrlP2_;
-        g_game_state.entities().list_joueurs().push_back(player2);
+        player_manager_.player2()->ctrl = &ctrlP2_;
+        g_game_state.entities().list_joueurs().push_back(player_manager_.player2());
     }
 
     // Joue à tous les niveaux
@@ -151,9 +152,9 @@ void Game::jouePartie(int nbj, int idj) {
             letsgo = joueNiveau(fic_names[i], type_lvl[i]);
 
             if (!g_game_state.player_toggles().cow_bomb_on()) {
-                if (player1 != NULL) player1->nb_cow_bomb = 1;
+                if (player_manager_.player1() != NULL) player_manager_.player1()->nb_cow_bomb = 1;
 
-                if (player2 != NULL) player2->nb_cow_bomb = 1;
+                if (player_manager_.player2() != NULL) player_manager_.player2()->nb_cow_bomb = 1;
 
                 g_game_state.player_toggles().set_cow_bomb_on(true);
             }
@@ -223,14 +224,14 @@ void Game::jouePartie(int nbj, int idj) {
         showHighScores();
     }
 
-    if (player1 != NULL) {
-        delete player1;
-        player1 = NULL;
+    if (player_manager_.player1() != NULL) {
+        delete player_manager_.player1();
+        player_manager_.player1() = NULL;
     }
 
-    if (player2 != NULL) {
-        delete player2;
-        player2 = NULL;
+    if (player_manager_.player2() != NULL) {
+        delete player_manager_.player2();
+        player_manager_.player2() = NULL;
     }
 }
 
@@ -279,39 +280,39 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
     // Place les joueurs et initialise qq trucs
     //
-    if (player1 != NULL && player1->nb_life > 0) {
-        player1->x = xstart1;
-        player1->y = ystart1;
-        player1->etat = ETAT_NORMAL;
-        player1->etape = 0;
-        player1->ss_etape = 0;
-        player1->dir = BBDIR_DROITE;
-        player1->tire = false;
+    if (player_manager_.player1() != NULL && player_manager_.player1()->nb_life > 0) {
+        player_manager_.player1()->x = xstart1;
+        player_manager_.player1()->y = ystart1;
+        player_manager_.player1()->etat = ETAT_NORMAL;
+        player_manager_.player1()->etape = 0;
+        player_manager_.player1()->ss_etape = 0;
+        player_manager_.player1()->dir = BBDIR_DROITE;
+        player_manager_.player1()->tire = false;
 
         if (type == LVL_BONUS) {
-            p1_life = player1->nb_life;
+            p1_life = player_manager_.player1()->nb_life;
             p1_bringBack = true;
 
-            if (p1_life > 0) player1->nb_life = 1;
+            if (p1_life > 0) player_manager_.player1()->nb_life = 1;
         }
     } else {
         p1_bringBack = false;
     }
 
-    if (player2 != NULL && player2->nb_life > 0) {
-        player2->x = xstart2;
-        player2->y = ystart2;
-        player2->etat = ETAT_NORMAL;
-        player1->etape = 0;
-        player1->ss_etape = 0;
-        player2->dir = BBDIR_DROITE;
-        player2->tire = false;
+    if (player_manager_.player2() != NULL && player_manager_.player2()->nb_life > 0) {
+        player_manager_.player2()->x = xstart2;
+        player_manager_.player2()->y = ystart2;
+        player_manager_.player2()->etat = ETAT_NORMAL;
+        player_manager_.player1()->etape = 0;
+        player_manager_.player1()->ss_etape = 0;
+        player_manager_.player2()->dir = BBDIR_DROITE;
+        player_manager_.player2()->tire = false;
 
         if (type == LVL_BONUS) {
-            p2_life = player2->nb_life;
+            p2_life = player_manager_.player2()->nb_life;
             p2_bringBack = true;
 
-            if (p2_life > 0) player2->nb_life = 1;
+            if (p2_life > 0) player_manager_.player2()->nb_life = 1;
         }
     } else {
         p2_bringBack = false;
@@ -323,47 +324,47 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         type == LVL_END) {
         g_game_state.enemy_stats().Reset();
 
-        if (player1 != NULL) {
-            player1->setKilled(0);
+        if (player_manager_.player1() != NULL) {
+            player_manager_.player1()->setKilled(0);
 
             if (type != LVL_END) {
-                player1->etat = ETAT_COME_BACK;
-                player1->y = -50;
-                player1->y_to_go = ystart1;
+                player_manager_.player1()->etat = ETAT_COME_BACK;
+                player_manager_.player1()->y = -50;
+                player_manager_.player1()->y_to_go = ystart1;
             }
 
-            player1->id_arme = ID_M16;
-            player1->latence_arme = 3;
-            player1->nb_etape_arme = 5;
-            player1->cadence_arme = 10;
-            player1->poid_arme = 1;
-            player1->perfect = true;
-            player1->pv = 5;
+            player_manager_.player1()->id_arme = ID_M16;
+            player_manager_.player1()->latence_arme = 3;
+            player_manager_.player1()->nb_etape_arme = 5;
+            player_manager_.player1()->cadence_arme = 10;
+            player_manager_.player1()->poid_arme = 1;
+            player_manager_.player1()->perfect = true;
+            player_manager_.player1()->pv = 5;
 
             if (last_perfect1) {
-                player1->setSuperWeapon();
+                player_manager_.player1()->setSuperWeapon();
             }
         }
 
-        if (player2 != NULL) {
-            player2->setKilled(0);
+        if (player_manager_.player2() != NULL) {
+            player_manager_.player2()->setKilled(0);
 
             if (type != LVL_END) {
-                player2->etat = ETAT_COME_BACK;
-                player2->y = -50;
-                player2->y_to_go = ystart2;
+                player_manager_.player2()->etat = ETAT_COME_BACK;
+                player_manager_.player2()->y = -50;
+                player_manager_.player2()->y_to_go = ystart2;
             }
 
-            player2->id_arme = ID_M16;
-            player2->latence_arme = 3;
-            player2->nb_etape_arme = 5;
-            player2->cadence_arme = 10;
-            player2->poid_arme = 1;
-            player2->perfect = true;
-            player2->pv = 5;
+            player_manager_.player2()->id_arme = ID_M16;
+            player_manager_.player2()->latence_arme = 3;
+            player_manager_.player2()->nb_etape_arme = 5;
+            player_manager_.player2()->cadence_arme = 10;
+            player_manager_.player2()->poid_arme = 1;
+            player_manager_.player2()->perfect = true;
+            player_manager_.player2()->pv = 5;
 
             if (last_perfect2) {
-                player2->setSuperWeapon();
+                player_manager_.player2()->setSuperWeapon();
             }
         }
     }
@@ -463,12 +464,12 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     if (skipped) debug << "User skipped\n";
     if (app_killed) debug << "Application killed\n";
 
-    if (player1 != NULL) {
-        player1->endLevel();
+    if (player_manager_.player1() != NULL) {
+        player_manager_.player1()->endLevel();
     }
 
-    if (player2 != NULL) {
-        player2->endLevel();
+    if (player_manager_.player2() != NULL) {
+        player_manager_.player2()->endLevel();
     }
 
     // Coupe les musiques
@@ -480,22 +481,22 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     // joueurs + on ne peut pas perdre
     //
     if (type == LVL_BONUS && !skipped && !app_killed) {
-        if (player1 != NULL && p1_bringBack) {
-            if (player1->a_detruire && p1_life > 0) {
-                player1->a_detruire = false;
-                g_game_state.entities().list_joueurs().push_back(player1);
+        if (player_manager_.player1() != NULL && p1_bringBack) {
+            if (player_manager_.player1()->a_detruire && p1_life > 0) {
+                player_manager_.player1()->a_detruire = false;
+                g_game_state.entities().list_joueurs().push_back(player_manager_.player1());
             }
 
-            player1->nb_life = p1_life;
+            player_manager_.player1()->nb_life = p1_life;
         }
 
-        if (player2 != NULL && p2_bringBack) {
-            if (player2->a_detruire && p2_life > 0) {
-                player2->a_detruire = false;
-                g_game_state.entities().list_joueurs().push_back(player2);
+        if (player_manager_.player2() != NULL && p2_bringBack) {
+            if (player_manager_.player2()->a_detruire && p2_life > 0) {
+                player_manager_.player2()->a_detruire = false;
+                g_game_state.entities().list_joueurs().push_back(player_manager_.player2());
             }
 
-            player2->nb_life = p2_life;
+            player_manager_.player2()->nb_life = p2_life;
         }
 
         niveau_fini = true;
@@ -510,12 +511,12 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
         if ((type == LVL_BONUS && !skipped && g_game_state.game_flags()[FLAG_TIMER] > 0) ||
             type == LVL_COMPLETE || type == LVL_LAST) {
-            if (player1 != NULL) {
-                last_perfect1 = player1->perfect;
+            if (player_manager_.player1() != NULL) {
+                last_perfect1 = player_manager_.player1()->perfect;
             }
 
-            if (player2 != NULL) {
-                last_perfect2 = player2->perfect;
+            if (player_manager_.player2() != NULL) {
+                last_perfect2 = player_manager_.player2()->perfect;
             }
 
             showPE((type == LVL_BONUS));
@@ -540,409 +541,19 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 //-----------------------------------------------------------------------------
 
 bool Game::chargeNiveau(const char* nom_niveau) {
-    char buffer[20];
-    char buffer2[70];
-
-    std::ifstream fic(nom_niveau, std::ios::binary);
-
-    if (!fic.good()) {
-        debug << "Game::chargeNiveau() -> Cannot load <" << nom_niveau << ">\n";
-        return false;
-    }
-
-    debug
-        << "---------------------------------------------------------------\n";
-    debug << "Loading level <" << nom_niveau << ">\n";
-    debug
-        << "---------------------------------------------------------------\n";
-
-    // GFX decors
-    //
-    fic.read(buffer, 20);
-    strcpy(buffer2, "data/");
-    strcat(buffer2, buffer);
-
-    if (!g_game_state.picture_banks().decor().loadGFX(buffer2, DDSURF_SYSTEM)) {
-        debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-              << " as background\n";
-        return false;
-    }
-
-    debug << "Successfully loaded <" << buffer2 << "> as background\n";
-
-    // GFX niveau (fonds animés & co)
-    //
-    fic.read(buffer, 20);
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-
-        if (!g_game_state.picture_banks().niveau().loadGFX(buffer2, mem_flag)) {
-            debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-                  << " as level stuff\n";
-            return false;
-        }
-
-        debug << "Successfully loaded <" << buffer2 << "> as level stuff\n";
-    }
-
-    // GFX ennemis
-    //
-    fic.read(buffer, 20);
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-
-        if (!g_game_state.picture_banks().ennemis().loadGFX(buffer2, mem_flag)) {
-            debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-                  << " as ennemies\n";
-            return false;
-        }
-
-        debug << "Successfully loaded <" << buffer2 << "> as ennemies\n";
-    }
-
-    // SBK ennemis
-    //
-    fic.read(buffer, 20);
-
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-
-        if (!g_game_state.sound_banks().sbk_niveau().loadSFX(buffer2)) {
-            debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-                  << " as SBK\n";
-            return false;
-        }
-
-        debug << "Successfully loaded <" << buffer2 << "> as SBK\n";
-    }
-
-    // Fichier MBK
-    //
-    fic.read(buffer, 20);
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-        strcpy(g_game_state.sound_banks().current_mbk(), buffer2);
-
-        if (music_on) {
-            if (!g_game_state.sound_banks().mbk_niveau().open(buffer2)) {
-                debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-                      << " as MKB\n";
-                return false;
-            }
-            debug << "Successfully loaded <" << buffer2 << "> as MBK\n";
-        }
-    } else
-        strcpy(g_game_state.sound_banks().current_mbk(), "");
-
-    // Fichier RPG itself
-    //
-    fic.read(buffer, 20);
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-        rpg.attachFile(buffer2);
-
-        // Precache le fichier RPG
-        //
-        Precache(buffer2);
-
-        debug << "Successfully loaded <" << buffer2 << "> as RPG file\n";
-    }
-
-    // GFX rpg
-    //
-    fic.read(buffer, 20);
-    if (strlen(buffer) != 0) {
-        strcpy(buffer2, "data/");
-        strcat(buffer2, buffer);
-
-        if (!g_game_state.picture_banks().rpg().loadGFX(buffer2, mem_flag)) {
-            debug << "Game::chargeNiveau() -> Cannot load " << buffer2
-                  << " as RPG GFX\n";
-            return false;
-        }
-
-        debug << "Successfully loaded <" << buffer2 << "> as RPG GFX\n";
-    }
-
-    // Taille du niveau
-    //
-    int scr_level_size;
-    fic.read(reinterpret_cast<char*>(&scr_level_size), sizeof(scr_level_size));
-    g_game_state.level().set_scr_size(scr_level_size);
-    g_game_state.level().set_size(scr_level_size * 640);
-
-    // Numéros des écrans à afficher (comme des tiles)
-    //
-    int* num_decor = g_game_state.level().AllocNumDecor(scr_level_size);
-    for (int i = 0; i < scr_level_size; i++)
-        fic.read(reinterpret_cast<char*>(&num_decor[i]), sizeof(int));
-
-    // Coordonnées de départ des joueurs
-    //
-    fic.read(reinterpret_cast<char*>(&xstart1), sizeof(xstart1));
-    fic.read(reinterpret_cast<char*>(&ystart1), sizeof(ystart1));
-    fic.read(reinterpret_cast<char*>(&xstart2), sizeof(xstart2));
-    fic.read(reinterpret_cast<char*>(&ystart2), sizeof(ystart2));
-
-    // Conditions de victoire
-    //
-    fic.read(reinterpret_cast<char*>(&vic_x), sizeof(vic_x));
-    fic.read(reinterpret_cast<char*>(&vic_flag1), sizeof(vic_flag1));
-    fic.read(reinterpret_cast<char*>(&vic_val1), sizeof(vic_val1));
-    fic.read(reinterpret_cast<char*>(&vic_flag2), sizeof(vic_flag2));
-    fic.read(reinterpret_cast<char*>(&vic_val2), sizeof(vic_val2));
-
-    //
-    // Plateformes
-    //
-    int** y_plat = g_game_state.level().AllocYPlat(g_game_state.level().size());
-
-    for (int i = 0; i < NB_MAX_PLAT; i++) {
-        fic.read(reinterpret_cast<char*>(y_plat[i]),
-                 (g_game_state.level().size()) * sizeof(int));
-    }
-
-    //
-    // Murs opaques
-    //
-    int level_size_8 = g_game_state.level().size() / 8;
-    bool** murs_opaques = g_game_state.level().AllocMursOpaques(level_size_8);
-
-    for (int i = 0; i < 60; i++) {
-        fic.read(reinterpret_cast<char*>(murs_opaques[i]),
-                 (level_size_8) * sizeof(bool));
-    }
-
-    //
-    // Murs sanglants
-    //
-    bool** murs_sanglants = g_game_state.level().AllocMursSanglants(level_size_8);
-
-    for (int i = 0; i < 60; i++) {
-        fic.read(reinterpret_cast<char*>(murs_sanglants[i]),
-                 (level_size_8) * sizeof(bool));
-    }
-
-    //
-    // Charge les évenements
-    //
-    FICEVENT ficevent;
-    int nb_events;
-
-    fic.read(reinterpret_cast<char*>(&nb_events), sizeof(nb_events));
-
-    for (int i = 0; i < nb_events; i++) {
-        fic.read(reinterpret_cast<char*>(&ficevent), sizeof(ficevent));
-
-        switch (ficevent.event_id) {
-            case EVENTID_ENNEMI: {
-                auto event_ennemi = std::make_unique<EventEnnemi>();
-
-                event_ennemi->x_activation = ficevent.x_activation;
-                event_ennemi->id_ennemi = ficevent.id;
-                event_ennemi->x = ficevent.x;
-                event_ennemi->y = ficevent.y;
-                event_ennemi->sens = ficevent.sens;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_ennemi));
-                break;
-            }
-
-            case EVENTID_ENNEMI_GENERATOR: {
-                auto event_gennemi = std::make_unique<EventGenEnnemi>();
-
-                event_gennemi->x_activation = ficevent.x_activation;
-                event_gennemi->id_ennemi = ficevent.id;
-                event_gennemi->x = ficevent.x;
-                event_gennemi->y = ficevent.y;
-                event_gennemi->sens = ficevent.sens;
-                event_gennemi->capacite = ficevent.capacite;
-                event_gennemi->periode = ficevent.periode;
-                event_gennemi->tmp = ficevent.tmp;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_gennemi));
-                break;
-            }
-
-            case EVENTID_LOCK: {
-                auto event_lock = std::make_unique<EventLock>();
-
-                event_lock->x_activation = ficevent.x_activation;
-                event_lock->cond = ficevent.cond;
-                event_lock->flag = ficevent.flag;
-                event_lock->val = ficevent.val;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_lock));
-                break;
-            }
-
-            case EVENTID_FORCE_SCROLL: {
-                auto event_scroll_speed = std::make_unique<EventScrollSpeed>();
-
-                event_scroll_speed->x_activation = ficevent.x_activation;
-                event_scroll_speed->speed = ficevent.speed;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_scroll_speed));
-                break;
-            }
-
-            case EVENTID_FLAG: {
-                auto event_set_flag = std::make_unique<EventSetFlag>();
-
-                event_set_flag->x_activation = ficevent.x_activation;
-                event_set_flag->flag = ficevent.flag;
-                event_set_flag->val = ficevent.val;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_set_flag));
-                break;
-            }
-
-            case EVENTID_HOLD_FIRE: {
-                auto event_hold_fire = std::make_unique<EventHoldFire>();
-
-                event_hold_fire->x_activation = ficevent.x_activation;
-                event_hold_fire->flag = ficevent.flag;
-                event_hold_fire->val = ficevent.val;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_hold_fire));
-                break;
-            }
-
-            case EVENTID_BONUS_GENERATOR: {
-                auto event_gen_bonus = std::make_unique<EventGenBonus>();
-
-                event_gen_bonus->x_activation = ficevent.x_activation;
-                event_gen_bonus->type = ficevent.id;
-                event_gen_bonus->periode = ficevent.periode;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_gen_bonus));
-                break;
-            }
-
-            case EVENTID_TEXT: {
-                auto event_texte = std::make_unique<EventTexte>();
-
-                event_texte->x_activation = ficevent.x_activation;
-                event_texte->ntxt = ficevent.n_txt;
-                event_texte->cond = ficevent.cond;
-                event_texte->flag = ficevent.flag;
-                event_texte->val = ficevent.val;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_texte));
-                break;
-            }
-
-            case EVENTID_FOND_ANIME: {
-                auto event_fond_anime = std::make_unique<EventFondAnime>();
-
-                event_fond_anime->x_activation = ficevent.x_activation;
-                event_fond_anime->id_fond = ficevent.id;
-                event_fond_anime->x = ficevent.x;
-                event_fond_anime->y = ficevent.y;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_fond_anime));
-                break;
-            }
-
-            case EVENTID_MIFOND: {
-                auto event_mi_fond = std::make_unique<EventMiFond>();
-
-                event_mi_fond->x_activation = ficevent.x_activation;
-                event_mi_fond->id = ficevent.id;
-                event_mi_fond->x = ficevent.x;
-                event_mi_fond->y = ficevent.y;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_mi_fond));
-                break;
-            }
-
-            case EVENTID_PREMIER_PLAN: {
-                auto event_pplan = std::make_unique<EventPremierPlan>();
-
-                event_pplan->id_fond = ficevent.id;
-                event_pplan->x_activation = ficevent.x_activation;
-                event_pplan->x = ficevent.x;
-                event_pplan->y = ficevent.y;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_pplan));
-                break;
-            }
-
-            case EVENTID_RPG: {
-                auto event_rpg = std::make_unique<EventRPG>();
-
-                event_rpg->x_activation = ficevent.x_activation;
-                event_rpg->num = ficevent.id;
-                event_rpg->cond = ficevent.cond;
-                event_rpg->flag = ficevent.flag;
-                event_rpg->val = ficevent.val;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_rpg));
-                break;
-            }
-
-            case EVENTID_MUSIC: {
-                auto event_music = std::make_unique<EventMusic>();
-
-                event_music->x_activation = ficevent.x_activation;
-                event_music->id = ficevent.id;
-                event_music->play = ficevent.play;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_music));
-                break;
-            }
-
-            case EVENTID_METEO: {
-                auto event_meteo = std::make_unique<EventMeteo>();
-
-                event_meteo->x_activation = ficevent.x_activation;
-                event_meteo->intensite = ficevent.intensite;
-                event_meteo->type = ficevent.id;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_meteo));
-                break;
-            }
-
-            case EVENTID_BONUS: {
-                auto event_bonus = std::make_unique<EventBonus>();
-                event_bonus->x_activation = ficevent.x_activation;
-                event_bonus->type = ficevent.id;
-                event_bonus->x = ficevent.x;
-                event_bonus->y = ficevent.y;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_bonus));
-                break;
-            }
-
-            case EVENTID_TURRET: {
-                auto event_vehicule = std::make_unique<EventVehicule>();
-                event_vehicule->x_activation = ficevent.x_activation;
-                event_vehicule->id_vehicule = ficevent.id;
-                event_vehicule->x = ficevent.x;
-                event_vehicule->y = ficevent.y;
-                event_vehicule->dir = ficevent.dir;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_vehicule));
-                break;
-            }
-
-            case EVENTID_SON: {
-                auto event_son = std::make_unique<EventSon>();
-                event_son->x_activation = ficevent.x_activation;
-                event_son->nsnd = ficevent.id;
-
-                g_game_state.entities().list_event_endormis().push_back(std::move(event_son));
-                break;
-            }
-        }
-    }
-
-    debug << "Successfully loaded all level files\n";
+    LevelLoader::Result result;
+    if (!level_loader_.Load(nom_niveau, rpg, result)) return false;
+
+    xstart1 = result.xstart1;
+    ystart1 = result.ystart1;
+    xstart2 = result.xstart2;
+    ystart2 = result.ystart2;
+
+    vic_x = result.vic_x;
+    vic_flag1 = result.vic_flag1;
+    vic_val1 = result.vic_val1;
+    vic_flag2 = result.vic_flag2;
+    vic_val2 = result.vic_val2;
 
     return true;
 }
@@ -1006,12 +617,12 @@ void Game::updateAll() {
     //
     bool ok_bonus = false;
 
-    if (player1 != NULL) {
-        ok_bonus = ok_bonus || player1->okBonus();
+    if (player_manager_.player1() != NULL) {
+        ok_bonus = ok_bonus || player_manager_.player1()->okBonus();
     }
 
-    if (player2 != NULL) {
-        ok_bonus = ok_bonus || player2->okBonus();
+    if (player_manager_.player2() != NULL) {
+        ok_bonus = ok_bonus || player_manager_.player2()->okBonus();
     }
 
     g_game_state.player_toggles().set_ok_bonus(ok_bonus);
@@ -1335,16 +946,16 @@ void Game::updateHoldFire() {
 //-----------------------------------------------------------------------------
 
 void Game::drawHUB() {
-    if (player1 != NULL && player1->nb_life > 0) {
-        auto color = player1->id_couille == ID_BLIP ? HUD::Color::Blue
+    if (player_manager_.player1() != NULL && player_manager_.player1()->nb_life > 0) {
+        auto color = player_manager_.player1()->id_couille == ID_BLIP ? HUD::Color::Blue
                                                     : HUD::Color::Orange;
-        hud_.Draw(player1, HUD::Location::Left, color, niveau_bonus);
+        hud_.Draw(player_manager_.player1(), HUD::Location::Left, color, niveau_bonus);
     }
 
-    if (player2 != NULL && player2->nb_life > 0) {
-        auto color = player2->id_couille == ID_BLIP ? HUD::Color::Blue
+    if (player_manager_.player2() != NULL && player_manager_.player2()->nb_life > 0) {
+        auto color = player_manager_.player2()->id_couille == ID_BLIP ? HUD::Color::Blue
                                                     : HUD::Color::Orange;
-        hud_.Draw(player2, HUD::Location::Right, color, niveau_bonus);
+        hud_.Draw(player_manager_.player2(), HUD::Location::Right, color, niveau_bonus);
     }
 }
 
@@ -1634,34 +1245,34 @@ void Game::updateCheat() {
 
     if (!cheat_on) return;
 
-    if (player1 != NULL) {
-        if (in.scanKey(DIK_F1)) player1->ammo += 10;
+    if (player_manager_.player1() != NULL) {
+        if (in.scanKey(DIK_F1)) player_manager_.player1()->ammo += 10;
 
         if (wait_cheat < 20) return;
 
         if (in.scanKey(DIK_F3)) {
-            player1->nb_life++;
+            player_manager_.player1()->nb_life++;
             wait_cheat = 0;
         }
 
         if (in.scanKey(DIK_F2)) {
-            player1->nb_cow_bomb += 1;
+            player_manager_.player1()->nb_cow_bomb += 1;
             wait_cheat = 0;
         }
     }
 
-    if (player2 != NULL) {
-        if (in.scanKey(DIK_F5)) player2->ammo += 10;
+    if (player_manager_.player2() != NULL) {
+        if (in.scanKey(DIK_F5)) player_manager_.player2()->ammo += 10;
 
         if (wait_cheat < 20) return;
 
         if (in.scanKey(DIK_F7)) {
-            player2->nb_life++;
+            player_manager_.player2()->nb_life++;
             wait_cheat = 0;
         }
 
         if (in.scanKey(DIK_F6)) {
-            player2->nb_cow_bomb += 1;
+            player_manager_.player2()->nb_cow_bomb += 1;
             wait_cheat = 0;
         }
     }
@@ -1736,12 +1347,12 @@ void Game::showPE(bool bonus, bool fuckOff) {
         xbasep1 = 80;
         xbasep2 = 350;
     } else {
-        if (player1 != NULL && player1->nb_life > 0) {
+        if (player_manager_.player1() != NULL && player_manager_.player1()->nb_life > 0) {
             showp1 = true;
             showp2 = false;
             xbasep1 = 210;
             calc_p2 = 4;
-        } else if (player2 != NULL) {
+        } else if (player_manager_.player2() != NULL) {
             showp1 = false;
             showp2 = true;
             xbasep2 = 210;
@@ -1750,14 +1361,14 @@ void Game::showPE(bool bonus, bool fuckOff) {
     }
 
     if (showp1) {
-        if (player1->id_couille == ID_BLIP)
+        if (player_manager_.player1()->id_couille == ID_BLIP)
             fnt_p1 = &g_game_state.font_bank().score_blip();
         else
             fnt_p1 = &g_game_state.font_bank().score_blop();
     }
 
     if (showp2) {
-        if (player2->id_couille == ID_BLIP)
+        if (player_manager_.player2()->id_couille == ID_BLIP)
             fnt_p2 = &g_game_state.font_bank().score_blip();
         else
             fnt_p2 = &g_game_state.font_bank().score_blop();
@@ -1765,9 +1376,9 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
     if (g_game_state.enemy_stats().created() > 0) {
         if (showp1)
-            killed_p1 = (100 * player1->getKilled()) / g_game_state.enemy_stats().created();
+            killed_p1 = (100 * player_manager_.player1()->getKilled()) / g_game_state.enemy_stats().created();
         if (showp2)
-            killed_p2 = (100 * player2->getKilled()) / g_game_state.enemy_stats().created();
+            killed_p2 = (100 * player_manager_.player2()->getKilled()) / g_game_state.enemy_stats().created();
     }
 
     if (!bonus || (g_game_state.game_flags()[FLAG_TIMER] > 0 && !joueurs_morts)) {
@@ -1775,13 +1386,13 @@ void Game::showPE(bool bonus, bool fuckOff) {
         if (showp2) obj_p2 = 50000;
     }
 
-    if (obj_p1 > 0 && player1->perfect) perfect_p1 = 50000;
+    if (obj_p1 > 0 && player_manager_.player1()->perfect) perfect_p1 = 50000;
 
-    if (obj_p2 > 0 && player2->perfect) perfect_p2 = 50000;
+    if (obj_p2 > 0 && player_manager_.player2()->perfect) perfect_p2 = 50000;
 
-    if (showp1) total_p1 = player1->getScore();
+    if (showp1) total_p1 = player_manager_.player1()->getScore();
 
-    if (showp2) total_p2 = player2->getScore();
+    if (showp2) total_p2 = player_manager_.player2()->getScore();
 
     if (fuckOff) {
         perfect_p1 = perfect_p2 = obj_p1 = obj_p2 = killed_p1 = killed_p2 = 0;
@@ -1951,9 +1562,9 @@ void Game::showPE(bool bonus, bool fuckOff) {
             sprintf(buffer, "%d", total_p1);
             fnt_p1->printR(backSurface, xbasep1 + 210, 320, buffer);
 
-            if (total_p1 / 500000 > player1->mod_life) {
-                player1->mod_life = total_p1 / 500000;
-                player1->nb_life++;
+            if (total_p1 / 500000 > player_manager_.player1()->mod_life) {
+                player_manager_.player1()->mod_life = total_p1 / 500000;
+                player_manager_.player1()->nb_life++;
                 life_up_p1 = 100;
             }
         }
@@ -2004,9 +1615,9 @@ void Game::showPE(bool bonus, bool fuckOff) {
             sprintf(buffer, "%d", total_p2);
             fnt_p2->printR(backSurface, xbasep2 + 210, 320, buffer);
 
-            if (total_p2 / 500000 > player2->mod_life) {
-                player2->mod_life = total_p2 / 500000;
-                player2->nb_life++;
+            if (total_p2 / 500000 > player_manager_.player2()->mod_life) {
+                player_manager_.player2()->mod_life = total_p2 / 500000;
+                player_manager_.player2()->nb_life++;
                 life_up_p2 = 100;
             }
         }
@@ -2019,8 +1630,8 @@ void Game::showPE(bool bonus, bool fuckOff) {
         in.waitKey();
     }
 
-    if (showp1) player1->setScore(total_p1);
-    if (showp2) player2->setScore(total_p2);
+    if (showp1) player_manager_.player1()->setScore(total_p1);
+    if (showp2) player_manager_.player2()->setScore(total_p2);
 
     g_game_state.sound_banks().mbk_inter().stop();
 }
@@ -2286,11 +1897,11 @@ void Game::drawLoading() {
 //-----------------------------------------------------------------------------
 
 void Game::getHiscore() {
-    if (player1 != NULL && hi_scores.isGood(player1->getScore()))
-        getName(player1, 1);
+    if (player_manager_.player1() != NULL && hi_scores.isGood(player_manager_.player1()->getScore()))
+        getName(player_manager_.player1(), 1);
 
-    if (player2 != NULL && hi_scores.isGood(player2->getScore()))
-        getName(player2, 2);
+    if (player_manager_.player2() != NULL && hi_scores.isGood(player_manager_.player2()->getScore()))
+        getName(player_manager_.player2(), 2);
 }
 
 //-----------------------------------------------------------------------------

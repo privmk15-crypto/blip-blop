@@ -33,6 +33,8 @@
 #include "control_p1.h"
 #include "control_p2.h"
 #include "event_system.h"
+#include "level_loader.h"
+#include "player_manager.h"
 #include "update_regulator.h"
 #include "go_arrow.h"
 #include "hud.h"
@@ -69,6 +71,8 @@ protected:
         UpdateRegulator update_regulator_;
         CollisionSystem collision_system_;
         EventSystem event_system_;
+        LevelLoader level_loader_;
+        PlayerManager player_manager_;
 	PictureBank	pbk_briefing;
 	bool	briefing;
 
@@ -103,13 +107,13 @@ protected:
 	int		xstart2;
 	int		ystart2;
 
-	Couille *	player1;
-	Couille *	player2;
+	// player1/player2 moved into PlayerManager (player_manager.h) - see
+	// player_manager_ above.
 
 	// Stage 2 ownership migration: these used to be the free globals
 	// ctrlP1/ctrlP2 (globals.h/.cpp). Their only prior use anywhere in the
-	// codebase was being handed to player1/player2 below, so they move
-	// here as a direct, shim-free encapsulation.
+	// codebase was being handed to player_manager_.player1()/.player2(),
+	// so they move here as a direct, shim-free encapsulation.
 	ControlP1	ctrlP1_;
 	ControlP2	ctrlP2_;
 

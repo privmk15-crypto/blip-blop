@@ -181,16 +181,14 @@ extern bool			slow_phase;
 
 extern int			game_flag[11];
 
-extern bool			hold_fire;
-extern int			flag_hold_fire;
-extern int			val_hold_fire;
+// hold_fire/flag_hold_fire/val_hold_fire moved into HoldFire (hold_fire.h)
+// as part of the Stage 2 ownership migration.
 
-extern int			rpg_to_play;	// Le numéro de la phase RPG à actionner (-1:aucune)
+// rpg_to_play moved into RpgTrigger (rpg_trigger.h).
 
 extern int			nb_ennemis_created;
 
-extern int			intensite_meteo;
-extern int			type_meteo;
+// intensite_meteo/type_meteo moved into Weather (weather.h).
 
 // dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement
 // moved into ScreenShake (screen_shake.h) as part of the Stage 2 ownership

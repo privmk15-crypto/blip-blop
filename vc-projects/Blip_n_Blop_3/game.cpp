@@ -60,6 +60,7 @@
 #include "gen_bonus.h"
 #include "gen_ennemi.h"
 #include "globals.h"
+#include "hold_fire.h"
 #include "input.h"
 #include "key_translator.h"
 #include "level.h"
@@ -70,6 +71,7 @@
 #include "meteo_neige.h"
 #include "meteo_pluie.h"
 #include "restore.h"
+#include "rpg_trigger.h"
 #include "screen_shake.h"
 #include "scroll.h"
 #include "scroll_lock.h"
@@ -78,6 +80,7 @@
 #include "tir_bb_vache.h"
 #include "txt_data.h"
 #include "vehicule.h"
+#include "weather.h"
 
 #include "precache.h"
 #include "trace.h"
@@ -259,9 +262,9 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     no_scroll1 = false;
     no_scroll2 = false;
 
-    hold_fire = false;
+    g_hold_fire.Release();
 
-    intensite_meteo = 0;
+    g_weather.ResetIntensite();
     g_screen_shake.Reset();
 
     n_cache = 0;
@@ -1047,7 +1050,7 @@ void Game::updateAll() {
 
     if (game_flag[FLAG_BULLES]) updateBulles();
 
-    if (type_meteo == METEO_PLUIE || type_meteo == METEO_NEIGE) updateMeteo();
+    if (g_weather.type() == METEO_PLUIE || g_weather.type() == METEO_NEIGE) updateMeteo();
 
     UpdateCollection(list_fonds_statiques);
     UpdateCollection(list_fonds_animes);
@@ -1073,7 +1076,7 @@ void Game::updateAll() {
     updateFlags();
     updateFlecheGo();
 
-    if (type_meteo == METEO_DEFORME && intensite_meteo != 0)
+    if (g_weather.type() == METEO_DEFORME && g_weather.intensite() != 0)
         updateDeformation();
 
     manageCollisions();
@@ -1135,7 +1138,7 @@ void Game::drawAll(bool flip) {
     DrawCollection(list_meteo);
     DrawCollection(list_premiers_plans);
 
-    if (type_meteo == METEO_DEFORME && intensite_meteo != 0) drawDeformation();
+    if (g_weather.type() == METEO_DEFORME && g_weather.intensite() != 0) drawDeformation();
 
     // FIXME: Disable it for now as it works unproperly at least on Linux
     // drawTremblements();
@@ -1434,9 +1437,9 @@ void Game::updateLock() {
 //-----------------------------------------------------------------------------
 
 void Game::updateHoldFire() {
-    if (!hold_fire) return;
+    if (!g_hold_fire.active()) return;
 
-    if (game_flag[flag_hold_fire] == val_hold_fire) hold_fire = false;
+    if (game_flag[g_hold_fire.flag()] == g_hold_fire.val()) g_hold_fire.Release();
 }
 
 //-----------------------------------------------------------------------------
@@ -1504,7 +1507,7 @@ void Game::drawDebugInfos() {
        buffer);
 
                     sprintf( buffer, "Meteo = %d / %d (%d)",
-       list_meteo.taille(), intensite_meteo, type_meteo); fnt_rpg.print(
+       list_meteo.taille(), g_weather.intensite(), g_weather.type()); fnt_rpg.print(
        backSurface, 10, 290, buffer);
 
                     sprintf( buffer, "Plat. mobile = %d",
@@ -1612,11 +1615,11 @@ void Game::updateTeteTurc() {
 //-----------------------------------------------------------------------------
 
 void Game::updateRPG() {
-    if (rpg_to_play == -1) return;
+    if (g_rpg_trigger.num() == -1) return;
 
     bool continued = true;
 
-    rpg.startPlay(rpg_to_play);
+    rpg.startPlay(g_rpg_trigger.num());
 
     while (continued && !app_killed) {
         manageMsg();
@@ -1628,7 +1631,7 @@ void Game::updateRPG() {
 
     rpg.stopPlay();
     in.waitClean();
-    rpg_to_play = -1;
+    g_rpg_trigger.Clear();
     update_regulator_.Skip();
 }
 
@@ -1649,7 +1652,7 @@ void Game::updateVictoryAndDefeat() {
     //
     if (offset >= vic_x && game_flag[vic_flag1] == vic_val1 &&
         game_flag[vic_flag2] == vic_val2) {
-        hold_fire = true;
+        g_hold_fire.Activate();
         wait_for_victory += 1;
 
         if (game_flag[1] == 999) wait_for_victory = 200;
@@ -2141,8 +2144,8 @@ void Game::updateMeteo() {
         pl->update();
     }
 
-    while (list_meteo.size() < intensite_meteo) {
-        if (type_meteo == METEO_NEIGE) {
+    while (list_meteo.size() < g_weather.intensite()) {
+        if (g_weather.type() == METEO_NEIGE) {
             //			MeteoNeige * flocon = new MeteoNeige();
 
             next_flocon = (next_flocon + 1) % NB_FLOCONS;
@@ -2159,14 +2162,14 @@ void Game::updateMeteo() {
             else
                 flocon->pic = pbk_misc[72];
 
-            flocon->dy = intensite_meteo / 20 + d;
+            flocon->dy = g_weather.intensite() / 20 + d;
             flocon->phi = rand() % 360;
             flocon->xwide = 10 + d * 4;
 
             if (mur_opaque(flocon->xbase, 0)) flocon->y -= 550;
 
             list_meteo.emplace_back(flocon);
-        } else if (type_meteo == METEO_PLUIE) {
+        } else if (g_weather.type() == METEO_PLUIE) {
             //			MeteoPluie * goutte = new MeteoPluie();
 
             next_goutte = (next_goutte + 1) % NB_GOUTTES;

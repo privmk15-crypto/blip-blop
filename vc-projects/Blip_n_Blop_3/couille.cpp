@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include "config.h"
 #include "couille.h"
+#include "hold_fire.h"
 #include "tir_bbm16.h"
 #include "tir_bbpm.h"
 #include "tir_bb_fusil.h"
@@ -1027,7 +1028,7 @@ void Couille::updateArme()
 
 	// Si le joueur appuie sur 'FEU' on passe en mode TIR
 	//
-	if (!tire && ctrl->fire() && !hold_fire) {
+	if (!tire && ctrl->fire() && !g_hold_fire.active()) {
 		tire = true;
 		etape_arme = 0;
 		ss_etape_arme = 0;

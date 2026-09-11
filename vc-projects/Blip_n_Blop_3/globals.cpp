@@ -137,16 +137,13 @@ bool			slow_phase;
 
 int				game_flag[11];
 
-bool			hold_fire;
-int				flag_hold_fire;
-int				val_hold_fire;
+// hold_fire/flag_hold_fire/val_hold_fire moved to hold_fire.cpp (HoldFire).
 
-int				rpg_to_play = -1;	// Le numéro de la phase RPG à actionner (-1:aucune)
+// rpg_to_play moved to rpg_trigger.cpp (RpgTrigger).
 
 int				nb_ennemis_created;
 
-int				intensite_meteo;
-int				type_meteo;
+// intensite_meteo/type_meteo moved to weather.cpp (Weather).
 
 // dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement and
 // tremblement() moved to screen_shake.cpp (ScreenShake) - Stage 2 ownership

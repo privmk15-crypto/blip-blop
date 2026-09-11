@@ -18,6 +18,7 @@
 #include "config.h"
 #include "couille.h"
 #include "hold_fire.h"
+#include "player_toggles.h"
 #include "tir_bbm16.h"
 #include "tir_bbpm.h"
 #include "tir_bb_fusil.h"
@@ -1291,7 +1292,7 @@ void Couille::onMeure()
 		dx_saut = 0;
 		tire = false;
 
-		if (cowBombOn)
+		if (g_player_toggles.cow_bomb_on())
 			nb_cow_bomb = 1;
 	} else if (etape == 5 && ss_etape == 0 && plat(x, y) != 0) {
 		if (dir <= BBLIM_DROITE)
@@ -1409,7 +1410,7 @@ bool Couille::okBonus()
 
 void Couille::setSuperWeapon()
 {
-	if (id_couille == ID_BLIP || !okLanceFlame) {
+	if (id_couille == ID_BLIP || !g_player_toggles.ok_lance_flame()) {
 		id_arme = ID_LASER;
 		ammo = 750;
 		latence_arme = 3;

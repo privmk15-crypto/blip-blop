@@ -70,6 +70,7 @@
 #include "menu_main.h"
 #include "meteo_neige.h"
 #include "meteo_pluie.h"
+#include "player_toggles.h"
 #include "restore.h"
 #include "rpg_trigger.h"
 #include "screen_shake.h"
@@ -146,7 +147,7 @@ void Game::jouePartie(int nbj, int idj) {
 
     // Joue à tous les niveaux
     //
-    cowBombOn = false;
+    g_player_toggles.set_cow_bomb_on(false);
     last_perfect1 = last_perfect2 = false;
     int nbNiv = 0;
     i = 0;
@@ -155,12 +156,12 @@ void Game::jouePartie(int nbj, int idj) {
         if (type_part[i] == PART_LEVEL) {
             letsgo = joueNiveau(fic_names[i], type_lvl[i]);
 
-            if (!cowBombOn) {
+            if (!g_player_toggles.cow_bomb_on()) {
                 if (player1 != NULL) player1->nb_cow_bomb = 1;
 
                 if (player2 != NULL) player2->nb_cow_bomb = 1;
 
-                cowBombOn = true;
+                g_player_toggles.set_cow_bomb_on(true);
             }
         } else if (type_part[i] == PART_BRIEFING) {
             showBriefing(fic_names[i]);
@@ -277,9 +278,9 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
     if (strcmp(nom_niveau, "data/snorkniv.lvl") == 0 ||
         strcmp(nom_niveau, "data/snorkniv2.lvl") == 0) {
-        okLanceFlame = false;
+        g_player_toggles.set_ok_lance_flame(false);
     } else {
-        okLanceFlame = true;
+        g_player_toggles.set_ok_lance_flame(true);
     }
 
     // Place les joueurs et initialise qq trucs
@@ -1025,15 +1026,17 @@ void Game::updateAll() {
 
     // Ok bonus ?
     //
-    okBonus = false;
+    bool ok_bonus = false;
 
     if (player1 != NULL) {
-        okBonus = okBonus || player1->okBonus();
+        ok_bonus = ok_bonus || player1->okBonus();
     }
 
     if (player2 != NULL) {
-        okBonus = okBonus || player2->okBonus();
+        ok_bonus = ok_bonus || player2->okBonus();
     }
+
+    g_player_toggles.set_ok_bonus(ok_bonus);
 
     // Update tout ce qu'il faut
     //

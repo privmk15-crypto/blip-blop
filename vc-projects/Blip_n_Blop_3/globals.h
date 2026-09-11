@@ -99,9 +99,8 @@ extern int			scroll_speed;
 extern bool			no_scroll1;			// Pour arrêter le scroll quand
 extern bool			no_scroll2;			// blip ou blop meure
 
-extern bool			okBonus;
-extern bool			cowBombOn;
-extern bool			okLanceFlame;
+// okBonus/cowBombOn/okLanceFlame moved into PlayerToggles
+// (player_toggles.h) as part of the Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Données sur le niveau

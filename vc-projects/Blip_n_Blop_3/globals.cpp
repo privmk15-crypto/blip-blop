@@ -151,9 +151,8 @@ int				nb_ennemis_created;
 
 bool			total_debug = false;
 
-bool			okBonus;
-bool			cowBombOn;
-bool			okLanceFlame;
+// okBonus/cowBombOn/okLanceFlame moved to player_toggles.cpp
+// (PlayerToggles) - Stage 2 ownership migration.
 
 
 //-----------------------------------------------------------------------------

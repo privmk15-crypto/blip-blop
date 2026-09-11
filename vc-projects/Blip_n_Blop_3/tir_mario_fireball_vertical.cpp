@@ -30,7 +30,7 @@ TirMarioFireballVertical::TirMarioFireballVertical(int vx, int xc): x_cible(xc),
 void TirMarioFireballVertical::update()
 {
 
-	if (x < offset - 100 || x > offset + 700 || y > 520 || y < -250)
+	if (x < offset - 100 || x > offset + SCREEN_W + 60 || y > 520 || y < -250)
 		a_detruire = true;
 	if (dy > 0) {
 		fireball_tombe();

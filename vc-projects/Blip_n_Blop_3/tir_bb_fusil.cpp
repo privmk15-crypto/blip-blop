@@ -159,7 +159,7 @@ void TirBBFusil::update()
 	x += dxReferentiel;
 
 
-	if (mur_opaque(x, y) || x < offset - 20 || x > offset + 660 || y < -20 || y > 500) {
+	if (mur_opaque(x, y) || x < offset - 20 || x > offset + SCREEN_W + 20 || y < -20 || y > 500) {
 		pic = NULL;
 		noCol();
 		a_detruire = true;

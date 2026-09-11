@@ -51,7 +51,7 @@ void TirCarapace::update()
 	} else {
 		x += CARAPACE_SPEED;
 	}
-	if (x < offset - 100 || x > offset + 700 || y > 520 || y < -50)
+	if (x < offset - 100 || x > offset + SCREEN_W + 60 || y > 520 || y < -50)
 		a_detruire = true;
 
 	colFromPic();

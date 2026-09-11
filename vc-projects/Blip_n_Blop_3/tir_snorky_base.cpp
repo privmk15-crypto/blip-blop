@@ -36,7 +36,7 @@ TirSnorkybase::TirSnorkybase(int vx): speed_etape(0), oscilation_etape(0)
 void TirSnorkybase::update()
 {
 
-	if (x < offset - 100 || x > offset + 700 || y > 520 || y < -50)
+	if (x < offset - 100 || x > offset + SCREEN_W + 60 || y > 520 || y < -50)
 		a_detruire = true;
 
 	speed_etape++;

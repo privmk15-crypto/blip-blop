@@ -160,16 +160,15 @@ public:
 	virtual void rearme() = 0;
 
 	virtual void affiche(RenderQueue& rq);
-	virtual void afficheNormal();
-	// Etap 3 (RenderSystem migration, step 2): these two take rq only
-	// because their bodies call Sprite::affiche(rq) internally - not
-	// otherwise migrated to push into rq themselves yet (deferred,
-	// same as afficheArme()/afficheOeil()'s manual draw() calls below).
+	// Etap 3 (RenderSystem migration, step 5): fully migrated - all
+	// four now push into rq themselves instead of calling the old free
+	// draw().
+	virtual void afficheNormal(RenderQueue& rq);
 	virtual void afficheSaute(RenderQueue& rq);
 	virtual void afficheMeure(RenderQueue& rq);
 	virtual void afficheVehicule(RenderQueue& rq);
-	virtual void afficheArme( int xtmp, int ytmp);
-	virtual void afficheOeil( int xtmp, int ytmp);
+	virtual void afficheArme( int xtmp, int ytmp, RenderQueue& rq);
+	virtual void afficheOeil( int xtmp, int ytmp, RenderQueue& rq);
 	virtual void update();
 	virtual void onNormal();
 	virtual void onSaute();

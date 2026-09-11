@@ -24,6 +24,7 @@
 #include "tir_bb_laser.h"
 #include "tir_bb_vache.h"
 #include "globals.h"
+#include "render_queue.h"
 
 //-----------------------------------------------------------------------------
 //		Animes
@@ -201,7 +202,7 @@ void Couille::affiche(RenderQueue& rq)
 	switch (etat) {
 		case ETAT_NORMAL:
 		case ETAT_AVANCE:
-			afficheNormal();
+			afficheNormal(rq);
 			break;
 
 		case ETAT_SALETO:
@@ -227,30 +228,30 @@ void Couille::affiche(RenderQueue& rq)
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheNormal()
+void Couille::afficheNormal(RenderQueue& rq)
 {
 	// Etap 3 (Sprite/Renderer separation, step 2): used to temporarily
 	// mutate `y` (the gameplay position field) for the duration of this
 	// call, then restore it - the only place in the whole Sprite
 	// hierarchy where affiche() ever wrote gameplay state, even
-	// transiently (see the Sprite/Renderer audit, section B). Calling
-	// draw() directly with a local y_render instead of going through
-	// Sprite::affiche() (which reads `y` off `this`) achieves the exact
-	// same rendered result without ever touching `y`.
+	// transiently (see the Sprite/Renderer audit, section B). Pushing
+	// directly with a local y_render instead of going through
+	// Sprite::affiche(rq) (which reads `y` off `this`) achieves the
+	// exact same rendered result without ever touching `y`.
 	int y_render = y - anime_sautille[sauti];
 
-	draw(x, y_render, pic);
+	rq.Push(x, y_render, pic);
 
 	// Affiche les accessoires
 	//
-	afficheOeil(x, y_render);
-	afficheArme(x, y_render);
+	afficheOeil(x, y_render, rq);
+	afficheArme(x, y_render, rq);
 }
 
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheArme(int xtmp, int ytmp)
+void Couille::afficheArme(int xtmp, int ytmp, RenderQueue& rq)
 {
 	// Affiche l'arme elle même
 	//
@@ -265,60 +266,60 @@ void Couille::afficheArme(int xtmp, int ytmp)
 	switch (id_arme) {
 		case ID_M16:
 			if (tire)
-				draw(xtmp + dx_m16[d_arme] + x_recul[d_arme][etape_recul],
+				rq.Push(xtmp + dx_m16[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_m16[d_arme] + y_recul[d_arme][etape_recul],
 				     pbk_own[24 + d_arme]);
 			else
-				draw(xtmp + dx_m16[d_arme], ytmp + dy_m16[d_arme], pbk_own[24 + d_arme]);
+				rq.Push(xtmp + dx_m16[d_arme], ytmp + dy_m16[d_arme], pbk_own[24 + d_arme]);
 			break;
 
 		case ID_PM:
 			if (tire)
-				draw(xtmp + dx_pm[d_arme] + x_recul[d_arme][etape_recul],
+				rq.Push(xtmp + dx_pm[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_pm[d_arme] + y_recul[d_arme][etape_recul],
 				     pbk_own[64 + d_arme]);
 			else
-				draw(xtmp + dx_pm[d_arme], ytmp + dy_pm[d_arme], pbk_own[64 + d_arme]);
+				rq.Push(xtmp + dx_pm[d_arme], ytmp + dy_pm[d_arme], pbk_own[64 + d_arme]);
 			break;
 
 		case ID_LF:
-			draw(xtmp + dx_lf[d_arme], ytmp + dy_lf[d_arme], pbk_own[54 + d_arme]);
+			rq.Push(xtmp + dx_lf[d_arme], ytmp + dy_lf[d_arme], pbk_own[54 + d_arme]);
 			break;
 
 		case ID_FUSIL:
 			if (tire) {
 				if (etape_arme < 5) {	// Le recul
-					draw(xtmp + dx_fusil[d_arme] + x_recul[d_arme][etape_arme] * 2,
+					rq.Push(xtmp + dx_fusil[d_arme] + x_recul[d_arme][etape_arme] * 2,
 					     ytmp + dy_fusil[d_arme] + y_recul[d_arme][etape_arme] * 2,
 					     pbk_own[44 + d_arme]);
 
-					draw(xtmp + dx_main_fusil[d_arme] + x_recul_fusil[d_arme][etape_arme],
+					rq.Push(xtmp + dx_main_fusil[d_arme] + x_recul_fusil[d_arme][etape_arme],
 					     ytmp + dy_main_fusil[d_arme] + y_recul_fusil[d_arme][etape_arme],
 					     pbk_own[104 + d_arme2]);
 				} else {	// Recharge
 					int ea = (etape_arme - 5) / 2;
 
-					draw(xtmp + dx_fusil[d_arme], ytmp + dy_fusil[d_arme], pbk_own[44 + d_arme]);
-					draw(xtmp + dx_main_fusil[d_arme] + x_recul_fusil[d_arme][ea],
+					rq.Push(xtmp + dx_fusil[d_arme], ytmp + dy_fusil[d_arme], pbk_own[44 + d_arme]);
+					rq.Push(xtmp + dx_main_fusil[d_arme] + x_recul_fusil[d_arme][ea],
 					     ytmp + dy_main_fusil[d_arme] + y_recul_fusil[d_arme][ea],
 					     pbk_own[104 + d_arme2]);
 				}
 			} else {
-				draw(xtmp + dx_fusil[d_arme], ytmp + dy_fusil[d_arme], pbk_own[44 + d_arme]);
-				draw(xtmp + dx_main_fusil[d_arme], ytmp + dy_main_fusil[d_arme], pbk_own[104 + d_arme2]);
+				rq.Push(xtmp + dx_fusil[d_arme], ytmp + dy_fusil[d_arme], pbk_own[44 + d_arme]);
+				rq.Push(xtmp + dx_main_fusil[d_arme], ytmp + dy_main_fusil[d_arme], pbk_own[104 + d_arme2]);
 			}
 			break;
 
 		case ID_LASER:
 			if (tire) {
-				draw(xtmp + dx_laser[d_arme] + x_recul[d_arme][etape_recul],
+				rq.Push(xtmp + dx_laser[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_laser[d_arme] + y_recul[d_arme][etape_recul],
 				     pbk_own[34 + d_arme]);
-				draw(xtmp + dx_truc_laser[d_arme] + x_recul[d_arme][etape_recul],
+				rq.Push(xtmp + dx_truc_laser[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_truc_laser[d_arme] + y_recul[d_arme][etape_recul],
 				     g_game_state.picture_banks().bb()[152 + 4 * d_arme + etape_arme]);
 			} else {
-				draw(xtmp + dx_laser[d_arme],
+				rq.Push(xtmp + dx_laser[d_arme],
 				     ytmp + dy_laser[d_arme],
 				     pbk_own[34 + d_arme]);
 			}
@@ -337,32 +338,32 @@ void Couille::afficheArme(int xtmp, int ytmp)
 		switch (id_arme) {
 			case ID_M16:
 				if (id_couille == ID_BLIP) {
-					draw(xtmp + dx_m16_deto[d_arme] + x_recul[d_arme][etape_recul],
+					rq.Push(xtmp + dx_m16_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_m16_deto[d_arme] + y_recul[d_arme][etape_recul],
 					     g_game_state.picture_banks().bb()[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
 				} else {
-					draw(xtmp + dx_m16o_deto[d_arme] + x_recul[d_arme][etape_recul],
+					rq.Push(xtmp + dx_m16o_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_m16o_deto[d_arme] + y_recul[d_arme][etape_recul],
 					     g_game_state.picture_banks().bb()[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
 				}
 				break;
 
 			case ID_PM:
-				draw(xtmp + dx_pm_deto[d_arme] + x_recul[d_arme][etape_recul],
+				rq.Push(xtmp + dx_pm_deto[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_pm_deto[d_arme] + y_recul[d_arme][etape_recul],
 				     pbk_own[74 + d_arme * 3 + anim_pm_deto[etape_arme]]);
 				break;
 
 			case ID_FUSIL:
 				if (etape_arme < 5)
-					draw(xtmp + dx_fusil_deto[d_arme] + x_recul_fusil[d_arme][etape_arme],
+					rq.Push(xtmp + dx_fusil_deto[d_arme] + x_recul_fusil[d_arme][etape_arme],
 					     ytmp + dy_fusil_deto[d_arme] + y_recul_fusil[d_arme][etape_arme],
 					     g_game_state.picture_banks().bb()[42 + d_arme * 3 + anim_fusil_deto[etape_arme]]);
 				break;
 
 			case ID_LASER:
 				if (dir_arme == dir)
-					draw(xtmp + dx_laser_deto[d_arme] + x_recul[d_arme][etape_recul],
+					rq.Push(xtmp + dx_laser_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_laser_deto[d_arme] + y_recul[d_arme][etape_recul],
 					     g_game_state.picture_banks().bb()[104 + d_arme2 * 4 + etape_arme]);
 				break;
@@ -374,7 +375,7 @@ void Couille::afficheArme(int xtmp, int ytmp)
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheOeil(int xtmp, int ytmp)
+void Couille::afficheOeil(int xtmp, int ytmp, RenderQueue& rq)
 {
 	int		base;	// Oeil de base (enervé & co)
 	int		delta;	// Selon dir
@@ -383,9 +384,9 @@ void Couille::afficheOeil(int xtmp, int ytmp)
 	//
 	if (a_mal) {
 		if (dir <= BBLIM_DROITE)
-			draw(xtmp + 12, ytmp - 14, pbk_own[22]);
+			rq.Push(xtmp + 12, ytmp - 14, pbk_own[22]);
 		else
-			draw(xtmp - 12, ytmp - 14, pbk_own[23]);
+			rq.Push(xtmp - 12, ytmp - 14, pbk_own[23]);
 	} else {
 		if (tire)
 			base = 6;	// Oeil méchant
@@ -408,9 +409,9 @@ void Couille::afficheOeil(int xtmp, int ytmp)
 			delta = 5;
 
 		if (dir <= BBLIM_DROITE)
-			draw(xtmp + 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
+			rq.Push(xtmp + 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
 		else
-			draw(xtmp - 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
+			rq.Push(xtmp - 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
 	}
 
 }
@@ -426,11 +427,11 @@ void Couille::afficheSaute(RenderQueue& rq)
 	// Sauter n'est pas tomber
 	//
 	if (dy < 0) {	// Saute
-		afficheOeil(x, y + dy - 2);
-		afficheArme(x, y + dy - 2);
+		afficheOeil(x, y + dy - 2, rq);
+		afficheArme(x, y + dy - 2, rq);
 	} else {		// Tombe
-		afficheOeil(x, y);
-		afficheArme(x, y);
+		afficheOeil(x, y, rq);
+		afficheArme(x, y, rq);
 	}
 }
 
@@ -1507,7 +1508,7 @@ void Couille::afficheVehicule(RenderQueue& rq)
 		pic = pbk_own[3];
 
 	Sprite::affiche(rq);
-	afficheOeil(x, y);
+	afficheOeil(x, y, rq);
 
-	afficheArme(x, y);
+	afficheArme(x, y, rq);
 }

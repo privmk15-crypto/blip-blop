@@ -190,9 +190,9 @@ void EnnemiSmurfSauvage::update()
 				g_game_state.sound_banks().sbk_niveau().play(17);
 
 				if (rand() % 2 == 0)
-					x = offset + 320 - rand() % 150;
+					x = offset + SCREEN_W / 2 - rand() % 150;
 				else
-					x = offset + 320 + rand() % 150;
+					x = offset + SCREEN_W / 2 + rand() % 150;
 
 				int j = 100 + rand() % 140;
 

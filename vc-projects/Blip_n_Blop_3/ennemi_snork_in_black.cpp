@@ -69,7 +69,7 @@ void EnnemiSnorkInBlack::onAvance()
 	}
 
 	wait_for_shoot++;
-	if ((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + 560)))
+	if ((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + SCREEN_W - 80)))
 
 	{
 		x_cible = tete_turc->x;

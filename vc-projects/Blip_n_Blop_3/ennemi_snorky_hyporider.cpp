@@ -57,7 +57,7 @@ void EnnemiSnorkyHyporider::update()
 void EnnemiSnorkyHyporider::onAvance()
 {
 	wait_for_charge ++;
-	if ((wait_for_charge > charge_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + 560))) {
+	if ((wait_for_charge > charge_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + SCREEN_W - 80))) {
 		wait_for_charge = 0;
 		charge_delay = 50 + rand() % 200;
 		etape = 0;

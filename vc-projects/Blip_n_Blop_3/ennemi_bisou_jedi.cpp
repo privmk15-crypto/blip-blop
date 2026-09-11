@@ -60,7 +60,7 @@ void EnnemiBisouJedi::onAvance()
 	//
 	if (x - SPEED < offset + 20 || mur_opaque(x - SPEED, y))
 		dir = SENS_DROITE;
-	else if (x + SPEED > offset + 600 || mur_opaque(x + SPEED, y))
+	else if (x + SPEED > offset + SCREEN_W - 40 || mur_opaque(x + SPEED, y))
 		dir = SENS_GAUCHE;
 
 	if (dir == SENS_DROITE) {

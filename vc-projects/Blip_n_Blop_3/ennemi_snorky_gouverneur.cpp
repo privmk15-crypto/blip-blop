@@ -75,7 +75,7 @@ void EnnemiSnorkyGouverneur::onAvance()
 	}
 
 	wait_for_shoot++;
-	if ((wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 40) || (dir == SENS_GAUCHE && x < offset + 600))) {
+	if ((wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 40) || (dir == SENS_GAUCHE && x < offset + SCREEN_W - 40))) {
 		wait_for_shoot = 0;
 		shoot_delay = 50 + rand() % 200;
 		etape = 0;

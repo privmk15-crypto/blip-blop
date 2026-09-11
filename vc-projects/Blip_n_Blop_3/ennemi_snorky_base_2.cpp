@@ -74,7 +74,7 @@ void EnnemiSnorkyBase2::onAvance()
 	}
 
 	wait_for_shoot++;
-	if ((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + 560))) {
+	if ((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 80) || (dir == SENS_GAUCHE && x < offset + SCREEN_W - 80))) {
 		wait_for_shoot = 0;
 		shoot_delay = 50 + rand() % 200;
 		etape = 0;

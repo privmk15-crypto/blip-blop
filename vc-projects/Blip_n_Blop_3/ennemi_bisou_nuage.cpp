@@ -110,7 +110,7 @@ void EnnemiBisouNuage::onNormal()
 	static const int anim_gauche [] = { 229, 230, 231, 230 };
 	static const int anim_droite [] = { 226, 227, 228, 227 };
 
-	if (x > (offset + 320)) {
+	if (x > (offset + SCREEN_W / 2)) {
 		dir = SENS_GAUCHE;
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 10)];
 	} else {

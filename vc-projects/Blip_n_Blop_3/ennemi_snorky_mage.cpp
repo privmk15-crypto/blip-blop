@@ -73,7 +73,7 @@ void EnnemiSnorkyMage::onAvance()
 
 
 	wait_for_shoot++;
-	if	((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 30) || (dir == SENS_GAUCHE && x < offset + 610)))
+	if	((tete_turc != NULL) && (wait_for_shoot > shoot_delay) && ((dir == SENS_DROITE && x > offset + 30) || (dir == SENS_GAUCHE && x < offset + SCREEN_W - 30)))
 
 	{
 		int dif_y = tete_turc->y - y;

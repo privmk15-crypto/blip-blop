@@ -83,7 +83,7 @@ void EnnemiLuigi::onAvance()
 	if (x - speed < (xmin + 20) || mur_opaque(x - speed, y)) {
 		dir = SENS_DROITE;
 		speed = 1;
-	} else if (x + speed > offset + 600 || mur_opaque(x + speed, y)) {
+	} else if (x + speed > offset + SCREEN_W - 40 || mur_opaque(x + speed, y)) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}
@@ -233,7 +233,7 @@ void EnnemiLuigi::onAvance()
 	}
 
 	if (encaissement >= MULTIPLICATEUR_RECUL_SOL) {
-		if (x + encaissement / MULTIPLICATEUR_RECUL_SOL < offset + 620) {
+		if (x + encaissement / MULTIPLICATEUR_RECUL_SOL < offset + SCREEN_W - 20) {
 			x += encaissement / MULTIPLICATEUR_RECUL_SOL;
 		}
 		/*else
@@ -342,7 +342,7 @@ void EnnemiLuigi::onMeure()
 	} else if (g_game_state.game_flags()[1] == 2) {
 		marche(3);
 		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_mort_droite, 4, 8)];
-		if (x > offset + 680) {
+		if (x > offset + SCREEN_W + 40) {
 			g_game_state.game_flags()[1] = 3;
 			attack_delay = 0;
 		}
@@ -615,7 +615,7 @@ void EnnemiLuigi::onAttack()
 			}
 
 			//recul
-			if (x < offset + 610) {
+			if (x < offset + SCREEN_W - 30) {
 				x += 1;
 			}
 		}
@@ -697,7 +697,7 @@ void EnnemiLuigi::onSaute()
 		speed = 1;
 	}
 
-	else if (/*(dir==SENS_DROITE)&&*/(x + speed > offset + 600 || mur_opaque(x + speed, y))) {
+	else if (/*(dir==SENS_DROITE)&&*/(x + speed > offset + SCREEN_W - 40 || mur_opaque(x + speed, y))) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}
@@ -714,7 +714,7 @@ void EnnemiLuigi::onSaute()
 
 
 	if (dir == SENS_DROITE) {
-		if (x + speed < offset + 620)
+		if (x + speed < offset + SCREEN_W - 20)
 			x += speed;
 
 		if (dy < 0) {

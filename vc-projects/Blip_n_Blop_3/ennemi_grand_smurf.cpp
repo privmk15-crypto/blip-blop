@@ -47,7 +47,7 @@ void EnnemiGrandSmurf::updateChoice()
 		else
 			dx = 3;
 	} else {
-		if (ddx < -400 || ddx > 400 || x <= offset + 60 || x >= offset + 580)
+		if (ddx < -400 || ddx > 400 || x <= offset + 60 || x >= offset + SCREEN_W - 60)
 			attak_wanted = ATT_ATATA;
 		else if (ddx < 0)
 			dx = 3;
@@ -108,7 +108,7 @@ void EnnemiGrandSmurf::onAtata()
 
 		int x2 = x + dx;
 
-		if (!mur_opaque(x2, y) && x2 > offset + 50 && x2 < offset + 600)
+		if (!mur_opaque(x2, y) && x2 > offset + 50 && x2 < offset + SCREEN_W - 40)
 			x = x2;
 	}
 }
@@ -117,7 +117,7 @@ void EnnemiGrandSmurf::onAvance()
 {
 	int x2 = x + dx;
 
-	if (!mur_opaque(x2, y) && x2 > offset + 50 && x2 < offset + 600)
+	if (!mur_opaque(x2, y) && x2 > offset + 50 && x2 < offset + SCREEN_W - 40)
 		x = x2;
 
 	if (dx <= 0) {

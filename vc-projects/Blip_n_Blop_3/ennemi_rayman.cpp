@@ -116,7 +116,7 @@ void EnnemiRayman::onAvance()
 
 				if (x - RAYMAN_SPEED < xmin || mur_opaque(x - RAYMAN_SPEED, y)) {
 					dir = SENS_DROITE;
-				} else if (x + RAYMAN_SPEED > offset + 600 || mur_opaque(x + RAYMAN_SPEED, y)) {
+				} else if (x + RAYMAN_SPEED > offset + SCREEN_W - 40 || mur_opaque(x + RAYMAN_SPEED, y)) {
 					dir = SENS_GAUCHE;
 				}
 				wait_for_attack++;
@@ -231,7 +231,7 @@ void EnnemiRayman::onAvance()
 
 				if (x - RAYMAN_SPEED < xmin || mur_opaque(x - RAYMAN_SPEED, y)) {
 					dir = SENS_DROITE;
-				} else if (x + RAYMAN_SPEED > offset + 600 || mur_opaque(x + RAYMAN_SPEED, y)) {
+				} else if (x + RAYMAN_SPEED > offset + SCREEN_W - 40 || mur_opaque(x + RAYMAN_SPEED, y)) {
 					dir = SENS_GAUCHE;
 				}
 

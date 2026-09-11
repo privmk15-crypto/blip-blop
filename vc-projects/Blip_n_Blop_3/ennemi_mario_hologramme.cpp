@@ -83,7 +83,7 @@ void EnnemiMarioHologramme::onAvance()
 	if (x - speed < xmin || mur_opaque(x - speed, y)) {
 		dir = SENS_DROITE;
 		speed = 1;
-	} else if (x + speed > offset + 600 || mur_opaque(x + speed, y)) {
+	} else if (x + speed > offset + SCREEN_W - 40 || mur_opaque(x + speed, y)) {
 		dir = SENS_GAUCHE;
 		speed = 1;
 	}

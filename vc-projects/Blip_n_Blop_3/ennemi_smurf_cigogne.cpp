@@ -24,7 +24,7 @@ void EnnemiSmurfCigogne::update() {
 
     y = base_y + sini(100, ((x - base_x) / 4) % 360);
 
-    if (x > offset + 750 && g_game_state.game_flags()[0] < 3) {
+    if (x > offset + SCREEN_W + 110 && g_game_state.game_flags()[0] < 3) {
         g_game_state.game_flags()[0] = 3;
     }
 }

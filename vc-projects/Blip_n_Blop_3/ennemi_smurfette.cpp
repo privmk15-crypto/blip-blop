@@ -65,7 +65,7 @@ void EnnemiSmurfette::onAvance()
 		pic = g_game_state.picture_banks().ennemis()[anime(marche_gauche, 8, 6)];
 	}
 
-	if (etape_shoot >= wait_shoot && x > offset + 10 && x < offset + 630) {
+	if (etape_shoot >= wait_shoot && x > offset + 10 && x < offset + SCREEN_W - 10) {
 		etape = ss_etape = 0;
 		etat = ETAT_TIRE;
 		onTire();

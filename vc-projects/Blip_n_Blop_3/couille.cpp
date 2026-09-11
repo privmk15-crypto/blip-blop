@@ -558,7 +558,7 @@ void Couille::update()
 
 		// Cherche un endroit où atterir
 		//
-		x = offset + 320;
+		x = offset + SCREEN_W / 2;
 		int i = 0;
 
 		while (i < NB_MAX_PLAT && g_game_state.level().y_plat()[i][x] == 0xFFFF)

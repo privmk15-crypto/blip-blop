@@ -322,7 +322,7 @@ void EnnemiDiabolo::onCoupdelatte()
 		}
 	} else {
 		if (dir == SENS_DROITE) {
-			if (mur_opaque(x + DIABOLO_KICK_SPEED, y) || (x + DIABOLO_KICK_SPEED > offset + 560)) {
+			if (mur_opaque(x + DIABOLO_KICK_SPEED, y) || (x + DIABOLO_KICK_SPEED > offset + SCREEN_W - 80)) {
 				ss_etape++;
 				ss_etape %= 6;
 				if (ss_etape == 0) {

@@ -86,7 +86,7 @@ void EnnemiPrincesse::onAvance()
 	}*/
 
 	if (g_game_state.game_flags()[1]) {
-		if (x  > offset + 820) {
+		if (x  > offset + SCREEN_W + 180) {
 			TexteCool * txt = new TexteCool();
 			txt->ntxt = 517;
 			g_game_state.entities().list_txt_cool().emplace_back(txt);
@@ -105,7 +105,7 @@ void EnnemiPrincesse::onAvance()
 			for (i = 1; i < 4; i++) {
 				guard = new EnnemiPrincesseguard(this, 40 + i * 40);
 
-				guard->x = offset + 720 - i * 20;
+				guard->x = offset + SCREEN_W + 80 - i * 20;
 				guard->y = y - 20;
 				guard->dir = SENS_GAUCHE;
 				g_game_state.entities().list_ennemis().emplace_back(guard);

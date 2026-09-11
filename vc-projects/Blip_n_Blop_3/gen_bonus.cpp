@@ -30,7 +30,7 @@ void GenBonus::update()
 		t %= periode;
 
 		if (t == 0) {
-			MakeBonus(offset + 320 - 200 + rand() % 400, -50);
+			MakeBonus(offset + SCREEN_W / 2 - 200 + rand() % 400, -50);
 		}
 
 		if (offset > x + 500)

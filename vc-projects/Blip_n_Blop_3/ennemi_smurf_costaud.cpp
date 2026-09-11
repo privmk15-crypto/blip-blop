@@ -254,7 +254,7 @@ void EnnemiSmurfCostaud::onTireHurricanKick()
 
 	int x2 = x + dx;
 
-	if (!mur_opaque(x2, y) && x2 > xmin && x2 < offset + 740)
+	if (!mur_opaque(x2, y) && x2 > xmin && x2 < offset + SCREEN_W + 100)
 		x = x2;
 
 	if (dy > 0 && plat(x, y) != 0) {

@@ -22,6 +22,7 @@
 #include "input.h"
 #include "control_alias.h"
 #include "fmod.h"
+#include "game_state.h"
 #include "globals.h"
 
 bool	vSyncOn = true;
@@ -34,6 +35,18 @@ int		lang_type = LANG_UK;
 
 bool	music_on = true;
 bool	sound_on = true;
+
+int		music_volume = 255;
+int		sfx_volume = 255;
+
+void apply_volume_settings()
+{
+	FSOUND_SetSFXMasterVolume(sfx_volume);
+
+	g_game_state.sound_banks().mbk_niveau().setVol(music_volume);
+	g_game_state.sound_banks().mbk_inter().setVol(music_volume);
+	g_game_state.sound_banks().mbk_interl().setVol(music_volume);
+}
 
 bool	cheat_on = false;
 
@@ -91,6 +104,14 @@ void load_BB3_config(const char * cfg_file)
 		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_JUMP, a);
 		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_SUPER, a);
 
+		// Appended after the original fields - an older config file
+		// (from before this was added) will simply run short here,
+		// which correctly falls into the "malformed" branch below and
+		// resets everything to defaults rather than leaving volume
+		// uninitialized.
+		READ_OR_BAIL(music_volume);
+		READ_OR_BAIL(sfx_volume);
+
 #undef READ_OR_BAIL
 
 		fclose(fic);
@@ -100,6 +121,8 @@ void load_BB3_config(const char * cfg_file)
 			      << " is short/malformed - using default config "
 			         "instead of partially-read garbage.\n";
 			set_default_config(true);
+		} else {
+			apply_volume_settings();
 		}
 	}
 
@@ -166,6 +189,9 @@ void save_BB3_config(const char * cfg_file)
 		a = in.getAlias(ALIAS_P2_SUPER);
 		fwrite(&a, sizeof(a), 1, fic);
 
+		fwrite(&music_volume, sizeof(music_volume), 1, fic);
+		fwrite(&sfx_volume, sizeof(sfx_volume), 1, fic);
+
 		fclose(fic);
 	}
 }
@@ -190,4 +216,8 @@ void set_default_config(bool reset_lang)
 	in.setAlias(ALIAS_P2_FIRE, DIK_TAB);
 	in.setAlias(ALIAS_P2_JUMP, DIK_G);
 	in.setAlias(ALIAS_P2_SUPER, DIK_H);
+
+	music_volume = 255;
+	sfx_volume = 255;
+	apply_volume_settings();
 }

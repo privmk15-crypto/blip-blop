@@ -48,6 +48,13 @@ bool MusicBank::open(const char* file, bool loop) {
         } else {  // TYPE_MP3
             musics_[i].reset(new Mp3Music(fname, loop));
         }
+
+        // Newly loaded tracks otherwise start at whatever volume
+        // ModMusic/Mp3Music itself defaults to, ignoring the current
+        // music_volume setting until the player happens to open the
+        // options menu and nudge it - apply it here too so a level's
+        // music always starts at the configured volume.
+        musics_[i]->set_volume(music_volume);
     }
 
     f.close();

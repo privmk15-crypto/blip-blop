@@ -35,6 +35,18 @@ extern int		lang_type;
 extern bool		music_on;
 extern bool		sound_on;
 
+// 0-255, matching FMOD's own volume convention (FSOUND_SetSFXMasterVolume,
+// FMUSIC_SetMasterVolume). Applied via apply_volume_settings() below.
+extern int		music_volume;
+extern int		sfx_volume;
+
+// Pushes music_volume/sfx_volume to FMOD (FSOUND_SetSFXMasterVolume for
+// sound effects, MusicBank::setVol() for each music bank) and, for
+// music, is also what MusicBank::open() itself calls on every newly
+// loaded track - so call this once after changing either value (the
+// options menu does), not after every level load.
+void apply_volume_settings();
+
 extern bool		cheat_on;
 
 extern HiScores	hi_scores;

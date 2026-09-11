@@ -25,8 +25,6 @@
 
 // #include <ddraw.h>
 #include "ben_divers.h"
-#include "control_p1.h"
-#include "control_p2.h"
 #include "picture_bank.h"
 #include "fonte.h"
 #include "super_liste.h"
@@ -101,13 +99,6 @@ bool **		murs_opaques;		// Murs opaques (=true)
 bool **		murs_sanglants;		// Murs sanglants (=true)
 
 //-----------------------------------------------------------------------------
-//		Pour les controles
-//-----------------------------------------------------------------------------
-
-ControlP1	ctrlP1;
-ControlP2	ctrlP2;
-
-//-----------------------------------------------------------------------------
 //		Les listes
 //-----------------------------------------------------------------------------
 
@@ -162,10 +153,9 @@ int				nb_ennemis_created;
 int				intensite_meteo;
 int				type_meteo;
 
-int				dy_tremblement = 0;
-int				etape_tremblement = 0;
-int				amplitude_tremblement = 0;
-int				ddy_tremblement = 0;
+// dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement and
+// tremblement() moved to screen_shake.cpp (ScreenShake) - Stage 2 ownership
+// migration.
 
 bool			total_debug = false;
 
@@ -224,15 +214,6 @@ Fonte			fnt_menus;
 //-----------------------------------------------------------------------------
 //		Les fonctions cool
 //-----------------------------------------------------------------------------
-
-
-void tremblement(int amp)
-{
-	amplitude_tremblement = amp;
-	ddy_tremblement = (amp >> 1) + 1;
-	dy_tremblement = -amp;
-	etape_tremblement = 0;
-}
 
 
 int	plat(int x, int y)

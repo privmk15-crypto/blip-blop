@@ -25,8 +25,6 @@
 
 // #include <ddraw.h>
 #include "ben_debug.h"
-#include "control_p1.h"
-#include "control_p2.h"
 #include "picture_bank.h"
 #include "fonte.h"
 #include "super_liste.h"
@@ -114,13 +112,6 @@ extern bool **		murs_sanglants;		// Murs sanglants (=true)
 
 
 //-----------------------------------------------------------------------------
-//		Pour les controles
-//-----------------------------------------------------------------------------
-
-extern ControlP1	ctrlP1;
-extern ControlP2	ctrlP2;
-
-//-----------------------------------------------------------------------------
 //		Les listes
 //-----------------------------------------------------------------------------
 
@@ -196,10 +187,9 @@ extern int			nb_ennemis_created;
 extern int			intensite_meteo;
 extern int			type_meteo;
 
-extern int			dy_tremblement;
-extern int			etape_tremblement;
-extern int			amplitude_tremblement;
-extern int			ddy_tremblement;
+// dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement
+// moved into ScreenShake (screen_shake.h) as part of the Stage 2 ownership
+// migration. tremblement() below still forwards to it, unchanged.
 
 extern bool			total_debug;
 

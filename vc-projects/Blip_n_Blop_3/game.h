@@ -29,6 +29,8 @@
 #include "rpg_player.h"
 #include "blip.h"
 #include "chrono.h"
+#include "control_p1.h"
+#include "control_p2.h"
 #include "update_regulator.h"
 #include "go_arrow.h"
 #include "hud.h"
@@ -99,6 +101,13 @@ protected:
 
 	Couille *	player1;
 	Couille *	player2;
+
+	// Stage 2 ownership migration: these used to be the free globals
+	// ctrlP1/ctrlP2 (globals.h/.cpp). Their only prior use anywhere in the
+	// codebase was being handed to player1/player2 below, so they move
+	// here as a direct, shim-free encapsulation.
+	ControlP1	ctrlP1_;
+	ControlP2	ctrlP2_;
 
 	RPGPlayer	rpg;
 

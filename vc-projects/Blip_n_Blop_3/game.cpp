@@ -69,6 +69,7 @@
 #include "meteo_neige.h"
 #include "meteo_pluie.h"
 #include "restore.h"
+#include "screen_shake.h"
 #include "scroll.h"
 #include "texte_cool.h"
 #include "tir_bb.h"
@@ -125,7 +126,7 @@ void Game::jouePartie(int nbj, int idj) {
     else
         player1 = new Blop();
 
-    player1->ctrl = &ctrlP1;
+    player1->ctrl = &ctrlP1_;
     list_joueurs.push_back(player1);
 
     if (nbj == 2) {
@@ -134,7 +135,7 @@ void Game::jouePartie(int nbj, int idj) {
         else
             player2 = new Blip();
 
-        player2->ctrl = &ctrlP2;
+        player2->ctrl = &ctrlP2_;
         list_joueurs.push_back(player2);
     }
 
@@ -259,9 +260,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     hold_fire = false;
 
     intensite_meteo = 0;
-    dy_tremblement = 0;
-    etape_tremblement = 0;
-    amplitude_tremblement = 0;
+    g_screen_shake.Reset();
 
     n_cache = 0;
 
@@ -2324,65 +2323,11 @@ void Game::creeBulle(Sprite* s) {
 
 //-----------------------------------------------------------------------------
 
-void Game::updateTremblements() {
-    if (amplitude_tremblement == 0) return;
-
-    if (etape_tremblement == 0) {
-        dy_tremblement += ddy_tremblement;
-
-        if (dy_tremblement <= -amplitude_tremblement) {
-            amplitude_tremblement -= 1;
-            ddy_tremblement = (amplitude_tremblement >> 1) + 1;
-            dy_tremblement += 1;
-        } else if (dy_tremblement >= amplitude_tremblement) {
-            amplitude_tremblement -= 1;
-            ddy_tremblement = -(amplitude_tremblement >> 1) - 1;
-            dy_tremblement -= 1;
-        }
-    }
-}
+void Game::updateTremblements() { g_screen_shake.Update(); }
 
 //-----------------------------------------------------------------------------
 
-void Game::drawTremblements() {
-    if (amplitude_tremblement == 0 || dy_tremblement == 0) return;
-
-    int y;
-    Rect r;
-    Rect r2;
-
-    r2.left = r.left = 0;
-    r2.right = r.right = 640;
-
-    if (dy_tremblement < 0) {
-        r.top = -dy_tremblement;
-        r.bottom = 480;
-
-        r2.top = 480 + dy_tremblement;
-        r2.bottom = 480;
-
-        y = 0;
-    } else if (dy_tremblement > 0) {
-        r.top = 0;
-        r.bottom = 480 - dy_tremblement;
-
-        r2.top = 0;
-        r2.bottom = dy_tremblement;
-
-        y = dy_tremblement;
-    }
-
-    backSurface->BltFast(
-        0, y, backSurface, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
-
-    DDBLTFX ddfx;
-
-    memset(&ddfx, 0, sizeof(ddfx));
-    ddfx.dwSize = sizeof(ddfx);
-    ddfx.dwFillColor = 0;
-
-    backSurface->Blt(&r2, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddfx);
-}
+void Game::drawTremblements() { g_screen_shake.Draw(backSurface); }
 
 //-----------------------------------------------------------------------------
 

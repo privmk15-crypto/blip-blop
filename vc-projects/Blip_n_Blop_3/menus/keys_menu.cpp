@@ -59,6 +59,25 @@ void KeysMenu::SetKey(int key) {
 int KeysMenu::ProcessEvent() {
     if (state_ == State::WaitingKey) {
         int key = in.waitKey();
+
+        // Fix: DIK_RETURN and DIK_ESCAPE are checked directly (not via
+        // an alias) in every menu's own ProcessEvent() - RETURN to
+        // confirm, ESCAPE to cancel/skip. Binding either of them to a
+        // P1/P2 alias here (e.g. rebinding UP to RETURN) makes that
+        // key ALSO fire as an alias check (in.scanAlias(ALIAS_P1_UP))
+        // on top of its hardcoded scanKey(DIK_RETURN) meaning, on
+        // every single menu screen from then on - one physical press
+        // both moves the cursor and confirms in the same frame,
+        // silently "selecting" whatever item the cursor lands on
+        // instead of what was actually highlighted. Reported as
+        // "wciskam enter i wybiera pozycję jedną wyżej niż zaznaczoną,
+        // dzieje się w każdym menu" after rebinding UP to RETURN this
+        // way. Reject both outright and keep waiting for a different
+        // key instead of ever assigning them.
+        if (key == DIK_RETURN || key == DIK_ESCAPE) {
+            return player_ == 1 ? MenuType::Keys_1 : MenuType::Keys_2;
+        }
+
         SetKey(key);
     } else {
         if (in.scanKey(DIK_UP) || in.scanAlias(ALIAS_P1_UP)) {

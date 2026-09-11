@@ -133,7 +133,40 @@ void load_BB3_config(const char * cfg_file)
 			         "instead of partially-read garbage.\n";
 			set_default_config(true);
 		} else {
-			apply_volume_settings();
+			// Fix: a saved config could have RETURN or ESCAPE bound to
+			// a P1/P2 alias (the Keys menu itself now refuses to let
+			// this happen going forward - see keys_menu.cpp - but this
+			// self-heals a config saved before that fix existed).
+			// Either one corrupts every menu's navigation: RETURN/
+			// ESCAPE are checked directly (scanKey) for confirm/cancel
+			// in every menu on top of whatever alias now also maps to
+			// them, so one press does both at once - reported as
+			// "wciskam enter i wybiera pozycję jedną wyżej niż
+			// zaznaczoną, dzieje się w każdym menu".
+			static const int kAliasesToCheck[] = {
+				ALIAS_P1_UP, ALIAS_P1_DOWN, ALIAS_P1_LEFT, ALIAS_P1_RIGHT,
+				ALIAS_P1_FIRE, ALIAS_P1_JUMP, ALIAS_P1_SUPER,
+				ALIAS_P2_UP, ALIAS_P2_DOWN, ALIAS_P2_LEFT, ALIAS_P2_RIGHT,
+				ALIAS_P2_FIRE, ALIAS_P2_JUMP, ALIAS_P2_SUPER,
+			};
+			bool corrupted = false;
+			for (int alias : kAliasesToCheck) {
+				int bound = in.getAlias(alias);
+				if (bound == DIK_RETURN || bound == DIK_ESCAPE) {
+					corrupted = true;
+					break;
+				}
+			}
+
+			if (corrupted) {
+				debug << "Config file " << cfg_file
+				      << " has RETURN/ESCAPE bound to a P1/P2 key - "
+				         "using default config instead of one that "
+				         "would break every menu.\n";
+				set_default_config(true);
+			} else {
+				apply_volume_settings();
+			}
 		}
 	}
 

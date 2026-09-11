@@ -36,7 +36,7 @@
 #include "control_p1.h"
 #include "control_p2.h"
 #include "picture_bank.h"
-#include "fonte.h"
+#include "fonte.h"  // kept: Fonte type still used by game.cpp's fnt_p1/fnt_p2 pointers
 #include "super_liste.h"
 #include "sound_bank_bb.h"
 #include "music_bank.h"
@@ -185,14 +185,9 @@ extern int				current_zik;			// Numéro de la zik jouée
 //		Les Fontes
 //-----------------------------------------------------------------------------
 
-extern Fonte			fnt_score_blip;
-extern Fonte			fnt_score_blop;
-extern Fonte			fnt_ammo;
-extern Fonte			fnt_ammo_used;
-extern Fonte			fnt_cool;
-extern Fonte			fnt_rpg;
-extern Fonte			fnt_menu;
-extern Fonte			fnt_menus;
+// fnt_score_blip/fnt_score_blop/fnt_ammo/fnt_ammo_used/fnt_cool/fnt_rpg/
+// fnt_menu/fnt_menus moved into FontBank (font_bank.h) as part of the
+// Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les fonctions cool

@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "couille.h"
+#include "game_state.h"
 #include "globals.h"
 
 class HUD {
@@ -48,15 +49,15 @@ class HUD {
     void DrawAmmo(int ammo, bool firing, Location location) {
         int x = location == Location::Left ? 135 : 505;
         if (ammo == -1) {
-            fnt_ammo.printC(backSurface, x, 43, "*");
+            g_game_state.font_bank().ammo().printC(backSurface, x, 43, "*");
             return;
         }
 
         std::string ammo_str = std::to_string(ammo);
         if (firing) {
-            fnt_ammo_used.printC(backSurface, x, 43, ammo_str.c_str());
+            g_game_state.font_bank().ammo_used().printC(backSurface, x, 43, ammo_str.c_str());
         } else {
-            fnt_ammo.printC(backSurface, x, 43, ammo_str.c_str());
+            g_game_state.font_bank().ammo().printC(backSurface, x, 43, ammo_str.c_str());
         }
     }
 
@@ -87,19 +88,19 @@ class HUD {
 
     void DrawBonusStage(Location location) {
         if (location == Location::Left) {
-            fnt_rpg.print(backSurface, 4, 5, "Bonus");
-            fnt_rpg.print(backSurface, 4, 20, "Stage");
+            g_game_state.font_bank().rpg().print(backSurface, 4, 5, "Bonus");
+            g_game_state.font_bank().rpg().print(backSurface, 4, 20, "Stage");
         } else {
-            fnt_rpg.printR(backSurface, 635, 5, "Bonus");
-            fnt_rpg.printR(backSurface, 635, 20, "Stage");
+            g_game_state.font_bank().rpg().printR(backSurface, 635, 5, "Bonus");
+            g_game_state.font_bank().rpg().printR(backSurface, 635, 20, "Stage");
         }
     }
 
     void DrawLives(int lives, Location location) {
         if (location == Location::Left) {
-            fnt_cool.print(backSurface, 5, 5, std::to_string(lives).c_str());
+            g_game_state.font_bank().cool().print(backSurface, 5, 5, std::to_string(lives).c_str());
         } else {
-            fnt_cool.printR(backSurface, 635, 5, std::to_string(lives).c_str());
+            g_game_state.font_bank().cool().printR(backSurface, 635, 5, std::to_string(lives).c_str());
         }
     }
 
@@ -110,9 +111,9 @@ class HUD {
 
         int x = (location == Location::Left) ? 100 : 450;
         if (color == Color::Blue) {
-            fnt_score_blip.print(backSurface, x, 20, s.c_str());
+            g_game_state.font_bank().score_blip().print(backSurface, x, 20, s.c_str());
         } else {
-            fnt_score_blop.print(backSurface, x, 20, s.c_str());
+            g_game_state.font_bank().score_blop().print(backSurface, x, 20, s.c_str());
         }
     }
 

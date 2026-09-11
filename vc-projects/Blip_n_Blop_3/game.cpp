@@ -433,7 +433,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         backSurface->FillRect(&r, 0);
 
         pbk_briefing[0]->PasteTo(backSurface, 0, 0);
-        fnt_rpg.printC(backSurface, 320, 460, "Press a key to start.");
+        g_game_state.font_bank().rpg().printC(backSurface, 320, 460, "Press a key to start.");
         DDFlip();
 
         mbk_inter.play(2);
@@ -1215,25 +1215,25 @@ bool Game::chargePartie() {
 
     // Fonte score blip
     //
-    if (!fnt_score_blip.load("data/scorei.lft", mem_flag)) return false;
+    if (!g_game_state.font_bank().score_blip().load("data/scorei.lft", mem_flag)) return false;
 
     debug << "Successfully loaded <scorei.lft>\n";
 
     // Fonte score blop
     //
-    if (!fnt_score_blop.load("data/scoreo.lft", mem_flag)) return false;
+    if (!g_game_state.font_bank().score_blop().load("data/scoreo.lft", mem_flag)) return false;
 
     debug << "Successfully loaded <scoreo.lft>\n";
 
     // Fonte munitions
     //
-    if (!fnt_ammo.load("data/ammo1.lft", mem_flag)) return false;
+    if (!g_game_state.font_bank().ammo().load("data/ammo1.lft", mem_flag)) return false;
 
     debug << "Successfully loaded <ammo1.lft>\n";
 
     // Fonte munitions utilisées
     //
-    if (!fnt_ammo_used.load("data/ammo2.lft", mem_flag)) return false;
+    if (!g_game_state.font_bank().ammo_used().load("data/ammo2.lft", mem_flag)) return false;
 
     debug << "Successfully loaded <ammo2.lft>\n";
 
@@ -1459,110 +1459,110 @@ void Game::drawDebugInfos() {
 
     if (show_fps) {
         sprintf(buffer, "FPS = %d", g_game_state.debug_stats().fps_count());
-        fnt_rpg.print(backSurface, 10, 130, buffer);
+        g_game_state.font_bank().rpg().print(backSurface, 10, 130, buffer);
     }
     /*
             if ( show_lists)
             {
                     sprintf( buffer, "Joueurs = %d", g_game_state.entities().list_joueurs().taille());
-                    fnt_rpg.print( backSurface, 10, 150, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 150, buffer);
 
                     sprintf( buffer, "Tirs joueurs = %d",
-       g_game_state.entities().list_tirs_bb().taille()); fnt_rpg.print( backSurface, 10, 170, buffer);
+       g_game_state.entities().list_tirs_bb().taille()); g_game_state.font_bank().rpg().print( backSurface, 10, 170, buffer);
 
                     sprintf( buffer, "Ennemis = %d", g_game_state.entities().list_ennemis().taille());
-                    fnt_rpg.print( backSurface, 10, 190, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 190, buffer);
 
                     sprintf( buffer, "Tirs ennemis = %d",
-       g_game_state.entities().list_tirs_ennemis().taille()); fnt_rpg.print( backSurface, 10, 210,
+       g_game_state.entities().list_tirs_ennemis().taille()); g_game_state.font_bank().rpg().print( backSurface, 10, 210,
        buffer);
 
                     sprintf( buffer, "Gens ennemis = %d",
-       g_game_state.entities().list_gen_ennemis().taille()); fnt_rpg.print( backSurface, 10, 230, buffer);
+       g_game_state.entities().list_gen_ennemis().taille()); g_game_state.font_bank().rpg().print( backSurface, 10, 230, buffer);
 
                     sprintf( buffer, "Nb created = %d", nb_ennemis_created);
-                    fnt_rpg.print( backSurface, 10, 250, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 250, buffer);
 
                     sprintf( buffer, "Fonds animes = %d",
-       g_game_state.entities().list_fonds_animes().taille()); fnt_rpg.print( backSurface, 10, 270,
+       g_game_state.entities().list_fonds_animes().taille()); g_game_state.font_bank().rpg().print( backSurface, 10, 270,
        buffer);
 
                     sprintf( buffer, "Meteo = %d / %d (%d)",
-       g_game_state.entities().list_meteo().taille(), g_game_state.weather().intensite(), g_game_state.weather().type()); fnt_rpg.print(
+       g_game_state.entities().list_meteo().taille(), g_game_state.weather().intensite(), g_game_state.weather().type()); g_game_state.font_bank().rpg().print(
        backSurface, 10, 290, buffer);
 
                     sprintf( buffer, "Plat. mobile = %d",
-       g_game_state.entities().list_plateformes_mobiles().taille()); fnt_rpg.print( backSurface, 10, 310,
+       g_game_state.entities().list_plateformes_mobiles().taille()); g_game_state.font_bank().rpg().print( backSurface, 10, 310,
        buffer);
 
                     sprintf( buffer, "Giclures = %d", g_game_state.entities().list_giclures().taille());
-                    fnt_rpg.print( backSurface, 10, 330, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 330, buffer);
 
                     sprintf( buffer, "xTex = %d", xTex);
-                    fnt_rpg.print( backSurface, 10, 350, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 350, buffer);
 
                     sprintf( buffer, "next_x = %d", next_x);
-                    fnt_rpg.print( backSurface, 10, 370, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 370, buffer);
 
                     sprintf( buffer, "Offset = %d", offset);
-                    fnt_rpg.print( backSurface, 10, 390, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 390, buffer);
 
                     sprintf( buffer, "n_img = %d", n_img);
-                    fnt_rpg.print( backSurface, 10, 410, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 410, buffer);
 
                     sprintf( buffer, "n_cache = %d", n_cache);
-                    fnt_rpg.print( backSurface, 10, 430, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 430, buffer);
 
                     sprintf( buffer, "glorf = %d", glorf);
-                    fnt_rpg.print( backSurface, 10, 450, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 10, 450, buffer);
 
 
                     sprintf( buffer, "0-USER0 = %d", game_flag[FLAG_USER0]);
-                    fnt_rpg.print( backSurface, 440, 165, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 165, buffer);
 
                     sprintf( buffer, "1-USER1 = %d", game_flag[FLAG_USER1]);
-                    fnt_rpg.print( backSurface, 440, 185, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 185, buffer);
 
                     sprintf( buffer, "2-USER2 = %d", game_flag[FLAG_USER2]);
-                    fnt_rpg.print( backSurface, 440, 205, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 205, buffer);
 
                     sprintf( buffer, "3-USER3 = %d", game_flag[FLAG_USER3]);
-                    fnt_rpg.print( backSurface, 440, 225, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 225, buffer);
 
                     sprintf( buffer, "4-RESERVED = %d", game_flag[3]);
-                    fnt_rpg.print( backSurface, 440, 245, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 245, buffer);
 
                     sprintf( buffer, "5-BONUS = %d", game_flag[FLAG_BONUS]);
-                    fnt_rpg.print( backSurface, 440, 265, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 265, buffer);
 
                     sprintf( buffer, "6-TIMER = %d", game_flag[FLAG_TIMER]);
-                    fnt_rpg.print( backSurface, 440, 285, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 285, buffer);
 
                     sprintf( buffer, "7-GEN_OFF = %d", game_flag[FLAG_GEN_OFF]);
-                    fnt_rpg.print( backSurface, 440, 305, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 305, buffer);
 
                     sprintf( buffer, "8-NB_KILL = %d", game_flag[FLAG_NB_KILL]);
-                    fnt_rpg.print( backSurface, 440, 325, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 325, buffer);
 
                     sprintf( buffer, "9-NB_ENN = %d", game_flag[FLAG_NB_ENN]);
-                    fnt_rpg.print( backSurface, 440, 345, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 345, buffer);
 
                     sprintf( buffer, "10-NB_GEN = %d", game_flag[FLAG_NB_GEN]);
-                    fnt_rpg.print( backSurface, 440, 365, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 365, buffer);
 
                     sprintf( buffer, "Channels = %d",
-       FSOUND_GetChannelsPlaying()); fnt_rpg.print( backSurface, 440, 405,
+       FSOUND_GetChannelsPlaying()); g_game_state.font_bank().rpg().print( backSurface, 440, 405,
        buffer);
 
                     sprintf( buffer, "Gore = %d", g_game_state.entities().list_gore().taille());
-                    fnt_rpg.print( backSurface, 440, 425, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 425, buffer);
 
                     sprintf( buffer, "Fonds stat. = %d",
-       g_game_state.entities().list_fonds_statiques().taille()); fnt_rpg.print( backSurface, 440, 445,
+       g_game_state.entities().list_fonds_statiques().taille()); g_game_state.font_bank().rpg().print( backSurface, 440, 445,
        buffer);
 
                     sprintf( buffer, "Impacts = %d", g_game_state.entities().list_impacts().taille());
-                    fnt_rpg.print( backSurface, 440, 465, buffer);
+                    g_game_state.font_bank().rpg().print( backSurface, 440, 465, buffer);
 
                     RECT	r;
 
@@ -1671,9 +1671,9 @@ void Game::drawTimer() {
     if (game_flag[FLAG_TIMER] > 0) {
         char buffer[10];
 
-        fnt_cool.printC(backSurface, 320, 20, txt_data[TXT_TIME].c_str());
+        g_game_state.font_bank().cool().printC(backSurface, 320, 20, txt_data[TXT_TIME].c_str());
         sprintf(buffer, "%d", game_flag[FLAG_TIMER]);
-        fnt_cool.printC(backSurface, 320, 50, buffer);
+        g_game_state.font_bank().cool().printC(backSurface, 320, 50, buffer);
     }
 }
 
@@ -1842,16 +1842,16 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
     if (showp1) {
         if (player1->id_couille == ID_BLIP)
-            fnt_p1 = &fnt_score_blip;
+            fnt_p1 = &g_game_state.font_bank().score_blip();
         else
-            fnt_p1 = &fnt_score_blop;
+            fnt_p1 = &g_game_state.font_bank().score_blop();
     }
 
     if (showp2) {
         if (player2->id_couille == ID_BLIP)
-            fnt_p2 = &fnt_score_blip;
+            fnt_p2 = &g_game_state.font_bank().score_blip();
         else
-            fnt_p2 = &fnt_score_blop;
+            fnt_p2 = &g_game_state.font_bank().score_blop();
     }
 
     if (g_game_state.enemy_stats().created() > 0) {
@@ -1990,9 +1990,9 @@ void Game::showPE(bool bonus, bool fuckOff) {
             0, 0, systemSurface, NULL, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
         if (fuckOff) {
-            fnt_cool.printC(backSurface, 320, 120, "BONUS STAGE FAILED!");
+            g_game_state.font_bank().cool().printC(backSurface, 320, 120, "BONUS STAGE FAILED!");
         } else {
-            fnt_cool.printC(backSurface, 320, 120, "LEVEL COMPLETE!");
+            g_game_state.font_bank().cool().printC(backSurface, 320, 120, "LEVEL COMPLETE!");
         }
 
         // Affichage	P1
@@ -2000,45 +2000,45 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
         if (showp1) {
             if (life_up_p1 > 0) {
-                fnt_rpg.printC(backSurface, xbasep1 + 105, 270, "LIFE UP");
+                g_game_state.font_bank().rpg().printC(backSurface, xbasep1 + 105, 270, "LIFE UP");
                 //				life_up_p1--;
             }
 
             if (perfect_p1 > 0) {
                 strcpy(buffer, "PERFECT");
-                fnt_rpg.print(backSurface, xbasep1, 180, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep1, 180, buffer);
                 sprintf(buffer, "%d", c_perfect_p1);
                 fnt_p1->printR(backSurface, xbasep1 + 210, 180, buffer);
             }
 
             if (obj_p1 > 0) {
                 strcpy(buffer, "Objective");
-                fnt_rpg.print(backSurface, xbasep1, 200, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep1, 200, buffer);
                 sprintf(buffer, "%d", c_obj_p1);
                 fnt_p1->printR(backSurface, xbasep1 + 210, 200, buffer);
             }
 
             strcpy(buffer, "Casualties");
-            fnt_rpg.print(backSurface, xbasep1, 220, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep1, 220, buffer);
             sprintf(buffer, "%d", c_killed_p1);
             fnt_p1->printR(backSurface, xbasep1 + 210, 220, buffer);
             strcpy(buffer, "%");
-            fnt_rpg.printR(backSurface, xbasep1 + 220, 220, buffer);
+            g_game_state.font_bank().rpg().printR(backSurface, xbasep1 + 220, 220, buffer);
 
             if (game_flag[FLAG_TIMER] > 0) {
                 strcpy(buffer, "Time left");
-                fnt_rpg.print(backSurface, xbasep1, 240, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep1, 240, buffer);
                 sprintf(buffer, "%d", c_time_p1);
                 fnt_p1->printR(backSurface, xbasep1 + 210, 240, buffer);
             }
 
             strcpy(buffer, "BONUS");
-            fnt_rpg.print(backSurface, xbasep1, 300, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep1, 300, buffer);
             sprintf(buffer, "%d", total_bonus_p1);
             fnt_p1->printR(backSurface, xbasep1 + 210, 300, buffer);
 
             strcpy(buffer, "SCORE");
-            fnt_rpg.print(backSurface, xbasep1, 320, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep1, 320, buffer);
             sprintf(buffer, "%d", total_p1);
             fnt_p1->printR(backSurface, xbasep1 + 210, 320, buffer);
 
@@ -2053,45 +2053,45 @@ void Game::showPE(bool bonus, bool fuckOff) {
         //
         if (showp2) {
             if (life_up_p2 > 0) {
-                fnt_rpg.printC(backSurface, xbasep2 + 105, 270, "LIFE UP");
+                g_game_state.font_bank().rpg().printC(backSurface, xbasep2 + 105, 270, "LIFE UP");
                 //				life_up_p2--;
             }
 
             if (perfect_p2 > 0) {
                 strcpy(buffer, "PERFECT");
-                fnt_rpg.print(backSurface, xbasep2, 180, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep2, 180, buffer);
                 sprintf(buffer, "%d", c_perfect_p2);
                 fnt_p2->printR(backSurface, xbasep2 + 210, 180, buffer);
             }
 
             if (obj_p2 > 0) {
                 strcpy(buffer, "Objective");
-                fnt_rpg.print(backSurface, xbasep2, 200, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep2, 200, buffer);
                 sprintf(buffer, "%d", c_obj_p2);
                 fnt_p2->printR(backSurface, xbasep2 + 210, 200, buffer);
             }
 
             strcpy(buffer, "Casualties");
-            fnt_rpg.print(backSurface, xbasep2, 220, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep2, 220, buffer);
             sprintf(buffer, "%d", c_killed_p2);
             fnt_p2->printR(backSurface, xbasep2 + 210, 220, buffer);
             strcpy(buffer, "%");
-            fnt_rpg.printR(backSurface, xbasep2 + 220, 220, buffer);
+            g_game_state.font_bank().rpg().printR(backSurface, xbasep2 + 220, 220, buffer);
 
             if (game_flag[FLAG_TIMER] > 0) {
                 strcpy(buffer, "Time left");
-                fnt_rpg.print(backSurface, xbasep2, 240, buffer);
+                g_game_state.font_bank().rpg().print(backSurface, xbasep2, 240, buffer);
                 sprintf(buffer, "%d", c_time_p2);
                 fnt_p2->printR(backSurface, xbasep2 + 210, 240, buffer);
             }
 
             strcpy(buffer, "BONUS");
-            fnt_rpg.print(backSurface, xbasep2, 300, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep2, 300, buffer);
             sprintf(buffer, "%d", total_bonus_p2);
             fnt_p2->printR(backSurface, xbasep2 + 210, 300, buffer);
 
             strcpy(buffer, "SCORE");
-            fnt_rpg.print(backSurface, xbasep2, 320, buffer);
+            g_game_state.font_bank().rpg().print(backSurface, xbasep2, 320, buffer);
             sprintf(buffer, "%d", total_p2);
             fnt_p2->printR(backSurface, xbasep2 + 210, 320, buffer);
 
@@ -2370,8 +2370,8 @@ void Game::drawLoading() {
 
     //	LGXpaker.halfTone( backSurface, &r);
 
-    //	fnt_menu.printC( backSurface, 320, 205, "LOADING");
-    fnt_cool.printC(backSurface, 320, 205, "LOADING");
+    //	g_game_state.font_bank().menu().printC( backSurface, 320, 205, "LOADING");
+    g_game_state.font_bank().cool().printC(backSurface, 320, 205, "LOADING");
 }
 
 //-----------------------------------------------------------------------------
@@ -2407,8 +2407,8 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 
         pbk_inter[1]->PasteTo(backSurface, 0, 0);
 
-        fnt_menu.printC(backSurface, 320 - x, 160, buff);
-        fnt_menu.printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
 
         DDFlipV();
     }
@@ -2434,9 +2434,9 @@ void Game::getName(Joueur* joueur, int ijoueur) {
         }
 
         pbk_inter[1]->PasteTo(backSurface, 0, 0);
-        fnt_menu.printC(backSurface, 320 - x, 160, buff);
-        fnt_menu.printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
-        fnt_menu.printC(backSurface, 320, 260, name);
+        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, 320, 260, name);
         // primSurface->Flip( NULL, 0);
         DDFlipV();
     }
@@ -2446,9 +2446,9 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 
         pbk_inter[1]->PasteTo(backSurface, 0, 0);
 
-        fnt_menu.printC(backSurface, 320 - x, 160, buff);
-        fnt_menu.printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
-        fnt_menu.printC(backSurface, 320, 260 + x, name);
+        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, 320, 260 + x, name);
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
     }
@@ -2469,8 +2469,8 @@ void Game::showGameOver() {
 
         pbk_inter[0]->PasteTo(backSurface, 0, 0);
         /*
-                        fnt_menu.printR( backSurface, 320-x, 220, "GAME");
-                        fnt_menu.print( backSurface, 320+x, 220, "OVER");
+                        g_game_state.font_bank().menu().printR( backSurface, 320-x, 220, "GAME");
+                        g_game_state.font_bank().menu().print( backSurface, 320+x, 220, "OVER");
 
                         x -= 1;
         */
@@ -2490,8 +2490,8 @@ void Game::showGameOver() {
 
                     pbk_inter[0]->PasteTo( backSurface, 0, 0);
 
-                    fnt_menu.printR( backSurface, 320-x, 220, "GAME");
-                    fnt_menu.print( backSurface, 320+x, 220, "OVER");
+                    g_game_state.font_bank().menu().printR( backSurface, 320-x, 220, "GAME");
+                    g_game_state.font_bank().menu().print( backSurface, 320+x, 220, "OVER");
 
                     x += 20;
 
@@ -2519,10 +2519,10 @@ void Game::showHighScores() {
             if (x[i] > 0) x[i] -= 20;
 
             sprintf(buffer, "%d", hi_scores.getScore(i));
-            fnt_cool.printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
 
             sprintf(buffer, "%s", hi_scores.getName(i));
-            fnt_cool.print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
         }
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
@@ -2538,10 +2538,10 @@ void Game::showHighScores() {
             if (i == 0 || x[i - 1] >= 160) x[i] += 20;
 
             sprintf(buffer, "%d", hi_scores.getScore(i));
-            fnt_cool.printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
 
             sprintf(buffer, "%s", hi_scores.getName(i));
-            fnt_cool.print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
         }
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
@@ -2567,7 +2567,7 @@ void Game::go() {
         ddfx.dwFillColor = 0;
 
         backSurface->Blt(NULL, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddfx);
-        fnt_cool.printC(backSurface, 320, 240, "PLEASE WAIT");
+        g_game_state.font_bank().cool().printC(backSurface, 320, 240, "PLEASE WAIT");
     }
 
     CINEPlayer cine;
@@ -2696,7 +2696,7 @@ void Game::showBriefing(char* fn) {
     backSurface->Blt(&r, NULL, NULL, DDBLT_WAIT | DDBLT_COLORFILL, &ddfx);
 
     pbk_briefing[0]->PasteTo(backSurface, 0, 0);
-    fnt_rpg.printC(backSurface, 320, 460, "Loading...");
+    g_game_state.font_bank().rpg().printC(backSurface, 320, 460, "Loading...");
     DDFlip();
 }
 
@@ -2788,92 +2788,92 @@ void Game::showCredits(bool theEnd) {
             pbk_inter[1]->BlitTo(backSurface, 0, 0);
         }
 
-        fnt_rpg.printC(backSurface, xcred, y + ILIGNE, "Credits");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y + ILIGNE, "Credits");
 
         int y1 = y + ILIGNE + IPARTI;
 
-        fnt_rpg.printC(backSurface, xcred, y1, "CODE");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y1, "CODE");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y1 + ITITRE + ILIGNE * 0, "Benjamin Karaban");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y1 + ITITRE + ILIGNE * 1, "Sylvain Bugat");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y1 + ITITRE + ILIGNE * 3, "2019 REVAMP");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y1 + ITITRE + ILIGNE * 4, "Guillaume Sanchez");
 
         int y2 = y1 + 2 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y2, "MUSIC AND SOUND");
-        fnt_rpg.printC(backSurface, xcred, y2 + ILIGNE, "DESIGN");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y2, "MUSIC AND SOUND");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y2 + ILIGNE, "DESIGN");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y2 + ITITRE + ILIGNE, "Gerard Kelly");
 
         int y3 = y2 + 2 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y3, "ADDITIONAL MUSIC");
-        fnt_rpg.printC(backSurface, xcred, y3 + ITITRE + 0 * ILIGNE, "El Mobo");
-        fnt_rpg.printC(backSurface, xcred, y3 + ITITRE + 1 * ILIGNE, "Rik Ede");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y3, "ADDITIONAL MUSIC");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y3 + ITITRE + 0 * ILIGNE, "El Mobo");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y3 + ITITRE + 1 * ILIGNE, "Rik Ede");
 
         int y4 = y3 + 2 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y4, "ARTWORK");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y4, "ARTWORK");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y4 + ITITRE + ILIGNE * 0, "Laurent Schneider");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y4 + ITITRE + ILIGNE * 1, "Jérémie Comarmond");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y4 + ITITRE + ILIGNE * 2, "Jérôme Karaban");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y4 + ITITRE + ILIGNE * 3, "Didier Colin");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y4 + ITITRE + ILIGNE * 4, "Sylvain Bugat");
 
         int y5 = y4 + 5 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y5, "ADDITIONAL SOUND");
-        fnt_rpg.printC(backSurface, xcred, y5 + ILIGNE, "AND VOCAL EFFECTS");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y5, "ADDITIONAL SOUND");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y5 + ILIGNE, "AND VOCAL EFFECTS");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y5 + ITITRE + 1 * ILIGNE, "Eric Khodja");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y5 + ITITRE + 2 * ILIGNE, "Jérôme Karaban");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y5 + ITITRE + 3 * ILIGNE, "Benjamin Karaban");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y5 + ITITRE + 4 * ILIGNE, "Vincent Lagarrigue");
 
         int y6 = y5 + 5 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y6, "STORYLINE");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y6, "STORYLINE");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y6 + ITITRE + 0 * ILIGNE, "Benjamin Karaban");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y6 + ITITRE + 1 * ILIGNE, "Eric Khodja");
 
         int y7 = y6 + 2 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y7, "ORIGINAL CONCEPT");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y7, "ORIGINAL CONCEPT");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y7 + ITITRE + 0 * ILIGNE, "Laurent Schneider");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y7 + ITITRE + 1 * ILIGNE, "Jérémie Comarmond");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y7 + ITITRE + 2 * ILIGNE, "Didier Colin");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y7 + ITITRE + 3 * ILIGNE, "Sylvain Bugat");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y7 + ITITRE + 4 * ILIGNE, "Benjamin Karaban");
 
         int y8 = y7 + 5 * ILIGNE + IPARTI + ITITRE;
 
-        fnt_rpg.printC(backSurface, xcred, y8, "BETA TEST");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y8, "BETA TEST");
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y8 + ITITRE + 0 * ILIGNE, "Jérémie Khodja");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y8 + ITITRE + 1 * ILIGNE, "Julien Areas");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y8 + ITITRE + 2 * ILIGNE, "Carlos Sédille");
-        fnt_rpg.printC(
+        g_game_state.font_bank().rpg().printC(
             backSurface, xcred, y8 + ITITRE + 3 * ILIGNE, "Juliette Karaban");
 
         int y9 = y8 + 4 * ILIGNE + IPARTI + ITITRE;
@@ -2881,220 +2881,220 @@ void Game::showCredits(bool theEnd) {
         int y11 = y10;
 
         if (theEnd) {
-            fnt_rpg.printC(backSurface, xcred, y9, "THANKS TO");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(backSurface, xcred, y9, "THANKS TO");
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 0 * ILIGNE, "Arnaud Dubois");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 1 * ILIGNE, "Carole Schmitt");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 2 * ILIGNE,
                            "Aasterion staff");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 3 * ILIGNE, "Aurore Anger");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 4 * ILIGNE,
                            "Cécile Baudoncourt");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 5 * ILIGNE,
                            "Nicolas Clément");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 6 * ILIGNE, "Nathalie Morin");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 7 * ILIGNE,
                            "Florent and Thomas");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 8 * ILIGNE, "Bruno Singer");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 9 * ILIGNE,
                            "Francois Deschamps");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 10 * ILIGNE, "Colin Auger");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y9 + ITITRE + 11 * ILIGNE,
                            "TP122 students");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 12 * ILIGNE, "Jeff");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y9 + ITITRE + 13 * ILIGNE, "Flavy");
 
             y10 = y9 + 14 * ILIGNE + IPARTI + ITITRE;
 
-            fnt_rpg.printC(backSurface, xcred, y10, "SPECIAL THANKS TO");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface, xcred, y10, "SPECIAL THANKS TO");
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 0 * ILIGNE,
                            "La Guinguette Pirate");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 1 * ILIGNE,
                            "TiPunch power!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 3 * ILIGNE, "La Pirogue");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 4 * ILIGNE,
                            "I love you Séverine!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 6 * ILIGNE, "Le Montbauron");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 7 * ILIGNE,
                            "mind the 8 ball!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 9 * ILIGNE,
                            "La Fleche d'Or");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 10 * ILIGNE,
                            "avoid the toilets!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 12 * ILIGNE,
                            "Hippochine Restaurant");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 13 * ILIGNE, "great music!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 15 * ILIGNE,
                            "Vitigno Pizzeria");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 16 * ILIGNE, "pizza! good!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 18 * ILIGNE,
                            "Max Linder Theatre");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 19 * ILIGNE, "THX rules!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 21 * ILIGNE, "UNEF");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 22 * ILIGNE,
                            "cheap beer 4 all!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 24 * ILIGNE,
                            "Hayao Myazaki");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 25 * ILIGNE,
                            "Totoro! To-to-ro!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 27 * ILIGNE, "Kevin Smith");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 28 * ILIGNE,
                            "thirty seven?");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 30 * ILIGNE,
                            "Peter Jackson");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 31 * ILIGNE,
                            "Bad Taste rules!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 33 * ILIGNE, "Monty Python");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 34 * ILIGNE,
                            "behind the rabbit?");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 36 * ILIGNE, "John Boorman");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 37 * ILIGNE,
                            "Zardoz has spoken!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 39 * ILIGNE, "Luc Besson");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 40 * ILIGNE,
                            "nah... just kidding!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 42 * ILIGNE,
                            "Christopher Lambert");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 43 * ILIGNE,
                            "watch your back!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 45 * ILIGNE, "Jeremy Irons");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 46 * ILIGNE,
                            "lord Profion!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 48 * ILIGNE, "Wayne Scott");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 49 * ILIGNE,
                            "Rambo! Rambo!");
 
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 51 * ILIGNE,
                            "Les Joyeux Urbains");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 52 * ILIGNE,
                            "va chez ta mère!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 54 * ILIGNE, "Toss");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 55 * ILIGNE, "da! da! da!");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 57 * ILIGNE, "Le cassoulet");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 58 * ILIGNE,
                            "best served at 4 AM");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 60 * ILIGNE, "Gamedev.net");
-            fnt_rpg.printC(backSurface,
+            g_game_state.font_bank().rpg().printC(backSurface,
                            xcred,
                            y10 + ITITRE + 61 * ILIGNE,
                            "DirectX vs hamsters");
 
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 64 * ILIGNE, "THANK");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 65 * ILIGNE, "YOU");
-            fnt_rpg.printC(
+            g_game_state.font_bank().rpg().printC(
                 backSurface, xcred, y10 + ITITRE + 66 * ILIGNE, "FOR PLAYING");
 
             y11 = y10 + 72 * ILIGNE + IPARTI + ITITRE;
         }
 
-        fnt_rpg.printC(backSurface, xcred, y11, "LOADED Studio");
-        fnt_rpg.printC(backSurface, xcred, y11 + ILIGNE, "May 2002");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y11, "LOADED Studio");
+        g_game_state.font_bank().rpg().printC(backSurface, xcred, y11 + ILIGNE, "May 2002");
 
         last_y = y11 + 2 * ILIGNE;
 

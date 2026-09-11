@@ -394,33 +394,33 @@ static bool InitApp(int nCmdShow) {
     //                      Chargement des fontes
     //------------------------------------------------------------------
 
-    if (!fnt_menu.load("data/menu.lft", mem_flag)) {
+    if (!g_game_state.font_bank().menu().load("data/menu.lft", mem_flag)) {
         Bug("Cannot open the file data/menu.lft");
         return false;
     }
 
-    if (!fnt_menus.load("data/menus.lft", mem_flag)) {
+    if (!g_game_state.font_bank().menus().load("data/menus.lft", mem_flag)) {
         Bug("Cannot open the file data/menus.lft");
         return false;
     }
 
-    if (!fnt_cool.load("data/cool.lft", mem_flag)) {
+    if (!g_game_state.font_bank().cool().load("data/cool.lft", mem_flag)) {
         Bug("Cannot open the file data/cool.lft");
         return false;
     }
 
-    if (!fnt_rpg.load("data/rpg.lft", mem_flag)) {
+    if (!g_game_state.font_bank().rpg().load("data/rpg.lft", mem_flag)) {
         Bug("Cannot open the file data/rpg.lft");
         return false;
     }
     /*
-            if ( !fnt_score_blip.load( "data/scorei.lft", mem_flag))
+            if ( !g_game_state.font_bank().score_blip().load( "data/scorei.lft", mem_flag))
             {
                     Bug("Cannot open the file data/scorei.lft");
                     return false;
             }
 
-            if ( !fnt_score_blop.load( "data/scoreo.lft", mem_flag))
+            if ( !g_game_state.font_bank().score_blop().load( "data/scoreo.lft", mem_flag))
             {
                     Bug("Cannot open the file data/scoreo.lft");
                     return false;

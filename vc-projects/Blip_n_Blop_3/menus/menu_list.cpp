@@ -1,5 +1,6 @@
 #include "menu_list.h"
 
+#include "../game_state.h"
 #include "../globals.h"
 #include "../lgx_packer.h"
 
@@ -7,7 +8,7 @@ int MenuList::ComputeWidth() const {
     int width = 0;
 
     for (const std::string& s : items_) {
-        int tmp = fnt_menu.width(s.c_str());
+        int tmp = g_game_state.font_bank().menu().width(s.c_str());
 
         if (tmp > width) {
             width = tmp;
@@ -45,9 +46,9 @@ void MenuList::Draw(SDL::Surface* surf) const {
     int y = 240 - items_.size() * 15;
     for (int i = 0; i < items_.size(); ++i) {
         if (focused_ == i)
-            fnt_menus.printC(surf, 320, y, items_[i].c_str());
+            g_game_state.font_bank().menus().printC(surf, 320, y, items_[i].c_str());
         else
-            fnt_menu.printC(surf, 320, y, items_[i].c_str());
+            g_game_state.font_bank().menu().printC(surf, 320, y, items_[i].c_str());
 
         y += 30;
     }

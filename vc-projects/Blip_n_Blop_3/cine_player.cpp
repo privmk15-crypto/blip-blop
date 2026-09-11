@@ -2,6 +2,7 @@
 #include <cstring>
 //#include <fcntl.h>
 #include "cine_player.h"
+#include "game_state.h"
 #include "ben_divers.h"
 #include "ben_debug.h"
 #include "input.h"
@@ -448,7 +449,7 @@ void CINEPlayer::drawSprite(int n)
 void CINEPlayer::drawText(int n)
 {
 	if (n < NB_OBJ)
-		fnt_rpg.printC(back_surf, obj[n].x, obj[n].y, txt_data[obj[n].txt].c_str());
+		g_game_state.font_bank().rpg().printC(back_surf, obj[n].x, obj[n].y, txt_data[obj[n].txt].c_str());
 }
 
 

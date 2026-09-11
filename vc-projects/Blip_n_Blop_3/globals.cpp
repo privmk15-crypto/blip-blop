@@ -151,14 +151,9 @@ int				current_zik;				// Numéro de la zik jouée
 //		Les Fontes
 //-----------------------------------------------------------------------------
 
-Fonte			fnt_score_blip;
-Fonte			fnt_score_blop;
-Fonte			fnt_ammo;
-Fonte			fnt_ammo_used;
-Fonte			fnt_cool;
-Fonte			fnt_rpg;
-Fonte			fnt_menu;
-Fonte			fnt_menus;
+// fnt_score_blip/fnt_score_blop/fnt_ammo/fnt_ammo_used/fnt_cool/fnt_rpg/
+// fnt_menu/fnt_menus moved to font_bank.cpp (FontBank) - Stage 2
+// ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les fonctions cool

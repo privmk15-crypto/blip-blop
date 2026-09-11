@@ -17,6 +17,7 @@
 #define TEXTE_COOL_CPP
 
 #include "globals.h"
+#include "game_state.h"
 #include "texte_cool.h"
 #include "txt_data.h"
 
@@ -55,7 +56,7 @@ void TexteCool::update()
 
 void TexteCool::affiche()
 {
-	fnt_cool.printC(backSurface, x, y, txt_data[ntxt].c_str());
+	g_game_state.font_bank().cool().printC(backSurface, x, y, txt_data[ntxt].c_str());
 }
 
 void clearTexteCool()

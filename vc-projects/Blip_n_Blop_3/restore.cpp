@@ -1,6 +1,7 @@
 #include <cstring>
 
 #include "globals.h"
+#include "game_state.h"
 #include "config.h"
 #include "scroll.h"
 #include "ben_debug.h"
@@ -12,11 +13,11 @@ bool RestoreAll()
 		return false;
 	}
 
-	fnt_menu.restoreAll();
+	g_game_state.font_bank().menu().restoreAll();
 
 	// Affiche un "LOADING..."
 	//
-	fnt_menu.printC(backSurface, 320, 210, "PLEASE WAIT");
+	g_game_state.font_bank().menu().printC(backSurface, 320, 210, "PLEASE WAIT");
 	//primSurface->Flip(NULL, DDFLIP_WAIT);
 	graphicInstance->Flip();
 
@@ -39,13 +40,13 @@ bool RestoreAll()
 
 	pbk_inter.restoreAll();
 
-	fnt_score_blip.restoreAll();
-	fnt_score_blop.restoreAll();
-	fnt_ammo.restoreAll();
-	fnt_ammo_used.restoreAll();
-	fnt_cool.restoreAll();
-	fnt_rpg.restoreAll();
-	fnt_menus.restoreAll();
+	g_game_state.font_bank().score_blip().restoreAll();
+	g_game_state.font_bank().score_blop().restoreAll();
+	g_game_state.font_bank().ammo().restoreAll();
+	g_game_state.font_bank().ammo_used().restoreAll();
+	g_game_state.font_bank().cool().restoreAll();
+	g_game_state.font_bank().rpg().restoreAll();
+	g_game_state.font_bank().menus().restoreAll();
 
 	in.reAcquire();
 

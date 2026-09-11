@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "controlor.h"
+#include "game_state.h"
 #include "personnage.h"
 #include "joueur.h"
 #include "tir.h"
@@ -186,8 +187,8 @@ public:
 	virtual void setSuperWeapon();
 	virtual void endLevel()
 	{
-		sbk_bb.stop( 2);
-		sbk_bb.stop( 4);
+		g_game_state.sound_banks().sbk_bb().stop( 2);
+		g_game_state.sound_banks().sbk_bb().stop( 4);
 	};
 
 };

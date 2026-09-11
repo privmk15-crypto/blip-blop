@@ -68,7 +68,7 @@ void EnnemiBisouBoom::onAvance()
 		if (ddx > -60 && ddx < 60 && ddy > -40 && ddy < 20) {
 			ss_etape = etape = 0;
 			etat = ETAT_MEURE;
-			sbk_misc.play(11);
+			g_game_state.sound_banks().sbk_misc().play(11);
 			onMeure();
 		}
 	}
@@ -157,5 +157,5 @@ void EnnemiBisouBoom::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE || etat == ETAT_CARBONISE)
-		sbk_misc.play(11);
+		g_game_state.sound_banks().sbk_misc().play(11);
 }

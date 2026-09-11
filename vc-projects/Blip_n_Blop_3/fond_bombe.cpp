@@ -58,7 +58,7 @@ void FondBombe::update()
 				bonus->y = 0;
 				g_game_state.entities().list_bonus().emplace_back(bonus);
 
-				sbk_niveau.play(1);
+				g_game_state.sound_banks().sbk_niveau().play(1);
 			}
 		}
 		ss_etape ++;

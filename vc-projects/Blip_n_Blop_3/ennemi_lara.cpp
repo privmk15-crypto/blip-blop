@@ -129,8 +129,8 @@ void EnnemiLara::onAvance()
 				g_game_state.game_flags()[0] = 3;
 				etape = 0;
 				/*
-								mbk_niveau.stop();
-								mbk_niveau.play( 0);
+								g_game_state.sound_banks().mbk_niveau().stop();
+								g_game_state.sound_banks().mbk_niveau().play( 0);
 				*/
 				g_game_state.game_flags()[FLAG_TIMER] = 180;
 			} else {

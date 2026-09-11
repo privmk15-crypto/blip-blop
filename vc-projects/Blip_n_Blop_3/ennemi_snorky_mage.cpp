@@ -153,7 +153,7 @@ void EnnemiSnorkyMage::onMeure()
 		etape += 1;
 
 	if (ss_etape == 0 && etape == 3) {
-		sbk_niveau.play(13);
+		g_game_state.sound_banks().sbk_niveau().play(13);
 	}
 
 	if ((plat(x, y) != 0) && (etape < 7)) {
@@ -168,7 +168,7 @@ void EnnemiSnorkyMage::onMeure()
 			grave(x, y, pic);
 
 		a_detruire = true;
-//		sbk_niveau.play( 11);
+//		g_game_state.sound_banks().sbk_niveau().play( 11);
 	} else {
 		pic = g_game_state.picture_banks().ennemis()[266 + etape];
 	}
@@ -218,7 +218,7 @@ void EnnemiSnorkyMage::onTire()
 				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
 
-			sbk_niveau.play(12);
+			g_game_state.sound_banks().sbk_niveau().play(12);
 		}
 
 		if (etape == 5) {
@@ -265,6 +265,6 @@ void EnnemiSnorkyMage::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_mage, dy_giclure_mage);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(10);
+		g_game_state.sound_banks().sbk_niveau().play(10);
 	}
 }

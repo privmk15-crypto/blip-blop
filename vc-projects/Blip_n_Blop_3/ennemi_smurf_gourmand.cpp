@@ -69,7 +69,7 @@ void EnnemiSmurfGourmand::onNormal()
 	wait_for_shoot += 1;
 
 	if (wait_for_shoot > shoot_delay && x > offset && x < offset + 640 && tete_turc != NULL) {
-		sbk_niveau.play(14 + rand() % 2);
+		g_game_state.sound_banks().sbk_niveau().play(14 + rand() % 2);
 		etat = ETAT_TIRE;
 		wait_for_shoot = 0;
 		shoot_delay = 100 + rand() % 250;
@@ -181,7 +181,7 @@ void EnnemiSmurfGourmand::estTouche(Tir * tir)
 		dir = SENS_DROITE;
 
 	if (etat == ETAT_MEURE)
-		sbk_niveau.play(rand() % 4);
+		g_game_state.sound_banks().sbk_niveau().play(rand() % 4);
 }
 
 void EnnemiSmurfGourmand::onHold()

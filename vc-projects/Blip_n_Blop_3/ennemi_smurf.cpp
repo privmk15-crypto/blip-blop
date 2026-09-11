@@ -81,7 +81,7 @@ void EnnemiSmurf::onAvance()
 		/*
 				if ( rand() % 10 == 0)
 				{
-					sbk_niveau.play( 14 + rand() % 1);
+					g_game_state.sound_banks().sbk_niveau().play( 14 + rand() % 1);
 				}
 		*/
 		onSaute();
@@ -174,7 +174,7 @@ void EnnemiSmurf::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_smurf, dy_giclure_smurf);
 
 	if (etat == ETAT_MEURE)
-		sbk_niveau.play(4 + rand() % 10);
+		g_game_state.sound_banks().sbk_niveau().play(4 + rand() % 10);
 }
 
 

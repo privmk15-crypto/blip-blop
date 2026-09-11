@@ -31,7 +31,7 @@ public:
 
 		if (ss_etape == 0 && (etape < 3 || plat(x, y) != 0)) {
 			if (!joue_son && plat(x, y) != 0) {
-				sbk_misc.play(6 + (rand() % 2));
+				g_game_state.sound_banks().sbk_misc().play(6 + (rand() % 2));
 				joue_son = true;
 			}
 

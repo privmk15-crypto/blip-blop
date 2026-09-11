@@ -116,7 +116,7 @@ void EnnemiPikachu::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE) {
-//		sbk_niveau.play( 7/*+rand()%3*/);
-		sbk_misc.play(8 + rand() % 2);
+//		g_game_state.sound_banks().sbk_niveau().play( 7/*+rand()%3*/);
+		g_game_state.sound_banks().sbk_misc().play(8 + rand() % 2);
 	}
 }

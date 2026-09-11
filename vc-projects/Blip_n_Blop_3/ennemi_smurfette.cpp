@@ -141,7 +141,7 @@ void EnnemiSmurfette::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_smurf, dy_giclure_smurf);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(21);
+		g_game_state.sound_banks().sbk_niveau().play(21);
 	}
 }
 

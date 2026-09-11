@@ -86,7 +86,7 @@ void EnnemiYoshi::onAvance()
 		attack = true;
 		etape = 0;
 		ss_etape = 0;
-		sbk_niveau.play(35);
+		g_game_state.sound_banks().sbk_niveau().play(35);
 		onTire();
 		return;
 		//}
@@ -101,7 +101,7 @@ void EnnemiYoshi::onAvance()
 		attack = false;
 		etape = 0;
 		ss_etape = 0;
-		sbk_niveau.play(37);
+		g_game_state.sound_banks().sbk_niveau().play(37);
 		onAttaque();
 		return;
 	}
@@ -267,6 +267,6 @@ void EnnemiYoshi::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE) {
-		sbk_misc.play(6 + rand() % 3);
+		g_game_state.sound_banks().sbk_misc().play(6 + rand() % 3);
 	}
 }

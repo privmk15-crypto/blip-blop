@@ -352,6 +352,6 @@ void EnnemiTailsvolant::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE) {
-		sbk_misc.play(10);
+		g_game_state.sound_banks().sbk_misc().play(10);
 	}
 }

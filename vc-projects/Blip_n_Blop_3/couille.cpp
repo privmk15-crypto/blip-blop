@@ -440,27 +440,27 @@ void Couille::update()
 
 	if (id_arme == ID_LF) {
 		if (tire && !fire_lf) {
-			sbk_bb.play(2, SOUND_LOOP);
+			g_game_state.sound_banks().sbk_bb().play(2, SOUND_LOOP);
 			fire_lf = true;
 		} else if (!tire && fire_lf) {
-			sbk_bb.stop(2);
+			g_game_state.sound_banks().sbk_bb().stop(2);
 			fire_lf = false;
 		}
 	} else if (fire_lf) {
-		sbk_bb.stop(2);
+		g_game_state.sound_banks().sbk_bb().stop(2);
 		fire_lf = false;
 	}
 
 	if (id_arme == ID_LASER) {
 		if (tire && !fire_laser) {
-			sbk_bb.play(4, SOUND_LOOP);
+			g_game_state.sound_banks().sbk_bb().play(4, SOUND_LOOP);
 			fire_laser = true;
 		} else if (!tire && fire_laser) {
-			sbk_bb.stop(4);
+			g_game_state.sound_banks().sbk_bb().stop(4);
 			fire_laser = false;
 		}
 	} else if (fire_laser) {
-		sbk_bb.stop(4);
+		g_game_state.sound_banks().sbk_bb().stop(4);
 		fire_laser = false;
 	}
 
@@ -518,7 +518,7 @@ void Couille::update()
 		invincible = 200;
 		inv_cow = true;
 
-		sbk_bb.play(5);
+		g_game_state.sound_banks().sbk_bb().play(5);
 	}
 
 
@@ -1038,7 +1038,7 @@ void Couille::updateArme()
 				break;
 
 			case ID_PM:
-				sbk_bb.play(0);
+				g_game_state.sound_banks().sbk_bb().play(0);
 				break;
 
 			case ID_LF:
@@ -1082,7 +1082,7 @@ void Couille::updateArme()
 		switch (id_arme) {
 			case ID_M16:
 
-				sbk_bb.play(3);
+				g_game_state.sound_banks().sbk_bb().play(3);
 
 //			t = new TirBBM16;
 
@@ -1125,7 +1125,7 @@ void Couille::updateArme()
 
 			case ID_FUSIL:
 
-				sbk_bb.play(1);
+				g_game_state.sound_banks().sbk_bb().play(1);
 
 				for (i = 0; i < 17; i++) {
 //				t = new TirBBFusil;
@@ -1229,11 +1229,11 @@ void Couille::estTouche(int degats)
 	/*
 		if ( id_couille == ID_BLIP)
 		{
-			sbk_bb.play( 6);
+			g_game_state.sound_banks().sbk_bb().play( 6);
 		}
 		else
 		{
-			sbk_bb.play( 7);
+			g_game_state.sound_banks().sbk_bb().play( 7);
 		}
 	*/
 	if (pv <= 0) {

@@ -53,7 +53,7 @@ void TirBBVache::update()
 			g_game_state.entities().list_gore().emplace_back(s);
 		}
 
-		sbk_misc.play(11);
+		g_game_state.sound_banks().sbk_misc().play(11);
 	} else if (y > 550 || x < offset - 50) {
 		a_detruire = true;
 	} else {

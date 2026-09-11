@@ -29,7 +29,7 @@ public:
 		if ((plat(x, y) != 0 && etape >= 5) || mur_opaque(x, y)) {
 			grave(x, y, pic);
 			a_detruire = true;
-			sbk_misc.play(6 + (rand() % 2));
+			g_game_state.sound_banks().sbk_misc().play(6 + (rand() % 2));
 		} else {
 			if (dir == SENS_DROITE)
 				x -= 2;
@@ -66,7 +66,7 @@ public:
 		if ((plat(x, y) != 0 && etape >= 5) || mur_opaque(x, y)) {
 			grave(x, y, pic);
 			a_detruire = true;
-			sbk_misc.play(6 + (rand() % 2));
+			g_game_state.sound_banks().sbk_misc().play(6 + (rand() % 2));
 		} else {
 			if (dir == SENS_DROITE)
 				x += 2;
@@ -101,7 +101,7 @@ public:
 
 		if ((plat(x, y) != 0 && etape >= 5) || mur_opaque(x, y)) {
 			grave(x, y, pic);
-			sbk_misc.play(6 + (rand() % 2));
+			g_game_state.sound_banks().sbk_misc().play(6 + (rand() % 2));
 			a_detruire = true;
 		} else {
 			if (dir == SENS_DROITE)

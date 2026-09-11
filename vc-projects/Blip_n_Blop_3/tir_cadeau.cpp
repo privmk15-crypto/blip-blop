@@ -23,7 +23,7 @@ void TirCadeau::update()
 		etape += 1;
 
 		if (etape == 20) {
-			sbk_misc.play(11);
+			g_game_state.sound_banks().sbk_misc().play(11);
 		}
 	}
 

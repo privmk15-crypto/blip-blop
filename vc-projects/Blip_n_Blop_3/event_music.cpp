@@ -1,17 +1,18 @@
 
 #include "event_music.h"
 #include "globals.h"
+#include "game_state.h"
 
 void EventMusic::doEvent()
 {
 	if (play) {
-		if (current_zik != -1)
-			mbk_niveau.stop(current_zik);
+		if (g_game_state.sound_banks().current_zik() != -1)
+			g_game_state.sound_banks().mbk_niveau().stop(g_game_state.sound_banks().current_zik());
 
-		mbk_niveau.play(id);
-		current_zik = id;
+		g_game_state.sound_banks().mbk_niveau().play(id);
+		g_game_state.sound_banks().current_zik() = id;
 	} else {
-		mbk_niveau.stop(id);
-		current_zik = -1;
+		g_game_state.sound_banks().mbk_niveau().stop(id);
+		g_game_state.sound_banks().current_zik() = -1;
 	}
 }

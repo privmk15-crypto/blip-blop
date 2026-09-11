@@ -127,7 +127,7 @@ void EnnemiSmurfPaysan::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_smurf_paysan, dy_giclure_smurf_paysan);
 
 	if (etat == ETAT_MEURE)
-		sbk_misc.play(8 + rand() % 3);
+		g_game_state.sound_banks().sbk_misc().play(8 + rand() % 3);
 }
 
 

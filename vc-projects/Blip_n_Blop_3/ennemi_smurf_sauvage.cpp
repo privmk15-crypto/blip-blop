@@ -125,7 +125,7 @@ void EnnemiSmurfSauvage::update()
 				etat = ETAT_TOMBE;
 
 //				if ( rand() % 10 == 0)
-				sbk_niveau.play(17);
+				g_game_state.sound_banks().sbk_niveau().play(17);
 
 				if (rand() % 2 == 0)
 					x = offset + 320 - rand() % 150;
@@ -217,7 +217,7 @@ void EnnemiSmurfSauvage::onTire()
 		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		if (nb_shoot == 0)
-			sbk_niveau.play(18);
+			g_game_state.sound_banks().sbk_niveau().play(18);
 //		}
 		nb_shoot += 1 ;
 	}
@@ -238,10 +238,10 @@ void EnnemiSmurfSauvage::estTouche(Tir * tir)
 //	gicle( tir, dx_giclure_smurf_sauvage, dy_giclure_smurf_sauvage);
 	/*
 		if ( etat == ETAT_MEURE)
-			sbk_bb.play( 10+rand()%5);
+			g_game_state.sound_banks().sbk_bb().play( 10+rand()%5);
 	*/
 	if (etat == ETAT_MEURE)
-		sbk_niveau.play(4 + rand() % 10);
+		g_game_state.sound_banks().sbk_niveau().play(4 + rand() % 10);
 }
 
 void EnnemiSmurfSauvage::onMeure()

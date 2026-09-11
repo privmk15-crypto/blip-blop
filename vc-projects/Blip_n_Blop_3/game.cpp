@@ -109,7 +109,7 @@ void Game::jouePartie(int nbj, int idj) {
 
     // Bidon
     //
-    mbk_interl.stop();
+    g_game_state.sound_banks().mbk_interl().stop();
 
     // Charge Tout
     //
@@ -119,7 +119,7 @@ void Game::jouePartie(int nbj, int idj) {
     }
 
     wait_for_death = 0;
-    current_zik = -1;
+    g_game_state.sound_banks().current_zik() = -1;
 
     if (idj == 0)
         player1 = new Blip();
@@ -436,7 +436,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         g_game_state.font_bank().rpg().printC(backSurface, 320, 460, "Press a key to start.");
         DDFlip();
 
-        mbk_inter.play(2);
+        g_game_state.sound_banks().mbk_inter().play(2);
         in.waitClean();
         in.waitKey();
         briefing = false;
@@ -473,8 +473,8 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
     // Coupe les musiques
     //
-    current_zik = -1;
-    if (music_on) mbk_niveau.stop();
+    g_game_state.sound_banks().current_zik() = -1;
+    if (music_on) g_game_state.sound_banks().mbk_niveau().stop();
 
     // S'il s'agissait d'un niveau bonus on restaure les vies des
     // joueurs + on ne peut pas perdre
@@ -610,7 +610,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
         strcpy(buffer2, "data/");
         strcat(buffer2, buffer);
 
-        if (!sbk_niveau.loadSFX(buffer2)) {
+        if (!g_game_state.sound_banks().sbk_niveau().loadSFX(buffer2)) {
             debug << "Game::chargeNiveau() -> Cannot load " << buffer2
                   << " as SBK\n";
             return false;
@@ -625,10 +625,10 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     if (strlen(buffer) != 0) {
         strcpy(buffer2, "data/");
         strcat(buffer2, buffer);
-        strcpy(current_mbk, buffer2);
+        strcpy(g_game_state.sound_banks().current_mbk(), buffer2);
 
         if (music_on) {
-            if (!mbk_niveau.open(buffer2)) {
+            if (!g_game_state.sound_banks().mbk_niveau().open(buffer2)) {
                 debug << "Game::chargeNiveau() -> Cannot load " << buffer2
                       << " as MKB\n";
                 return false;
@@ -636,7 +636,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
             debug << "Successfully loaded <" << buffer2 << "> as MBK\n";
         }
     } else
-        strcpy(current_mbk, "");
+        strcpy(g_game_state.sound_banks().current_mbk(), "");
 
     // Fichier RPG itself
     //
@@ -1239,13 +1239,13 @@ bool Game::chargePartie() {
 
     // Sons globaux
     //
-    if (!sbk_misc.loadSFX("data/misc.sfx")) return false;
+    if (!g_game_state.sound_banks().sbk_misc().loadSFX("data/misc.sfx")) return false;
 
     debug << "Successfully loaded <misc.sfx>\n";
 
     // Sons BB
     //
-    if (!sbk_bb.loadSFX("data/bb.sfx")) return false;
+    if (!g_game_state.sound_banks().sbk_bb().loadSFX("data/bb.sfx")) return false;
 
     debug << "Successfully loaded <bb.sfx>\n";
 
@@ -1300,102 +1300,11 @@ void Game::cleanLists() {
 
 //-----------------------------------------------------------------------------
 
-void Game::updateEvents() {
-    Event* event;
-
-    // Les évenements de la liste "endormie" sont mis dans la liste "en attente"
-    // quand ils sont sur le point d'être activés
-    //
-    // FIXME: These reverse iterators are WEIRD. Why are the events coming
-    // in reverse order? This feels so backward.
-    for (auto it = g_game_state.entities().list_event_endormis().rbegin();
-         it != g_game_state.entities().list_event_endormis().rend();
-         ++it) {
-        auto& event = *it;
-        if (!event->aReveiller()) {
-            break;
-        }
-        g_game_state.entities().list_event().push_back(std::move(event));
-    }
-
-    g_game_state.entities().list_event_endormis().erase(
-        std::remove_if(g_game_state.entities().list_event_endormis().begin(),
-                       g_game_state.entities().list_event_endormis().end(),
-                       [](auto& ev) { return !ev.get(); }),
-        g_game_state.entities().list_event_endormis().end());
-
-    // Si les évenements "en attente" doivent être activés, on les active
-    //
-    for (auto& event : g_game_state.entities().list_event()) {
-        if (event->aActiver()) {
-            event->doEvent();
-            event.reset(nullptr);
-        }
-    }
-    g_game_state.entities().list_event().erase(
-        std::remove_if(g_game_state.entities().list_event().begin(),
-                        g_game_state.entities().list_event().end(),
-                        [](auto& ev) { return !ev.get(); }),
-        g_game_state.entities().list_event().end());
-}
+void Game::updateEvents() { event_system_.Update(); }
 
 //-----------------------------------------------------------------------------
 
-void Game::manageCollisions() {
-    Tir* tir;
-    Ennemi* ennemi;
-
-    // Collisions TirsBB / Ennemis
-    //
-    for (Tir* tir : g_game_state.entities().list_tirs_bb()) {
-        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
-            if (tir->collision(ennemi.get())) {
-                ennemi->estTouche(tir);
-            }
-        }
-    }
-
-    // Collisions Vaches / Ennemis
-    //
-    for (auto& tir : g_game_state.entities().list_cow()) {
-        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
-            if (tir->collision(ennemi.get())) {
-                ennemi->estTouche(tir.get());
-            }
-        }
-    }
-
-    // Collisions Joueurs / Bonus
-    //
-    for (auto& bonus : g_game_state.entities().list_bonus()) {
-        for (Couille* couille : g_game_state.entities().list_joueurs()) {
-            if (bonus->collision(couille)) {
-                bonus->estPris(couille);
-            }
-        }
-    }
-
-    if (wait_for_victory <= 0) {
-        // Collisions Joueurs / Ennemis
-        //
-        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
-            for (Couille* joueur : g_game_state.entities().list_joueurs()) {
-                if (ennemi->collision(joueur))
-                    joueur->estTouche(ennemi->degats());
-            }
-        }
-
-        // Collisions Joueurs / tirs ennemis
-        //
-        for (auto& tir : g_game_state.entities().list_tirs_ennemis()) {
-            for (Couille* joueur : g_game_state.entities().list_joueurs()) {
-                if (tir->collision(joueur)) {
-                    joueur->estTouche(tir->degats());
-                }
-            }
-        }
-    }
-}
+void Game::manageCollisions() { collision_system_.Update(wait_for_victory); }
 
 //-----------------------------------------------------------------------------
 
@@ -1820,7 +1729,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
     LGXpaker.halfTone(systemSurface, &r);
 
-    mbk_inter.play(0);
+    g_game_state.sound_banks().mbk_inter().play(0);
 
     if (g_game_state.entities().list_joueurs().size() == 2) {
         showp1 = showp2 = true;
@@ -2113,7 +2022,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
     if (showp1) player1->setScore(total_p1);
     if (showp2) player2->setScore(total_p2);
 
-    mbk_inter.stop();
+    g_game_state.sound_banks().mbk_inter().stop();
 }
 
 //-----------------------------------------------------------------------------
@@ -2461,7 +2370,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 void Game::showGameOver() {
     int x = 400;
 
-    mbk_inter.play(1);
+    g_game_state.sound_banks().mbk_inter().play(1);
 
     while (!app_killed && x > 20 && !in.anyKeyPressed()) {
         manageMsg();
@@ -2498,7 +2407,7 @@ void Game::showGameOver() {
                     DDFlipV();
             }
     */
-    mbk_inter.stop();
+    g_game_state.sound_banks().mbk_inter().stop();
 }
 
 void Game::showHighScores() {
@@ -2573,7 +2482,7 @@ void Game::go() {
     CINEPlayer cine;
 
     cine.loadPBK("data/intro.gfx");
-    mbk_interl.play(0);
+    g_game_state.sound_banks().mbk_interl().play(0);
     cine.playScene("data/intro.cin", primSurface, backSurface);
 
     menu.start();
@@ -2663,7 +2572,7 @@ void Game::go() {
 
             menu.stop();
             menu.start();
-            mbk_interl.play(0);
+            g_game_state.sound_banks().mbk_interl().play(0);
             diff_start.Reset();
         }
 
@@ -2671,7 +2580,7 @@ void Game::go() {
 
     menu.stop();
 
-    mbk_interl.stop();
+    g_game_state.sound_banks().mbk_interl().stop();
 }
 
 //-----------------------------------------------------------------------------

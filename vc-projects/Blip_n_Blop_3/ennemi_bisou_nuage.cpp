@@ -85,7 +85,7 @@ void EnnemiBisouNuage::onMeureTombe()
 	if (plat(x, y) != 0) {
 		etape = ss_etape = 0;
 		etat = ETAT_MEURE_4;
-//		sbk_niveau.play( 25);
+//		g_game_state.sound_banks().sbk_niveau().play( 25);
 	}
 }
 

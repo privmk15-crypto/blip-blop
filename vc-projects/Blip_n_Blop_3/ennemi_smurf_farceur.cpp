@@ -241,8 +241,8 @@ void EnnemiSmurfFarceur::estTouche(Tir * tir)
 
 	if (etat == ETAT_MEURE) {
 		if (porte_bomb)
-			sbk_misc.play(11);
+			g_game_state.sound_banks().sbk_misc().play(11);
 		else
-			sbk_niveau.play(4 + rand() % 10);
+			g_game_state.sound_banks().sbk_niveau().play(4 + rand() % 10);
 	}
 }

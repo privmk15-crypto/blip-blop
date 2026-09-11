@@ -55,7 +55,7 @@ void EnnemiYoshiDCA::onAvance()
 		}
 		etape = 0;
 		etat = ETAT_TIRE;
-		sbk_niveau.play(35);
+		g_game_state.sound_banks().sbk_niveau().play(35);
 		onTire();
 		return;
 	}
@@ -162,6 +162,6 @@ void EnnemiYoshiDCA::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE) {
-		sbk_misc.play(6 + rand() % 3);
+		g_game_state.sound_banks().sbk_misc().play(6 + rand() % 3);
 	}
 }

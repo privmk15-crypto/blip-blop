@@ -64,7 +64,7 @@ void EnnemiRayman::onAvance()
 
 			g_game_state.enemy_stats().Add();
 
-			mbk_niveau.play(1);
+			g_game_state.sound_banks().mbk_niveau().play(1);
 			g_game_state.game_flags()[FLAG_TIMER] = 70;
 
 			dorkemon --;

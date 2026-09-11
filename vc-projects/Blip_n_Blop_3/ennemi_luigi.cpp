@@ -158,7 +158,7 @@ void EnnemiLuigi::onAvance()
 				etape_attack = 0;
 				etat = ETAT_TIRE;
 				nb_tir = 0;
-				sbk_niveau.play(9);
+				g_game_state.sound_banks().sbk_niveau().play(9);
 				onAttack();
 				return;
 			} else if ((dir == SENS_GAUCHE) && (dif_x < 0) && ((coef_direct <= -2) || (coef_direct >= 2))) {
@@ -173,7 +173,7 @@ void EnnemiLuigi::onAvance()
 				etape_attack = 0;
 				etat = ETAT_TIRE;
 				nb_tir = 0;
-				sbk_niveau.play(9);
+				g_game_state.sound_banks().sbk_niveau().play(9);
 				onAttack();
 				return;
 			}

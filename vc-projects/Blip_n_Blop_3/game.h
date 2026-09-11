@@ -29,8 +29,10 @@
 #include "rpg_player.h"
 #include "blip.h"
 #include "chrono.h"
+#include "collision_system.h"
 #include "control_p1.h"
 #include "control_p2.h"
+#include "event_system.h"
 #include "update_regulator.h"
 #include "go_arrow.h"
 #include "hud.h"
@@ -65,6 +67,8 @@ class Game
 protected:
         HUD hud_;
         UpdateRegulator update_regulator_;
+        CollisionSystem collision_system_;
+        EventSystem event_system_;
 	PictureBank	pbk_briefing;
 	bool	briefing;
 

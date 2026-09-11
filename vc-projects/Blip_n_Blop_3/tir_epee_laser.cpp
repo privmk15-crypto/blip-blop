@@ -7,12 +7,12 @@
 TirEpeeLaser::TirEpeeLaser() : isdead(false), cible(NULL), retour(false), lanceur(NULL), accel(1)
 {
 	duree_vie = 200 + rand() % 100;
-	sbk_niveau.play(13, SOUND_LOOP);
+	g_game_state.sound_banks().sbk_niveau().play(13, SOUND_LOOP);
 }
 
 TirEpeeLaser::~TirEpeeLaser()
 {
-	sbk_niveau.stop(13);
+	g_game_state.sound_banks().sbk_niveau().stop(13);
 }
 
 void TirEpeeLaser::update()
@@ -44,7 +44,7 @@ void TirEpeeLaser::update()
 		updateADetruire();
 
 		if (a_detruire) {
-			sbk_niveau.stop(13);
+			g_game_state.sound_banks().sbk_niveau().stop(13);
 		}
 	} else if (retour) {
 		xc = lanceur->x;
@@ -55,7 +55,7 @@ void TirEpeeLaser::update()
 
 		if (ddx > -10 && ddx < 10 && ddy > -10 && dy < 10) {
 			a_detruire = true;
-			sbk_niveau.stop(13);
+			g_game_state.sound_banks().sbk_niveau().stop(13);
 			((EnnemiBisouJedi*)lanceur)->a_epee = true;
 		}
 	} else {

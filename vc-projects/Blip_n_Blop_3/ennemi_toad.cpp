@@ -85,7 +85,7 @@ void EnnemiToad::onAvance()
 			ss_etape = 0;
 			dy = 0;
 			etat = ETAT_TIRE;
-			sbk_niveau.play(34);
+			g_game_state.sound_banks().sbk_niveau().play(34);
 			onCharge();
 			return;
 		} else {
@@ -136,7 +136,7 @@ void EnnemiToad::onMeure()
 	}
 
 	if (etape == 5 && ss_etape == 0) {
-		sbk_misc.play(9 + rand() % 2);
+		g_game_state.sound_banks().sbk_misc().play(9 + rand() % 2);
 	}
 
 	if (etape >= 10) {
@@ -268,7 +268,7 @@ void EnnemiToad::estTouche(Tir * tir)
 	if (etat == ETAT_MEURE) {
 		if (wait_brain_hurts >= 140 && wait_brain_hurts <= 200) {
 			wait_brain_hurts = 250;
-			sbk_niveau.play(29);
+			g_game_state.sound_banks().sbk_niveau().play(29);
 			hokuto = 7;
 		} else {
 			brain_hurts += 1;
@@ -277,9 +277,9 @@ void EnnemiToad::estTouche(Tir * tir)
 			if (brain_hurts == 0) {
 				wait_brain_hurts = 0;
 				hokuto = 6;
-				sbk_niveau.play(28);
+				g_game_state.sound_banks().sbk_niveau().play(28);
 			} else {
-				sbk_niveau.play(30 + rand() % 2);
+				g_game_state.sound_banks().sbk_niveau().play(30 + rand() % 2);
 			}
 		}
 	}

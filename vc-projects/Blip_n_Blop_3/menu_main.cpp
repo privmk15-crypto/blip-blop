@@ -3,6 +3,7 @@
 #include <cstring>
 #include "config.h"
 #include "control_alias.h"
+#include "game_state.h"
 #include "globals.h"
 #include "input.h"
 #include "key_translator.h"
@@ -47,23 +48,23 @@ int TitleScreen::update() {
 void TitleScreen::stop() {
     if (sound_on != start_sound_on) {
         if (sound_on) {
-            sbk_bb.loadSFX("data\\bb.sfx");
+            g_game_state.sound_banks().sbk_bb().loadSFX("data\\bb.sfx");
         }
     }
 
     if (music_on != start_music_on) {
         if (music_on) {
-            if (strlen(current_mbk) > 0) {
-                if (!mbk_niveau.open(current_mbk))
+            if (strlen(g_game_state.sound_banks().current_mbk()) > 0) {
+                if (!g_game_state.sound_banks().mbk_niveau().open(g_game_state.sound_banks().current_mbk()))
                     music_on = false;
                 else {
-                    if (current_zik >= 0) {
-                        mbk_niveau.play(current_zik);
+                    if (g_game_state.sound_banks().current_zik() >= 0) {
+                        g_game_state.sound_banks().mbk_niveau().play(g_game_state.sound_banks().current_zik());
                     }
                 }
             }
         } else {
-            mbk_niveau.stop();
+            g_game_state.sound_banks().mbk_niveau().stop();
         }
     }
 }

@@ -171,7 +171,7 @@ void EnnemiSnorkyGouverneur::onTire()
 		}
 
 		if (nb_tir == 0) {
-			sbk_niveau.play(6);
+			g_game_state.sound_banks().sbk_niveau().play(6);
 		}
 
 		//}
@@ -219,6 +219,6 @@ void EnnemiSnorkyGouverneur::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_gouverneur, dy_giclure_gouverneur);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(4 + rand() % 2);
+		g_game_state.sound_banks().sbk_niveau().play(4 + rand() % 2);
 	}
 }

@@ -38,8 +38,8 @@
 #include "picture_bank.h"  // kept: PictureBank type used elsewhere via transitive include
 #include "fonte.h"  // kept: Fonte type still used by game.cpp's fnt_p1/fnt_p2 pointers
 #include "super_liste.h"
-#include "sound_bank_bb.h"
-#include "music_bank.h"
+#include "sound_bank_bb.h"  // kept: transitive-include safety, see fonte.h/picture_bank.h above
+#include "music_bank.h"  // kept: transitive-include safety, see fonte.h/picture_bank.h above
 
 //-----------------------------------------------------------------------------
 //		Constantes
@@ -160,20 +160,10 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Les Sounds Banks
 //-----------------------------------------------------------------------------
 
-extern SoundBankBB		sbk_bb;		// Sons BB/divers communs à tous les niveaux
-extern SoundBankBB		sbk_rpg;	// Les musiques des scènes RPG
-extern SoundBankBB		sbk_misc;
-extern SoundBankBB		sbk_niveau;
-
-extern MusicBank		mbk_niveau;
-extern MusicBank		mbk_inter;
-extern MusicBank		mbk_interl;
-
-extern char				current_sbk[];			// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-extern char				current_sbk_misc[];		// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-extern char				current_sbk_niveau[];	// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-extern char				current_mbk[];			// Nom de la MBK courante pour pouvoir la recharger si on enlève puis remet le son
-extern int				current_zik;			// Numéro de la zik jouée
+// sbk_bb/sbk_rpg/sbk_misc/sbk_niveau/mbk_niveau/mbk_inter/mbk_interl/
+// current_sbk/current_sbk_misc/current_sbk_niveau/current_mbk/current_zik
+// moved into SoundBankSet (sound_bank_set.h) as part of the Stage 2
+// ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les Fontes

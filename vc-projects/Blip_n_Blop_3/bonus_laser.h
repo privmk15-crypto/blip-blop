@@ -31,7 +31,7 @@ public:
 
 	virtual void estPris(Couille * c)
 	{
-		sbk_misc.play(3);
+		g_game_state.sound_banks().sbk_misc().play(3);
 
 		if (c->id_arme == ID_LASER) {
 			c->ammo += 750;

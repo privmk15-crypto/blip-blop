@@ -126,20 +126,10 @@ bool		no_scroll2;
 //		Les Sounds Banks
 //-----------------------------------------------------------------------------
 
-SoundBankBB		sbk_bb;		// Sons BB/divers communs à tous les niveaux
-SoundBankBB		sbk_rpg;	// Les musiques des scènes RPG
-SoundBankBB		sbk_misc;
-SoundBankBB		sbk_niveau;
-
-MusicBank		mbk_niveau;
-MusicBank		mbk_inter;
-MusicBank		mbk_interl;
-
-char			current_sbk[200];			// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-char			current_sbk_misc[200];		// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-char			current_sbk_niveau[200];	// Nom de la SBK courante pour pouvoir la recharger si on enlève puis remet le son
-char			current_mbk[200];			// Nom de la MBK courante pour pouvoir la recharger si on enlève puis remet le son
-int				current_zik;				// Numéro de la zik jouée
+// sbk_bb/sbk_rpg/sbk_misc/sbk_niveau/mbk_niveau/mbk_inter/mbk_interl/
+// current_sbk/current_sbk_misc/current_sbk_niveau/current_mbk/current_zik
+// moved to sound_bank_set.cpp (SoundBankSet) - Stage 2 ownership
+// migration.
 
 //-----------------------------------------------------------------------------
 //		Les Fontes

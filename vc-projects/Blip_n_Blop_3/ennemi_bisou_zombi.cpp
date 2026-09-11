@@ -41,7 +41,7 @@ void EnnemiBisouZombi::update()
 			num_moan += 1;
 			num_moan %= 3;
 
-			sbk_niveau.play(10 + num_moan);
+			g_game_state.sound_banks().sbk_niveau().play(10 + num_moan);
 		}
 
 		local_phase = g_game_state.phase_clock().phase();

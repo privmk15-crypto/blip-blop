@@ -105,7 +105,7 @@ void EnnemiCOMVolant::onAvance()
 void EnnemiCOMVolant::onMeure()
 {
 	if (ss_etape == 0 && etape == 0) {
-		sbk_niveau.play(6);
+		g_game_state.sound_banks().sbk_niveau().play(6);
 	}
 
 	ss_etape += 1;

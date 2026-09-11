@@ -42,7 +42,7 @@ void EnnemiLemmings::update()
 	}
 
 	if (g_game_state.game_flags()[3] == 1) {
-		sbk_niveau.play(5);
+		g_game_state.sound_banks().sbk_niveau().play(5);
 		g_game_state.game_flags()[3] = 0;
 	}
 
@@ -183,9 +183,9 @@ void EnnemiLemmings::estTouche(Tir * tir)
 		wait_no %= 20;
 
 		if (wait_no == 0) {
-			sbk_niveau.play(1);
+			g_game_state.sound_banks().sbk_niveau().play(1);
 		} else {
-			sbk_misc.play(7 + rand() % 3);
+			g_game_state.sound_banks().sbk_misc().play(7 + rand() % 3);
 		}
 	}
 }

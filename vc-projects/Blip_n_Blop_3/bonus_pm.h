@@ -34,7 +34,7 @@ public:
 		if ((c->id_arme == ID_LF && c->ammo >= 100) || (c->id_arme == ID_LASER && c->ammo >= 100))
 			return;
 
-		sbk_misc.play(4);
+		g_game_state.sound_banks().sbk_misc().play(4);
 
 		if (c->id_arme == ID_PM) {
 			c->ammo += 200;

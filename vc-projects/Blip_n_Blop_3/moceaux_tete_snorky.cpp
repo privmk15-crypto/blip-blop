@@ -156,7 +156,7 @@ void MorceauSnorkyHyporidercorp::update()
 		} else {
 			grave(x, y, pic);
 			a_detruire = true;
-//			sbk_niveau.play( 9);
+//			g_game_state.sound_banks().sbk_niveau().play( 9);
 		}
 	}
 }

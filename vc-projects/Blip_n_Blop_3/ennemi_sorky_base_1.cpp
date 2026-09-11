@@ -189,7 +189,7 @@ void EnnemiSnorkyBase1::onTire()
 			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		}
 
-		sbk_niveau.play(17);
+		g_game_state.sound_banks().sbk_niveau().play(17);
 	}
 
 	if (etape < 11) {
@@ -229,6 +229,6 @@ void EnnemiSnorkyBase1::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_snorkbase1, dy_giclure_snorkbase1);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(14 + rand() % 3);
+		g_game_state.sound_banks().sbk_niveau().play(14 + rand() % 3);
 	}
 }

@@ -43,7 +43,7 @@ void FondPokeInterupteur::update()
 			if ((tete_turc->x > x - 10) && (tete_turc->x < x + 33) && (tete_turc->y > y - 10) && (tete_turc->y < y + 51)) {
 				g_game_state.game_flags()[2] ++;
 				etat = true;
-				sbk_niveau.play(2);
+				g_game_state.sound_banks().sbk_niveau().play(2);
 			}
 		}
 		pic = g_game_state.picture_banks().niveau()[anim_interupteur_off[etape]];

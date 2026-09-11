@@ -33,7 +33,7 @@ void EnnemiPikachuHeros::update()
 		tombe();
 		int yp;
 		if ((dy > 0) && (yp = plat(x, y + dy)) != 0) {
-			sbk_niveau.play(15);
+			g_game_state.sound_banks().sbk_niveau().play(15);
 			etat = ETAT_NORMAL;
 			dy = 0;
 			y = yp;

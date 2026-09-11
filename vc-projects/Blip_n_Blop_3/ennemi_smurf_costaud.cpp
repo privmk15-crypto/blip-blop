@@ -23,7 +23,7 @@ void EnnemiSmurfCostaud::update()
 		etape_shoot += 1;
 
 		if (g_game_state.game_flags()[2] == 0) {
-			mbk_niveau.play(2);
+			g_game_state.sound_banks().mbk_niveau().play(2);
 			g_game_state.game_flags()[2] = 1;
 			g_game_state.game_flags()[FLAG_TIMER] = 40;
 		}
@@ -290,7 +290,7 @@ void EnnemiSmurfCostaud::onTire()
 
 	if (ddy > -50 && ddy < 50 && x > offset && x < offset + 640) {
 		etat = ETAT_TIRE_HADOKEN;
-		sbk_niveau.play(19);
+		g_game_state.sound_banks().sbk_niveau().play(19);
 		onTireHadoken();
 	} else if (ddx < 150 && ddx > -150 && ddy < 0) {
 		etat = ETAT_TIRE_DPUNCH;
@@ -299,7 +299,7 @@ void EnnemiSmurfCostaud::onTire()
 		if (dypunch < -10)
 			dypunch = -10;
 
-		sbk_niveau.play(20);
+		g_game_state.sound_banks().sbk_niveau().play(20);
 		onTireDragonPunch();
 	} else {
 		tirEnCloche(x, y - 5, xc, yc, dx, dy);

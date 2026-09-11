@@ -217,5 +217,5 @@ void EnnemiBisouEtoile::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE)
-		sbk_niveau.play((rand() % 9));
+		g_game_state.sound_banks().sbk_niveau().play((rand() % 9));
 }

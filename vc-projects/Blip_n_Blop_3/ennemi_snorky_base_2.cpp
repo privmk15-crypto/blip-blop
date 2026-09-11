@@ -268,6 +268,6 @@ void EnnemiSnorkyBase2::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_snorkbase2, dy_giclure_snorkbase2);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(18/*+rand()%3*/);
+		g_game_state.sound_banks().sbk_niveau().play(18/*+rand()%3*/);
 	}
 }

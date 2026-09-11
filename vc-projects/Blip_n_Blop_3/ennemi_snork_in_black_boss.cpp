@@ -69,7 +69,7 @@ void EnnemiSnorkInBlackBoss::onAvance()
 {
 	if (g_game_state.game_flags()[0] == 1) {
 		if (ss_etape == 0 && etape == 0) {
-			sbk_niveau.play(0);
+			g_game_state.sound_banks().sbk_niveau().play(0);
 		}
 
 		ss_etape ++;
@@ -83,7 +83,7 @@ void EnnemiSnorkInBlackBoss::onAvance()
 			g_game_state.game_flags()[0] = 2;
 			etape = 0;
 			ss_etape = 0;
-			mbk_niveau.play(1);
+			g_game_state.sound_banks().mbk_niveau().play(1);
 			g_game_state.game_flags()[FLAG_TIMER] = 50;
 		} else {
 			pic = g_game_state.picture_banks().ennemis()[383 + etape];
@@ -268,9 +268,9 @@ void EnnemiSnorkInBlackBoss::onAvance()
 				}
 
 				if (type_attack == 0) {
-					sbk_niveau.play(2);
+					g_game_state.sound_banks().sbk_niveau().play(2);
 				} else {
-					sbk_niveau.play(3);
+					g_game_state.sound_banks().sbk_niveau().play(3);
 				}
 
 				attack = true;

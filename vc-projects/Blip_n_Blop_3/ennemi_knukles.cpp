@@ -76,7 +76,7 @@ void EnnemiKnukles::onAvance()
 		        && (((dir == SENS_DROITE) && (x > (tete_turc->x - 200)) && (tete_turc->x > x))
 		            || ((dir == SENS_GAUCHE) && (x < (tete_turc->x + 200)) && (tete_turc->x < x)))) {
 			etat = ETAT_TIRE;
-			sbk_niveau.play(6);
+			g_game_state.sound_banks().sbk_niveau().play(6);
 			speed = KNUKLES_CHARGE_SPEED;
 			etape = 0;
 			ss_etape = 0;
@@ -89,7 +89,7 @@ void EnnemiKnukles::onAvance()
 			ss_etape = 0;
 			lat_grav = 0;	// Sinon les sauts diffèrent par leur hauteur
 			dy = 0;
-			sbk_niveau.play(7);
+			g_game_state.sound_banks().sbk_niveau().play(7);
 			onSaute();
 			return;
 		} else {
@@ -354,7 +354,7 @@ void EnnemiKnukles::estTouche(Tir * tir)
 	gicle(tir, dx_giclure, dy_giclure);
 
 	if (etat == ETAT_MEURE) {
-		sbk_misc.play(10);
+		g_game_state.sound_banks().sbk_misc().play(10);
 	}
 }
 

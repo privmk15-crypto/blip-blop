@@ -31,7 +31,7 @@ public:
 
 	virtual void estPris(Couille * c)
 	{
-		sbk_misc.play(5);
+		g_game_state.sound_banks().sbk_misc().play(5);
 
 		c->pv = 5;
 

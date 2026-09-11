@@ -118,7 +118,7 @@ void EnnemiSnorkyHyporider::onMeure()
 
 		g_game_state.entities().list_giclures().emplace_back(s);
 
-		sbk_niveau.play(8);
+		g_game_state.sound_banks().sbk_niveau().play(8);
 		dy = 0;
 	}
 	if (etape >= 7) {
@@ -246,6 +246,6 @@ void EnnemiSnorkyHyporider::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_hyporider, dy_giclure_hyporider);
 
 	if (etat == ETAT_MEURE) {
-		sbk_niveau.play(7);
+		g_game_state.sound_banks().sbk_niveau().play(7);
 	}
 }

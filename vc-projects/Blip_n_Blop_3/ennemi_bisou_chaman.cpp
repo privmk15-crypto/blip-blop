@@ -29,7 +29,7 @@ void EnnemiBisouChaman::update()
 	g_game_state.game_flags()[2] = 1;
 
 	if (g_game_state.game_flags()[0] == 1) {
-		mbk_niveau.play(1);
+		g_game_state.sound_banks().mbk_niveau().play(1);
 		g_game_state.game_flags()[0] = 2;
 		g_game_state.game_flags()[FLAG_TIMER] = 50;
 	}
@@ -342,7 +342,7 @@ void EnnemiBisouChaman::onAvance()
 	if (nb_touch >= 10) {
 		etape = ss_etape = 0;
 		etat = ETAT_TELE;
-		sbk_niveau.play(16);
+		g_game_state.sound_banks().sbk_niveau().play(16);
 	}
 
 	colFromPic();
@@ -383,6 +383,6 @@ void EnnemiBisouChaman::estTouche(Tir * tir)
 	if (etat == ETAT_MEURE || etat == ETAT_CARBONISE) {
 		g_game_state.game_flags()[0] = 7;
 		g_game_state.game_flags()[FLAG_GEN_OFF] = 1;
-		sbk_niveau.play(19);
+		g_game_state.sound_banks().sbk_niveau().play(19);
 	}
 }

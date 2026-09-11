@@ -159,7 +159,7 @@ void TirNuage::onTire()
 	etape_shoot += 1;
 
 	if (etape_shoot == 50) {
-		sbk_niveau.play(24);
+		g_game_state.sound_banks().sbk_niveau().play(24);
 	}
 
 	if (etape_shoot >= 100) {

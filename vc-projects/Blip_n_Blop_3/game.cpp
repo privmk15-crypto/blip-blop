@@ -1212,9 +1212,9 @@ void Game::drawTimer() {
     if (g_game_state.game_flags()[FLAG_TIMER] > 0) {
         char buffer[10];
 
-        g_game_state.font_bank().cool().printC(backSurface, 320, 20, txt_data[TXT_TIME].c_str());
+        g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 20, txt_data[TXT_TIME].c_str());
         sprintf(buffer, "%d", g_game_state.game_flags()[FLAG_TIMER]);
-        g_game_state.font_bank().cool().printC(backSurface, 320, 50, buffer);
+        g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 50, buffer);
     }
 }
 
@@ -1531,9 +1531,9 @@ void Game::showPE(bool bonus, bool fuckOff) {
             0, 0, systemSurface, NULL, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
         if (fuckOff) {
-            g_game_state.font_bank().cool().printC(backSurface, 320, 120, "BONUS STAGE FAILED!");
+            g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 120, "BONUS STAGE FAILED!");
         } else {
-            g_game_state.font_bank().cool().printC(backSurface, 320, 120, "LEVEL COMPLETE!");
+            g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 120, "LEVEL COMPLETE!");
         }
 
         // Affichage	P1
@@ -2063,7 +2063,7 @@ void Game::showHighScores() {
             g_game_state.font_bank().cool().printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
 
             sprintf(buffer, "%s", hi_scores.getName(i));
-            g_game_state.font_bank().cool().print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().print(backSurface, SCREEN_W / 2 + x[i], 160 + 30 * i, buffer);
         }
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
@@ -2082,7 +2082,7 @@ void Game::showHighScores() {
             g_game_state.font_bank().cool().printR(backSurface, 300 - x[i], 160 + 30 * i, buffer);
 
             sprintf(buffer, "%s", hi_scores.getName(i));
-            g_game_state.font_bank().cool().print(backSurface, 320 + x[i], 160 + 30 * i, buffer);
+            g_game_state.font_bank().cool().print(backSurface, SCREEN_W / 2 + x[i], 160 + 30 * i, buffer);
         }
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
@@ -2108,7 +2108,7 @@ void Game::go() {
         ddfx.dwFillColor = 0;
 
         backSurface->Blt(NULL, NULL, NULL, DDBLT_COLORFILL | DDBLT_WAIT, &ddfx);
-        g_game_state.font_bank().cool().printC(backSurface, 320, 240, "PLEASE WAIT");
+        g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 240, "PLEASE WAIT");
     }
 
     CINEPlayer cine;

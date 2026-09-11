@@ -8,7 +8,7 @@ CharacterSelection::CharacterSelection()
     : et_phase_(0),
       phase_(0),
       x_back1_(0),
-      x_back2_(640),
+      x_back2_(SCREEN_W),
       y_select_(-50),
       x_name_(1040),
       y_name_(255),
@@ -33,10 +33,10 @@ CharacterSelection::Output CharacterSelection::update() {
     x_back2_ -= 20;
 
     if (x_back1_ == -640) {
-        x_back1_ = 640;
+        x_back1_ = SCREEN_W;
     }
     if (x_back2_ == -640) {
-        x_back2_ = 640;
+        x_back2_ = SCREEN_W;
     }
 
     // Gestion du texte

@@ -426,7 +426,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         ddfx.dwFillColor = 0;  // Noir
 
         r.left = 0;
-        r.right = 640;
+        r.right = SCREEN_W;
         r.top = 0;
         r.bottom = 480;
 
@@ -435,7 +435,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         backSurface->FillRect(&r, 0);
 
         pbk_briefing[0]->PasteTo(backSurface, 0, 0);
-        g_game_state.font_bank().rpg().printC(backSurface, 320, 460, "Press a key to start.");
+        g_game_state.font_bank().rpg().printC(backSurface, SCREEN_W / 2, 460, "Press a key to start.");
         DDFlip();
 
         g_game_state.sound_banks().mbk_inter().play(2);
@@ -1905,14 +1905,14 @@ void Game::drawLoading() {
     Rect r;
 
     r.left = 0;
-    r.right = 640;
+    r.right = SCREEN_W;
     r.top = 195;
     r.bottom = 245;
 
     //	LGXpaker.halfTone( backSurface, &r);
 
     //	g_game_state.font_bank().menu().printC( backSurface, 320, 205, "LOADING");
-    g_game_state.font_bank().cool().printC(backSurface, 320, 205, "LOADING");
+    g_game_state.font_bank().cool().printC(backSurface, SCREEN_W / 2, 205, "LOADING");
 }
 
 //-----------------------------------------------------------------------------
@@ -1932,7 +1932,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
     char name[21];
     int i = 0;
     int key = -1;
-    int x = 640;
+    int x = SCREEN_W;
 
     sprintf(buff, "PLAYER %d GOT A HIGH SCORE!", ijoueur);
 
@@ -1948,8 +1948,8 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 
         g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
-        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
-        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
 
         DDFlipV();
     }
@@ -1975,21 +1975,21 @@ void Game::getName(Joueur* joueur, int ijoueur) {
         }
 
         g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
-        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
-        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
-        g_game_state.font_bank().menu().printC(backSurface, 320, 260, name);
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2, 260, name);
         // primSurface->Flip( NULL, 0);
         DDFlipV();
     }
 
-    while (!app_killed && x < 640) {
+    while (!app_killed && x < SCREEN_W) {
         x += 20;
 
         g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
-        g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
-        g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
-        g_game_state.font_bank().menu().printC(backSurface, 320, 260 + x, name);
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
+        g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2, 260 + x, name);
 
         DDFlipV();  // primSurface->Flip( NULL, 0);
     }
@@ -2230,14 +2230,14 @@ void Game::showBriefing(char* fn) {
     ddfx.dwFillColor = 0;  // Noir
 
     r.left = 0;
-    r.right = 640;
+    r.right = SCREEN_W;
     r.top = 0;
     r.bottom = 480;
 
     backSurface->Blt(&r, NULL, NULL, DDBLT_WAIT | DDBLT_COLORFILL, &ddfx);
 
     pbk_briefing[0]->PasteTo(backSurface, 0, 0);
-    g_game_state.font_bank().rpg().printC(backSurface, 320, 460, "Loading...");
+    g_game_state.font_bank().rpg().printC(backSurface, SCREEN_W / 2, 460, "Loading...");
     DDFlip();
 }
 
@@ -2271,7 +2271,7 @@ void Game::showCredits(bool theEnd) {
     int y = 480;
     int ey = 0;
     int last_y = 100;
-    int xcred = 320;
+    int xcred = SCREEN_W / 2;
 
     PictureBank pbk_cred;
 
@@ -2315,7 +2315,7 @@ void Game::showCredits(bool theEnd) {
             ddfx.dwFillColor = 0;  // Noir
 
             r.left = 0;
-            r.right = 640;
+            r.right = SCREEN_W;
             r.top = 0;
             r.bottom = 480;
 

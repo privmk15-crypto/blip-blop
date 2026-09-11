@@ -57,7 +57,7 @@ void ScreenShake::Draw(SDL::Surface* surf) {
     Rect r2;
 
     r2.left = r.left = 0;
-    r2.right = r.right = 640;
+    r2.right = r.right = SCREEN_W;
 
     if (dy_ < 0) {
         r.top = -dy_;

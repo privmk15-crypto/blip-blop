@@ -132,7 +132,7 @@ bool RPGPlayer::drawScene(SDL::Surface * surf)
 	if (nimage[0] >= 0) {
 		r.left	= 100;
 		r.top	= 120;
-		r.right = 640;
+		r.right = SCREEN_W;
 		r.bottom = 220;
 
 		LGXpaker.halfTone(surf, &r);
@@ -164,7 +164,7 @@ bool RPGPlayer::drawScene(SDL::Surface * surf)
 	// Ecrit le texte
 	//
 	if (ntxt[0] != -1 && txt_data[ntxt[0]].c_str() != NULL)
-		g_game_state.font_bank().rpg().printMW(surf, 120, 135, txt_data[ntxt[0]].c_str(), 640);
+		g_game_state.font_bank().rpg().printMW(surf, 120, 135, txt_data[ntxt[0]].c_str(), SCREEN_W);
 
 	if (ntxt[1] != -1 && txt_data[ntxt[1]].c_str() != NULL)
 		g_game_state.font_bank().rpg().printMW(surf, 20, 315, txt_data[ntxt[1]].c_str(), 535);

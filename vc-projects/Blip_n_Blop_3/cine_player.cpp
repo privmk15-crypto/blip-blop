@@ -32,7 +32,7 @@ void CINEPlayer::initPlayer()
 	fini = false;
 	clip_x1 = 0;
 	clip_y1 = 0;
-	clip_x2 = 640;
+	clip_x2 = SCREEN_W;
 	clip_y2 = 480;
 	alpha = 0;
 	delta_alpha = 0;
@@ -276,7 +276,7 @@ void CINEPlayer::updateState()
 		} else if (ISCOM("noclip")) {
 			clip_x1 = 0;
 			clip_y1 = 0;
-			clip_x2 = 640;
+			clip_x2 = SCREEN_W;
 			clip_y2 = 480;
 		} else if (ISCOM("setanim")) {
 			n = int_arg[0];
@@ -404,21 +404,21 @@ void CINEPlayer::drawScene()
 	back_surf->FillRect(&r,0);
 
 	r.left	= clip_x2;
-	r.right = 640;
+	r.right = SCREEN_W;
 	r.top	= 0;
 	r.bottom = 480;
 	//graphicInstance->Clear(ddfx);
 	back_surf->FillRect(&r, 0);
 
 	r.left	= 0;
-	r.right = 640;
+	r.right = SCREEN_W;
 	r.top	= 0;
 	r.bottom = clip_y1;
 	//graphicInstance->Clear(ddfx);
 	back_surf->FillRect(&r, 0);
 
 	r.left	= 0;
-	r.right = 640;
+	r.right = SCREEN_W;
 	r.top	= clip_y2;
 	r.bottom = 480;
 	//graphicInstance->Clear(ddfx);

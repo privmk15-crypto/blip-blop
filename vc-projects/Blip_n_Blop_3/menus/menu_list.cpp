@@ -20,8 +20,8 @@ int MenuList::ComputeWidth() const {
 
     if (width < 200)
         width = 200;
-    else if (width > 320)
-        width = 320;
+    else if (width > SCREEN_W / 2)
+        width = SCREEN_W / 2;
     return width;
 }
 
@@ -33,9 +33,9 @@ void MenuList::ShadeTextBox(SDL::Surface* surf) const {
 
     Rect rec;
     rec.top = 220 - ys;
-    rec.left = 320 - width;
+    rec.left = SCREEN_W / 2 - width;
     rec.bottom = 260 + ys;
-    rec.right = 320 + width;
+    rec.right = SCREEN_W / 2 + width;
 
     LGXpaker.halfTone(surf, &rec);
 }
@@ -46,9 +46,9 @@ void MenuList::Draw(SDL::Surface* surf) const {
     int y = 240 - items_.size() * 15;
     for (int i = 0; i < items_.size(); ++i) {
         if (focused_ == i)
-            g_game_state.font_bank().menus().printC(surf, 320, y, items_[i].c_str());
+            g_game_state.font_bank().menus().printC(surf, SCREEN_W / 2, y, items_[i].c_str());
         else
-            g_game_state.font_bank().menu().printC(surf, 320, y, items_[i].c_str());
+            g_game_state.font_bank().menu().printC(surf, SCREEN_W / 2, y, items_[i].c_str());
 
         y += 30;
     }

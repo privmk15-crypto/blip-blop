@@ -17,12 +17,13 @@
  *		directly.
  *
  *		tremblement(int amp) is kept as a free function (declared in
- *		globals.h, defined in screen_shake.cpp) forwarding to the
- *		single g_screen_shake instance below, because its handful of
- *		call sites (scattered across enemy/projectile .cpp files)
- *		have no reachable Game instance to call through - this keeps
- *		their call syntax unchanged. Game::updateTremblements() and
- *		Game::drawTremblements() now forward to the same instance.
+ *		globals.h, defined in screen_shake.cpp) forwarding to
+ *		g_game_state.screen_shake() (owned by GameState, see
+ *		game_state.h), because its handful of call sites (scattered
+ *		across enemy/projectile .cpp files) have no reachable
+ *		Game/GameState instance to call through - this keeps their
+ *		call syntax unchanged. Game::updateTremblements() and
+ *		Game::drawTremblements() now forward the same way.
  *		Behavior is unchanged from before this migration.
  *
  ******************************************************************/
@@ -61,9 +62,5 @@ class ScreenShake {
     int ddy_ = 0;
 };
 
-// The single ScreenShake instance for the current game session, matching
-// the pre-migration reality that there was exactly one set of tremblement
-// globals for the whole process. Exposed so Game's methods and the
-// tremblement() shim can reach it; other code should keep going through
-// tremblement() / Game's methods rather than touching this directly.
-extern ScreenShake g_screen_shake;
+// Owned by GameState (game_state.h) as g_game_state.screen_shake() - no
+// standalone global instance here anymore.

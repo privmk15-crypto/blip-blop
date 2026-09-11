@@ -10,8 +10,6 @@
 
 #include "level.h"
 
-Level g_level;
-
 int* Level::AllocNumDecor(int count) {
     num_decor_ = new int[count];
     return num_decor_;

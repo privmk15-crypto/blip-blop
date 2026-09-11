@@ -17,7 +17,7 @@
 #define _EventRPG_
 
 #include "event.h"
-#include "rpg_trigger.h"
+#include "game_state.h"
 
 class EventRPG : public Event
 {
@@ -38,7 +38,7 @@ public:
 
 	virtual void doEvent()
 	{
-		g_rpg_trigger.Set(num);
+		g_game_state.rpg_trigger().Set(num);
 	};
 };
 

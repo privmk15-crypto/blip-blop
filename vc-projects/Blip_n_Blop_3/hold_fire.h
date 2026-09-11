@@ -10,9 +10,9 @@
  *		game_flag[flag()] == val() (checked in
  *		Game::updateHoldFire()), which then releases it.
  *
- *		A single g_hold_fire instance is used (rather than a Game
- *		member) because EventHoldFire::doEvent() has no reachable
- *		Game instance to call through.
+ *		Owned by GameState (game_state.h) as g_game_state.hold_fire()
+ *		because EventHoldFire::doEvent() has no reachable Game/
+ *		GameState instance to call through.
  *
  *		Two distinct activation call sites existed before this
  *		migration and are preserved as two distinct methods, not
@@ -43,4 +43,5 @@ class HoldFire {
     int val_ = 0;
 };
 
-extern HoldFire g_hold_fire;
+// Owned by GameState (game_state.h) as g_game_state.hold_fire() - no
+// standalone global instance here anymore.

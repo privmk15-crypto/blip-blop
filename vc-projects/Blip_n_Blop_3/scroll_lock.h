@@ -11,11 +11,11 @@
  *
  *		Stage 2 migration: replaces five independent globals
  *		(scroll_locked, x_lock, cond_end_lock, flag_end_lock,
- *		val_end_lock; globals.h/.cpp) with one object. A single
- *		g_scroll_lock instance is used (rather than a Game member)
+ *		val_end_lock; globals.h/.cpp) with one object, owned by
+ *		GameState (game_state.h) as g_game_state.scroll_lock() -
  *		because EventLock::doEvent() - like tremblement()'s callers
- *		in the screen-shake migration - has no reachable Game
- *		instance to call through.
+ *		in the screen-shake migration - has no reachable Game/
+ *		GameState instance to call through.
  *
  *		This class only stores what was locked and whether it's
  *		active; the condition check itself (list_ennemis.empty(),
@@ -50,7 +50,5 @@ class ScrollLock {
     int val_ = 0;
 };
 
-// The single ScrollLock instance for the current game session, matching
-// the pre-migration reality that there was exactly one set of lock globals
-// for the whole process.
-extern ScrollLock g_scroll_lock;
+// Owned by GameState (game_state.h) as g_game_state.scroll_lock() - no
+// standalone global instance here anymore.

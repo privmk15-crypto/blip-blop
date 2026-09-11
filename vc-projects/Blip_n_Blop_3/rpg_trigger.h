@@ -8,8 +8,8 @@
  *		which RPG cutscene phase (-1 = none) EventRPG has queued up
  *		for Game::updateRPG() to play.
  *
- *		A single g_rpg_trigger instance is used (rather than a Game
- *		member) because EventRPG::doEvent() has no reachable Game
+ *		Owned by GameState (game_state.h) as g_game_state.rpg_trigger()
+ *		because EventRPG::doEvent() has no reachable Game/GameState
  *		instance to call through.
  *
  ******************************************************************/
@@ -26,4 +26,5 @@ class RpgTrigger {
     int num_ = -1;  // -1: none pending, matches the original's initializer
 };
 
-extern RpgTrigger g_rpg_trigger;
+// Owned by GameState (game_state.h) as g_game_state.rpg_trigger() - no
+// standalone global instance here anymore.

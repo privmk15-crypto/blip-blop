@@ -19,7 +19,7 @@
 
 #include "event.h"
 #include "ben_debug.h"
-#include "weather.h"
+#include "game_state.h"
 
 class EventMeteo : public Event
 {
@@ -30,7 +30,7 @@ public:
 
 	virtual void doEvent()
 	{
-		g_weather.Set(intensite, type);
+		g_game_state.weather().Set(intensite, type);
 	};
 };
 

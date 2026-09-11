@@ -9,5 +9,3 @@
  ******************************************************************/
 
 #include "rpg_trigger.h"
-
-RpgTrigger g_rpg_trigger;

@@ -10,8 +10,6 @@
 
 #include "hold_fire.h"
 
-HoldFire g_hold_fire;
-
 void HoldFire::Engage(int flag, int val) {
     active_ = true;
     flag_ = flag;

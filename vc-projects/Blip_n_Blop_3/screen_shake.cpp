@@ -18,12 +18,11 @@
 
 #include <cstring>
 
+#include "game_state.h"
 #include "globals.h"  // for tremblement()'s declaration
 #include "graphics.h"
 
-ScreenShake g_screen_shake;
-
-void tremblement(int amp) { g_screen_shake.Start(amp); }
+void tremblement(int amp) { g_game_state.screen_shake().Start(amp); }
 
 void ScreenShake::Start(int amp) {
     amplitude_ = amp;

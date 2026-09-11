@@ -57,31 +57,25 @@
 #include "explosion.h"
 #include "fic_events.h"
 #include "game.h"
+#include "game_state.h"
 #include "gen_bonus.h"
 #include "gen_ennemi.h"
 #include "globals.h"
-#include "hold_fire.h"
 #include "input.h"
 #include "key_translator.h"
-#include "level.h"
 #include "lgx_packer.h"
 #include "make_bonus.h"
 #include "menu_game.h"
 #include "menu_main.h"
 #include "meteo_neige.h"
 #include "meteo_pluie.h"
-#include "player_toggles.h"
 #include "restore.h"
-#include "rpg_trigger.h"
-#include "screen_shake.h"
 #include "scroll.h"
-#include "scroll_lock.h"
 #include "texte_cool.h"
 #include "tir_bb.h"
 #include "tir_bb_vache.h"
 #include "txt_data.h"
 #include "vehicule.h"
-#include "weather.h"
 
 #include "precache.h"
 #include "trace.h"
@@ -147,7 +141,7 @@ void Game::jouePartie(int nbj, int idj) {
 
     // Joue à tous les niveaux
     //
-    g_player_toggles.set_cow_bomb_on(false);
+    g_game_state.player_toggles().set_cow_bomb_on(false);
     last_perfect1 = last_perfect2 = false;
     int nbNiv = 0;
     i = 0;
@@ -156,12 +150,12 @@ void Game::jouePartie(int nbj, int idj) {
         if (type_part[i] == PART_LEVEL) {
             letsgo = joueNiveau(fic_names[i], type_lvl[i]);
 
-            if (!g_player_toggles.cow_bomb_on()) {
+            if (!g_game_state.player_toggles().cow_bomb_on()) {
                 if (player1 != NULL) player1->nb_cow_bomb = 1;
 
                 if (player2 != NULL) player2->nb_cow_bomb = 1;
 
-                g_player_toggles.set_cow_bomb_on(true);
+                g_game_state.player_toggles().set_cow_bomb_on(true);
             }
         } else if (type_part[i] == PART_BRIEFING) {
             showBriefing(fic_names[i]);
@@ -258,15 +252,15 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     etape_timer = 0;
     go_.Reset();
 
-    g_scroll_lock.Release();
+    g_game_state.scroll_lock().Release();
     scroll_speed = 0;
     no_scroll1 = false;
     no_scroll2 = false;
 
-    g_hold_fire.Release();
+    g_game_state.hold_fire().Release();
 
-    g_weather.ResetIntensite();
-    g_screen_shake.Reset();
+    g_game_state.weather().ResetIntensite();
+    g_game_state.screen_shake().Reset();
 
     n_cache = 0;
 
@@ -278,9 +272,9 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
 
     if (strcmp(nom_niveau, "data/snorkniv.lvl") == 0 ||
         strcmp(nom_niveau, "data/snorkniv2.lvl") == 0) {
-        g_player_toggles.set_ok_lance_flame(false);
+        g_game_state.player_toggles().set_ok_lance_flame(false);
     } else {
-        g_player_toggles.set_ok_lance_flame(true);
+        g_game_state.player_toggles().set_ok_lance_flame(true);
     }
 
     // Place les joueurs et initialise qq trucs
@@ -679,12 +673,12 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     //
     int scr_level_size;
     fic.read(reinterpret_cast<char*>(&scr_level_size), sizeof(scr_level_size));
-    g_level.set_scr_size(scr_level_size);
-    g_level.set_size(scr_level_size * 640);
+    g_game_state.level().set_scr_size(scr_level_size);
+    g_game_state.level().set_size(scr_level_size * 640);
 
     // Numéros des écrans à afficher (comme des tiles)
     //
-    int* num_decor = g_level.AllocNumDecor(scr_level_size);
+    int* num_decor = g_game_state.level().AllocNumDecor(scr_level_size);
     for (int i = 0; i < scr_level_size; i++)
         fic.read(reinterpret_cast<char*>(&num_decor[i]), sizeof(int));
 
@@ -709,15 +703,15 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     y_plat = new int*[NB_MAX_PLAT];
 
     for (int i = 0; i < NB_MAX_PLAT; i++) {
-        y_plat[i] = new int[g_level.size()];
+        y_plat[i] = new int[g_game_state.level().size()];
         fic.read(reinterpret_cast<char*>(y_plat[i]),
-                 (g_level.size()) * sizeof(int));
+                 (g_game_state.level().size()) * sizeof(int));
     }
 
     //
     // Murs opaques
     //
-    int level_size_8 = g_level.size() / 8;
+    int level_size_8 = g_game_state.level().size() / 8;
     murs_opaques = new bool*[60];
 
     for (int i = 0; i < 60; i++) {
@@ -729,7 +723,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     //
     // Murs sanglants
     //
-    bool** murs_sanglants = g_level.AllocMursSanglants(level_size_8);
+    bool** murs_sanglants = g_game_state.level().AllocMursSanglants(level_size_8);
 
     for (int i = 0; i < 60; i++) {
         fic.read(reinterpret_cast<char*>(murs_sanglants[i]),
@@ -958,7 +952,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
 //-----------------------------------------------------------------------------
 
 void Game::releaseNiveau() {
-    g_level.Release();
+    g_game_state.level().Release();
 
     if (y_plat != NULL) {
         for (int i = 0; i < NB_MAX_PLAT; i++) delete[] y_plat[i];
@@ -1036,7 +1030,7 @@ void Game::updateAll() {
         ok_bonus = ok_bonus || player2->okBonus();
     }
 
-    g_player_toggles.set_ok_bonus(ok_bonus);
+    g_game_state.player_toggles().set_ok_bonus(ok_bonus);
 
     // Update tout ce qu'il faut
     //
@@ -1053,7 +1047,7 @@ void Game::updateAll() {
 
     if (game_flag[FLAG_BULLES]) updateBulles();
 
-    if (g_weather.type() == METEO_PLUIE || g_weather.type() == METEO_NEIGE) updateMeteo();
+    if (g_game_state.weather().type() == METEO_PLUIE || g_game_state.weather().type() == METEO_NEIGE) updateMeteo();
 
     UpdateCollection(list_fonds_statiques);
     UpdateCollection(list_fonds_animes);
@@ -1079,7 +1073,7 @@ void Game::updateAll() {
     updateFlags();
     updateFlecheGo();
 
-    if (g_weather.type() == METEO_DEFORME && g_weather.intensite() != 0)
+    if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0)
         updateDeformation();
 
     manageCollisions();
@@ -1141,7 +1135,7 @@ void Game::drawAll(bool flip) {
     DrawCollection(list_meteo);
     DrawCollection(list_premiers_plans);
 
-    if (g_weather.type() == METEO_DEFORME && g_weather.intensite() != 0) drawDeformation();
+    if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0) drawDeformation();
 
     // FIXME: Disable it for now as it works unproperly at least on Linux
     // drawTremblements();
@@ -1422,17 +1416,17 @@ void Game::manageCollisions() {
 //-----------------------------------------------------------------------------
 
 void Game::updateLock() {
-    if (!g_scroll_lock.active()) return;
+    if (!g_game_state.scroll_lock().active()) return;
 
-    int cond = g_scroll_lock.cond();
-    int flag = g_scroll_lock.flag();
-    int val = g_scroll_lock.val();
+    int cond = g_game_state.scroll_lock().cond();
+    int flag = g_game_state.scroll_lock().flag();
+    int val = g_game_state.scroll_lock().val();
 
     if ((cond == 0 && list_ennemis.empty()) ||
         (cond == 1 && list_gen_ennemis.empty()) ||
         (cond == 2 && game_flag[flag] == val) ||
         (cond == 3 && game_flag[flag] >= val)) {
-        g_scroll_lock.Release();
+        g_game_state.scroll_lock().Release();
         go_.Come();
     }
 }
@@ -1440,9 +1434,9 @@ void Game::updateLock() {
 //-----------------------------------------------------------------------------
 
 void Game::updateHoldFire() {
-    if (!g_hold_fire.active()) return;
+    if (!g_game_state.hold_fire().active()) return;
 
-    if (game_flag[g_hold_fire.flag()] == g_hold_fire.val()) g_hold_fire.Release();
+    if (game_flag[g_game_state.hold_fire().flag()] == g_game_state.hold_fire().val()) g_game_state.hold_fire().Release();
 }
 
 //-----------------------------------------------------------------------------
@@ -1510,7 +1504,7 @@ void Game::drawDebugInfos() {
        buffer);
 
                     sprintf( buffer, "Meteo = %d / %d (%d)",
-       list_meteo.taille(), g_weather.intensite(), g_weather.type()); fnt_rpg.print(
+       list_meteo.taille(), g_game_state.weather().intensite(), g_game_state.weather().type()); fnt_rpg.print(
        backSurface, 10, 290, buffer);
 
                     sprintf( buffer, "Plat. mobile = %d",
@@ -1618,11 +1612,11 @@ void Game::updateTeteTurc() {
 //-----------------------------------------------------------------------------
 
 void Game::updateRPG() {
-    if (g_rpg_trigger.num() == -1) return;
+    if (g_game_state.rpg_trigger().num() == -1) return;
 
     bool continued = true;
 
-    rpg.startPlay(g_rpg_trigger.num());
+    rpg.startPlay(g_game_state.rpg_trigger().num());
 
     while (continued && !app_killed) {
         manageMsg();
@@ -1634,7 +1628,7 @@ void Game::updateRPG() {
 
     rpg.stopPlay();
     in.waitClean();
-    g_rpg_trigger.Clear();
+    g_game_state.rpg_trigger().Clear();
     update_regulator_.Skip();
 }
 
@@ -1655,7 +1649,7 @@ void Game::updateVictoryAndDefeat() {
     //
     if (offset >= vic_x && game_flag[vic_flag1] == vic_val1 &&
         game_flag[vic_flag2] == vic_val2) {
-        g_hold_fire.Activate();
+        g_game_state.hold_fire().Activate();
         wait_for_victory += 1;
 
         if (game_flag[1] == 999) wait_for_victory = 200;
@@ -2147,8 +2141,8 @@ void Game::updateMeteo() {
         pl->update();
     }
 
-    while (list_meteo.size() < g_weather.intensite()) {
-        if (g_weather.type() == METEO_NEIGE) {
+    while (list_meteo.size() < g_game_state.weather().intensite()) {
+        if (g_game_state.weather().type() == METEO_NEIGE) {
             //			MeteoNeige * flocon = new MeteoNeige();
 
             next_flocon = (next_flocon + 1) % NB_FLOCONS;
@@ -2165,14 +2159,14 @@ void Game::updateMeteo() {
             else
                 flocon->pic = pbk_misc[72];
 
-            flocon->dy = g_weather.intensite() / 20 + d;
+            flocon->dy = g_game_state.weather().intensite() / 20 + d;
             flocon->phi = rand() % 360;
             flocon->xwide = 10 + d * 4;
 
             if (mur_opaque(flocon->xbase, 0)) flocon->y -= 550;
 
             list_meteo.emplace_back(flocon);
-        } else if (g_weather.type() == METEO_PLUIE) {
+        } else if (g_game_state.weather().type() == METEO_PLUIE) {
             //			MeteoPluie * goutte = new MeteoPluie();
 
             next_goutte = (next_goutte + 1) % NB_GOUTTES;
@@ -2326,11 +2320,11 @@ void Game::creeBulle(Sprite* s) {
 
 //-----------------------------------------------------------------------------
 
-void Game::updateTremblements() { g_screen_shake.Update(); }
+void Game::updateTremblements() { g_game_state.screen_shake().Update(); }
 
 //-----------------------------------------------------------------------------
 
-void Game::drawTremblements() { g_screen_shake.Draw(backSurface); }
+void Game::drawTremblements() { g_game_state.screen_shake().Draw(backSurface); }
 
 //-----------------------------------------------------------------------------
 

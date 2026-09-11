@@ -10,8 +10,6 @@
 
 #include "scroll_lock.h"
 
-ScrollLock g_scroll_lock;
-
 void ScrollLock::Engage(int x, int cond, int flag, int val) {
     active_ = true;
     x_ = x;

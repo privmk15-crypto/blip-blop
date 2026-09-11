@@ -9,10 +9,10 @@
  *		Game's updateMeteo()/drawDeformation() and the rain/snow
  *		particle spawner.
  *
- *		A single g_weather instance is used (rather than a Game
- *		member) because EventMeteo::doEvent() - like the other Stage
- *		2 Event-triggered globals - has no reachable Game instance to
- *		call through.
+ *		Owned by GameState (game_state.h) as g_game_state.weather()
+ *		because EventMeteo::doEvent() - like the other Stage 2
+ *		Event-triggered state - has no reachable Game/GameState
+ *		instance to call through.
  *
  ******************************************************************/
 
@@ -35,4 +35,5 @@ class Weather {
     int type_ = 0;
 };
 
-extern Weather g_weather;
+// Owned by GameState (game_state.h) as g_game_state.weather() - no
+// standalone global instance here anymore.

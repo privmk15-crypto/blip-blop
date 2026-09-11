@@ -9,5 +9,3 @@
  ******************************************************************/
 
 #include "player_toggles.h"
-
-PlayerToggles g_player_toggles;

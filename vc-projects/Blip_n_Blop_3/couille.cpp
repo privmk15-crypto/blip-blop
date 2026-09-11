@@ -17,8 +17,7 @@
 #include <stdio.h>
 #include "config.h"
 #include "couille.h"
-#include "hold_fire.h"
-#include "player_toggles.h"
+#include "game_state.h"
 #include "tir_bbm16.h"
 #include "tir_bbpm.h"
 #include "tir_bb_fusil.h"
@@ -1029,7 +1028,7 @@ void Couille::updateArme()
 
 	// Si le joueur appuie sur 'FEU' on passe en mode TIR
 	//
-	if (!tire && ctrl->fire() && !g_hold_fire.active()) {
+	if (!tire && ctrl->fire() && !g_game_state.hold_fire().active()) {
 		tire = true;
 		etape_arme = 0;
 		ss_etape_arme = 0;
@@ -1292,7 +1291,7 @@ void Couille::onMeure()
 		dx_saut = 0;
 		tire = false;
 
-		if (g_player_toggles.cow_bomb_on())
+		if (g_game_state.player_toggles().cow_bomb_on())
 			nb_cow_bomb = 1;
 	} else if (etape == 5 && ss_etape == 0 && plat(x, y) != 0) {
 		if (dir <= BBLIM_DROITE)
@@ -1410,7 +1409,7 @@ bool Couille::okBonus()
 
 void Couille::setSuperWeapon()
 {
-	if (id_couille == ID_BLIP || !g_player_toggles.ok_lance_flame()) {
+	if (id_couille == ID_BLIP || !g_game_state.player_toggles().ok_lance_flame()) {
 		id_arme = ID_LASER;
 		ammo = 750;
 		latence_arme = 3;

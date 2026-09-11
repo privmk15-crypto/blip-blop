@@ -10,8 +10,6 @@
 
 #include "weather.h"
 
-Weather g_weather;
-
 void Weather::Set(int intensite, int type) {
     intensite_ = intensite;
     type_ = type;

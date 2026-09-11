@@ -16,12 +16,12 @@
  *		migrating those needs a separate, more careful pass. See the
  *		Stage 2 Phase 1 globals.h inventory.
  *
- *		A single g_level instance is used (rather than a Game member)
+ *		Owned by GameState (game_state.h) as g_game_state.level()
  *		because plat()/plat2()/mur_opaque()/mur_sanglant()
  *		(globals.cpp) - callable from ~100+ entity files with no
- *		reachable Game instance - need to read size()/murs_sanglants()
- *		even though Game::chargeNiveau()/releaseNiveau() are the only
- *		writers.
+ *		reachable Game/GameState instance - need to read
+ *		size()/murs_sanglants() even though Game::chargeNiveau()/
+ *		releaseNiveau() are the only writers.
  *
  *		Allocation/loading logic (reading the level file) stays in
  *		Game::chargeNiveau() as before; this class only owns the
@@ -65,4 +65,5 @@ class Level {
     bool** murs_sanglants_ = nullptr;
 };
 
-extern Level g_level;
+// Owned by GameState (game_state.h) as g_game_state.level() - no
+// standalone global instance here anymore.

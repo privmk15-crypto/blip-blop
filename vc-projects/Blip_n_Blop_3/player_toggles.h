@@ -23,10 +23,11 @@
  *		shared state regardless, without attempting to split them
  *		per-player.
  *
- *		A single g_player_toggles instance is used because enemy.cpp
- *		and couille.cpp read these with no reachable Game instance,
- *		even though every write originates inside Game's own
- *		methods.
+ *		Owned by GameState (game_state.h) as
+ *		g_game_state.player_toggles() because enemy.cpp and
+ *		couille.cpp read these with no reachable Game/GameState
+ *		instance, even though every write originates inside Game's
+ *		own methods.
  *
  ******************************************************************/
 
@@ -48,4 +49,5 @@ class PlayerToggles {
     bool ok_lance_flame_ = false;
 };
 
-extern PlayerToggles g_player_toggles;
+// Owned by GameState (game_state.h) as g_game_state.player_toggles() - no
+// standalone global instance here anymore.

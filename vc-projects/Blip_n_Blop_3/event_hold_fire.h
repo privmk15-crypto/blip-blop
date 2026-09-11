@@ -18,7 +18,7 @@
 #define _EventHoldFire_
 
 #include "event.h"
-#include "hold_fire.h"
+#include "game_state.h"
 
 class EventHoldFire : public Event
 {
@@ -29,7 +29,7 @@ public:
 
 	virtual void doEvent()
 	{
-		g_hold_fire.Engage(flag, val);
+		g_game_state.hold_fire().Engage(flag, val);
 	};
 };
 

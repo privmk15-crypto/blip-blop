@@ -15,10 +15,10 @@
 ******************************************************************/
 
 #include "event_lock.h"
-#include "scroll_lock.h"
+#include "game_state.h"
 #include "ben_debug.h"
 
 void EventLock::doEvent()
 {
-	g_scroll_lock.Engage(x_activation, cond, flag, val);
+	g_game_state.scroll_lock().Engage(x_activation, cond, flag, val);
 }

@@ -45,7 +45,7 @@
 #include "texte_cool.h"
 #include "giclure.h"
 #include "bulle.h"
-#include "level.h"
+#include "game_state.h"
 
 #include "ben_debug.h"
 
@@ -209,7 +209,7 @@ Fonte			fnt_menus;
 
 int	plat(int x, int y)
 {
-	if (x < 0 || x >= g_level.size() || y >= 480)
+	if (x < 0 || x >= g_game_state.level().size() || y >= 480)
 		return 0;
 
 	int	tmp;
@@ -229,7 +229,7 @@ int	plat(int x, int y)
 
 int	plat2(int x, int y)
 {
-	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
+	if (x < 0 || x >= g_game_state.level().size() || y < 0 || y >= 480)
 		return -1;
 
 	int	tmp;
@@ -246,7 +246,7 @@ int	plat2(int x, int y)
 
 bool mur_opaque(int x, int y)
 {
-	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
+	if (x < 0 || x >= g_game_state.level().size() || y < 0 || y >= 480)
 		return false;
 
 	return murs_opaques[y / 8][x / 8];
@@ -255,10 +255,10 @@ bool mur_opaque(int x, int y)
 
 bool mur_sanglant(int x, int y)
 {
-	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
+	if (x < 0 || x >= g_game_state.level().size() || y < 0 || y >= 480)
 		return false;
 
-	return g_level.murs_sanglants()[y / 8][x / 8];
+	return g_game_state.level().murs_sanglants()[y / 8][x / 8];
 }
 
 inline void clipedBlit(SDL::Surface * surf, const Picture * pic, int x, int y, Rect * clip)

@@ -16,9 +16,9 @@
 
 
 #include "enemy.h"
+#include "game_state.h"
 #include "globals.h"
 #include "make_bonus.h"
-#include "player_toggles.h"
 #include "giclure.h"
 
 Personnage *	tete_turc;
@@ -73,7 +73,7 @@ void Ennemi::estTouche(Tir * tir)
 		if (count()) {
 			wait_for_bonus += tresor;
 
-			if (wait_for_bonus >= 50 && g_player_toggles.ok_bonus()) {
+			if (wait_for_bonus >= 50 && g_game_state.player_toggles().ok_bonus()) {
 				MakeBonusWeapon(x, y);
 				wait_for_bonus = 0;
 			}

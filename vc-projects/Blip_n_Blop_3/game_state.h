@@ -4,35 +4,36 @@
  *		 GameState.h
  *		----------------
  *
- *		Composition root for the Stage 2 ownership migration:
- *		aggregates the small owned types extracted from globals.h so
- *		far (ScreenShake, ScrollLock, Level, Weather, RpgTrigger,
- *		HoldFire, PlayerToggles) into one addressable "state of the
- *		simulated world" surface.
+ *		Composition root for the Stage 2 ownership migration and the
+ *		SOLE owner of ScreenShake, ScrollLock, Level, Weather,
+ *		RpgTrigger, HoldFire, and PlayerToggles - the small types
+ *		extracted from globals.h so far.
  *
- *		Why now: this exists specifically to prepare for future
- *		multiplayer work via server-authoritative state sync (not
- *		lockstep - this codebase's scattered, unseeded rand() calls
- *		make full determinism impractical to retrofit, but state sync
- *		doesn't need determinism, only a serializable/diffable state
- *		surface). A dedicated server needs exactly one thing it can
- *		construct, update, and eventually serialize/diff - without
- *		ever touching rendering/audio/input (a future GameContext,
- *		not built yet, and deliberately never referenced from here).
+ *		Why one true owner rather than 7 independent globals: this
+ *		exists to prepare for future multiplayer work via
+ *		server-authoritative state sync (not lockstep - this
+ *		codebase's scattered, unseeded rand() calls make full
+ *		determinism impractical to retrofit, but state sync doesn't
+ *		need determinism, only a serializable/diffable state
+ *		surface). Real single ownership - not 7 globals plus a
+ *		reference-holding facade - is what actually enables later
+ *		work like multiple independent GameState instances (a server
+ *		hosting several lobbies, client-side rollback/prediction),
+ *		which a set of process-wide singletons could never support.
  *
- *		IMPORTANT - this does NOT change ownership of any aggregated
- *		type. Each keeps its own invariants and its own free-standing
- *		g_* global instance, because the ~150 leaf entity files that
- *		read/write them have no reachable Game (or GameState)
- *		reference and go through those globals/free-function shims
- *		directly - see each type's own header for why. GameState
- *		holds references to those SAME instances (bound in
- *		game_state.cpp), not new copies - it's an additional access
- *		path for future consumers (networking, save state) that want
- *		"the whole state" as one object, not a new source of truth.
- *		None of the ~40 existing call sites across game.cpp/
- *		couille.cpp/enemy.cpp/event_*.h etc. need to change, or have
- *		been changed, because of this file.
+ *		How the ~150 leaf entity files that have no reachable Game/
+ *		GameState reference still reach this state: they go through
+ *		the single global g_game_state below (or, for
+ *		screen-shake specifically, the tremblement() free-function
+ *		shim in screen_shake.cpp, which itself now forwards through
+ *		g_game_state). There is deliberately no per-type global
+ *		anymore (no g_screen_shake, g_level, etc.) - g_game_state is
+ *		the only source of truth, reached via
+ *		g_game_state.level()/.weather()/etc.
+ *
+ *		Deliberately excludes anything render/audio/input-related
+ *		(a future GameContext, not built yet) - a dedicated server
+ *		constructs a GameState and never needs a GameContext at all.
  *
  ******************************************************************/
 
@@ -48,17 +49,6 @@
 
 class GameState {
    public:
-    GameState(ScreenShake& screen_shake, ScrollLock& scroll_lock,
-              Level& level, Weather& weather, RpgTrigger& rpg_trigger,
-              HoldFire& hold_fire, PlayerToggles& player_toggles)
-        : screen_shake_(screen_shake),
-          scroll_lock_(scroll_lock),
-          level_(level),
-          weather_(weather),
-          rpg_trigger_(rpg_trigger),
-          hold_fire_(hold_fire),
-          player_toggles_(player_toggles) {}
-
     ScreenShake& screen_shake() { return screen_shake_; }
     ScrollLock& scroll_lock() { return scroll_lock_; }
     Level& level() { return level_; }
@@ -68,19 +58,18 @@ class GameState {
     PlayerToggles& player_toggles() { return player_toggles_; }
 
    private:
-    ScreenShake& screen_shake_;
-    ScrollLock& scroll_lock_;
-    Level& level_;
-    Weather& weather_;
-    RpgTrigger& rpg_trigger_;
-    HoldFire& hold_fire_;
-    PlayerToggles& player_toggles_;
+    ScreenShake screen_shake_;
+    ScrollLock scroll_lock_;
+    Level level_;
+    Weather weather_;
+    RpgTrigger rpg_trigger_;
+    HoldFire hold_fire_;
+    PlayerToggles player_toggles_;
 };
 
-// The single GameState for the current game session, aggregating the
-// existing g_screen_shake/g_scroll_lock/g_level/g_weather/g_rpg_trigger/
-// g_hold_fire/g_player_toggles singletons (see game_state.cpp). Binding
-// references here does not read those objects' contents, only their
-// addresses, so this is safe regardless of static-initialization order
-// across translation units.
+// The single GameState for the current game session - the sole owner of
+// all 7 aggregated types. A plain global with default-constructed value
+// members: nothing else needs to run before it (its members are POD-like,
+// default member initializers only), so there is no cross-translation-unit
+// static-initialization-order concern.
 extern GameState g_game_state;

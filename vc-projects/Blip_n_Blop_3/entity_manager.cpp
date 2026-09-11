@@ -25,4 +25,4 @@
 #include "tir_bb_vache.h"
 #include "vehicule.h"
 
-EntityManager::~EntityManager() = default;
+EntityManager::~EntityManager() noexcept = default;

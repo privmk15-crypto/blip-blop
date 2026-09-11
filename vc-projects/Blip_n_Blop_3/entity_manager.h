@@ -42,6 +42,17 @@
  *		"invalid application of 'sizeof' to incomplete type" for
  *		every unique_ptr<T> member, pointing at game_state.cpp.)
  *
+ *		Second gotcha, also confirmed the hard way: the declaration
+ *		below must specify `noexcept` explicitly. A destructor with
+ *		NO exception-specification is - even when it's user-declared
+ *		and not defaulted right here - still implicitly considered to
+ *		have the SAME exception specification it would get if it were
+ *		implicitly-declared, which means the compiler tries to inspect
+ *		every member's destructor (including the unique_ptr<T> ones)
+ *		right here at the declaration to compute it, reintroducing the
+ *		exact same incomplete-type error this destructor exists to
+ *		avoid. An explicit `noexcept` skips that computation.
+ *
  *		Owned by GameState (game_state.h) as g_game_state.entities().
  *		Most writers of these lists are Event subclasses
  *		(EventGenEnnemi, EventGenBonus, EventVehicule, etc.) or other
@@ -70,8 +81,9 @@ class GenBonus;
 class EntityManager {
    public:
     // Declared here, defined (= default) in entity_manager.cpp - see the
-    // class-level comment for why this can't just be implicit/inline.
-    ~EntityManager();
+    // class-level comment for why this can't just be implicit/inline, and
+    // why `noexcept` must be spelled out explicitly.
+    ~EntityManager() noexcept;
 
     // FIXME (carried over from globals.h): vector instead of an owning
     // container because Couille* isn't owned here - see the original

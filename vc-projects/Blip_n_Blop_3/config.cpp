@@ -47,6 +47,7 @@ void load_BB3_config(const char * cfg_file)
 {
 	FILE *	fic;
 	int		a;
+	bool	ok = true;
 
 	fic = fopen(cfg_file, "rb");
 
@@ -56,54 +57,50 @@ void load_BB3_config(const char * cfg_file)
 	} else {
 		debug << "Using " << cfg_file << " as configuration file.\n";
 
-		fread(&vSyncOn, sizeof(vSyncOn), 1, fic);
-		fread(&fullscreen, sizeof(fullscreen), 1, fic);
-		fread(&lang_type, sizeof(lang_type), 1, fic);
+		// Fix: none of these fread() calls used to check their return
+		// value. A short/truncated/stale config file (e.g. left over
+		// from an older build with a different number of fields) would
+		// silently leave `a` holding whatever it had from the previous
+		// successful read (or uninitialized stack garbage, for the
+		// very first field) - setAlias() would then be called with
+		// that bogus value for every remaining binding, showing up as
+		// "UNDEFINED" in the keys menu (reported as player 1's
+		// bindings looking like "unknown"). Now aborts to
+		// set_default_config() as soon as any read comes up short,
+		// discarding whatever was partially read, instead of
+		// proceeding with garbage.
+#define READ_OR_BAIL(dst) ok = ok && (fread(&(dst), sizeof(dst), 1, fic) == 1)
 
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_UP, a);
+		READ_OR_BAIL(vSyncOn);
+		READ_OR_BAIL(fullscreen);
+		READ_OR_BAIL(lang_type);
 
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_DOWN, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_UP, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_DOWN, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_LEFT, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_RIGHT, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_FIRE, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_JUMP, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P1_SUPER, a);
 
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_LEFT, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_UP, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_DOWN, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_LEFT, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_RIGHT, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_FIRE, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_JUMP, a);
+		READ_OR_BAIL(a); if (ok) in.setAlias(ALIAS_P2_SUPER, a);
 
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_RIGHT, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_FIRE, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_JUMP, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P1_SUPER, a);
-
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_UP, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_DOWN, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_LEFT, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_RIGHT, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_FIRE, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_JUMP, a);
-
-		fread(&a, sizeof(a), 1, fic);
-		in.setAlias(ALIAS_P2_SUPER, a);
+#undef READ_OR_BAIL
 
 		fclose(fic);
+
+		if (!ok) {
+			debug << "Config file " << cfg_file
+			      << " is short/malformed - using default config "
+			         "instead of partially-read garbage.\n";
+			set_default_config(true);
+		}
 	}
 
 	lang_type = LANG_UK;

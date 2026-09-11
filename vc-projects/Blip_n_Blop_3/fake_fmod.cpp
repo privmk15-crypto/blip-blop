@@ -106,4 +106,5 @@ signed char FMUSIC_SetMasterVolume(FMUSIC_MODULE* mod, int volume) {
 signed char FMUSIC_StopSong(FMUSIC_MODULE* mod) { return true; }
 signed char FMUSIC_FreeSong(FMUSIC_MODULE* mod) { return true; }
 signed char FSOUND_SetPriority(int channel, int priority) { return true; }
+void FSOUND_SetSFXMasterVolume(int volume) {}
 }

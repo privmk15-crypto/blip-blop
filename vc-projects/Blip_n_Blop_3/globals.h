@@ -107,15 +107,13 @@ extern bool			okLanceFlame;
 //		Données sur le niveau
 //-----------------------------------------------------------------------------
 
-extern int			scr_level_size;		// taille en écran du niveau
-extern int			level_size;			// taille en pixels du niveau
-extern int *		num_decor;			// Numéro ecran courant -> surface à utiliser
-
+// scr_level_size/level_size/num_decor/murs_sanglants moved into Level
+// (level.h) as part of the Stage 2 ownership migration. y_plat/murs_opaques
+// stay here deliberately - see level.h for why.
 
 extern int	**		y_plat;				// Plateformes (ordonnées)
 
 extern bool **		murs_opaques;		// Murs opaques (=true)
-extern bool **		murs_sanglants;		// Murs sanglants (=true)
 
 
 //-----------------------------------------------------------------------------

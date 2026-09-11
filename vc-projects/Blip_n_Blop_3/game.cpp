@@ -62,6 +62,7 @@
 #include "globals.h"
 #include "input.h"
 #include "key_translator.h"
+#include "level.h"
 #include "lgx_packer.h"
 #include "make_bonus.h"
 #include "menu_game.h"
@@ -672,12 +673,14 @@ bool Game::chargeNiveau(const char* nom_niveau) {
 
     // Taille du niveau
     //
+    int scr_level_size;
     fic.read(reinterpret_cast<char*>(&scr_level_size), sizeof(scr_level_size));
-    level_size = scr_level_size * 640;
+    g_level.set_scr_size(scr_level_size);
+    g_level.set_size(scr_level_size * 640);
 
     // Numéros des écrans à afficher (comme des tiles)
     //
-    num_decor = new int[scr_level_size];
+    int* num_decor = g_level.AllocNumDecor(scr_level_size);
     for (int i = 0; i < scr_level_size; i++)
         fic.read(reinterpret_cast<char*>(&num_decor[i]), sizeof(int));
 
@@ -702,15 +705,15 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     y_plat = new int*[NB_MAX_PLAT];
 
     for (int i = 0; i < NB_MAX_PLAT; i++) {
-        y_plat[i] = new int[level_size];
+        y_plat[i] = new int[g_level.size()];
         fic.read(reinterpret_cast<char*>(y_plat[i]),
-                 (level_size) * sizeof(int));
+                 (g_level.size()) * sizeof(int));
     }
 
     //
     // Murs opaques
     //
-    int level_size_8 = level_size / 8;
+    int level_size_8 = g_level.size() / 8;
     murs_opaques = new bool*[60];
 
     for (int i = 0; i < 60; i++) {
@@ -722,10 +725,9 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     //
     // Murs sanglants
     //
-    murs_sanglants = new bool*[60];
+    bool** murs_sanglants = g_level.AllocMursSanglants(level_size_8);
 
     for (int i = 0; i < 60; i++) {
-        murs_sanglants[i] = new bool[level_size_8];
         fic.read(reinterpret_cast<char*>(murs_sanglants[i]),
                  (level_size_8) * sizeof(bool));
     }
@@ -952,23 +954,13 @@ bool Game::chargeNiveau(const char* nom_niveau) {
 //-----------------------------------------------------------------------------
 
 void Game::releaseNiveau() {
-    if (num_decor != NULL) {
-        delete[] num_decor;
-        num_decor = NULL;
-    }
+    g_level.Release();
 
     if (y_plat != NULL) {
         for (int i = 0; i < NB_MAX_PLAT; i++) delete[] y_plat[i];
 
         delete[] y_plat;
         y_plat = NULL;
-    }
-
-    if (murs_sanglants != NULL) {
-        for (int i = 0; i < 60; i++) delete[] murs_sanglants[i];
-
-        delete[] murs_sanglants;
-        murs_sanglants = NULL;
     }
 
     if (murs_opaques != NULL) {

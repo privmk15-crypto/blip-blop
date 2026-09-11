@@ -45,6 +45,7 @@
 #include "texte_cool.h"
 #include "giclure.h"
 #include "bulle.h"
+#include "level.h"
 
 #include "ben_debug.h"
 
@@ -85,15 +86,12 @@ bool		no_scroll2;
 //		Données sur le niveau
 //-----------------------------------------------------------------------------
 
-int			scr_level_size;		// taille en écran du niveau
-int			level_size;			// taille en pixels du niveau
-int	*		num_decor	= NULL;	// Numéro ecran courant -> surface à utiliser
-
+// scr_level_size/level_size/num_decor/murs_sanglants moved to level.cpp
+// (Level) - Stage 2 ownership migration. y_plat/murs_opaques stay here.
 
 int	**		y_plat		= NULL;	// Plateformes (ordonnées)
 
 bool **		murs_opaques;		// Murs opaques (=true)
-bool **		murs_sanglants;		// Murs sanglants (=true)
 
 //-----------------------------------------------------------------------------
 //		Les listes
@@ -215,7 +213,7 @@ Fonte			fnt_menus;
 
 int	plat(int x, int y)
 {
-	if (x < 0 || x >= level_size || y >= 480)
+	if (x < 0 || x >= g_level.size() || y >= 480)
 		return 0;
 
 	int	tmp;
@@ -235,7 +233,7 @@ int	plat(int x, int y)
 
 int	plat2(int x, int y)
 {
-	if (x < 0 || x >= level_size || y < 0 || y >= 480)
+	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
 		return -1;
 
 	int	tmp;
@@ -252,7 +250,7 @@ int	plat2(int x, int y)
 
 bool mur_opaque(int x, int y)
 {
-	if (x < 0 || x >= level_size || y < 0 || y >= 480)
+	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
 		return false;
 
 	return murs_opaques[y / 8][x / 8];
@@ -261,10 +259,10 @@ bool mur_opaque(int x, int y)
 
 bool mur_sanglant(int x, int y)
 {
-	if (x < 0 || x >= level_size || y < 0 || y >= 480)
+	if (x < 0 || x >= g_level.size() || y < 0 || y >= 480)
 		return false;
 
-	return murs_sanglants[y / 8][x / 8];
+	return g_level.murs_sanglants()[y / 8][x / 8];
 }
 
 inline void clipedBlit(SDL::Surface * surf, const Picture * pic, int x, int y, Rect * clip)

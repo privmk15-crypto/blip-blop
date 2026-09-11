@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include "level.h"
 #include "sprite.h"
 
 #ifndef _FondEau_
@@ -40,7 +41,7 @@ public:
 		bool		b = false;
 
 
-		for (int i = 0; i < (((level_size) / pbk_niveau[7]->xSize()) + 1); i++) {
+		for (int i = 0; i < (((g_level.size()) / pbk_niveau[7]->xSize()) + 1); i++) {
 			if (b)
 				ptr = new FondEau1();
 			else

@@ -25,6 +25,7 @@
 #include "graphics.h"
 #include "sprite.h"
 #include "globals.h"
+#include "level.h"
 #include "scroll.h"
 #include "scroll_lock.h"
 #include "ben_debug.h"
@@ -48,8 +49,8 @@ void drawScrolling()
 	//
 	if (offset < 0)
 		offset = 0;
-	else if (offset > level_size - 640)
-		offset = level_size - 640;
+	else if (offset > g_level.size() - 640)
+		offset = g_level.size() - 640;
 
 	int	x1 = offset % vbuffer_wide;
 	int x2 = (offset + 640) % vbuffer_wide;
@@ -60,7 +61,7 @@ void drawScrolling()
 
 	
 
-	while (n_img < ((offset + vbuffer_wide - 2) / 640) || (n_img < scr_level_size && (next_x != ((x3 + 1) % vbuffer_wide)) && (next_x != ((x3) % vbuffer_wide)))) {
+	while (n_img < ((offset + vbuffer_wide - 2) / 640) || (n_img < g_level.scr_size() && (next_x != ((x3 + 1) % vbuffer_wide)) && (next_x != ((x3) % vbuffer_wide)))) {
 
 		/*static int counter = 0;
 		char buf[128];
@@ -72,7 +73,7 @@ void drawScrolling()
 		r.left	= xTex;
 		r.right = xTex + 2;
 
-		videoA->BltFast(next_x, 0, pbk_decor[num_decor[n_img]]->Surf(), &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+		videoA->BltFast(next_x, 0, pbk_decor[g_level.num_decor()[n_img]]->Surf(), &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
 		xTex += 2;
 
@@ -137,6 +138,6 @@ void updateScrolling(bool forceOk)
 
 	if (offset < 0)
 		offset = 0;
-	else if (offset > level_size - 640)
-		offset = level_size - 640;
+	else if (offset > g_level.size() - 640)
+		offset = g_level.size() - 640;
 }

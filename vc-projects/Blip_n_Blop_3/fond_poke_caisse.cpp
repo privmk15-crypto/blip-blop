@@ -19,7 +19,7 @@
 
 FondPokeCaisse::FondPokeCaisse()
 {
-	pic = pbk_niveau[117];
+	pic = g_game_state.picture_banks().niveau()[117];
 }
 
 void FondPokeCaisse::update()

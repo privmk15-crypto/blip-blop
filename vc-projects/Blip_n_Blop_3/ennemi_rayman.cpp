@@ -144,10 +144,10 @@ void EnnemiRayman::onAvance()
 				}
 				if (dir == SENS_DROITE) {
 					marche(RAYMAN_SPEED);
-					pic = pbk_ennemis[188 + etape];
+					pic = g_game_state.picture_banks().ennemis()[188 + etape];
 				} else {
 					marche(-RAYMAN_SPEED);
-					pic = pbk_ennemis[209 + etape];
+					pic = g_game_state.picture_banks().ennemis()[209 + etape];
 				}
 			} else if ((pv > PV_CRITIQUE) && (x - offset >= 80) && (x - offset <= 600)) {
 
@@ -194,9 +194,9 @@ void EnnemiRayman::onAvance()
 					}
 				}
 				if (dir == SENS_DROITE) {
-					pic = pbk_ennemis[268];
+					pic = g_game_state.picture_banks().ennemis()[268];
 				} else {
-					pic = pbk_ennemis[269];
+					pic = g_game_state.picture_banks().ennemis()[269];
 				}
 			} else if ((pv > PV_SUR_CRITIQUE)) { //||((pv<PV_SUR_CRITIQUE)&&((x-offset<80)||(x-offset>600))))
 				if (poing2) {
@@ -242,10 +242,10 @@ void EnnemiRayman::onAvance()
 				}
 				if (dir == SENS_DROITE) {
 					marche(RAYMAN_CRITICAL_SPEED);
-					pic = pbk_ennemis[250 + etape];
+					pic = g_game_state.picture_banks().ennemis()[250 + etape];
 				} else {
 					marche(-RAYMAN_CRITICAL_SPEED);
-					pic = pbk_ennemis[258 + etape];
+					pic = g_game_state.picture_banks().ennemis()[258 + etape];
 				}
 
 			} else  if ((x - offset >= 80) && (x - offset <= 600)) {
@@ -275,9 +275,9 @@ void EnnemiRayman::onAvance()
 				}
 
 				if (dir == SENS_DROITE) {
-					pic = pbk_ennemis[266];
+					pic = g_game_state.picture_banks().ennemis()[266];
 				} else {
-					pic = pbk_ennemis[267];
+					pic = g_game_state.picture_banks().ennemis()[267];
 				}
 			}
 		}
@@ -291,10 +291,10 @@ void EnnemiRayman::onAvance()
 		}
 		if (dir == SENS_DROITE) {
 			marche(RAYMAN_SPEED);
-			pic = pbk_ennemis[188 + etape];
+			pic = g_game_state.picture_banks().ennemis()[188 + etape];
 		} else {
 			marche(-RAYMAN_SPEED);
-			pic = pbk_ennemis[209 + etape];
+			pic = g_game_state.picture_banks().ennemis()[209 + etape];
 		}
 
 		if (g_game_state.game_flags()[3] == 1) { //x-offset<450)
@@ -330,9 +330,9 @@ void EnnemiRayman::onMeure()
 			a_detruire = true;
 		} else {
 			if ((etape < 2) && (dir == SENS_DROITE)) {
-				pic = pbk_ennemis[494 + etape];
+				pic = g_game_state.picture_banks().ennemis()[494 + etape];
 			} else {
-				pic = pbk_ennemis[488 + etape];
+				pic = g_game_state.picture_banks().ennemis()[488 + etape];
 			}
 		}
 	}
@@ -400,9 +400,9 @@ void EnnemiRayman::onTire()
 		}
 
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[172 + etape];
+			pic = g_game_state.picture_banks().ennemis()[172 + etape];
 		} else {
-			pic = pbk_ennemis[180 + etape];
+			pic = g_game_state.picture_banks().ennemis()[180 + etape];
 		}
 	} else {
 		if (attack_etape == 0) {
@@ -464,9 +464,9 @@ void EnnemiRayman::onTire()
 		}
 
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[232 + etape];
+			pic = g_game_state.picture_banks().ennemis()[232 + etape];
 		} else {
-			pic = pbk_ennemis[241 + etape];
+			pic = g_game_state.picture_banks().ennemis()[241 + etape];
 		}
 	}
 
@@ -493,12 +493,12 @@ void EnnemiRayman::onTombe()
 	/*if ( dir == SENS_DROITE)
 	{
 		x += speed;
-		pic = pbk_ennemis[3];
+		pic = g_game_state.picture_banks().ennemis()[3];
 	}
 	else
 	{
 		x -= speed;
-		pic = pbk_ennemis[7];
+		pic = g_game_state.picture_banks().ennemis()[7];
 	}*/
 
 	colFromPic();

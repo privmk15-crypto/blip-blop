@@ -18,7 +18,7 @@ EnnemiMariotapette::EnnemiMariotapette(): speed(1), etape_speed(0), attack_delay
 	pv = 10000;
 	//pv = 1;
 	xmin = 1280;
-	pic = pbk_ennemis[78];
+	pic = g_game_state.picture_banks().ennemis()[78];
 }
 
 void EnnemiMariotapette::update()
@@ -127,7 +127,7 @@ void EnnemiMariotapette::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
 
 		if (encaissement < 0) {
 			if (speed > - encaissement / MULTIPLACATEUR_VITESSE_AU_SOL) {
@@ -144,7 +144,7 @@ void EnnemiMariotapette::onAvance()
 		}
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
 
 		if (encaissement > 0) {
 			if (speed > encaissement / MULTIPLACATEUR_VITESSE_AU_SOL) {
@@ -250,9 +250,9 @@ void EnnemiMariotapette::onMeure()
 			nabo = true;
 		} else {
 			if (dir == SENS_DROITE) {
-				pic = pbk_ennemis[anime(anim_transformation_droite, 2 , 6)];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_transformation_droite, 2 , 6)];
 			} else {
-				pic = pbk_ennemis[anime(anim_transformation_gauche, 2 , 6)];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_transformation_gauche, 2 , 6)];
 			}
 		}
 	} else {
@@ -271,10 +271,10 @@ void EnnemiMariotapette::onMeure()
 
 			if (dir == SENS_DROITE) {
 				marche(speed);
-				pic = pbk_ennemis[anime(anim_nabo_droite, 2, 16 - (3 * speed))];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_nabo_droite, 2, 16 - (3 * speed))];
 			} else {
 				marche(-speed);
-				pic = pbk_ennemis[anime(anim_nabo_gauche, 2, 16 - (3 * speed))];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_nabo_gauche, 2, 16 - (3 * speed))];
 			}
 		}
 
@@ -340,9 +340,9 @@ void EnnemiMariotapette::onCharge()
 	attack_etape += 1;
 	if (attack_etape < 40) {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 3)];
 		} else {
-			pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 3)];
 		}
 
 		if (encaissement > 1000) {
@@ -359,10 +359,10 @@ void EnnemiMariotapette::onCharge()
 	} else {
 		if (dir == SENS_DROITE) {
 			marche(speed);
-			pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 2)];
 		} else {
 			marche(-speed);
-			pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 2)];
 		}
 	}
 	colFromPic();
@@ -406,9 +406,9 @@ void EnnemiMariotapette::onSaute()
 		if (dir == SENS_DROITE) {
 			x += speed;
 			if (dy < 0) {
-				pic = pbk_ennemis[81];
+				pic = g_game_state.picture_banks().ennemis()[81];
 			} else {
-				pic = pbk_ennemis[82];
+				pic = g_game_state.picture_banks().ennemis()[82];
 			}
 
 			if (encaissement != 0) {
@@ -445,9 +445,9 @@ void EnnemiMariotapette::onSaute()
 		} else {
 			x -= speed;
 			if (dy < 0) {
-				pic = pbk_ennemis[83];
+				pic = g_game_state.picture_banks().ennemis()[83];
 			} else {
-				pic = pbk_ennemis[84];
+				pic = g_game_state.picture_banks().ennemis()[84];
 			}
 
 			if (encaissement != 0) {
@@ -478,10 +478,10 @@ void EnnemiMariotapette::onSaute()
 	} else {
 		if (dir == SENS_DROITE) {
 			x += speed;
-			pic = pbk_ennemis[anime(anim_nabo_droite, 2, 16 - (3 * speed))];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_nabo_droite, 2, 16 - (3 * speed))];
 		} else {
 			x -= speed;
-			pic = pbk_ennemis[anime(anim_nabo_gauche, 2, 16 - (3 * speed))];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_nabo_gauche, 2, 16 - (3 * speed))];
 
 		}
 	}
@@ -505,9 +505,9 @@ void EnnemiMariotapette::onCarbonise()
 	else
 	{
 		if ( dir == SENS_DROITE)
-			pic = pbk_ennemis[100+etape];
+			pic = g_game_state.picture_banks().ennemis()[100+etape];
 		else
-			pic = pbk_ennemis[114+etape];
+			pic = g_game_state.picture_banks().ennemis()[114+etape];
 	}*/
 }
 

@@ -15,6 +15,7 @@
 
 
 #include "fond_bossventilo.h"
+#include "game_state.h"
 
 
 void FondBossventilo::update()
@@ -26,6 +27,6 @@ void FondBossventilo::update()
 		etape %= 4;
 	}
 
-	pic = pbk_niveau[60 + etape];
+	pic = g_game_state.picture_banks().niveau()[60 + etape];
 	updateADetruire();
 }

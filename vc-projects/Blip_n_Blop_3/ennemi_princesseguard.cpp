@@ -80,13 +80,13 @@ void EnnemiPrincesseguard::onAvance()
 		if ((x + distance_couverture + GUARD_SPEED) < princesse->x) {
 			//x=princesse->x-distance_couverture;
 			marche(GUARD_SPEED);
-			pic = pbk_ennemis[anime(anim_guard_marche_gauche, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_guard_marche_gauche, 4, 6)];
 		} else if ((x + distance_couverture - GUARD_SPEED) > princesse->x) {
 			//x=princesse->x-distance_couverture;
 			marche(-GUARD_SPEED * 3);
-			pic = pbk_ennemis[anime(anim_guard_marche_gauche, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_guard_marche_gauche, 4, 6)];
 		} else {
-			pic = pbk_ennemis[135];
+			pic = g_game_state.picture_banks().ennemis()[135];
 		}
 		/*if ( x - GUARD_SPEED < xmin || mur_opaque( x-GUARD_SPEED, y))
 		{
@@ -100,12 +100,12 @@ void EnnemiPrincesseguard::onAvance()
 		if ( dir == SENS_DROITE)
 		{
 			marche(GUARD_SPEED);
-			pic = pbk_ennemis[anime( anim_guard_marche_droite, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_guard_marche_droite, 4, 6)];
 		}
 		else
 		{
 			marche( -GUARD_SPEED);
-			pic = pbk_ennemis[anime( anim_guard_marche_gauche, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_guard_marche_gauche, 4, 6)];
 		}
 		*/
 	} else {
@@ -141,7 +141,7 @@ void EnnemiPrincesseguard::onMeure()
 
 		//if ( !mur_opaque( x - GUARD_SPEED, y) && plat( x, y) == 0)
 		//	x -= GUARD_SPEED;
-		pic = pbk_ennemis[138 + etape];
+		pic = g_game_state.picture_banks().ennemis()[138 + etape];
 	}
 }
 
@@ -168,12 +168,12 @@ void EnnemiPrincesseguard::onMeure()
 	if ( dir == SENS_DROITE)
 	{
 		x += GUARD_SPEED;
-		pic = pbk_ennemis[3];
+		pic = g_game_state.picture_banks().ennemis()[3];
 	}
 	else
 	{
 		x -= GUARD_SPEED;
-		pic = pbk_ennemis[7];
+		pic = g_game_state.picture_banks().ennemis()[7];
 	}
 
 	colFromPic();
@@ -194,9 +194,9 @@ void EnnemiPrincesseguard::onMeure()
 	else
 	{
 		if ( dir == SENS_DROITE)
-			pic = pbk_ennemis[100+etape];
+			pic = g_game_state.picture_banks().ennemis()[100+etape];
 		else
-			pic = pbk_ennemis[114+etape];
+			pic = g_game_state.picture_banks().ennemis()[114+etape];
 	}
 }*/
 

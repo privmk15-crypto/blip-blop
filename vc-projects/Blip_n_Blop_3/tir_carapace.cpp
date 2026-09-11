@@ -5,10 +5,11 @@
 
 #include "tir_carapace.h"
 #include "ben_debug.h"
+#include "game_state.h"
 
 TirCarapace::TirCarapace()
 {
-	pic = pbk_ennemis[58];
+	pic = g_game_state.picture_banks().ennemis()[58];
 	rebond = false;
 }
 
@@ -25,7 +26,7 @@ void TirCarapace::update()
 		etape += 1;
 		etape %= 4;
 	}
-	pic = pbk_ennemis[58 + etape];
+	pic = g_game_state.picture_banks().ennemis()[58 + etape];
 
 
 	if (/*x - CARAPACE_SPEED < xmin ||*/ mur_opaque(x - CARAPACE_SPEED, y)) {

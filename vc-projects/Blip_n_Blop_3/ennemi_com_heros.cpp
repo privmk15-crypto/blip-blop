@@ -47,7 +47,7 @@ void EnnemiComHeros::update()
 				etape ++;
 				etape %= 4;
 			}
-			pic = pbk_ennemis[272 + etape];
+			pic = g_game_state.picture_banks().ennemis()[272 + etape];
 		}
 	} else if (dorkeball == 1) {
 		ss_etape ++;
@@ -59,7 +59,7 @@ void EnnemiComHeros::update()
 				etape = 0;
 				ss_etape = 0;
 			} else {
-				pic = pbk_ennemis[388 + etape];
+				pic = g_game_state.picture_banks().ennemis()[388 + etape];
 			}
 		}
 
@@ -109,7 +109,7 @@ void EnnemiComHeros::onAvance()
 		marche(-2);
 	}
 
-	pic = pbk_ennemis[304 + etape];
+	pic = g_game_state.picture_banks().ennemis()[304 + etape];
 
 	colFromPic();
 }
@@ -128,7 +128,7 @@ void EnnemiComHeros::onMeure()
 		g_game_state.game_flags()[1] --;
 		a_detruire = true;
 	} else {
-		pic = pbk_ennemis[358 + etape];
+		pic = g_game_state.picture_banks().ennemis()[358 + etape];
 	}
 }
 

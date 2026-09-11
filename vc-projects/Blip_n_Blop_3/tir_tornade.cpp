@@ -19,6 +19,7 @@
 
 #include <cmath>
 #include "tir_tornade.h"
+#include "game_state.h"
 
 
 
@@ -77,9 +78,9 @@ void TirTornade::update()
 	x += dx;
 
 	if (dx <= 0) {
-		pic = pbk_ennemis[80 + etape];
+		pic = g_game_state.picture_banks().ennemis()[80 + etape];
 	} else {
-		pic = pbk_ennemis[63 + etape];
+		pic = g_game_state.picture_banks().ennemis()[63 + etape];
 	}
 	if (etape <= 8) {
 		colFromPic();

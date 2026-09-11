@@ -54,10 +54,10 @@ void EnnemiPikachu::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[etape];
+		pic = g_game_state.picture_banks().ennemis()[etape];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[2 + etape];
+		pic = g_game_state.picture_banks().ennemis()[2 + etape];
 	}
 
 
@@ -83,9 +83,9 @@ void EnnemiPikachu::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[14 + etape];
+			pic = g_game_state.picture_banks().ennemis()[14 + etape];
 		else
-			pic = pbk_ennemis[4 + etape];
+			pic = g_game_state.picture_banks().ennemis()[4 + etape];
 	}
 }
 
@@ -101,9 +101,9 @@ void EnnemiPikachu::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[100 + etape];
+			pic = g_game_state.picture_banks().ennemis()[100 + etape];
 		else
-			pic = pbk_ennemis[114 + etape];
+			pic = g_game_state.picture_banks().ennemis()[114 + etape];
 	}
 }
 

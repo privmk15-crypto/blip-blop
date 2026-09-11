@@ -24,7 +24,7 @@ const int anim_gouverneur_marche_gauche[] = { 187, 188, 189, 190, 189, 188};
 EnnemiSnorkyGouverneur::EnnemiSnorkyGouverneur(): wait_for_shoot(0), shoot_delay(50 + rand() % 200)
 {
 	pv = 150;
-	pic = pbk_ennemis[0];
+	pic = g_game_state.picture_banks().ennemis()[0];
 	dy = 0;
 }
 
@@ -88,14 +88,14 @@ void EnnemiSnorkyGouverneur::onAvance()
 	if (dir == SENS_GAUCHE) {
 		marche(-GOUVERNEUR_SPEED);
 
-		pic = pbk_ennemis[anime(anim_gouverneur_marche_gauche, 6, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gouverneur_marche_gauche, 6, 4)];
 
 		if (mur_opaque(x - GOUVERNEUR_SPEED, y) || (x - GOUVERNEUR_SPEED < xmin))
 			dir = SENS_DROITE;
 	} else {
 		marche(GOUVERNEUR_SPEED);
 
-		pic = pbk_ennemis[anime(anim_gouverneur_marche_droite, 6, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gouverneur_marche_droite, 6, 4)];
 
 		if (mur_opaque(x + GOUVERNEUR_SPEED, y) || (x + GOUVERNEUR_SPEED > offset + 640))
 			dir = SENS_GAUCHE;
@@ -133,9 +133,9 @@ void EnnemiSnorkyGouverneur::onMeure()
 	}
 
 	if (dir == SENS_GAUCHE) {
-		pic = pbk_ennemis[210 + etape];
+		pic = g_game_state.picture_banks().ennemis()[210 + etape];
 	} else {
-		pic = pbk_ennemis[205 + etape];
+		pic = g_game_state.picture_banks().ennemis()[205 + etape];
 	}
 }
 
@@ -182,9 +182,9 @@ void EnnemiSnorkyGouverneur::onTire()
 
 	if (etape < 7) {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[191 + etape];
+			pic = g_game_state.picture_banks().ennemis()[191 + etape];
 		} else {
-			pic = pbk_ennemis[198 + etape];
+			pic = g_game_state.picture_banks().ennemis()[198 + etape];
 		}
 	}
 }
@@ -202,10 +202,10 @@ void EnnemiSnorkyGouverneur::onCarbonise()
 
 	else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[224 + etape];
+			pic = g_game_state.picture_banks().ennemis()[224 + etape];
 
 		else
-			pic = pbk_ennemis[215 + etape];
+			pic = g_game_state.picture_banks().ennemis()[215 + etape];
 	}
 }
 

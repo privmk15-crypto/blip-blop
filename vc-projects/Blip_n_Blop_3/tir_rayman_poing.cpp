@@ -6,6 +6,7 @@
 #include <cmath>
 #include "tir_rayman_poing.h"
 #include "ben_debug.h"
+#include "game_state.h"
 
 //implementation de la classe TirRaymanPoing
 
@@ -19,9 +20,9 @@ void TirRaymanpoing::update()
 {
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[230];
+		pic = g_game_state.picture_banks().ennemis()[230];
 	} else {
-		pic = pbk_ennemis[231];
+		pic = g_game_state.picture_banks().ennemis()[231];
 	}
 
 	if ((dx != 0) && (((dir == SENS_DROITE) && (x > x_cible)) || ((dir == SENS_GAUCHE) && (x < x_cible)))) {

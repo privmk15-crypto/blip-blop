@@ -76,9 +76,9 @@ void EnnemiBisouCiel::onMeureEntier()
 		onMeureHaut();
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[32 + etape];
+			pic = g_game_state.picture_banks().ennemis()[32 + etape];
 		else
-			pic = pbk_ennemis[36 + etape];
+			pic = g_game_state.picture_banks().ennemis()[36 + etape];
 	}
 }
 
@@ -102,10 +102,10 @@ void EnnemiBisouCiel::onMeureHaut()
 		etape += 1;
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[40 + etape];
+		pic = g_game_state.picture_banks().ennemis()[40 + etape];
 		x += 1;
 	} else {
-		pic = pbk_ennemis[44 + etape];
+		pic = g_game_state.picture_banks().ennemis()[44 + etape];
 		x -= 1;
 	}
 
@@ -127,9 +127,9 @@ void EnnemiBisouCiel::onMeureHautFin()
 		etape += 1;
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[24 + etape];
+		pic = g_game_state.picture_banks().ennemis()[24 + etape];
 	else
-		pic = pbk_ennemis[28 + etape];
+		pic = g_game_state.picture_banks().ennemis()[28 + etape];
 
 
 	if (etape >= 3) {
@@ -161,10 +161,10 @@ void EnnemiBisouCiel::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[8 + etape];
+		pic = g_game_state.picture_banks().ennemis()[8 + etape];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[16 + etape];
+		pic = g_game_state.picture_banks().ennemis()[16 + etape];
 	}
 
 	// Regarde s'il peut tirer
@@ -225,9 +225,9 @@ void EnnemiBisouCiel::onCarbonise()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[559 + etape];
+		pic = g_game_state.picture_banks().ennemis()[559 + etape];
 	else
-		pic = pbk_ennemis[566 + etape];
+		pic = g_game_state.picture_banks().ennemis()[566 + etape];
 }
 
 

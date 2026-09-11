@@ -6,7 +6,7 @@
 EnnemiVoiturePacman::EnnemiVoiturePacman(): invoc_pacman(false)
 {
 	pv = 1000;
-	pic = pbk_ennemis[216];
+	pic = g_game_state.picture_banks().ennemis()[216];
 	wait_end = 0;
 }
 
@@ -109,7 +109,7 @@ int EnnemiVoiturePacman::degats()
 void EnnemiVoiturePacman::affiche()
 {
 	if (g_game_state.game_flags()[2] >= 4) {
-		draw(x + 48, y - 82, pbk_ennemis[217 + etape]);
+		draw(x + 48, y - 82, g_game_state.picture_banks().ennemis()[217 + etape]);
 	}
 	Sprite::affiche();
 }

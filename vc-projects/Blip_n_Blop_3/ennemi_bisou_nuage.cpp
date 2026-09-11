@@ -51,10 +51,10 @@ void EnnemiBisouNuage::onMeureFin()
 
 		if (dir == SENS_DROITE) {
 //			x += 2;
-			pic = pbk_ennemis[236 + etape];
+			pic = g_game_state.picture_banks().ennemis()[236 + etape];
 		} else {
 //			x -= 2;
-			pic = pbk_ennemis[243 + etape];
+			pic = g_game_state.picture_banks().ennemis()[243 + etape];
 		}
 	} else {
 		grave(x, y, pic);
@@ -78,9 +78,9 @@ void EnnemiBisouNuage::onMeureTombe()
 	}
 
 	if (dir == SENS_GAUCHE)
-		pic = pbk_ennemis[234 + etape];
+		pic = g_game_state.picture_banks().ennemis()[234 + etape];
 	else
-		pic = pbk_ennemis[232 + etape];
+		pic = g_game_state.picture_banks().ennemis()[232 + etape];
 
 	if (plat(x, y) != 0) {
 		etape = ss_etape = 0;
@@ -94,9 +94,9 @@ void EnnemiBisouNuage::onMeureWait()
 	etape += 1;
 
 	if (dir == SENS_GAUCHE)
-		pic = pbk_ennemis[261];
+		pic = g_game_state.picture_banks().ennemis()[261];
 	else
-		pic = pbk_ennemis[260];
+		pic = g_game_state.picture_banks().ennemis()[260];
 
 	if (etape >= 30) {
 		etape = ss_etape = 0;
@@ -111,10 +111,10 @@ void EnnemiBisouNuage::onNormal()
 
 	if (x > (offset + 320)) {
 		dir = SENS_GAUCHE;
-		pic = pbk_ennemis[anime(anim_gauche, 4, 10)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 10)];
 	} else {
 		dir = SENS_DROITE;
-		pic = pbk_ennemis[anime(anim_droite, 4, 10)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 4, 10)];
 	}
 
 	if (etape_shoot >= wait_shoot && x <= offset + 640) {

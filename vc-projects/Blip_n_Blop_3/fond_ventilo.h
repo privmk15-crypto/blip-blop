@@ -3,6 +3,7 @@
 #define _FondVentilo_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondVentilo : public Sprite
 {
@@ -17,7 +18,7 @@ public:
 			etape %= 4;
 		}
 
-		pic = pbk_niveau[3 + etape];
+		pic = g_game_state.picture_banks().niveau()[3 + etape];
 
 		if (x < offset - 100)
 			a_detruire = true;

@@ -17,6 +17,7 @@
 #define _BonusPM_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusPM : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusPM()
 	{
-		pic = pbk_misc[8];
+		pic = g_game_state.picture_banks().misc()[8];
 		col_on = true;
 	};
 

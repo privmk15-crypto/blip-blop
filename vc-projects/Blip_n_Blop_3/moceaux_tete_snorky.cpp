@@ -85,7 +85,7 @@ void MorceauSnorkyBaseTeteEntiere::update()
 		tombe();
 		if (dir == SENS_DROITE) {
 			x += 1;
-			pic = pbk_ennemis[52 + etape];
+			pic = g_game_state.picture_banks().ennemis()[52 + etape];
 			if (etape >= 3) {
 				tombe();
 				x += 1;
@@ -95,7 +95,7 @@ void MorceauSnorkyBaseTeteEntiere::update()
 			}
 		} else {
 			x -= 1;
-			pic = pbk_ennemis[85 + etape];
+			pic = g_game_state.picture_banks().ennemis()[85 + etape];
 			if (etape >= 3) {
 				tombe();
 				x -= 1;
@@ -139,9 +139,9 @@ void MorceauSnorkyHyporidercorp::update()
 
 	if (etape < 3) {
 		if (dir == SENS_DROITE) {
-			pic =  pbk_ennemis[307 + etape];
+			pic =  g_game_state.picture_banks().ennemis()[307 + etape];
 		} else {
-			pic =  pbk_ennemis[320 + etape];
+			pic =  g_game_state.picture_banks().ennemis()[320 + etape];
 		}
 	} else if (plat(x, y) != 0) {
 		if (ss_etape == 0) {
@@ -149,9 +149,9 @@ void MorceauSnorkyHyporidercorp::update()
 		}
 		if (etape < 5) {
 			if (dir == SENS_DROITE) {
-				pic =  pbk_ennemis[307 + etape];
+				pic =  g_game_state.picture_banks().ennemis()[307 + etape];
 			} else {
-				pic =  pbk_ennemis[320 + etape];
+				pic =  g_game_state.picture_banks().ennemis()[320 + etape];
 			}
 		} else {
 			grave(x, y, pic);
@@ -185,9 +185,9 @@ void MorceauSnorkyBaseTetePartieArriere::update()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic =  pbk_ennemis[59 + etape];
+		pic =  g_game_state.picture_banks().ennemis()[59 + etape];
 	} else {
-		pic =  pbk_ennemis[92 + etape];
+		pic =  g_game_state.picture_banks().ennemis()[92 + etape];
 	}
 
 	if (etape  == 3 && (plat(x, y) != 0)) {
@@ -219,7 +219,7 @@ void MorceauSnorkyBaseTrompe::update()
 		etape %= 8;
 	}
 
-	pic =  pbk_ennemis[63 + etape];
+	pic =  g_game_state.picture_banks().ennemis()[63 + etape];
 
 	if (plat(x, y) != 0) {
 		grave(x, y, pic);

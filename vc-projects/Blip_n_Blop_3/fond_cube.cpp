@@ -35,7 +35,7 @@ void FondCube::update()
 		}
 	}
 
-	pic = pbk_niveau[etape_synchro];
+	pic = g_game_state.picture_banks().niveau()[etape_synchro];
 
 	if (x < offset - 100)
 		a_detruire = true;

@@ -15,10 +15,11 @@
 
 #include "globals.h"
 #include "fond_assembleur.h"
+#include "game_state.h"
 
 FondAssembleur::FondAssembleur()
 {
-	//pic = pbk_niveau[53];
+	//pic = g_game_state.picture_banks().niveau()[53];
 }
 
 void FondAssembleur::update()
@@ -39,9 +40,9 @@ void FondAssembleur::affiche()
 	Rect					r;
 	int						largeur;
 
-	surf = pbk_niveau[53]->Surf();
-	xs = pbk_niveau[53]->xSize();
-	ys = pbk_niveau[53]->ySize();
+	surf = g_game_state.picture_banks().niveau()[53]->Surf();
+	xs = g_game_state.picture_banks().niveau()[53]->xSize();
+	ys = g_game_state.picture_banks().niveau()[53]->ySize();
 
 	r.top		= etape;
 	r.left		= 0;

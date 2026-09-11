@@ -51,14 +51,14 @@ void EnnemiBisouCoeur::onAvance()
 		if (mur_opaque(x, y) || x < xmin)
 			dir = SENS_DROITE;
 
-		pic = pbk_ennemis[anime(anim_gauche, 6, 7)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 6, 7)];
 	} else {
 		x += SPEED;
 
 		if (mur_opaque(x, y) || x > offset + 600)
 			dir = SENS_GAUCHE;
 
-		pic = pbk_ennemis[anime(anim_droite, 6, 7)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 6, 7)];
 	}
 
 	if (etape == 3 && ss_etape == 0) {
@@ -108,10 +108,10 @@ void EnnemiBisouCoeur::onMeure()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[435 + etape];
+		pic = g_game_state.picture_banks().ennemis()[435 + etape];
 		x += SPEED;
 	} else {
-		pic = pbk_ennemis[441 + etape];
+		pic = g_game_state.picture_banks().ennemis()[441 + etape];
 		x -= SPEED;
 	}
 }

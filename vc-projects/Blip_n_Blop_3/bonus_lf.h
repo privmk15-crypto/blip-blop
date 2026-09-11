@@ -17,6 +17,7 @@
 #define _BonusLF_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusLF : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusLF()
 	{
-		pic = pbk_misc[11];
+		pic = g_game_state.picture_banks().misc()[11];
 		col_on = true;
 	};
 

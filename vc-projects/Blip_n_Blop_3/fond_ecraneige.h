@@ -17,6 +17,7 @@
 #define _FondEcranNeige_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondEcranneige : public Sprite
 {
@@ -31,7 +32,7 @@ public:
 			etape %= 4;
 		}
 
-		pic = pbk_niveau[45 + etape];
+		pic = g_game_state.picture_banks().niveau()[45 + etape];
 		updateADetruire();
 	};
 

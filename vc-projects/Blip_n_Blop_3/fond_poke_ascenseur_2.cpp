@@ -7,7 +7,7 @@
 
 FondPokeAscenceur2::FondPokeAscenceur2()
 {
-	pic = pbk_niveau[51];
+	pic = g_game_state.picture_banks().niveau()[51];
 	dy = 1;
 }
 

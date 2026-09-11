@@ -13,7 +13,7 @@ const int recul_mario[] = { 4, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0
 EnnemiMario::EnnemiMario(): speed(1), etape_speed(0), attack_delay(50 + rand() % 50), wait_for_attack(0), fireball(0), hologramme(1), nb_pluie(0)
 {
 	pv = 50000;
-	pic = pbk_ennemis[3];
+	pic = g_game_state.picture_banks().ennemis()[3];
 }
 
 void EnnemiMario::update()
@@ -333,10 +333,10 @@ void EnnemiMario::onAvance()
 	}
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
 	}
 	if (speed < MARIO_SPEED) {
 		etape_speed++;
@@ -385,11 +385,11 @@ void EnnemiMario::onCharge()
 	{
 		if ( dir == SENS_DROITE)
 		{
-			pic = pbk_ennemis[anime( anim_mario_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_droite, 4, 3)];
 		}
 		else
 		{
-			pic = pbk_ennemis[anime( anim_mario_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_gauche, 4, 3)];
 		}
 	}
 	else
@@ -397,12 +397,12 @@ void EnnemiMario::onCharge()
 		if ( dir == SENS_DROITE)
 		{
 			marche(speed);
-			pic = pbk_ennemis[anime( anim_mario_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_droite, 4, 2)];
 		}
 		else
 		{
 			marche( -speed);
-			pic = pbk_ennemis[anime( anim_mario_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_gauche, 4, 2)];
 		}
 	}
 	colFromPic();*/
@@ -443,16 +443,16 @@ void EnnemiMario::onSaute()
 	if (dir == SENS_DROITE) {
 		x += speed;
 		if (dy < 0) {
-			pic = pbk_ennemis[6];
+			pic = g_game_state.picture_banks().ennemis()[6];
 		} else {
-			pic = pbk_ennemis[7];
+			pic = g_game_state.picture_banks().ennemis()[7];
 		}
 	} else {
 		x -= speed;
 		if (dy < 0) {
-			pic = pbk_ennemis[8];
+			pic = g_game_state.picture_banks().ennemis()[8];
 		} else {
-			pic = pbk_ennemis[9];
+			pic = g_game_state.picture_banks().ennemis()[9];
 		}
 	}
 
@@ -474,9 +474,9 @@ void EnnemiMario::onCarbonise()
 	else
 	{
 		if ( dir == SENS_DROITE)
-			pic = pbk_ennemis[100+etape];
+			pic = g_game_state.picture_banks().ennemis()[100+etape];
 		else
-			pic = pbk_ennemis[114+etape];
+			pic = g_game_state.picture_banks().ennemis()[114+etape];
 	}*/
 }
 
@@ -487,9 +487,9 @@ void EnnemiMario::affiche()
 	Sprite::affiche();
 	if ((fireball) && (etape < 3)) {
 		if (dir == SENS_DROITE) {
-			draw(x + 29, y - 33, pbk_ennemis[48 + etape]);
+			draw(x + 29, y - 33, g_game_state.picture_banks().ennemis()[48 + etape]);
 		} else {
-			draw(x - 29, y - 33, pbk_ennemis[51 + etape]);
+			draw(x - 29, y - 33, g_game_state.picture_banks().ennemis()[51 + etape]);
 		}
 
 	}
@@ -498,10 +498,10 @@ void EnnemiMario::affiche()
 void EnnemiMario::onTirehorizontale()
 {
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 
 	else
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 
 
 
@@ -573,10 +573,10 @@ void EnnemiMario::onTirehorizontale()
 void EnnemiMario::onTireverticale()
 {
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 
 	else
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 
 
 	ss_etape++;
@@ -645,9 +645,9 @@ void EnnemiMario::onTirecross()
 void EnnemiMario::onRafalehorizontale()
 {
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 	} else {
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 	}
 
 	ss_etape++;
@@ -743,9 +743,9 @@ void EnnemiMario::onRafalehorizontalechercheuse()
 void EnnemiMario::onRafaleverticale()
 {
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 	} else {
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 	}
 
 	ss_etape++;
@@ -850,9 +850,9 @@ void EnnemiMario::onRafaleverticaledouble()
 void EnnemiMario::onRafaleverticaleinverser()
 {
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 	} else {
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 	}
 
 	ss_etape++;
@@ -964,7 +964,7 @@ void EnnemiMario::onRafaleberserker()
 		case 0:
 			if (dir == SENS_DROITE) {
 				marche(speed);
-				pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
 				if (x > offset + 600) {
 					fireball = true;
 					attack_phase = 1;
@@ -973,7 +973,7 @@ void EnnemiMario::onRafaleberserker()
 				}
 			} else {
 				marche(-speed);
-				pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
 				if (x < offset + 40) {
 					fireball = true;
 					attack_phase = 1;
@@ -1072,7 +1072,7 @@ void EnnemiMario::onPluiedefeu()
 	if (attack_phase == 0) {
 		if (dir == SENS_DROITE) {
 			marche(speed);
-			pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 16 - (3 * speed))];
 			if (x > offset + 600) {
 				fireball = true;
 				attack_phase = 1;
@@ -1081,7 +1081,7 @@ void EnnemiMario::onPluiedefeu()
 			}
 		} else {
 			marche(-speed);
-			pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed))];
 			if (x < offset + 40) {
 				fireball = true;
 				attack_phase = 1;

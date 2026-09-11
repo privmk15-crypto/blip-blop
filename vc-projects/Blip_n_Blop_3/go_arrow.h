@@ -2,6 +2,7 @@
 
 #include "ben_maths.h"
 #include "globals.h"
+#include "game_state.h"
 
 class GoArrow {
     enum class Phase { Coming, Bouncing, Leaving, No };
@@ -51,7 +52,7 @@ class GoArrow {
 
     void Draw() {
         if (phase_ != Phase::No) {
-            pbk_misc[81 + anim_step_ / kSpriteDuration]->BlitTo(
+            g_game_state.picture_banks().misc()[81 + anim_step_ / kSpriteDuration]->BlitTo(
                 backSurface, x_, 150);
         }
     }

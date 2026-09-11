@@ -11,7 +11,7 @@ const int recul_mario[] = { 4, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0
 EnnemiMarioHologramme::EnnemiMarioHologramme(): speed(1), etape_speed(0), attack_delay(50 + rand() % 50), wait_for_attack(0), fireball(0), wait_for_cligno(0), cligno_delay(10 + rand() % 10)
 {
 	pv = 1;
-	pic = pbk_ennemis[0];
+	pic = g_game_state.picture_banks().ennemis()[0];
 }
 
 void EnnemiMarioHologramme::update()
@@ -114,10 +114,10 @@ void EnnemiMarioHologramme::onAvance()
 	}
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_droite, 4, 16 - (3 * speed)) + decalage_cligno];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_droite, 4, 16 - (3 * speed)) + decalage_cligno];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed)) + decalage_cligno];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_mario_marche_gauche, 4, 16 - (3 * speed)) + decalage_cligno];
 	}
 	if (speed < MARIO_SPEED) {
 		etape_speed++;
@@ -166,11 +166,11 @@ void EnnemiMarioHologramme::onCharge()
 	{
 		if ( dir == SENS_DROITE)
 		{
-			pic = pbk_ennemis[anime( anim_mario_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_droite, 4, 3)];
 		}
 		else
 		{
-			pic = pbk_ennemis[anime( anim_mario_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_gauche, 4, 3)];
 		}
 	}
 	else
@@ -178,12 +178,12 @@ void EnnemiMarioHologramme::onCharge()
 		if ( dir == SENS_DROITE)
 		{
 			marche(speed);
-			pic = pbk_ennemis[anime( anim_mario_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_droite, 4, 2)];
 		}
 		else
 		{
 			marche( -speed);
-			pic = pbk_ennemis[anime( anim_mario_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_mario_marche_gauche, 4, 2)];
 		}
 	}
 	colFromPic();*/
@@ -224,16 +224,16 @@ void EnnemiMarioHologramme::onSaute()
 	if (dir == SENS_DROITE) {
 		x += speed;
 		if (dy < 0) {
-			pic = pbk_ennemis[6 + decalage_cligno];
+			pic = g_game_state.picture_banks().ennemis()[6 + decalage_cligno];
 		} else {
-			pic = pbk_ennemis[7 + decalage_cligno];
+			pic = g_game_state.picture_banks().ennemis()[7 + decalage_cligno];
 		}
 	} else {
 		x -= speed;
 		if (dy < 0) {
-			pic = pbk_ennemis[8 + decalage_cligno];
+			pic = g_game_state.picture_banks().ennemis()[8 + decalage_cligno];
 		} else {
-			pic = pbk_ennemis[9 + decalage_cligno];
+			pic = g_game_state.picture_banks().ennemis()[9 + decalage_cligno];
 		}
 	}
 
@@ -254,9 +254,9 @@ void EnnemiMarioHologramme::onCarbonise()
 	else
 	{
 		if ( dir == SENS_DROITE)
-			pic = pbk_ennemis[100+etape];
+			pic = g_game_state.picture_banks().ennemis()[100+etape];
 		else
-			pic = pbk_ennemis[114+etape];
+			pic = g_game_state.picture_banks().ennemis()[114+etape];
 	}*/
 }
 
@@ -265,9 +265,9 @@ void EnnemiMarioHologramme::affiche()
 	Sprite::affiche();
 	if (fireball) {
 		if (dir == SENS_DROITE) {
-			draw(x + 29, y - 33, pbk_ennemis[48 + etape]);
+			draw(x + 29, y - 33, g_game_state.picture_banks().ennemis()[48 + etape]);
 		} else {
-			draw(x - 29, y - 33, pbk_ennemis[51 + etape]);
+			draw(x - 29, y - 33, g_game_state.picture_banks().ennemis()[51 + etape]);
 		}
 
 	}
@@ -276,10 +276,10 @@ void EnnemiMarioHologramme::affiche()
 void EnnemiMarioHologramme::onTire()
 {
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[10 + decalage_cligno];
+		pic = g_game_state.picture_banks().ennemis()[10 + decalage_cligno];
 
 	else
-		pic = pbk_ennemis[11 + decalage_cligno];
+		pic = g_game_state.picture_banks().ennemis()[11 + decalage_cligno];
 
 
 	if ((y - 25 < y_cible) && (y_cible < 400)) {
@@ -346,10 +346,10 @@ void EnnemiMarioHologramme::onTire()
 void EnnemiMarioHologramme::onTireverticale()
 {
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 
 	else
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 
 
 	ss_etape++;

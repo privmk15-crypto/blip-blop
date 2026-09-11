@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------------
 
 #include "enemy.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe EnnemiSmurf
@@ -43,9 +44,9 @@ public:
 		Ennemi::affiche() ;
 		if (etat == ETAT_MEURE && tete_etape < 5) {
 			if (dir == SENS_GAUCHE)
-				draw(x_mort, y_mort, pbk_ennemis[169 + tete_etape]) ;
+				draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[169 + tete_etape]) ;
 			else
-				draw(x_mort, y_mort, pbk_ennemis[164 + tete_etape]) ;
+				draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[164 + tete_etape]) ;
 		}
 	}
 

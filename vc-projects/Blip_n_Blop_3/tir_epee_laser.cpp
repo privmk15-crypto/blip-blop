@@ -1,6 +1,7 @@
 
 #include "tir_epee_laser.h"
 #include "ennemi_bisou_jedi.h"
+#include "game_state.h"
 
 
 TirEpeeLaser::TirEpeeLaser() : isdead(false), cible(NULL), retour(false), lanceur(NULL), accel(1)
@@ -24,7 +25,7 @@ void TirEpeeLaser::update()
 		etape %= 24;
 	}
 
-	pic = pbk_ennemis[525 + etape];
+	pic = g_game_state.picture_banks().ennemis()[525 + etape];
 
 
 	x += dx / 10;

@@ -211,10 +211,10 @@ bool RPGPlayer::updateScene()
 				// Gère l'identité de la PBK de la case
 
 				if (buffer2_ == "joueur") {
-					pic_tab[focus] = &pbk_rpg_bb;
+					pic_tab[focus] = &g_game_state.picture_banks().rpg_bb();
 					id[focus] = ID_JOUEUR;
 				} else if (buffer2_ == "ennemi") {
-					pic_tab[focus] = &pbk_rpg;
+					pic_tab[focus] = &g_game_state.picture_banks().rpg();
 					id[focus] = ID_ENNEMI;
 				} else
 					error(buffer2_);

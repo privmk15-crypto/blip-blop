@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir.h"
+#include "game_state.h"
 
 
 #define DELAY_ACCELERATION 20
@@ -73,10 +74,10 @@ public:
 		} else {
 			if (dir == SENS_DROITE) {
 				x += SPEED;
-				pic = pbk_ennemis[219 + etape];
+				pic = g_game_state.picture_banks().ennemis()[219 + etape];
 			} else {
 				x -= SPEED;
-				pic = pbk_ennemis[221 + etape];
+				pic = g_game_state.picture_banks().ennemis()[221 + etape];
 			}
 		}
 

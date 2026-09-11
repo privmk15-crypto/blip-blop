@@ -53,10 +53,10 @@ void EnnemiBisouBoom::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[154 + etape];
+		pic = g_game_state.picture_banks().ennemis()[154 + etape];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[162 + etape];
+		pic = g_game_state.picture_banks().ennemis()[162 + etape];
 	}
 
 	// Si assez prêt du joueur -> kamikaze!
@@ -136,9 +136,9 @@ void EnnemiBisouBoom::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[170 + etape];
+			pic = g_game_state.picture_banks().ennemis()[170 + etape];
 		else
-			pic = pbk_ennemis[180 + etape];
+			pic = g_game_state.picture_banks().ennemis()[180 + etape];
 
 		colFromPic();
 	}

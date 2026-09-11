@@ -104,14 +104,14 @@ void EnnemiSnorkInBlack::onAvance()
 	if (dir == SENS_GAUCHE) {
 		marche(-SNORK_IN_BLACK_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snork_in_black_marche_gauche, 4, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_marche_gauche, 4, 4)];
 
 		if (mur_opaque(x - SNORK_IN_BLACK_SPEED, y) || (x - SNORK_IN_BLACK_SPEED < xmin))
 			dir = SENS_DROITE;
 	} else {
 		marche(SNORK_IN_BLACK_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snork_in_black_marche_droite, 4, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_marche_droite, 4, 4)];
 
 		if (mur_opaque(x + SNORK_IN_BLACK_SPEED, y) || (x + SNORK_IN_BLACK_SPEED > offset + 640))
 			dir = SENS_GAUCHE;
@@ -147,9 +147,9 @@ void EnnemiSnorkInBlack::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[354 + etape];
+			pic = g_game_state.picture_banks().ennemis()[354 + etape];
 		} else {
-			pic = pbk_ennemis[359 + etape];
+			pic = g_game_state.picture_banks().ennemis()[359 + etape];
 		}
 	}
 }
@@ -209,15 +209,15 @@ void EnnemiSnorkInBlack::onTire()
 
 	if (dir == SENS_DROITE) {
 		if (etape == 0) {
-			pic = pbk_ennemis[344];
+			pic = g_game_state.picture_banks().ennemis()[344];
 		} else {
-			pic = pbk_ennemis[350 + etape - 1];
+			pic = g_game_state.picture_banks().ennemis()[350 + etape - 1];
 		}
 	} else {
 		if (etape == 0) {
-			pic = pbk_ennemis[347 ];
+			pic = g_game_state.picture_banks().ennemis()[347 ];
 		} else {
-			pic = pbk_ennemis[352 + etape - 1];
+			pic = g_game_state.picture_banks().ennemis()[352 + etape - 1];
 		}
 	}
 	colFromPic();
@@ -235,9 +235,9 @@ void EnnemiSnorkInBlack::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[373 + etape];
+			pic = g_game_state.picture_banks().ennemis()[373 + etape];
 		else
-			pic = pbk_ennemis[366 + etape];
+			pic = g_game_state.picture_banks().ennemis()[366 + etape];
 	}
 }
 

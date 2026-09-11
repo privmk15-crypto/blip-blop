@@ -15,6 +15,7 @@
 
 #include "globals.h"
 #include "fond_electronics.h"
+#include "game_state.h"
 
 void FondElectronic1::update()
 {
@@ -24,13 +25,13 @@ void FondElectronic1::update()
 		etape += 1;
 		etape %= 15;
 	}
-	pic = pbk_niveau[27 + etape];
+	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
 void FondElectronic1::affiche()
 {
 	Sprite::affiche();
-	draw(x, y, pbk_niveau[42]);
+	draw(x, y, g_game_state.picture_banks().niveau()[42]);
 }
 
 
@@ -42,13 +43,13 @@ void FondElectronic2::update()
 		etape += 1;
 		etape %= 15;
 	}
-	pic = pbk_niveau[27 + etape];
+	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
 void FondElectronic2::affiche()
 {
 	Sprite::affiche();
-	draw(x, y, pbk_niveau[44]);
+	draw(x, y, g_game_state.picture_banks().niveau()[44]);
 }
 
 
@@ -61,13 +62,13 @@ void FondElectronic3::update()
 		etape += 1;
 		etape %= 15;
 	}
-	pic = pbk_niveau[27 + etape];
+	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
 void FondElectronic3::affiche()
 {
 	Sprite::affiche();
-	draw(x, y, pbk_niveau[43]);
+	draw(x, y, g_game_state.picture_banks().niveau()[43]);
 }
 
 
@@ -80,7 +81,7 @@ void FondElectronic4::update()
 		etape += 1;
 		etape %= 15;
 	}
-	pic = pbk_niveau[27 + etape];
+	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
 

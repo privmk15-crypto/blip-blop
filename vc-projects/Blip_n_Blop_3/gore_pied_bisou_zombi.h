@@ -3,6 +3,7 @@
 #define _GorePiedsBisouZombi_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GorePiedsBisouZombi : public Sprite
 {
@@ -21,10 +22,10 @@ public:
 
 		if (dir == SENS_DROITE) {
 			marche(-1);
-			pic = pbk_ennemis[300 + etape];
+			pic = g_game_state.picture_banks().ennemis()[300 + etape];
 		} else {
 			marche(1);
-			pic = pbk_ennemis[304 + etape];
+			pic = g_game_state.picture_banks().ennemis()[304 + etape];
 		}
 
 		if (etape == 3 && plat(x, y) != 0) {

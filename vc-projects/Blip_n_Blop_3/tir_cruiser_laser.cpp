@@ -15,10 +15,11 @@
 
 
 #include "tir_cruiser_laser.h"
+#include "game_state.h"
 
 TirCruiserLaser::TirCruiserLaser(int vx, int nb_pic): dx(vx)
 {
-	pic = pbk_niveau[nb_pic];
+	pic = g_game_state.picture_banks().niveau()[nb_pic];
 	etape = 0;
 	ss_etape = 2;
 }
@@ -92,9 +93,9 @@ void TirCruiserLaser::update()
 
 		if (etape > 0) {
 			if (dx > 0) {
-				pic = pbk_niveau[20 + etape];
+				pic = g_game_state.picture_banks().niveau()[20 + etape];
 			} else {
-				pic = pbk_niveau[17 + etape];
+				pic = g_game_state.picture_banks().niveau()[17 + etape];
 			}
 		}
 	}

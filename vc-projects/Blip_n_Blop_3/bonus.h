@@ -19,6 +19,7 @@
 #include "ben_maths.h"
 #include "couille.h"
 #include "sprite.h"
+#include "game_state.h"
 
 #define DIST_BITONIO 25
 
@@ -65,10 +66,10 @@ class Bonus : public Sprite {
 
         int d = sini(8, phi);
 
-        draw(x - DIST_BITONIO - d, y - DIST_BITONIO - d, pbk_misc[base + 3]);
-        draw(x + DIST_BITONIO + d, y - DIST_BITONIO - d, pbk_misc[base + 2]);
-        draw(x + DIST_BITONIO + d, y + DIST_BITONIO + d, pbk_misc[base]);
-        draw(x - DIST_BITONIO - d, y + DIST_BITONIO + d, pbk_misc[base + 1]);
+        draw(x - DIST_BITONIO - d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 3]);
+        draw(x + DIST_BITONIO + d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 2]);
+        draw(x + DIST_BITONIO + d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base]);
+        draw(x - DIST_BITONIO - d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base + 1]);
 
         y += 15;
     };

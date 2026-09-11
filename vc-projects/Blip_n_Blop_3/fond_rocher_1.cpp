@@ -25,13 +25,13 @@ const int monolite_animation[] = {50, 51, 51, 52, 52, 52, 53, 53, 53, 53, 53, 52
 
 FondRocher1::FondRocher1(): etape_levitation(0), ss_etape_levitation(0)
 {
-	pic = pbk_niveau[31];
+	pic = g_game_state.picture_banks().niveau()[31];
 	dy = 0;
 }
 
 void FondRocher1::update()
 {
-	pic = pbk_niveau[anime(monolite_animation, 32, 3)];
+	pic = g_game_state.picture_banks().niveau()[anime(monolite_animation, 32, 3)];
 
 
 	ss_etape_levitation++;

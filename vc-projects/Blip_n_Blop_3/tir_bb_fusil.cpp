@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include "tir_bb_fusil.h"
+#include "game_state.h"
 
 const int dx_tirbb_fusil [] = { 0, 6, 11, 14, 15, 14, 11, 6, 0, -6, -11, -14, -15, -14, -11, -6 };
 const int dy_tirbb_fusil [] = { 15, 14, 11, 6, 0, -6, -11, -14, -15, -14, -11, -6, 0, 6, 11, 14 };
@@ -163,9 +164,9 @@ void TirBBFusil::update()
 		a_detruire = true;
 	} else {
 		if (vie < duree_vie)
-			pic = pbk_bb[88 + dir];
+			pic = g_game_state.picture_banks().bb()[88 + dir];
 		else
-			pic = pbk_bb[72 + dir];
+			pic = g_game_state.picture_banks().bb()[72 + dir];
 
 		colFromPic();
 	}

@@ -212,7 +212,7 @@ void Game::jouePartie(int nbj, int idj) {
     //
     releasePartie();
 
-    pbk_inter.loadGFX("data/inter.gfx", DDSURF_BEST);
+    g_game_state.picture_banks().inter().loadGFX("data/inter.gfx", DDSURF_BEST);
 
     if (!skipped && !app_killed) {
         if (!letsgo) {
@@ -562,7 +562,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     strcpy(buffer2, "data/");
     strcat(buffer2, buffer);
 
-    if (!pbk_decor.loadGFX(buffer2, DDSURF_SYSTEM)) {
+    if (!g_game_state.picture_banks().decor().loadGFX(buffer2, DDSURF_SYSTEM)) {
         debug << "Game::chargeNiveau() -> Cannot load " << buffer2
               << " as background\n";
         return false;
@@ -577,7 +577,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
         strcpy(buffer2, "data/");
         strcat(buffer2, buffer);
 
-        if (!pbk_niveau.loadGFX(buffer2, mem_flag)) {
+        if (!g_game_state.picture_banks().niveau().loadGFX(buffer2, mem_flag)) {
             debug << "Game::chargeNiveau() -> Cannot load " << buffer2
                   << " as level stuff\n";
             return false;
@@ -593,7 +593,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
         strcpy(buffer2, "data/");
         strcat(buffer2, buffer);
 
-        if (!pbk_ennemis.loadGFX(buffer2, mem_flag)) {
+        if (!g_game_state.picture_banks().ennemis().loadGFX(buffer2, mem_flag)) {
             debug << "Game::chargeNiveau() -> Cannot load " << buffer2
                   << " as ennemies\n";
             return false;
@@ -660,7 +660,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
         strcpy(buffer2, "data/");
         strcat(buffer2, buffer);
 
-        if (!pbk_rpg.loadGFX(buffer2, mem_flag)) {
+        if (!g_game_state.picture_banks().rpg().loadGFX(buffer2, mem_flag)) {
             debug << "Game::chargeNiveau() -> Cannot load " << buffer2
                   << " as RPG GFX\n";
             return false;
@@ -1187,29 +1187,29 @@ bool Game::chargePartie() {
     debug
         << "---------------------------------------------------------------\n";
 
-    if (!pbk_blip.loadGFX("data/blip.gfx", mem_flag)) return false;
+    if (!g_game_state.picture_banks().blip().loadGFX("data/blip.gfx", mem_flag)) return false;
 
     debug << "Successfully loaded <blip.gfx>\n";
 
-    if (!pbk_blop.loadGFX("data/blop.gfx", mem_flag)) return false;
+    if (!g_game_state.picture_banks().blop().loadGFX("data/blop.gfx", mem_flag)) return false;
 
     debug << "Successfully loaded <blop.gfx>\n";
 
     // Charge BB
     //
-    if (!pbk_bb.loadGFX("data/bb.gfx", mem_flag)) return false;
+    if (!g_game_state.picture_banks().bb().loadGFX("data/bb.gfx", mem_flag)) return false;
 
     debug << "Successfully loaded <bb.gfx>\n";
 
     // Charge Divers
     //
-    if (!pbk_misc.loadGFX("data/misc.gfx", mem_flag)) return false;
+    if (!g_game_state.picture_banks().misc().loadGFX("data/misc.gfx", mem_flag)) return false;
 
     debug << "Successfully loaded <misc.gfx>\n";
 
     // Charge gueules BB
     //
-    if (!pbk_rpg_bb.loadGFX("data/rpg_bb.gfx", mem_flag)) return false;
+    if (!g_game_state.picture_banks().rpg_bb().loadGFX("data/rpg_bb.gfx", mem_flag)) return false;
 
     debug << "Successfully loaded <rpg_bb.gfx>\n";
 
@@ -1446,10 +1446,10 @@ void Game::drawHUBpv(int x, int y, int pv) {
     static const int y_pv[] = {0, 21, 48, 21, 0};
 
     for (int i = 0; i < pv; i++)
-        pbk_bb[201 - i]->BlitTo(backSurface, x + x_pv[i], y + y_pv[i]);
+        g_game_state.picture_banks().bb()[201 - i]->BlitTo(backSurface, x + x_pv[i], y + y_pv[i]);
 
     for (int i = pv; i < 5; i++)
-        pbk_bb[196 - i]->BlitTo(backSurface, x + x_pv[i], y + y_pv[i]);
+        g_game_state.picture_banks().bb()[196 - i]->BlitTo(backSurface, x + x_pv[i], y + y_pv[i]);
 }
 
 //-----------------------------------------------------------------------------
@@ -2139,9 +2139,9 @@ void Game::updateMeteo() {
             flocon->y = rand() % 480 - 500;
 
             if (d <= 1)
-                flocon->pic = pbk_misc[71];
+                flocon->pic = g_game_state.picture_banks().misc()[71];
             else
-                flocon->pic = pbk_misc[72];
+                flocon->pic = g_game_state.picture_banks().misc()[72];
 
             flocon->dy = g_game_state.weather().intensite() / 20 + d;
             flocon->phi = rand() % 360;
@@ -2161,7 +2161,7 @@ void Game::updateMeteo() {
             goutte->a_detruire = false;
             goutte->x = offset + rand() % 800;
             goutte->y = rand() % 480 - 480;
-            goutte->pic = pbk_misc[65 + d];
+            goutte->pic = g_game_state.picture_banks().misc()[65 + d];
             goutte->dy = 7 + d * 2;
 
             if (mur_opaque(goutte->x, 0)) goutte->y -= 550;
@@ -2292,7 +2292,7 @@ void Game::creeBulle(Sprite* s) {
 
         b->xbase = s->x;
         b->y = s->y - 10;
-        b->pic = pbk_misc[78 + rand() % 3];
+        b->pic = g_game_state.picture_banks().misc()[78 + rand() % 3];
         b->dphi = 5 + rand() % 3;
         b->dy = -(2 + rand() % 2);
 
@@ -2405,7 +2405,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 
         x -= 20;
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
         g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
@@ -2433,7 +2433,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
             name[i] = '\0';
         }
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
         g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
         g_game_state.font_bank().menu().printC(backSurface, 320, 260, name);
@@ -2444,7 +2444,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
     while (!app_killed && x < 640) {
         x += 20;
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
         g_game_state.font_bank().menu().printC(backSurface, 320 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, 320 + x, 210, "PLEASE ENTER YOUR NAME :");
@@ -2467,7 +2467,7 @@ void Game::showGameOver() {
         manageMsg();
         checkRestore();
 
-        pbk_inter[0]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[0]->PasteTo(backSurface, 0, 0);
         /*
                         g_game_state.font_bank().menu().printR( backSurface, 320-x, 220, "GAME");
                         g_game_state.font_bank().menu().print( backSurface, 320+x, 220, "OVER");
@@ -2488,7 +2488,7 @@ void Game::showGameOver() {
                     manageMsg();
                     checkRestore();
 
-                    pbk_inter[0]->PasteTo( backSurface, 0, 0);
+                    g_game_state.picture_banks().inter()[0]->PasteTo( backSurface, 0, 0);
 
                     g_game_state.font_bank().menu().printR( backSurface, 320-x, 220, "GAME");
                     g_game_state.font_bank().menu().print( backSurface, 320+x, 220, "OVER");
@@ -2513,7 +2513,7 @@ void Game::showHighScores() {
         manageMsg();
         checkRestore();
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
         for (int i = 0; i < HS_NB_SCORES; i++) {
             if (x[i] > 0) x[i] -= 20;
@@ -2532,7 +2532,7 @@ void Game::showHighScores() {
         manageMsg();
         checkRestore();
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
         for (int i = 0; i < HS_NB_SCORES; i++) {
             if (i == 0 || x[i - 1] >= 160) x[i] += 20;
@@ -2630,7 +2630,7 @@ void Game::go() {
                     in.waitClean();
                 }
             } else {
-                pbk_inter[1]->PasteTo(backSurface, 0, 0);
+                g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
 
                 r = menu.update();
                 menu.draw(backSurface);
@@ -2711,7 +2711,7 @@ void Game::showMainScreen() {
 
         in.update();
 
-        pbk_inter[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
         DDFlipV();  // primSurface->Flip(NULL, DDFLIP_WAIT );
     }
 }
@@ -2785,7 +2785,7 @@ void Game::showCredits(bool theEnd) {
         if (theEnd) {
             pbk_cred[npage]->PasteTo(backSurface, 0, 0);
         } else {
-            pbk_inter[1]->BlitTo(backSurface, 0, 0);
+            g_game_state.picture_banks().inter()[1]->BlitTo(backSurface, 0, 0);
         }
 
         g_game_state.font_bank().rpg().printC(backSurface, xcred, y + ILIGNE, "Credits");

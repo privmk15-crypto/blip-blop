@@ -3,13 +3,14 @@
 #define _PPlanTest_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class PPlanTest : public Sprite
 {
 public:
 	PPlanTest()
 	{
-		pic = pbk_niveau[2];
+		pic = g_game_state.picture_banks().niveau()[2];
 	};
 
 	virtual void update()

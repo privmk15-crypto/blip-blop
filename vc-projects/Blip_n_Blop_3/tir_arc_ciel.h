@@ -2,6 +2,8 @@
 #ifndef _TirArcCiel_
 #define _TirArcCiel
 
+#include "game_state.h"
+
 class TirArcCiel : public Tir
 {
 public:
@@ -17,9 +19,9 @@ public:
 			a_detruire = true;
 		} else {
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[48 + etape];
+				pic = g_game_state.picture_banks().ennemis()[48 + etape];
 			else
-				pic = pbk_ennemis[63 + etape];
+				pic = g_game_state.picture_banks().ennemis()[63 + etape];
 
 			colFromPic();
 		}

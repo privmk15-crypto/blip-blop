@@ -28,17 +28,17 @@ bool RestoreAll()
 	n_cache = 0;
 	next_x = 0;
 
-	pbk_decor.restoreAll();
-	pbk_blip.restoreAll();
-	pbk_blop.restoreAll();
-	pbk_bb.restoreAll();
-	pbk_misc.restoreAll();
-	pbk_ennemis.restoreAll();
-	pbk_niveau.restoreAll();
-	pbk_rpg.restoreAll();
-	pbk_rpg_bb.restoreAll();
+	g_game_state.picture_banks().decor().restoreAll();
+	g_game_state.picture_banks().blip().restoreAll();
+	g_game_state.picture_banks().blop().restoreAll();
+	g_game_state.picture_banks().bb().restoreAll();
+	g_game_state.picture_banks().misc().restoreAll();
+	g_game_state.picture_banks().ennemis().restoreAll();
+	g_game_state.picture_banks().niveau().restoreAll();
+	g_game_state.picture_banks().rpg().restoreAll();
+	g_game_state.picture_banks().rpg_bb().restoreAll();
 
-	pbk_inter.restoreAll();
+	g_game_state.picture_banks().inter().restoreAll();
 
 	g_game_state.font_bank().score_blip().restoreAll();
 	g_game_state.font_bank().score_blop().restoreAll();

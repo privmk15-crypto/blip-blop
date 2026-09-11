@@ -21,7 +21,7 @@
 
 MorceauRayman::MorceauRayman(int m_pic, int vx, int vy): dx(vx)
 {
-	pic = pbk_ennemis[m_pic];
+	pic = g_game_state.picture_banks().ennemis()[m_pic];
 	dy  = vy;
 	n_pic = m_pic;
 }

@@ -25,7 +25,7 @@ EnnemiPrincesse::EnnemiPrincesse(): avance(false), aide(false)
 {
 	pv = 3700;
 	tresor = 0;
-	pic = pbk_ennemis[128];
+	pic = g_game_state.picture_banks().ennemis()[128];
 
 }
 
@@ -125,7 +125,7 @@ void EnnemiPrincesse::onAvance()
 					etape %= 2;
 				}
 				marche(PRINCESSE_SPEED);
-				pic = pbk_ennemis[126 + etape];
+				pic = g_game_state.picture_banks().ennemis()[126 + etape];
 			} else {
 				ss_etape += 1;
 				ss_etape %= 6;
@@ -134,12 +134,12 @@ void EnnemiPrincesse::onAvance()
 					etape %= 2;
 				}
 				marche(2);
-				pic = pbk_ennemis[126 + etape];
+				pic = g_game_state.picture_banks().ennemis()[126 + etape];
 			}
 		} else if (dir == SENS_GAUCHE) {
 			dir = SENS_DROITE;
 			//marche( -PRINCESSE_SPEED);
-			//pic = pbk_ennemis[128+etape];
+			//pic = g_game_state.picture_banks().ennemis()[128+etape];
 		} else {
 			avance = false;
 		}
@@ -152,11 +152,11 @@ void EnnemiPrincesse::onAvance()
 				etape %= 2;
 			}
 			marche(PRINCESSE_SPEED);
-			pic = pbk_ennemis[126 + etape];
+			pic = g_game_state.picture_banks().ennemis()[126 + etape];
 		} else if (x > 7500) {
-			pic = pbk_ennemis[126];
+			pic = g_game_state.picture_banks().ennemis()[126];
 		} else {
-			pic = pbk_ennemis[128];
+			pic = g_game_state.picture_banks().ennemis()[128];
 		}
 	}
 	//}
@@ -198,7 +198,7 @@ void EnnemiPrincesse::onMeure()
 	} else {
 		//if ( !mur_opaque( x + speed, y) && plat( x, y) == 0)
 		//	x += speed;
-		pic = pbk_ennemis[130 + etape];
+		pic = g_game_state.picture_banks().ennemis()[130 + etape];
 
 	}
 }

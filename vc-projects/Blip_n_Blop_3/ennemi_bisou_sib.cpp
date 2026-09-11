@@ -30,7 +30,7 @@ void EnnemiBisouSIB::update()
 
 	switch (etat) {
 		case ETAT_ATTENDS_MAL:
-			pic = pbk_ennemis[635];
+			pic = g_game_state.picture_banks().ennemis()[635];
 			colFromPic();
 
 			if (x < offset + 440 || g_game_state.game_flags()[1] == 0)
@@ -39,7 +39,7 @@ void EnnemiBisouSIB::update()
 			break;
 
 		case ETAT_ATTENDS:
-			pic = pbk_ennemis[639];
+			pic = g_game_state.picture_banks().ennemis()[639];
 			colFromPic();
 
 			if (x - tete_turc->x < 200)
@@ -58,7 +58,7 @@ void EnnemiBisouSIB::update()
 					etape = ss_etape = 0;
 					etat = ETAT_COURS_FOREST;
 				} else {
-					pic = pbk_ennemis[635 + etape];
+					pic = g_game_state.picture_banks().ennemis()[635 + etape];
 				}
 			}
 
@@ -67,7 +67,7 @@ void EnnemiBisouSIB::update()
 
 
 		case ETAT_COURS_FOREST:
-			pic = pbk_ennemis[anime(anim_cours, 4, 5)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_cours, 4, 5)];
 			marche(3);
 			noCol();
 			break;

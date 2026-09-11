@@ -3,10 +3,11 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_cadeau.h"
+#include "game_state.h"
 
 TirCadeau::TirCadeau()
 {
-	pic = pbk_ennemis[56] ;
+	pic = g_game_state.picture_banks().ennemis()[56] ;
 	noCol() ;
 }
 
@@ -28,7 +29,7 @@ void TirCadeau::update()
 
 	if (etape >= 20) {
 		col_on = true ;
-		pic = pbk_ennemis[80 + etape] ;
+		pic = g_game_state.picture_banks().ennemis()[80 + etape] ;
 	}
 
 	if (etape > 35)

@@ -20,10 +20,11 @@
 
 #include "tir_gateau.h"
 #include "ben_debug.h"
+#include "game_state.h"
 
 TirGateau::TirGateau()
 {
-	pic = pbk_ennemis[194];
+	pic = g_game_state.picture_banks().ennemis()[194];
 }
 
 

@@ -63,7 +63,7 @@ void Ennemi::estTouche(Tir * tir)
 					num_giclure += 1;
 					num_giclure %= 14;
 
-					grave(x, y_trace, pbk_misc[50 + num_giclure]);
+					grave(x, y_trace, g_game_state.picture_banks().misc()[50 + num_giclure]);
 				}
 			}
 		}

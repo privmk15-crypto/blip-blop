@@ -1,5 +1,6 @@
 
 #include "ennemi_flameche.h"
+#include "game_state.h"
 
 EnnemiFlameche::EnnemiFlameche()
 {
@@ -47,10 +48,10 @@ void EnnemiFlameche::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(2);
-		pic = pbk_ennemis[44 + etape];
+		pic = g_game_state.picture_banks().ennemis()[44 + etape];
 	} else {
 		marche(-2);
-		pic = pbk_ennemis[46 + etape];
+		pic = g_game_state.picture_banks().ennemis()[46 + etape];
 	}
 
 
@@ -72,9 +73,9 @@ void EnnemiFlameche::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[62 + etape];
+			pic = g_game_state.picture_banks().ennemis()[62 + etape];
 		else
-			pic = pbk_ennemis[48 + etape];
+			pic = g_game_state.picture_banks().ennemis()[48 + etape];
 	}
 }
 

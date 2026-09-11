@@ -31,7 +31,7 @@ const int anim_lara_degaine[] = {127, 127, 127, 128, 128, 129, 130, 130, 131, 13
 EnnemiLara::EnnemiLara(): numero_image_buste(127), wait_for_attack(0), pics(0), tete_rayman(0)
 {
 	pv = 15000;
-	pic = pbk_ennemis[162];
+	pic = g_game_state.picture_banks().ennemis()[162];
 }
 
 void EnnemiLara::update()
@@ -357,7 +357,7 @@ void EnnemiLara::onMeure()
 void EnnemiLara::affiche()
 {
 	if (g_game_state.game_flags()[0] < 6) {
-		draw(x, y - 102, pbk_ennemis[numero_image_buste]);
+		draw(x, y - 102, g_game_state.picture_banks().ennemis()[numero_image_buste]);
 	}
 
 	Sprite::affiche();

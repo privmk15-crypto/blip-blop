@@ -17,6 +17,7 @@
 #define _BonusVache_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusVache : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusVache()
 	{
-		pic = pbk_misc[48];
+		pic = g_game_state.picture_banks().misc()[48];
 		col_on = true;
 	};
 

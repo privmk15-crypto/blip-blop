@@ -87,9 +87,9 @@ void EnnemiSmurfGourmand::onNormal()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[182];
+		pic = g_game_state.picture_banks().ennemis()[182];
 	} else {
-		pic = pbk_ennemis[188];
+		pic = g_game_state.picture_banks().ennemis()[188];
 	}
 
 	colFromPic();
@@ -128,9 +128,9 @@ void EnnemiSmurfGourmand::onTire()
 
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[182 + etape];
+		pic = g_game_state.picture_banks().ennemis()[182 + etape];
 	} else {
-		pic = pbk_ennemis[188 + etape];
+		pic = g_game_state.picture_banks().ennemis()[188 + etape];
 	}
 
 	colFromPic();
@@ -152,12 +152,12 @@ void EnnemiSmurfGourmand::onMeure()
 		if (!mur_opaque(x - 2, y))
 			x -= 2;
 
-		pic = pbk_ennemis[195 + etape];
+		pic = g_game_state.picture_banks().ennemis()[195 + etape];
 	} else {
 		if (!mur_opaque(x + 2, y))
 			x += 2;
 
-		pic = pbk_ennemis[207 + etape];
+		pic = g_game_state.picture_banks().ennemis()[207 + etape];
 	}
 
 	if (etape >= 11 && plat(x, y) != 0) {
@@ -195,9 +195,9 @@ void EnnemiSmurfGourmand::onHold()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[187];
+		pic = g_game_state.picture_banks().ennemis()[187];
 	} else {
-		pic = pbk_ennemis[193];
+		pic = g_game_state.picture_banks().ennemis()[193];
 	}
 
 	colFromPic();
@@ -216,8 +216,8 @@ void EnnemiSmurfGourmand::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[34 + etape];
+			pic = g_game_state.picture_banks().ennemis()[34 + etape];
 		else
-			pic = pbk_ennemis[40 + etape];
+			pic = g_game_state.picture_banks().ennemis()[40 + etape];
 	}
 }

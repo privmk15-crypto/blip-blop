@@ -3,12 +3,13 @@
 
 
 #include "vehicule_hypo.h"
+#include "game_state.h"
 
 static bool first;
 
 VehiculeCigogne::VehiculeCigogne()
 {
-	pic = pbk_ennemis[66];
+	pic = g_game_state.picture_banks().ennemis()[66];
 	hasBeenUsed = false;
 	first = true;
 };
@@ -48,7 +49,7 @@ void VehiculeCigogne::updateUsed()
 			y += SPEED;
 		}
 
-		pic = pbk_niveau[anime( bas_ailes, 6, 4)];
+		pic = g_game_state.picture_banks().niveau()[anime( bas_ailes, 6, 4)];
 	*/
 	x += SPEED;
 

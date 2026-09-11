@@ -1,5 +1,6 @@
 
 #include "tir_bblf.h"
+#include "game_state.h"
 
 
 void TirBBLF::aTouche(int pts)
@@ -127,17 +128,17 @@ void TirBBLF::update()
 				if (etape < 0)
 					a_detruire = true;
 				else
-					pic = pbk_bb[212 + etape];
+					pic = g_game_state.picture_banks().bb()[212 + etape];
 			} else if (type == 1) {
 				if (etape < 0)
 					a_detruire = true;
 				else
-					pic = pbk_bb[219 + etape];
+					pic = g_game_state.picture_banks().bb()[219 + etape];
 			} else {
 				if (etape < 0)
 					a_detruire = true;
 				else
-					pic = pbk_bb[231 + etape];
+					pic = g_game_state.picture_banks().bb()[231 + etape];
 			}
 		} else {
 			etape += 1;
@@ -146,17 +147,17 @@ void TirBBLF::update()
 				if (etape >= 5)
 					fini = true;
 				else
-					pic = pbk_bb[212 + etape];
+					pic = g_game_state.picture_banks().bb()[212 + etape];
 			} else if (type == 1) {
 				if (etape >= 10)
 					fini = true;
 				else
-					pic = pbk_bb[219 + etape];
+					pic = g_game_state.picture_banks().bb()[219 + etape];
 			} else {
 				if (etape >= 5)
 					fini = true;
 				else
-					pic = pbk_bb[231 + etape];
+					pic = g_game_state.picture_banks().bb()[231 + etape];
 			}
 		}
 	}

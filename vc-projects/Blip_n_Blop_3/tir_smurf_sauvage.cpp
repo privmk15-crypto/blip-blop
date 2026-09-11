@@ -3,10 +3,11 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_smurf_sauvage.h"
+#include "game_state.h"
 
 TirSmurfSauvage::TirSmurfSauvage()
 {
-	pic = pbk_ennemis[144];
+	pic = g_game_state.picture_banks().ennemis()[144];
 }
 
 void TirSmurfSauvage::update()

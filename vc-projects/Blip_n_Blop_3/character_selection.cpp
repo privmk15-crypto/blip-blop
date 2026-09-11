@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include "globals.h"
+#include "game_state.h"
 
 CharacterSelection::CharacterSelection()
     : et_phase_(0),
@@ -114,34 +115,34 @@ CharacterSelection::Output CharacterSelection::update() {
 void CharacterSelection::draw() {
     // Le fond
     //
-    pbk_inter[6]->PasteTo(backSurface, x_back1_, 0);
-    pbk_inter[7]->PasteTo(backSurface, x_back2_, 0);
+    g_game_state.picture_banks().inter()[6]->PasteTo(backSurface, x_back1_, 0);
+    g_game_state.picture_banks().inter()[7]->PasteTo(backSurface, x_back2_, 0);
 
     // Gestion du texte
     //
-    pbk_inter[pic_select_]->BlitTo(backSurface, 320, y_select_);
+    g_game_state.picture_banks().inter()[pic_select_]->BlitTo(backSurface, 320, y_select_);
 
     // Le perso + le nom
     //
     if (step_ == APPAR_BLIP) {
         if (phase_) {
-            pbk_inter[4]->BlitTo(backSurface, 620, 257);
+            g_game_state.picture_banks().inter()[4]->BlitTo(backSurface, 620, 257);
         }
 
-        pbk_inter[2]->BlitTo(backSurface, x_charac_, y_charac_);
-        pbk_inter[8]->BlitTo(backSurface, x_name_, y_name_);
+        g_game_state.picture_banks().inter()[2]->BlitTo(backSurface, x_charac_, y_charac_);
+        g_game_state.picture_banks().inter()[8]->BlitTo(backSurface, x_name_, y_name_);
     } else if (step_ == FINI_BLIP) {
-        pbk_inter[2]->BlitTo(backSurface, x_charac_, y_charac_);
-        pbk_inter[8]->BlitTo(backSurface, x_name_, y_name_);
+        g_game_state.picture_banks().inter()[2]->BlitTo(backSurface, x_charac_, y_charac_);
+        g_game_state.picture_banks().inter()[8]->BlitTo(backSurface, x_name_, y_name_);
     } else if (step_ == APPAR_BLOP) {
         if (phase_) {
-            pbk_inter[5]->BlitTo(backSurface, 20, 254);
+            g_game_state.picture_banks().inter()[5]->BlitTo(backSurface, 20, 254);
         }
 
-        pbk_inter[3]->BlitTo(backSurface, x_charac_, y_charac_);
-        pbk_inter[9]->BlitTo(backSurface, x_name_, y_name_);
+        g_game_state.picture_banks().inter()[3]->BlitTo(backSurface, x_charac_, y_charac_);
+        g_game_state.picture_banks().inter()[9]->BlitTo(backSurface, x_name_, y_name_);
     } else {
-        pbk_inter[3]->BlitTo(backSurface, x_charac_, y_charac_);
-        pbk_inter[9]->BlitTo(backSurface, x_name_, y_name_);
+        g_game_state.picture_banks().inter()[3]->BlitTo(backSurface, x_charac_, y_charac_);
+        g_game_state.picture_banks().inter()[9]->BlitTo(backSurface, x_name_, y_name_);
     }
 }

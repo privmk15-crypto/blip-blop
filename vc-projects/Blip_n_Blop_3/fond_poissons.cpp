@@ -15,6 +15,7 @@
 
 #include "sprite.h"
 #include "fond_poissons.h"
+#include "game_state.h"
 
 
 FondPoissonRouge::FondPoissonRouge()
@@ -34,10 +35,10 @@ void FondPoissonRouge::update()
 
 	if (dir) {
 		x += POISSON_SPEED;
-		pic = pbk_niveau[2 + etape];
+		pic = g_game_state.picture_banks().niveau()[2 + etape];
 	} else {
 		x -= POISSON_SPEED;
-		pic = pbk_niveau[5 + etape];
+		pic = g_game_state.picture_banks().niveau()[5 + etape];
 	}
 
 
@@ -65,10 +66,10 @@ void FondPoissonViolet::update()
 
 	if (dir) {
 		x += POISSON_SPEED;
-		pic = pbk_niveau[14 + etape];
+		pic = g_game_state.picture_banks().niveau()[14 + etape];
 	} else {
 		x -= POISSON_SPEED;
-		pic = pbk_niveau[17 + etape];
+		pic = g_game_state.picture_banks().niveau()[17 + etape];
 	}
 
 
@@ -95,10 +96,10 @@ void FondPoissonRougeCamoufle::update()
 
 	if (dir) {
 		x += POISSON_SPEED;
-		pic = pbk_niveau[8 + etape];
+		pic = g_game_state.picture_banks().niveau()[8 + etape];
 	} else {
 		x -= POISSON_SPEED;
-		pic = pbk_niveau[11 + etape];
+		pic = g_game_state.picture_banks().niveau()[11 + etape];
 	}
 
 
@@ -126,10 +127,10 @@ void FondPoissonVioletCamoufle::update()
 
 	if (dir) {
 		x += POISSON_SPEED;
-		pic = pbk_niveau[20 + etape];
+		pic = g_game_state.picture_banks().niveau()[20 + etape];
 	} else {
 		x -= POISSON_SPEED;
-		pic = pbk_niveau[23 + etape];
+		pic = g_game_state.picture_banks().niveau()[23 + etape];
 	}
 
 

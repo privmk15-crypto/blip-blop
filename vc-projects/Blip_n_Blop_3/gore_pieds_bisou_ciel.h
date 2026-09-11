@@ -3,6 +3,7 @@
 #define _GorePiedsBisouCiel_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GorePiedsBisouCiel : public Sprite
 {
@@ -21,10 +22,10 @@ public:
 
 		if (dir == SENS_DROITE) {
 			marche(-1);
-			pic = pbk_ennemis[etape];
+			pic = g_game_state.picture_banks().ennemis()[etape];
 		} else {
 			marche(1);
-			pic = pbk_ennemis[4 + etape];
+			pic = g_game_state.picture_banks().ennemis()[4 + etape];
 		}
 
 		if (etape == 3 && plat(x, y) != 0) {

@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_debouche_chiote.h"
+#include "game_state.h"
 //#include "bendebug.h"
 
 TirDebouchechiote::TirDebouchechiote(int n_pbk_ennemis, int vx, int vy)
 {
-	pic = pbk_ennemis[n_pbk_ennemis];
+	pic = g_game_state.picture_banks().ennemis()[n_pbk_ennemis];
 	dy = vy;
 	dx = vx;
 }

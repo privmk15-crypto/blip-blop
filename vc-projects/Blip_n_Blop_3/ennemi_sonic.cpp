@@ -200,10 +200,10 @@ void EnnemiSonic::onAvance()
 	}
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[30 + etape];
+		pic = g_game_state.picture_banks().ennemis()[30 + etape];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[38 + etape];
+		pic = g_game_state.picture_banks().ennemis()[38 + etape];
 	}
 	if (speed < SONIC_SPEED) {
 		etape_speed++;
@@ -234,10 +234,10 @@ void EnnemiSonic::onMeure()
 		}
 		if (dir == SENS_DROITE) {
 			marche(speed);
-			pic = pbk_ennemis[30 + etape];
+			pic = g_game_state.picture_banks().ennemis()[30 + etape];
 		} else {
 			marche(-speed);
-			pic = pbk_ennemis[38 + etape];
+			pic = g_game_state.picture_banks().ennemis()[38 + etape];
 		}
 		if (speed < SONIC_SPEED) {
 			etape_speed++;
@@ -264,7 +264,7 @@ void EnnemiSonic::onMeure()
 				g_game_state.game_flags()[2] = 2;
 				a_detruire = true;
 			} else {
-				pic = pbk_ennemis[sonic_anim_super_saien[etape]];
+				pic = g_game_state.picture_banks().ennemis()[sonic_anim_super_saien[etape]];
 			}
 		}
 	}
@@ -299,12 +299,12 @@ void EnnemiSonic::onCharge()
 		if ( dir == SENS_DROITE)
 		{
 			//marche(speed);
-			pic = pbk_ennemis[anime( anim_toad_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_toad_marche_droite, 4, 3)];
 		}
 		else
 		{
 			//marche( -speed);
-			pic = pbk_ennemis[anime( anim_toad_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_toad_marche_gauche, 4, 3)];
 		}
 	}
 	else
@@ -312,12 +312,12 @@ void EnnemiSonic::onCharge()
 		if ( dir == SENS_DROITE)
 		{
 			marche(speed);
-			pic = pbk_ennemis[anime( anim_toad_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_toad_marche_droite, 4, 2)];
 		}
 		else
 		{
 			marche( -speed);
-			pic = pbk_ennemis[anime( anim_toad_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_toad_marche_gauche, 4, 2)];
 		}
 	}
 
@@ -363,10 +363,10 @@ void EnnemiSonic::onSaute()
 	}
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[30 + etape];
+		pic = g_game_state.picture_banks().ennemis()[30 + etape];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[38 + etape];
+		pic = g_game_state.picture_banks().ennemis()[38 + etape];
 	}
 	colFromPic();
 
@@ -395,9 +395,9 @@ void EnnemiSonic::onAttackhorizontal()
 				etape %= 5;
 			}
 			if (dir == SENS_DROITE) {
-				pic = pbk_ennemis[85 + etape];
+				pic = g_game_state.picture_banks().ennemis()[85 + etape];
 			} else {
-				pic = pbk_ennemis[91 + etape];
+				pic = g_game_state.picture_banks().ennemis()[91 + etape];
 			}
 		}
 
@@ -473,10 +473,10 @@ void EnnemiSonic::onAttackhorizontal()
 		}
 		if (dir == SENS_DROITE) {
 			x += speed;
-			pic = pbk_ennemis[anime(sonic_anim_boule_droite, 6, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(sonic_anim_boule_droite, 6, 3)];
 		} else {
 			x -= speed;
-			pic = pbk_ennemis[anime(sonic_anim_boule_gauche, 6, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(sonic_anim_boule_gauche, 6, 3)];
 		}
 	}
 	colFromPic();
@@ -505,9 +505,9 @@ void EnnemiSonic::onAttackvertical()
 				etape %= 5;
 			}
 			if (dir == SENS_DROITE) {
-				pic = pbk_ennemis[85 + etape];
+				pic = g_game_state.picture_banks().ennemis()[85 + etape];
 			} else {
-				pic = pbk_ennemis[91 + etape];
+				pic = g_game_state.picture_banks().ennemis()[91 + etape];
 			}
 		}
 
@@ -599,10 +599,10 @@ void EnnemiSonic::onAttackvertical()
 		}
 		if (dir == SENS_DROITE) {
 			x += speed;
-			pic = pbk_ennemis[anime(sonic_anim_boule_droite, 6, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(sonic_anim_boule_droite, 6, 3)];
 		} else {
 			x -= speed;
-			pic = pbk_ennemis[anime(sonic_anim_boule_gauche, 6, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(sonic_anim_boule_gauche, 6, 3)];
 		}
 	}
 	colFromPic();
@@ -638,9 +638,9 @@ void EnnemiSonic::onAttackepine()
 		etape %= 5;
 	}
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[85 + etape];
+		pic = g_game_state.picture_banks().ennemis()[85 + etape];
 	} else {
-		pic = pbk_ennemis[91 + etape];
+		pic = g_game_state.picture_banks().ennemis()[91 + etape];
 	}
 	ss_etape_attack += 1;
 	ss_etape_attack %= 1;
@@ -698,10 +698,10 @@ void EnnemiSonic::onAttackeclair()
 
 	if (dir == SENS_DROITE) {
 		y -= 1;
-		pic = pbk_ennemis[97 + ss_etape];
+		pic = g_game_state.picture_banks().ennemis()[97 + ss_etape];
 	} else {
 		y -= 1;
-		pic = pbk_ennemis[108 + ss_etape];
+		pic = g_game_state.picture_banks().ennemis()[108 + ss_etape];
 	}
 
 	colFromPic();

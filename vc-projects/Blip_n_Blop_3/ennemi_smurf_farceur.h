@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 #include "enemy.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Constantes
@@ -53,9 +54,9 @@ public:
 	{
 		if (porte_bomb) {
 			if (dir == SENS_DROITE)
-				draw(x + 26, y - decalage_y_cadeau, pbk_ennemis[56]);
+				draw(x + 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
 			else
-				draw(x - 26, y - decalage_y_cadeau, pbk_ennemis[56]);
+				draw(x - 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
 		}
 
 		draw(x, y, pic) ;

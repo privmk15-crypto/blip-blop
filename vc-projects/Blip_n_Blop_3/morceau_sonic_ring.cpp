@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "morceau_sonic_ring.h"
+#include "game_state.h"
 
 //implementation de la classe MorceauSonicRing
 
@@ -44,6 +45,6 @@ void MorceauSonicRing::update()
 		etape %= 4;
 	}
 
-	pic = pbk_ennemis[119 + etape];
+	pic = g_game_state.picture_banks().ennemis()[119 + etape];
 	updateADetruire();
 }

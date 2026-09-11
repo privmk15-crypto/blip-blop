@@ -61,9 +61,9 @@ void EnnemiYoshiDCA::onAvance()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[28];
+		pic = g_game_state.picture_banks().ennemis()[28];
 	} else {
-		pic = pbk_ennemis[31];
+		pic = g_game_state.picture_banks().ennemis()[31];
 	}
 
 	colFromPic();
@@ -89,9 +89,9 @@ void EnnemiYoshiDCA::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[71 + etape];
+			pic = g_game_state.picture_banks().ennemis()[71 + etape];
 		else
-			pic = pbk_ennemis[62 + etape];
+			pic = g_game_state.picture_banks().ennemis()[62 + etape];
 	}
 }
 
@@ -126,9 +126,9 @@ void EnnemiYoshiDCA::onTire()
 
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[54 + etape];
+		pic = g_game_state.picture_banks().ennemis()[54 + etape];
 	} else {
-		pic = pbk_ennemis[56 + etape];
+		pic = g_game_state.picture_banks().ennemis()[56 + etape];
 	}
 
 	colFromPic();
@@ -147,9 +147,9 @@ void EnnemiYoshiDCA::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[460 + etape];
+			pic = g_game_state.picture_banks().ennemis()[460 + etape];
 		else
-			pic = pbk_ennemis[474 + etape];
+			pic = g_game_state.picture_banks().ennemis()[474 + etape];
 	}
 }
 

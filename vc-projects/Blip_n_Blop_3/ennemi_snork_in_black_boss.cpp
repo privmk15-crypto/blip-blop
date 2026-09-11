@@ -28,7 +28,7 @@ EnnemiSnorkInBlackBoss::EnnemiSnorkInBlackBoss(): position(1), type_attack(0), a
 	pv = 15000;
 	dy = 0;
 	dir = SENS_GAUCHE;
-	pic = pbk_ennemis[380];
+	pic = g_game_state.picture_banks().ennemis()[380];
 }
 
 
@@ -86,7 +86,7 @@ void EnnemiSnorkInBlackBoss::onAvance()
 			mbk_niveau.play(1);
 			g_game_state.game_flags()[FLAG_TIMER] = 50;
 		} else {
-			pic = pbk_ennemis[383 + etape];
+			pic = g_game_state.picture_banks().ennemis()[383 + etape];
 		}
 	} else if (g_game_state.game_flags()[0] == 2) {
 		etape ++;
@@ -281,10 +281,10 @@ void EnnemiSnorkInBlackBoss::onAvance()
 
 		if (position == 0 || position == 2) {
 			dir = SENS_DROITE;
-			pic = pbk_ennemis[401];
+			pic = g_game_state.picture_banks().ennemis()[401];
 		} else {
 			dir = SENS_GAUCHE;
-			pic = pbk_ennemis[400];
+			pic = g_game_state.picture_banks().ennemis()[400];
 		}
 	}
 
@@ -403,9 +403,9 @@ void EnnemiSnorkInBlackBoss::onTombe()
 		}*/
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[anime(anim_snork_in_black_boss_saute_droite, 4, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_boss_saute_droite, 4, 6)];
 	} else {
-		pic = pbk_ennemis[anime(anim_snork_in_black_boss_saute_gauche, 4, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_boss_saute_gauche, 4, 6)];
 	}
 
 	colFromPic();
@@ -422,10 +422,10 @@ void EnnemiSnorkInBlackBoss::onMeure()
 
 			if (position == 0 || position == 2) {
 				dir = SENS_DROITE;
-				pic = pbk_ennemis[401];
+				pic = g_game_state.picture_banks().ennemis()[401];
 			} else {
 				dir = SENS_GAUCHE;
-				pic = pbk_ennemis[400];
+				pic = g_game_state.picture_banks().ennemis()[400];
 			}
 		} else {
 			switch (position) {
@@ -548,9 +548,9 @@ void EnnemiSnorkInBlackBoss::onMeure()
 		}
 
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[anime(anim_snork_in_black_boss_saute_droite, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_boss_saute_droite, 4, 6)];
 		} else {
-			pic = pbk_ennemis[anime(anim_snork_in_black_boss_saute_gauche, 4, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_snork_in_black_boss_saute_gauche, 4, 6)];
 		}
 	} else if (g_game_state.game_flags()[0] == 3) {
 		shark = true;
@@ -712,9 +712,9 @@ void EnnemiSnorkInBlackBoss::onTire()
 		}
 
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[402 + 2 * (etape / 2) + ss_etape / 3];
+			pic = g_game_state.picture_banks().ennemis()[402 + 2 * (etape / 2) + ss_etape / 3];
 		} else {
-			pic = pbk_ennemis[408 + 2 * (etape / 2) + ss_etape / 3];
+			pic = g_game_state.picture_banks().ennemis()[408 + 2 * (etape / 2) + ss_etape / 3];
 		}
 	} else {
 		ss_etape ++;
@@ -750,9 +750,9 @@ void EnnemiSnorkInBlackBoss::onTire()
 			return;
 		} else {
 			if (dir == SENS_DROITE) {
-				pic = pbk_ennemis[421];
+				pic = g_game_state.picture_banks().ennemis()[421];
 			} else {
-				pic = pbk_ennemis[420];
+				pic = g_game_state.picture_banks().ennemis()[420];
 			}
 		}
 	}
@@ -819,22 +819,22 @@ void EnnemiSnorkInBlackBoss::onTire()
 	{
 		if (etape == 0)
 		{
-			pic = pbk_ennemis[344];
+			pic = g_game_state.picture_banks().ennemis()[344];
 		}
 		else
 		{
-			pic = pbk_ennemis[350 + etape - 1];
+			pic = g_game_state.picture_banks().ennemis()[350 + etape - 1];
 		}
 	}
 	else
 	{
 		if (etape == 0)
 		{
-			pic = pbk_ennemis[347 ];
+			pic = g_game_state.picture_banks().ennemis()[347 ];
 		}
 		else
 		{
-			pic = pbk_ennemis[352 + etape - 1];
+			pic = g_game_state.picture_banks().ennemis()[352 + etape - 1];
 		}
 	}*/
 	colFromPic();
@@ -858,9 +858,9 @@ void EnnemiSnorkInBlackBoss::affiche()
 	}
 	if (shark) {
 		if (x_shark < 5904) {
-			draw(x_shark, y_shark, pbk_ennemis[441]);
+			draw(x_shark, y_shark, g_game_state.picture_banks().ennemis()[441]);
 		} else {
-			draw(x_shark, y_shark, pbk_ennemis[440]);
+			draw(x_shark, y_shark, g_game_state.picture_banks().ennemis()[440]);
 		}
 	}
 }

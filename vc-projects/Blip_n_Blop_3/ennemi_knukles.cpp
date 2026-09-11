@@ -109,10 +109,10 @@ void EnnemiKnukles::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[etape + 152];
+		pic = g_game_state.picture_banks().ennemis()[etape + 152];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[etape + 160];
+		pic = g_game_state.picture_banks().ennemis()[etape + 160];
 	}
 	if (speed < KNUKLES_SPEED) {
 		etape_speed++;
@@ -141,13 +141,13 @@ void EnnemiKnukles::onMeure()
 		{
 			if (!mur_opaque( x + speed, y) )
 				x += speed;
-			pic = pbk_ennemis[122+etape];
+			pic = g_game_state.picture_banks().ennemis()[122+etape];
 		}
 		else
 		{
 			if ( !mur_opaque( x - speed, y) )
 				x -= speed;
-			pic = pbk_ennemis[124+etape];
+			pic = g_game_state.picture_banks().ennemis()[124+etape];
 		}
 		if ( dy > 0 && (yp=plat( x, y+dy)) != 0)
 		{
@@ -181,11 +181,11 @@ void EnnemiKnukles::onMeure()
 			if (dir == SENS_GAUCHE) {
 				if (!mur_opaque(x - speed, y))
 					x -= speed;
-				pic = pbk_ennemis[514 + etape];
+				pic = g_game_state.picture_banks().ennemis()[514 + etape];
 			} else {
 				if (!mur_opaque(x + speed, y))
 					x += speed;
-				pic = pbk_ennemis[504 + etape];
+				pic = g_game_state.picture_banks().ennemis()[504 + etape];
 			}
 		}
 	}
@@ -234,9 +234,9 @@ void EnnemiKnukles::onSaute()
 	}
 	//}
 	if (dir == SENS_GAUCHE) {
-		pic = pbk_ennemis[170 + etape];
+		pic = g_game_state.picture_banks().ennemis()[170 + etape];
 	} else {
-		pic = pbk_ennemis[168 + etape];
+		pic = g_game_state.picture_banks().ennemis()[168 + etape];
 	}
 	colFromPic();
 }
@@ -277,7 +277,7 @@ void EnnemiKnukles::onCharge()
 			onAvance();
 			return;
 		}
-		pic = pbk_ennemis[150 + etape];
+		pic = g_game_state.picture_banks().ennemis()[150 + etape];
 	} else {
 		if (!mur_opaque(x + speed, y)) {
 			marche(speed);//x += speed;
@@ -291,7 +291,7 @@ void EnnemiKnukles::onCharge()
 			onAvance();
 			return;
 		}
-		pic = pbk_ennemis[148 + etape];
+		pic = g_game_state.picture_banks().ennemis()[148 + etape];
 	}
 	colFromPic();
 }
@@ -316,10 +316,10 @@ void EnnemiKnukles::onTombe()
 
 	if (dir == SENS_DROITE) {
 		x += speed;
-		pic = pbk_ennemis[152];
+		pic = g_game_state.picture_banks().ennemis()[152];
 	} else {
 		x -= speed;
-		pic = pbk_ennemis[160];
+		pic = g_game_state.picture_banks().ennemis()[160];
 	}
 
 	colFromPic();
@@ -339,9 +339,9 @@ void EnnemiKnukles::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[392 + etape];
+			pic = g_game_state.picture_banks().ennemis()[392 + etape];
 		else
-			pic = pbk_ennemis[402 + etape];
+			pic = g_game_state.picture_banks().ennemis()[402 + etape];
 	}
 }
 

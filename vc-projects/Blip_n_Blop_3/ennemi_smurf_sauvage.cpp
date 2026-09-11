@@ -50,12 +50,12 @@ EnnemiSmurfSauvage::EnnemiSmurfSauvage() : etape_shoot(0), position(false)
 	switch (dir) {
 		case SENS_DROITE :
 			num_pic = 139 ;
-			pic = pbk_ennemis[140] ;
+			pic = g_game_state.picture_banks().ennemis()[140] ;
 			shoot_direction = BAS_DROITE ;
 			break ;
 		case SENS_GAUCHE :
 			num_pic = 141 ;
-			pic = pbk_ennemis[142] ;
+			pic = g_game_state.picture_banks().ennemis()[142] ;
 			shoot_direction = BAS_GAUCHE ;
 			break ;
 	}
@@ -108,7 +108,7 @@ void EnnemiSmurfSauvage::update()
 
 
 	if (etat != ETAT_MEURE)
-		pic = pbk_ennemis[num_pic + etape ] ;
+		pic = g_game_state.picture_banks().ennemis()[num_pic + etape ] ;
 
 	if (blood != 0)
 		blood -= 1;
@@ -259,11 +259,11 @@ void EnnemiSmurfSauvage::onMeure()
 		col_on = false;
 
 		if (ok) {
-			grave(x, y - 50, pbk_ennemis[117]) ;
-			grave(x, y - 100, pbk_ennemis[117]) ;
-			grave(x, y - 150, pbk_ennemis[117]) ;
-			grave(x, y - 200, pbk_ennemis[117]) ;
-			grave(x, y - 250, pbk_ennemis[117]) ;
+			grave(x, y - 50, g_game_state.picture_banks().ennemis()[117]) ;
+			grave(x, y - 100, g_game_state.picture_banks().ennemis()[117]) ;
+			grave(x, y - 150, g_game_state.picture_banks().ennemis()[117]) ;
+			grave(x, y - 200, g_game_state.picture_banks().ennemis()[117]) ;
+			grave(x, y - 250, g_game_state.picture_banks().ennemis()[117]) ;
 			grave(x, y, pic);
 			a_detruire = true;
 		}
@@ -274,9 +274,9 @@ void EnnemiSmurfSauvage::onMeure()
 		if (ss_etape == 0) {
 			etape += 1 ;
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[117 + etape] ;
+				pic = g_game_state.picture_banks().ennemis()[117 + etape] ;
 			else
-				pic = pbk_ennemis[122 + etape] ;
+				pic = g_game_state.picture_banks().ennemis()[122 + etape] ;
 		}
 	}
 }
@@ -294,8 +294,8 @@ void EnnemiSmurfSauvage::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[34 + etape];
+			pic = g_game_state.picture_banks().ennemis()[34 + etape];
 		else
-			pic = pbk_ennemis[40 + etape];
+			pic = g_game_state.picture_banks().ennemis()[40 + etape];
 	}
 }

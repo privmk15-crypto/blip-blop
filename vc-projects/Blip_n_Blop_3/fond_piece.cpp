@@ -32,7 +32,7 @@ void FondPiece::update()
 			etape_synchro %= 4;
 		}
 	}
-	pic = pbk_niveau[9 + etape_synchro];
+	pic = g_game_state.picture_banks().niveau()[9 + etape_synchro];
 	if (x < offset - 100)
 		a_detruire = true;
 };

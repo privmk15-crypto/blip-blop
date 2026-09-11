@@ -78,10 +78,10 @@ void EnnemiSmurfCostaud::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[anime(marche_droite, 6, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(marche_droite, 6, 6)];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[anime(marche_gauche, 6, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(marche_gauche, 6, 6)];
 	}
 
 	if (etape_shoot >= wait_shoot && plat(x, y) != 0) {
@@ -117,9 +117,9 @@ void EnnemiSmurfCostaud::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[253 + etape];
+			pic = g_game_state.picture_banks().ennemis()[253 + etape];
 		else
-			pic = pbk_ennemis[259 + etape];
+			pic = g_game_state.picture_banks().ennemis()[259 + etape];
 	}
 }
 
@@ -150,9 +150,9 @@ void EnnemiSmurfCostaud::onMeure()
 		grave(x, y, pic);
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[273 + etape];
+			pic = g_game_state.picture_banks().ennemis()[273 + etape];
 		else
-			pic = pbk_ennemis[287 + etape];
+			pic = g_game_state.picture_banks().ennemis()[287 + etape];
 	}
 }
 
@@ -186,9 +186,9 @@ void EnnemiSmurfCostaud::onTireHadoken()
 
 	if (etape <= 4) {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[237 + etape];
+			pic = g_game_state.picture_banks().ennemis()[237 + etape];
 		else
-			pic = pbk_ennemis[242 + etape];
+			pic = g_game_state.picture_banks().ennemis()[242 + etape];
 	}
 }
 
@@ -231,9 +231,9 @@ void EnnemiSmurfCostaud::onTireDragonPunch()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[223 + etape];
+		pic = g_game_state.picture_banks().ennemis()[223 + etape];
 	else
-		pic = pbk_ennemis[230 + etape];
+		pic = g_game_state.picture_banks().ennemis()[230 + etape];
 
 	colFromPic();
 }
@@ -265,7 +265,7 @@ void EnnemiSmurfCostaud::onTireHurricanKick()
 		return;
 	}
 
-	pic = pbk_ennemis[247 + etape];
+	pic = g_game_state.picture_banks().ennemis()[247 + etape];
 
 	colFromPic();
 }

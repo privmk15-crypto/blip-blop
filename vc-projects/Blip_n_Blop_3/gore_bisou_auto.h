@@ -2,6 +2,7 @@
 #define _GoreBisouAuto_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GoreBisouAuto : public Sprite
 {
@@ -41,14 +42,14 @@ public:
 			}
 
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[593 + etape];
+				pic = g_game_state.picture_banks().ennemis()[593 + etape];
 			else
-				pic = pbk_ennemis[607 + etape];
+				pic = g_game_state.picture_banks().ennemis()[607 + etape];
 		} else {
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[anime(anim_droite, 6, 6)];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 6, 6)];
 			else
-				pic = pbk_ennemis[anime(anim_gauche, 6, 6)];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 6, 6)];
 		}
 
 		if (dir == SENS_DROITE && !mur_opaque(x + SPEED, y))

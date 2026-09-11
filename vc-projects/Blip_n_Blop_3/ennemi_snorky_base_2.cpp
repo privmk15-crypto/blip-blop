@@ -23,7 +23,7 @@ const int anim_snorky_base_marche_gauche[] = { 119, 120, 121, 122, 123, 122, 121
 EnnemiSnorkyBase2::EnnemiSnorkyBase2(): wait_for_shoot(0), shoot_delay(50 + rand() % 200)
 {
 	pv = 150;
-	pic = pbk_ennemis[0];
+	pic = g_game_state.picture_banks().ennemis()[0];
 	dy = 0;
 }
 
@@ -88,14 +88,14 @@ void EnnemiSnorkyBase2::onAvance()
 	if (dir == SENS_GAUCHE) {
 		marche(-SNORKY_BASE_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snorky_base_marche_gauche, 8, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_gauche, 8, 4)];
 
 		if (mur_opaque(x - SNORKY_BASE_SPEED, y) || (x - SNORKY_BASE_SPEED < xmin))
 			dir = SENS_DROITE;
 	} else {
 		marche(SNORKY_BASE_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snorky_base_marche_droite, 8, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_droite, 8, 4)];
 
 		if (mur_opaque(x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + 640))
 			dir = SENS_GAUCHE;
@@ -154,9 +154,9 @@ void EnnemiSnorkyBase2::onMeure()
 	}
 
 	if (dir == SENS_GAUCHE) {
-		pic = pbk_ennemis[154 + etape];
+		pic = g_game_state.picture_banks().ennemis()[154 + etape];
 	} else {
-		pic = pbk_ennemis[144 + etape];
+		pic = g_game_state.picture_banks().ennemis()[144 + etape];
 	}
 }
 
@@ -201,7 +201,7 @@ void EnnemiSnorkyBase2::onTire()
 
 				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
-			pic = pbk_ennemis[124];
+			pic = g_game_state.picture_banks().ennemis()[124];
 		} else {
 			if ((x_cible < x) && (x_cible - x != 0)) {
 				int vy = ((y_cible - y + 50) * 6) / (x_cible - x);
@@ -226,15 +226,15 @@ void EnnemiSnorkyBase2::onTire()
 
 				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
-			pic = pbk_ennemis[134];
+			pic = g_game_state.picture_banks().ennemis()[134];
 		}
 	}
 
 	if (etape < 10) {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[124 + etape];
+			pic = g_game_state.picture_banks().ennemis()[124 + etape];
 		} else {
-			pic = pbk_ennemis[134 + etape];
+			pic = g_game_state.picture_banks().ennemis()[134 + etape];
 		}
 	}
 	colFromPic();
@@ -252,9 +252,9 @@ void EnnemiSnorkyBase2::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[173 + etape];
+			pic = g_game_state.picture_banks().ennemis()[173 + etape];
 		else
-			pic = pbk_ennemis[164 + etape];
+			pic = g_game_state.picture_banks().ennemis()[164 + etape];
 	}
 }
 

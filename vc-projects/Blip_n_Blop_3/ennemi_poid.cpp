@@ -6,7 +6,7 @@
 EnnemiPoid::EnnemiPoid(): nb_colision(0)
 {
 	pv = 1000;
-	pic = pbk_ennemis[169];
+	pic = g_game_state.picture_banks().ennemis()[169];
 	//col_on = false;
 }
 
@@ -15,7 +15,7 @@ void EnnemiPoid::update()
 	if (etat == ETAT_MEURE) {
 		onMeure();
 	} else {
-		pic = pbk_ennemis[169];
+		pic = g_game_state.picture_banks().ennemis()[169];
 		if (g_game_state.game_flags()[0] < 3) {
 			y = -100;
 			x = 565;
@@ -66,12 +66,12 @@ void EnnemiPoid::onMeure()
 			}
 		}
 		if (etape < 3) {
-			pic = pbk_ennemis[202 + etape];
+			pic = g_game_state.picture_banks().ennemis()[202 + etape];
 		}
 	} else {
 		tombe2();
 		if (mur_opaque(x, y + dy * 10)) {
-			pic = pbk_ennemis[201];
+			pic = g_game_state.picture_banks().ennemis()[201];
 			int i;
 			Sprite * s;
 			for (i = 0; i < 8 ; i++) {
@@ -81,7 +81,7 @@ void EnnemiPoid::onMeure()
 				g_game_state.entities().list_giclures().emplace_back(s);
 			}
 		} else if (mur_opaque(x, y + dy * 15)) {
-			pic = pbk_ennemis[200];
+			pic = g_game_state.picture_banks().ennemis()[200];
 			int i;
 			Sprite * s;
 			for (i = 0; i < 6 ; i++) {
@@ -91,7 +91,7 @@ void EnnemiPoid::onMeure()
 				g_game_state.entities().list_giclures().emplace_back(s);
 			}
 		} else if (mur_opaque(x, y + dy * 20)) {
-			pic = pbk_ennemis[200];
+			pic = g_game_state.picture_banks().ennemis()[200];
 			int i;
 			Sprite * s;
 			for (i = 0; i < 5 ; i++) {
@@ -102,7 +102,7 @@ void EnnemiPoid::onMeure()
 			}
 		} else if (mur_opaque(x, y + dy * 25)) {
 			g_game_state.game_flags()[0] = 6;
-			pic = pbk_ennemis[199];
+			pic = g_game_state.picture_banks().ennemis()[199];
 			int i;
 			Sprite * s;
 			for (i = 0; i < 4 ; i++) {
@@ -112,7 +112,7 @@ void EnnemiPoid::onMeure()
 				g_game_state.entities().list_giclures().emplace_back(s);
 			}
 		} else if (mur_opaque(x, y + dy * 30)) {
-			pic = pbk_ennemis[199];
+			pic = g_game_state.picture_banks().ennemis()[199];
 			int i;
 			Sprite * s;
 			for (i = 0; i < 3 ; i++) {
@@ -122,7 +122,7 @@ void EnnemiPoid::onMeure()
 				g_game_state.entities().list_giclures().emplace_back(s);
 			}
 		} else {
-			pic = pbk_ennemis[170];
+			pic = g_game_state.picture_banks().ennemis()[170];
 		}
 	}
 }

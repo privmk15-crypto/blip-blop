@@ -1,5 +1,6 @@
 
 #include "ennemi_com_volant.h"
+#include "game_state.h"
 
 EnnemiCOMVolant::EnnemiCOMVolant(): speed(0), attack(true)
 {
@@ -95,7 +96,7 @@ void EnnemiCOMVolant::onAvance()
 	else
 		x -= speed;
 
-	pic = pbk_ennemis[98 + etape];
+	pic = g_game_state.picture_banks().ennemis()[98 + etape];
 
 	colFromPic();
 }
@@ -116,6 +117,6 @@ void EnnemiCOMVolant::onMeure()
 	if (etape >= 22) {
 		a_detruire = true;
 	} else {
-		pic = pbk_ennemis[76 + etape];
+		pic = g_game_state.picture_banks().ennemis()[76 + etape];
 	}
 }

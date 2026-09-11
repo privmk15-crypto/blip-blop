@@ -2,6 +2,8 @@
 #ifndef _VehiculeTestTourelle_
 #define _VehiculeTestTourelle_
 
+#include "game_state.h"
+
 class VehiculeTestTourelle : public Vehicule
 {
 public:
@@ -10,7 +12,7 @@ public:
 
 	VehiculeTestTourelle() : lat(0)
 	{
-		pic = pbk_ennemis[525];
+		pic = g_game_state.picture_banks().ennemis()[525];
 	}
 
 	virtual bool canFire()
@@ -45,7 +47,7 @@ public:
 			}
 		}
 
-		pic = pbk_ennemis[525 + dir];
+		pic = g_game_state.picture_banks().ennemis()[525 + dir];
 
 		if (ctrl->saut()) {
 			joueur->unlockVehicule();

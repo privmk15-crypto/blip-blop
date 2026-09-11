@@ -3,6 +3,7 @@
 #define _FondWindows_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondWindows : public Sprite
 {
@@ -29,7 +30,7 @@ public:
 				break;
 		}
 
-		pic = pbk_niveau[i];
+		pic = g_game_state.picture_banks().niveau()[i];
 
 		updateADetruire();
 	};

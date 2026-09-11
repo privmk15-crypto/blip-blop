@@ -86,7 +86,7 @@ void EnnemiLemmings::onAvance()
 
 		tombe();
 
-		pic = pbk_ennemis[14 + etape];
+		pic = g_game_state.picture_banks().ennemis()[14 + etape];
 
 		if (mur_opaque(x, y) || x < 5)
 			dir = SENS_DROITE;
@@ -95,7 +95,7 @@ void EnnemiLemmings::onAvance()
 
 		tombe();
 
-		pic = pbk_ennemis[etape];
+		pic = g_game_state.picture_banks().ennemis()[etape];
 
 		if (mur_opaque(x, y))
 			dir = SENS_GAUCHE;
@@ -145,9 +145,9 @@ void EnnemiLemmings::onMeure()
 		}
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[38 + etape];
+			pic = g_game_state.picture_banks().ennemis()[38 + etape];
 		else
-			pic = pbk_ennemis[28 + etape];
+			pic = g_game_state.picture_banks().ennemis()[28 + etape];
 	}
 }
 
@@ -163,9 +163,9 @@ void EnnemiLemmings::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[62 + etape];
+			pic = g_game_state.picture_banks().ennemis()[62 + etape];
 		else
-			pic = pbk_ennemis[48 + etape];
+			pic = g_game_state.picture_banks().ennemis()[48 + etape];
 	}
 }
 

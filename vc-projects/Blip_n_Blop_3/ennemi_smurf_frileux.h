@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 #include "ennemi_smurf.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe
@@ -41,14 +42,14 @@ public:
 		if (etat != ETAT_MEURE && etat != ETAT_CARBONISE) {
 			switch (dir) {
 				case SENS_GAUCHE :
-					draw(x + 7, y - 18, pbk_ennemis[147]) ;
+					draw(x + 7, y - 18, g_game_state.picture_banks().ennemis()[147]) ;
 					EnnemiSmurf::affiche() ;
-					draw(x, y - 20, pbk_ennemis[149]) ;
+					draw(x, y - 20, g_game_state.picture_banks().ennemis()[149]) ;
 					break ;
 				case SENS_DROITE :
-					draw(x - 7, y - 18, pbk_ennemis[148]) ;
+					draw(x - 7, y - 18, g_game_state.picture_banks().ennemis()[148]) ;
 					EnnemiSmurf::affiche() ;
-					draw(x, y - 20, pbk_ennemis[150]) ;
+					draw(x, y - 20, g_game_state.picture_banks().ennemis()[150]) ;
 					break ;
 			}
 		} else

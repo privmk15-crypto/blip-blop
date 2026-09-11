@@ -7,6 +7,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe Tir
@@ -56,9 +57,9 @@ public:
 			dir = SENS_GAUCHE;
 
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[311 + etape];
+			pic = g_game_state.picture_banks().ennemis()[311 + etape];
 		else
-			pic = pbk_ennemis[313 + etape];
+			pic = g_game_state.picture_banks().ennemis()[313 + etape];
 
 
 		x += dx / 13;

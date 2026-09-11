@@ -17,6 +17,7 @@
 #define _BonusFusil_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusFusil : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusFusil()
 	{
-		pic = pbk_misc[9];
+		pic = g_game_state.picture_banks().misc()[9];
 		col_on = true;
 	};
 

@@ -117,10 +117,10 @@ void EnnemiYoshi::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(YOSHI_SPEED);
-		pic = pbk_ennemis[anime(anim_yoshi_marche_droite, 3, 3)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_yoshi_marche_droite, 3, 3)];
 	} else {
 		marche(-YOSHI_SPEED);
-		pic = pbk_ennemis[anime(anim_yoshi_marche_gauche, 3, 3)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_yoshi_marche_gauche, 3, 3)];
 	}
 	colFromPic();
 }
@@ -146,10 +146,10 @@ void EnnemiYoshi::onTombe()
 
 	if (dir == SENS_DROITE) {
 		x ++;
-		pic = pbk_ennemis[28];
+		pic = g_game_state.picture_banks().ennemis()[28];
 	} else {
 		x --;
-		pic = pbk_ennemis[31];
+		pic = g_game_state.picture_banks().ennemis()[31];
 	}
 
 	colFromPic();
@@ -174,18 +174,18 @@ void EnnemiYoshi::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[71 + etape];
+			pic = g_game_state.picture_banks().ennemis()[71 + etape];
 		else
-			pic = pbk_ennemis[62 + etape];
+			pic = g_game_state.picture_banks().ennemis()[62 + etape];
 	}
 }
 
 void EnnemiYoshi::onAttaque()
 {
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[anime(anim_yoshi_attaque_droite, 18, 2)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_yoshi_attaque_droite, 18, 2)];
 	} else {
-		pic = pbk_ennemis[anime(anim_yoshi_attaque_gauche, 18, 1)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_yoshi_attaque_gauche, 18, 1)];
 	}
 	if (etape >= 17) {
 		etat = ETAT_AVANCE;
@@ -231,9 +231,9 @@ void EnnemiYoshi::onTire()
 
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[54 + etape];
+		pic = g_game_state.picture_banks().ennemis()[54 + etape];
 	} else {
-		pic = pbk_ennemis[56 + etape];
+		pic = g_game_state.picture_banks().ennemis()[56 + etape];
 	}
 
 	colFromPic();
@@ -252,9 +252,9 @@ void EnnemiYoshi::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[460 + etape];
+			pic = g_game_state.picture_banks().ennemis()[460 + etape];
 		else
-			pic = pbk_ennemis[474 + etape];
+			pic = g_game_state.picture_banks().ennemis()[474 + etape];
 	}
 }
 

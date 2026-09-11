@@ -13,6 +13,7 @@
 ******************************************************************/
 
 #include "giclure.h"
+#include "game_state.h"
 
 void Giclure::update()
 {
@@ -30,7 +31,7 @@ void Giclure::update()
 	if (etape == 4)
 		a_detruire = true;
 	else
-		pic = pbk_misc[15 + dir * 4 + etape];
+		pic = g_game_state.picture_banks().misc()[15 + dir * 4 + etape];
 
 	x = pere->x + deltax;
 	y = pere->y + deltay;

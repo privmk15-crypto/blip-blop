@@ -14,11 +14,12 @@
 ******************************************************************/
 
 #include "morceau_tete_rayman.h"
+#include "game_state.h"
 
 
 MorceauTeteRayman::MorceauTeteRayman(int vx, int vy): dx(vx)
 {
-	pic = pbk_ennemis[496];
+	pic = g_game_state.picture_banks().ennemis()[496];
 	dy = vy;
 }
 
@@ -32,7 +33,7 @@ void MorceauTeteRayman::update()
 	if (ss_etape == 0) {
 		etape ++;
 		etape %= 8;
-		pic = pbk_ennemis[496 + etape];
+		pic = g_game_state.picture_banks().ennemis()[496 + etape];
 	}
 
 

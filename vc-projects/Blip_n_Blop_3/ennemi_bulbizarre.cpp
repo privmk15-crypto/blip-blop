@@ -53,10 +53,10 @@ void EnnemiBulbizarre::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(1);
-		pic = pbk_ennemis[24 + etape];
+		pic = g_game_state.picture_banks().ennemis()[24 + etape];
 	} else {
 		marche(-1);
-		pic = pbk_ennemis[26 + etape];
+		pic = g_game_state.picture_banks().ennemis()[26 + etape];
 	}
 
 
@@ -83,9 +83,9 @@ void EnnemiBulbizarre::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[36 + etape];
+			pic = g_game_state.picture_banks().ennemis()[36 + etape];
 		else
-			pic = pbk_ennemis[28 + etape];
+			pic = g_game_state.picture_banks().ennemis()[28 + etape];
 	}
 }
 
@@ -101,9 +101,9 @@ void EnnemiBulbizarre::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[128 + etape];
+			pic = g_game_state.picture_banks().ennemis()[128 + etape];
 		else
-			pic = pbk_ennemis[143 + etape];
+			pic = g_game_state.picture_banks().ennemis()[143 + etape];
 	}
 }
 

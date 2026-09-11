@@ -3,6 +3,7 @@
 #define _FondPokeAlarme1_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondPokeAlarme1 : public Sprite
 {
@@ -17,7 +18,7 @@ public:
 			etape %= 14;
 		}
 
-		pic = pbk_niveau[etape];
+		pic = g_game_state.picture_banks().niveau()[etape];
 		updateADetruire();
 	};
 
@@ -36,7 +37,7 @@ public:
 			etape %= 14;
 		}
 
-		pic = pbk_niveau[14 + etape];
+		pic = g_game_state.picture_banks().niveau()[14 + etape];
 		updateADetruire();
 	};
 };
@@ -54,7 +55,7 @@ public:
 			etape %= 14;
 		}
 
-		pic = pbk_niveau[28 + etape];
+		pic = g_game_state.picture_banks().niveau()[28 + etape];
 		updateADetruire();
 	};
 };

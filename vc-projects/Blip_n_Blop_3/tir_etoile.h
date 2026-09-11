@@ -3,6 +3,7 @@
 #define _TirEtoile
 
 #include "tir.h"
+#include "game_state.h"
 
 class TirEtoile : public Tir
 {
@@ -30,7 +31,7 @@ public:
 			etape %= 24;
 		}
 
-		pic = pbk_ennemis[130 + etape];
+		pic = g_game_state.picture_banks().ennemis()[130 + etape];
 
 		if (dir == SENS_DROITE) {
 			if (mur_opaque(x + SPEED, y))

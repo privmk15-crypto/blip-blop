@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "ennemi_smurf_paysan.h"
+#include "game_state.h"
 
 const int smurf_paysan_charge_droite[] = { 156, 157, 158, 159 };
 const int smurf_paysan_charge_gauche[] = { 160, 161, 162, 163 };
@@ -81,18 +82,18 @@ void EnnemiSmurfPaysan::onAvance()
 	if (etat == ETAT_MEURE) {
 		if (dir == SENS_DROITE) {
 			marche(SMURF_PAYSAN_SPEED);
-			pic	= pbk_ennemis[anime(smurf_paysan_decapite_droite, 4, 3)];
+			pic	= g_game_state.picture_banks().ennemis()[anime(smurf_paysan_decapite_droite, 4, 3)];
 		} else {
 			marche(-SMURF_PAYSAN_SPEED);
-			pic = pbk_ennemis[anime(smurf_paysan_decapite_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(smurf_paysan_decapite_gauche, 4, 3)];
 		}
 	} else {
 		if (dir == SENS_DROITE) {
 			marche(SMURF_PAYSAN_SPEED);
-			pic	= pbk_ennemis[anime(smurf_paysan_charge_droite, 4, 3)];
+			pic	= g_game_state.picture_banks().ennemis()[anime(smurf_paysan_charge_droite, 4, 3)];
 		} else {
 			marche(-SMURF_PAYSAN_SPEED);
-			pic = pbk_ennemis[anime(smurf_paysan_charge_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(smurf_paysan_charge_gauche, 4, 3)];
 		}
 		colFromPic();
 	}
@@ -110,9 +111,9 @@ void EnnemiSmurfPaysan::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[34 + etape];
+			pic = g_game_state.picture_banks().ennemis()[34 + etape];
 		else
-			pic = pbk_ennemis[40 + etape];
+			pic = g_game_state.picture_banks().ennemis()[40 + etape];
 	}
 }
 

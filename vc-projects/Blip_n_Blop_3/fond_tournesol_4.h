@@ -2,6 +2,7 @@
 #define _FondTournesol4_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondTournesol4 : public Sprite
 {
@@ -16,7 +17,7 @@ public:
 			etape %= 2;
 		}
 
-		pic = pbk_niveau[26 + etape];
+		pic = g_game_state.picture_banks().niveau()[26 + etape];
 	};
 };
 

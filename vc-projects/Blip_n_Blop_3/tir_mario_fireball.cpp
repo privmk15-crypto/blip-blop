@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_mario_fireball.h"
+#include "game_state.h"
 
 
 TirMarioFireball::TirMarioFireball(int vx): speed_etape(0)
@@ -55,19 +56,19 @@ void TirMarioFireball::update()
 	}
 
 	if (dx > 12) {
-		pic = pbk_ennemis[27 + etape];
+		pic = g_game_state.picture_banks().ennemis()[27 + etape];
 	} else if (dx > 6) {
-		pic = pbk_ennemis[24 + etape];
+		pic = g_game_state.picture_banks().ennemis()[24 + etape];
 	} else if (dx > 0) {
-		pic = pbk_ennemis[21 + etape];
+		pic = g_game_state.picture_banks().ennemis()[21 + etape];
 	}
 
 	if (dx < -12) {
-		pic = pbk_ennemis[18 + etape];
+		pic = g_game_state.picture_banks().ennemis()[18 + etape];
 	} else if (dx < -6) {
-		pic = pbk_ennemis[15 + etape];
+		pic = g_game_state.picture_banks().ennemis()[15 + etape];
 	} else if (dx < 0) {
-		pic = pbk_ennemis[12 + etape];
+		pic = g_game_state.picture_banks().ennemis()[12 + etape];
 	}
 
 	colFromPic();

@@ -78,9 +78,9 @@ void EnnemiBisouAuto::onAvance()
 	if (!mur_opaque(x, y + goy)) y += goy;
 
 	if (dx > 0)
-		pic = pbk_ennemis[anime(anim_droite, 4, 8)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 4, 8)];
 	else
-		pic = pbk_ennemis[anime(anim_gauche, 4, 8)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 8)];
 
 	colFromPic();
 }
@@ -116,9 +116,9 @@ void EnnemiBisouAuto::onMeure()
 		dy = -200;
 
 	if (dx > 0)
-		pic = pbk_ennemis[anime(anim_droite, 4, 8)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 4, 8)];
 	else
-		pic = pbk_ennemis[anime(anim_gauche, 4, 8)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 8)];
 
 	if ((ss_etape % 2) == 0) {
 		Explosion * s = new Explosion();

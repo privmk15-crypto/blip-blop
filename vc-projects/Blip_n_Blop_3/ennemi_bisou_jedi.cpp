@@ -63,10 +63,10 @@ void EnnemiBisouJedi::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[467 + etape];
+		pic = g_game_state.picture_banks().ennemis()[467 + etape];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[475 + etape];
+		pic = g_game_state.picture_banks().ennemis()[475 + etape];
 	}
 
 	if (etape_shoot > wait_shoot && tete_turc != NULL) {
@@ -128,9 +128,9 @@ void EnnemiBisouJedi::onMeure()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[483 + etape];
+		pic = g_game_state.picture_banks().ennemis()[483 + etape];
 	else
-		pic = pbk_ennemis[504 + etape];
+		pic = g_game_state.picture_banks().ennemis()[504 + etape];
 }
 
 
@@ -179,9 +179,9 @@ void EnnemiBisouJedi::onCarbonise()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[589 + etape];
+		pic = g_game_state.picture_banks().ennemis()[589 + etape];
 	else
-		pic = pbk_ennemis[597 + etape];
+		pic = g_game_state.picture_banks().ennemis()[597 + etape];
 }
 
 void EnnemiBisouJedi::affiche()
@@ -194,8 +194,8 @@ void EnnemiBisouJedi::affiche()
 
 	if (a_epee) {
 		if (dir == SENS_DROITE)
-			draw(x + dx_epee[etape], y + dy_epee[etape], pbk_ennemis[549 + etape_epee[etape]]);
+			draw(x + dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[549 + etape_epee[etape]]);
 		else
-			draw(x - dx_epee[etape], y + dy_epee[etape], pbk_ennemis[554 + etape_epee[etape]]);
+			draw(x - dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[554 + etape_epee[etape]]);
 	}
 }

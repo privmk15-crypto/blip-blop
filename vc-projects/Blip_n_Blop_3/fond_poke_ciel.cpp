@@ -1,10 +1,11 @@
 
 #include "globals.h"
 #include "fond_poke_ciel.h"
+#include "game_state.h"
 
 FondPokeCiel::FondPokeCiel()
 {
-	pic = pbk_niveau[48];
+	pic = g_game_state.picture_banks().niveau()[48];
 }
 
 void FondPokeCiel::update()
@@ -26,9 +27,9 @@ void FondPokeCiel::affiche()
 	Rect					r;
 	int						largeur;
 
-	surf = pbk_niveau[50]->Surf();
-	xs = pbk_niveau[50]->xSize();
-	ys = pbk_niveau[50]->ySize();
+	surf = g_game_state.picture_banks().niveau()[50]->Surf();
+	xs = g_game_state.picture_banks().niveau()[50]->xSize();
+	ys = g_game_state.picture_banks().niveau()[50]->ySize();
 
 	r.top		= 0;
 	r.left		= etape;
@@ -63,5 +64,5 @@ void FondPokeCiel::affiche()
 	backSurface->BltFast(x - offset + decalage, y + 50, surf, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
 
-	draw(x, y, pbk_niveau[49]);
+	draw(x, y, g_game_state.picture_banks().niveau()[49]);
 }

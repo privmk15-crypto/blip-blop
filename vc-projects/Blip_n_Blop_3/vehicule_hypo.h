@@ -3,6 +3,7 @@
 #define _VehiculeHypo_
 
 #include "vehicule.h"
+#include "game_state.h"
 
 class VehiculeHypo : public Vehicule
 {
@@ -12,7 +13,7 @@ public:
 
 	VehiculeHypo() : has_been_used(false)
 	{
-		pic = pbk_ennemis[255];
+		pic = g_game_state.picture_banks().ennemis()[255];
 	}
 
 	virtual bool canFire()

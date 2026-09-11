@@ -24,7 +24,7 @@ const int anim_snorky_base_marche_gauche[] = { 5, 6, 7, 8, 9, 8, 7, 6 };
 EnnemiSnorkyBase1::EnnemiSnorkyBase1(): wait_for_shoot(0), shoot_delay(50 + rand() % 200)
 {
 	pv = 200;
-	pic = pbk_ennemis[0];
+	pic = g_game_state.picture_banks().ennemis()[0];
 	dy = 0;
 }
 
@@ -87,14 +87,14 @@ void EnnemiSnorkyBase1::onAvance()
 	if (dir == SENS_GAUCHE) {
 		marche(-SNORKY_BASE_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snorky_base_marche_gauche, 8, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_gauche, 8, 4)];
 
 		if (mur_opaque(x - SNORKY_BASE_SPEED, y) || (x - SNORKY_BASE_SPEED < xmin))
 			dir = SENS_DROITE;
 	} else {
 		marche(SNORKY_BASE_SPEED);
 
-		pic = pbk_ennemis[anime(anim_snorky_base_marche_droite, 8, 4)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_snorky_base_marche_droite, 8, 4)];
 
 		if (mur_opaque(x + SNORKY_BASE_SPEED, y) || (x + SNORKY_BASE_SPEED > offset + 640))
 			dir = SENS_GAUCHE;
@@ -144,10 +144,10 @@ void EnnemiSnorkyBase1::onMeure()
 	} else {
 		if (dir == SENS_GAUCHE) {
 			marche(-SNORKY_BASE_SPEED);
-			pic = pbk_ennemis[71 + etape];
+			pic = g_game_state.picture_banks().ennemis()[71 + etape];
 		} else {
 			marche(SNORKY_BASE_SPEED);
-			pic = pbk_ennemis[38 + etape];
+			pic = g_game_state.picture_banks().ennemis()[38 + etape];
 		}
 	}
 }
@@ -194,9 +194,9 @@ void EnnemiSnorkyBase1::onTire()
 
 	if (etape < 11) {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[10 + etape];
+			pic = g_game_state.picture_banks().ennemis()[10 + etape];
 		} else {
-			pic = pbk_ennemis[21 + etape];
+			pic = g_game_state.picture_banks().ennemis()[21 + etape];
 		}
 	}
 }
@@ -213,9 +213,9 @@ void EnnemiSnorkyBase1::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[105 + etape];
+			pic = g_game_state.picture_banks().ennemis()[105 + etape];
 		else
-			pic = pbk_ennemis[96 + etape];
+			pic = g_game_state.picture_banks().ennemis()[96 + etape];
 	}
 }
 

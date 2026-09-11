@@ -11,9 +11,9 @@ public:
 	virtual void update()
 	{
 		if (g_game_state.phase_clock().phase())
-			pic = pbk_niveau[0];
+			pic = g_game_state.picture_banks().niveau()[0];
 		else
-			pic = pbk_niveau[1];
+			pic = g_game_state.picture_banks().niveau()[1];
 
 		if (x < offset - 100)
 			a_detruire = true;

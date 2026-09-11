@@ -17,6 +17,7 @@
 #define _BonusTonneau_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusTonneau : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusTonneau()
 	{
-		pic = pbk_misc[47];
+		pic = g_game_state.picture_banks().misc()[47];
 		col_on = true;
 	};
 

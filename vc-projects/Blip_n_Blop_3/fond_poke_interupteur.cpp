@@ -37,7 +37,7 @@ void FondPokeInterupteur::update()
 	}
 
 	if (etat) {
-		pic = pbk_niveau[anim_interupteur_on[etape]];
+		pic = g_game_state.picture_banks().niveau()[anim_interupteur_on[etape]];
 	} else {
 		if (tete_turc != NULL) {
 			if ((tete_turc->x > x - 10) && (tete_turc->x < x + 33) && (tete_turc->y > y - 10) && (tete_turc->y < y + 51)) {
@@ -46,7 +46,7 @@ void FondPokeInterupteur::update()
 				sbk_niveau.play(2);
 			}
 		}
-		pic = pbk_niveau[anim_interupteur_off[etape]];
+		pic = g_game_state.picture_banks().niveau()[anim_interupteur_off[etape]];
 	}
 
 

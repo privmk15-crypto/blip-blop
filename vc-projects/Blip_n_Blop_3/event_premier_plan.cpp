@@ -31,7 +31,7 @@ void EventPremierPlan::doEvent()
 
 	s->x = x;
 	s->y = y;
-	s->pic = pbk_niveau[id_fond];
+	s->pic = g_game_state.picture_banks().niveau()[id_fond];
 
 	g_game_state.entities().list_premiers_plans().emplace_back(s);
 

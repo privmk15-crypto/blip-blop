@@ -75,14 +75,14 @@ void EnnemiSnorkyHyporider::onAvance()
 
 	if (dir == SENS_GAUCHE) {
 		x -=  HYPORIDER_SPEED;
-		pic = pbk_ennemis[291];
+		pic = g_game_state.picture_banks().ennemis()[291];
 
 		if (mur_opaque(x - HYPORIDER_SPEED, y) || (x - HYPORIDER_SPEED < xmin))
 			dir = SENS_DROITE;
 	} else {
 		x += HYPORIDER_SPEED;
 
-		pic = pbk_ennemis[286];
+		pic = g_game_state.picture_banks().ennemis()[286];
 
 		if (mur_opaque(x + HYPORIDER_SPEED, y) || (x + HYPORIDER_SPEED > offset + 640))
 			dir = SENS_GAUCHE;
@@ -125,18 +125,18 @@ void EnnemiSnorkyHyporider::onMeure()
 		nageoire = 0;
 		if (dir == SENS_GAUCHE) {
 			x -= 4;
-			pic = pbk_ennemis[325];
+			pic = g_game_state.picture_banks().ennemis()[325];
 		} else {
 			x += 4;
-			pic = pbk_ennemis[312];
+			pic = g_game_state.picture_banks().ennemis()[312];
 		}
 	} else {
 		if (dir == SENS_GAUCHE) {
 			x -= HYPORIDER_SPEED;
-			pic = pbk_ennemis[313 + etape];
+			pic = g_game_state.picture_banks().ennemis()[313 + etape];
 		} else {
 			x += HYPORIDER_SPEED;
-			pic = pbk_ennemis[300 + etape];
+			pic = g_game_state.picture_banks().ennemis()[300 + etape];
 		}
 	}
 }
@@ -167,7 +167,7 @@ void EnnemiSnorkyHyporider::onCharge()
 			}
 
 			x += HYPORIDER_CHARGE_SPEED;
-			pic = pbk_ennemis[297];
+			pic = g_game_state.picture_banks().ennemis()[297];
 		} else {
 			if (mur_opaque(x - HYPORIDER_CHARGE_SPEED, y) || (x - HYPORIDER_CHARGE_SPEED < xmin)) {
 				etape = 0;
@@ -180,13 +180,13 @@ void EnnemiSnorkyHyporider::onCharge()
 			}
 
 			x -= HYPORIDER_CHARGE_SPEED;
-			pic = pbk_ennemis[299];
+			pic = g_game_state.picture_banks().ennemis()[299];
 		}
 	} else {
 		if (dir == SENS_DROITE) {
-			pic = pbk_ennemis[296];
+			pic = g_game_state.picture_banks().ennemis()[296];
 		} else {
-			pic = pbk_ennemis[298];
+			pic = g_game_state.picture_banks().ennemis()[298];
 		}
 	}
 	colFromPic();
@@ -203,10 +203,10 @@ void EnnemiSnorkyHyporider::onCarbonise()
 
 	if (dir == SENS_DROITE) {
 		x += 6;
-		pic = pbk_ennemis[312];
+		pic = g_game_state.picture_banks().ennemis()[312];
 	} else {
 		x -= 6;
-		pic = pbk_ennemis[325];
+		pic = g_game_state.picture_banks().ennemis()[325];
 	}
 
 	if ((x - 6 < xmin) || (x + 6 > offset + 640)) {
@@ -221,17 +221,17 @@ void EnnemiSnorkyHyporider::affiche()
 
 	if ((etat == ETAT_CARBONISE) && (etape < 9)) {
 		if (dir == SENS_DROITE) {
-			draw(x, y, pbk_ennemis[326 + etape]);
+			draw(x, y, g_game_state.picture_banks().ennemis()[326 + etape]);
 		} else {
-			draw(x, y, pbk_ennemis[335 + etape]);
+			draw(x, y, g_game_state.picture_banks().ennemis()[335 + etape]);
 		}
 	}
 
 	if (nageoire) {
 		if (dir == SENS_DROITE) {
-			draw(x + 15, y + 20, pbk_ennemis[287 + etape % 4]);
+			draw(x + 15, y + 20, g_game_state.picture_banks().ennemis()[287 + etape % 4]);
 		} else {
-			draw(x - 15, y + 20, pbk_ennemis[292 + etape % 4]);
+			draw(x - 15, y + 20, g_game_state.picture_banks().ennemis()[292 + etape % 4]);
 		}
 	}
 }

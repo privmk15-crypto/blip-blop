@@ -17,6 +17,7 @@
 #define _BonusLaser_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusLaser : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusLaser()
 	{
-		pic = pbk_misc[10];
+		pic = g_game_state.picture_banks().misc()[10];
 		col_on = true;
 	};
 

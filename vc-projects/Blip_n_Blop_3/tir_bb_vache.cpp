@@ -37,9 +37,9 @@ void TirBBVache::update()
 	if (mur_opaque(x, y) && y > 50) {
 		pic = NULL;
 		if (etape < 4)
-			grave(x, y, pbk_bb[211]);
+			grave(x, y, g_game_state.picture_banks().bb()[211]);
 		else
-			grave(x, y, pbk_bb[210]);
+			grave(x, y, g_game_state.picture_banks().bb()[210]);
 		col_on = false;
 		a_detruire = true;
 		tremblement(10);
@@ -57,7 +57,7 @@ void TirBBVache::update()
 	} else if (y > 550 || x < offset - 50) {
 		a_detruire = true;
 	} else {
-		pic = pbk_bb[202 + etape];
+		pic = g_game_state.picture_banks().bb()[202 + etape];
 		colFromPic();
 	}
 }

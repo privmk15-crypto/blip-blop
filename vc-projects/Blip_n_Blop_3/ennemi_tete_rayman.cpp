@@ -20,7 +20,7 @@
 EnnemiTeteRayman::EnnemiTeteRayman(): dx(3)
 {
 	pv = 1;
-	pic = pbk_ennemis[171];
+	pic = g_game_state.picture_banks().ennemis()[171];
 }
 
 void EnnemiTeteRayman::update()
@@ -54,7 +54,7 @@ void EnnemiTeteRayman::onAvance()
 	if (ss_etape == 0) {
 		etape ++;
 		etape %= 8;
-		pic = pbk_ennemis[171 + etape];
+		pic = g_game_state.picture_banks().ennemis()[171 + etape];
 	}
 
 
@@ -79,7 +79,7 @@ void EnnemiTeteRayman::onMeure()
 			g_game_state.game_flags()[0] = 2;
 			a_detruire = true;
 		} else {
-			pic = pbk_ennemis[179 + etape];
+			pic = g_game_state.picture_banks().ennemis()[179 + etape];
 		}
 	}
 }

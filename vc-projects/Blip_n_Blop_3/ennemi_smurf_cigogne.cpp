@@ -4,7 +4,7 @@
 #include "game_state.h"
 
 EnnemiSmurfCigogne::EnnemiSmurfCigogne() {
-    pic = pbk_ennemis[355];
+    pic = g_game_state.picture_banks().ennemis()[355];
     noCol();
     first = true;
 }

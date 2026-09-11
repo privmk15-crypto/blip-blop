@@ -14,10 +14,11 @@
 ******************************************************************/
 
 #include "fond_tir_cruiser.h"
+#include "game_state.h"
 
 TirCruiser::TirCruiser(int vx, int vy, int nb_pic): dx(vx)
 {
-	pic = pbk_niveau[nb_pic];
+	pic = g_game_state.picture_banks().niveau()[nb_pic];
 	dy = vy;
 	etape = 0;
 	ss_etape = 0;
@@ -35,7 +36,7 @@ void TirCruiser::update()
 			if (etape == 3) {
 				a_detruire = true;
 			} else {
-				pic = pbk_niveau[21 + etape];
+				pic = g_game_state.picture_banks().niveau()[21 + etape];
 			}
 		}
 	}
@@ -49,7 +50,7 @@ void TirCruiser::update()
 			if (etape == 3) {
 				a_detruire = true;
 			} else {
-				pic = pbk_niveau[18 + etape];
+				pic = g_game_state.picture_banks().niveau()[18 + etape];
 			}
 		}
 	} else {

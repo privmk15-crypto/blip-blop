@@ -3,6 +3,7 @@
 #define _FondDos_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondDos : public Sprite
 {
@@ -17,7 +18,7 @@ public:
 			etape %= 2;
 		}
 
-		pic = pbk_niveau[58 + etape];
+		pic = g_game_state.picture_banks().niveau()[58 + etape];
 		updateADetruire();
 	};
 

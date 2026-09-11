@@ -3,6 +3,7 @@
 #define _GorePiedsBisouEtoile_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GorePiedsBisouEtoile : public Sprite
 {
@@ -33,10 +34,10 @@ public:
 
 			if (dir == SENS_DROITE) {
 				marche(-1);
-				pic = pbk_ennemis[94 + etape];
+				pic = g_game_state.picture_banks().ennemis()[94 + etape];
 			} else {
 				marche(1);
-				pic = pbk_ennemis[100 + etape];
+				pic = g_game_state.picture_banks().ennemis()[100 + etape];
 			}
 
 			if (etape == 3 && plat(x, y) != 0) {
@@ -47,9 +48,9 @@ public:
 			nb += 1;
 
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[ anime(anim_droite, 4, 5)];
+				pic = g_game_state.picture_banks().ennemis()[ anime(anim_droite, 4, 5)];
 			else
-				pic = pbk_ennemis[anime(anim_gauche, 4, 5)];
+				pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 5)];
 
 			if (nb >= 100) {
 				grave(x, y, pic);

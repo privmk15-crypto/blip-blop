@@ -54,19 +54,19 @@ void TirMarioFireballVertical::update()
 	}
 
 	if (dy > 12) {
-		pic = pbk_ennemis[45 + etape];
+		pic = g_game_state.picture_banks().ennemis()[45 + etape];
 	} else if (dy > 6) {
-		pic = pbk_ennemis[42 + etape];
+		pic = g_game_state.picture_banks().ennemis()[42 + etape];
 	} else if (dy > 0) {
-		pic = pbk_ennemis[39 + etape];
+		pic = g_game_state.picture_banks().ennemis()[39 + etape];
 	}
 
 	if (dy < -12) {
-		pic = pbk_ennemis[36 + etape];
+		pic = g_game_state.picture_banks().ennemis()[36 + etape];
 	} else if (dy < -6) {
-		pic = pbk_ennemis[33 + etape];
+		pic = g_game_state.picture_banks().ennemis()[33 + etape];
 	} else if (dy < 0) {
-		pic = pbk_ennemis[30 + etape];
+		pic = g_game_state.picture_banks().ennemis()[30 + etape];
 	}
 
 	colFromPic();

@@ -5,7 +5,7 @@
 EnnemiPic::EnnemiPic(): y_origine(0)
 {
 	pv = 1;
-	pic = pbk_ennemis[168];
+	pic = g_game_state.picture_banks().ennemis()[168];
 }
 
 void EnnemiPic::update()
@@ -78,9 +78,9 @@ void EnnemiPic::affiche()
 	//int						largeur;
 
 
-	surf = pbk_ennemis[168]->Surf();
-	xs = pbk_ennemis[168]->xSize();
-	ys = pbk_ennemis[168]->ySize();
+	surf = g_game_state.picture_banks().ennemis()[168]->Surf();
+	xs = g_game_state.picture_banks().ennemis()[168]->xSize();
+	ys = g_game_state.picture_banks().ennemis()[168]->ySize();
 
 	r.top		= 0 ;
 	r.left		= 0;

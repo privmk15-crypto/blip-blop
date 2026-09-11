@@ -23,7 +23,7 @@ const int anim_lock[] = {88 , 89, 90, 91, 92, 93, 92, 91, 90, 89};
 
 FondPokeCaisseTombante::FondPokeCaisseTombante()
 {
-	pic = pbk_niveau[87];
+	pic = g_game_state.picture_banks().niveau()[87];
 }
 
 void FondPokeCaisseTombante::update()
@@ -61,7 +61,7 @@ void FondPokeCaisseTombante::update()
 				}
 
 				if ((etape == UNLOCK_DELAY + 5) && (ss_etape == 0)) {
-					pic = pbk_niveau[116];
+					pic = g_game_state.picture_banks().niveau()[116];
 
 					FondPokeCaisse * s = new FondPokeCaisse();
 					s->x = x;
@@ -87,13 +87,13 @@ void FondPokeCaisseTombante::affiche()
 {
 	Sprite::affiche();
 	if (etape > UNLOCK_DELAY + 4) {
-		draw(x, y, pbk_niveau[94]);
-		draw(x , y + 63, pbk_niveau[115]);
+		draw(x, y, g_game_state.picture_banks().niveau()[94]);
+		draw(x , y + 63, g_game_state.picture_banks().niveau()[115]);
 	} else if (etape > UNLOCK_DELAY - 1) {
-		draw(x , y + 63, pbk_niveau[111 + etape - UNLOCK_DELAY]);
+		draw(x , y + 63, g_game_state.picture_banks().niveau()[111 + etape - UNLOCK_DELAY]);
 	} else if (etape > 0) {
-		draw(x, y, pbk_niveau[anim_lock[etape % 10]]);
-		//draw(x, y, pbk_niveau[88 + etape % 6]);
-		draw(x, y + 63, pbk_niveau[95 + etape % 16]);
+		draw(x, y, g_game_state.picture_banks().niveau()[anim_lock[etape % 10]]);
+		//draw(x, y, g_game_state.picture_banks().niveau()[88 + etape % 6]);
+		draw(x, y + 63, g_game_state.picture_banks().niveau()[95 + etape % 16]);
 	}
 }

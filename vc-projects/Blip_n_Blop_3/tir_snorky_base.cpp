@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_snorkybase.h"
+#include "game_state.h"
 
 const int tir_snorky_oscilation[] = {0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0};
 
@@ -65,9 +66,9 @@ void TirSnorkybase::update()
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[32 + etape];
+		pic = g_game_state.picture_banks().ennemis()[32 + etape];
 	} else {
-		pic = pbk_ennemis[35 + etape];
+		pic = g_game_state.picture_banks().ennemis()[35 + etape];
 	}
 
 	if (mur_opaque(x, y) != 0)

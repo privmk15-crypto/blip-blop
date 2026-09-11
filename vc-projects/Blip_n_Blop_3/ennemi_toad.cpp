@@ -102,10 +102,10 @@ void EnnemiToad::onAvance()
 	}
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_toad_marche_droite, 4, 12 - 3 * speed)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_droite, 4, 12 - 3 * speed)];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_toad_marche_gauche, 4, 12 - 3 * speed)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_gauche, 4, 12 - 3 * speed)];
 	}
 	if (speed < TOAD_SPEED) {
 		etape_speed++;
@@ -150,11 +150,11 @@ void EnnemiToad::onMeure()
 		if (dir == SENS_GAUCHE) {
 			if (!mur_opaque(x - speed, y) && plat(x, y) == 0)
 				x -= speed;
-			pic = pbk_ennemis[18 + etape];
+			pic = g_game_state.picture_banks().ennemis()[18 + etape];
 		} else {
 			if (!mur_opaque(x + speed, y) && plat(x, y) == 0)
 				x += speed;
-			pic = pbk_ennemis[8 + etape];
+			pic = g_game_state.picture_banks().ennemis()[8 + etape];
 		}
 	}
 }
@@ -187,18 +187,18 @@ void EnnemiToad::onCharge()
 	if (charge_etape < 80) {
 		if (dir == SENS_DROITE) {
 			//marche(speed);
-			pic = pbk_ennemis[anime(anim_toad_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_droite, 4, 3)];
 		} else {
 			//marche( -speed);
-			pic = pbk_ennemis[anime(anim_toad_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_gauche, 4, 3)];
 		}
 	} else {
 		if (dir == SENS_DROITE) {
 			marche(speed);
-			pic = pbk_ennemis[anime(anim_toad_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_droite, 4, 2)];
 		} else {
 			marche(-speed);
-			pic = pbk_ennemis[anime(anim_toad_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_toad_marche_gauche, 4, 2)];
 		}
 	}
 
@@ -227,10 +227,10 @@ void EnnemiToad::onSaute()
 
 	if (dir == SENS_DROITE) {
 		x += speed;
-		pic = pbk_ennemis[3];
+		pic = g_game_state.picture_banks().ennemis()[3];
 	} else {
 		x -= speed;
-		pic = pbk_ennemis[7];
+		pic = g_game_state.picture_banks().ennemis()[7];
 	}
 
 	colFromPic();
@@ -251,9 +251,9 @@ void EnnemiToad::onCarbonise()
 		a_detruire = true;
 	else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[434 + etape];
+			pic = g_game_state.picture_banks().ennemis()[434 + etape];
 		else
-			pic = pbk_ennemis[447 + etape];
+			pic = g_game_state.picture_banks().ennemis()[447 + etape];
 	}
 }
 

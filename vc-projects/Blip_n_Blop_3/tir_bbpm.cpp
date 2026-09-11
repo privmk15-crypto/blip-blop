@@ -21,6 +21,7 @@
 
 
 #include "tir_bbpm.h"
+#include "game_state.h"
 
 const int dx_tirbb_PM [] = { 0, 5, 8, 11, 12, 11, 8, 5, 0, -5, -8, -11, -12, -11, -8, -5 };
 const int dy_tirbb_PM [] = { 12, 11, 8, 5, 0, -5, -8, -11, -12, -11, -8, -5, 0, 5, 8, 11 };
@@ -38,7 +39,7 @@ void TirBBPM::update()
 		noCol();
 		a_detruire = true;
 	} else {
-		pic = pbk_bb[88 + dir];
+		pic = g_game_state.picture_banks().bb()[88 + dir];
 		colFromPic();
 	}
 }

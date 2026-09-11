@@ -1,6 +1,7 @@
 
 #include "tir_coeur_bisou.h"
 #include "ben_maths.h"
+#include "game_state.h"
 
 TirCoeurBisou::TirCoeurBisou() : ok(false) { phi = rand() % 360; }
 
@@ -22,7 +23,7 @@ void TirCoeurBisou::update() {
             if (etape >= 2) ok = true;
         }
 
-        pic = pbk_ennemis[461 + etape];
+        pic = g_game_state.picture_banks().ennemis()[461 + etape];
     }
 
     if (mur_opaque(x, y)) a_detruire = true;

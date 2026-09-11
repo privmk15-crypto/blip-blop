@@ -3,6 +3,7 @@
 #define _GoreBisouBoom_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GorePiedBisouBoom : public Sprite
 {
@@ -19,9 +20,9 @@ public:
 				etape += 1;
 
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[190 + etape];
+				pic = g_game_state.picture_banks().ennemis()[190 + etape];
 			else
-				pic = pbk_ennemis[196 + etape];
+				pic = g_game_state.picture_banks().ennemis()[196 + etape];
 		}
 
 
@@ -56,9 +57,9 @@ public:
 				etape += 1;
 
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[202 + etape];
+				pic = g_game_state.picture_banks().ennemis()[202 + etape];
 			else
-				pic = pbk_ennemis[208 + etape];
+				pic = g_game_state.picture_banks().ennemis()[208 + etape];
 		}
 
 
@@ -92,9 +93,9 @@ public:
 				etape += 1;
 
 			if (dir == SENS_DROITE)
-				pic = pbk_ennemis[214 + etape];
+				pic = g_game_state.picture_banks().ennemis()[214 + etape];
 			else
-				pic = pbk_ennemis[220 + etape];
+				pic = g_game_state.picture_banks().ennemis()[220 + etape];
 		}
 
 

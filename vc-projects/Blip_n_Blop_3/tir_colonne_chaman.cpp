@@ -1,5 +1,6 @@
 
 #include "tir_colonne_chaman.h"
+#include "game_state.h"
 
 TirColonneChaman::TirColonneChaman() : etat(0)
 {
@@ -27,7 +28,7 @@ void TirColonneChaman::update()
 				}
 			}
 
-			pic = pbk_ennemis[398 - etape];
+			pic = g_game_state.picture_banks().ennemis()[398 - etape];
 
 			break;
 
@@ -46,7 +47,7 @@ void TirColonneChaman::update()
 				return;
 			}
 
-			pic = pbk_ennemis[399 + etape];
+			pic = g_game_state.picture_banks().ennemis()[399 + etape];
 
 			break;
 
@@ -61,7 +62,7 @@ void TirColonneChaman::update()
 				}
 			}
 
-			pic = pbk_ennemis[394 + etape];
+			pic = g_game_state.picture_banks().ennemis()[394 + etape];
 
 			break;
 	}

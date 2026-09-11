@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_sonic_eclair.h"
+#include "game_state.h"
 
 TirSoniceclair::TirSoniceclair()
 {
@@ -21,7 +22,7 @@ void TirSoniceclair::update()
 	if (ss_etape == 0) {
 		etape += 1;
 	}
-	pic = pbk_ennemis[56 + ss_etape];
+	pic = g_game_state.picture_banks().ennemis()[56 + ss_etape];
 
 	if (etape > 30) {
 		colFromPic();

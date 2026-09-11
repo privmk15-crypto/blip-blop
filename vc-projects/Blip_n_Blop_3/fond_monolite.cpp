@@ -26,13 +26,13 @@ const int monolite_animation[] = {41, 42, 43, 43, 44, 44, 44, 45, 45, 45, 45, 45
 
 FondMonolite::FondMonolite(): etape_levitation(0), ss_etape_levitation(0)
 {
-	pic = pbk_niveau[22];
+	pic = g_game_state.picture_banks().niveau()[22];
 	dy = 0;
 }
 
 void FondMonolite::update()
 {
-	pic = pbk_niveau[anime(monolite_animation, 36, 3)];
+	pic = g_game_state.picture_banks().niveau()[anime(monolite_animation, 36, 3)];
 	//anime36
 	ss_etape_levitation++;
 	ss_etape_levitation %= 4;

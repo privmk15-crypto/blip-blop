@@ -310,7 +310,7 @@ void Couille::afficheArme(int xtmp, int ytmp)
 				     pbk_own[34 + d_arme]);
 				draw(xtmp + dx_truc_laser[d_arme] + x_recul[d_arme][etape_recul],
 				     ytmp + dy_truc_laser[d_arme] + y_recul[d_arme][etape_recul],
-				     pbk_bb[152 + 4 * d_arme + etape_arme]);
+				     g_game_state.picture_banks().bb()[152 + 4 * d_arme + etape_arme]);
 			} else {
 				draw(xtmp + dx_laser[d_arme],
 				     ytmp + dy_laser[d_arme],
@@ -333,11 +333,11 @@ void Couille::afficheArme(int xtmp, int ytmp)
 				if (id_couille == ID_BLIP) {
 					draw(xtmp + dx_m16_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_m16_deto[d_arme] + y_recul[d_arme][etape_recul],
-					     pbk_bb[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
+					     g_game_state.picture_banks().bb()[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
 				} else {
 					draw(xtmp + dx_m16o_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_m16o_deto[d_arme] + y_recul[d_arme][etape_recul],
-					     pbk_bb[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
+					     g_game_state.picture_banks().bb()[12 + d_arme * 3 + anim_m16_deto[etape_arme]]);
 				}
 				break;
 
@@ -351,14 +351,14 @@ void Couille::afficheArme(int xtmp, int ytmp)
 				if (etape_arme < 5)
 					draw(xtmp + dx_fusil_deto[d_arme] + x_recul_fusil[d_arme][etape_arme],
 					     ytmp + dy_fusil_deto[d_arme] + y_recul_fusil[d_arme][etape_arme],
-					     pbk_bb[42 + d_arme * 3 + anim_fusil_deto[etape_arme]]);
+					     g_game_state.picture_banks().bb()[42 + d_arme * 3 + anim_fusil_deto[etape_arme]]);
 				break;
 
 			case ID_LASER:
 				if (dir_arme == dir)
 					draw(xtmp + dx_laser_deto[d_arme] + x_recul[d_arme][etape_recul],
 					     ytmp + dy_laser_deto[d_arme] + y_recul[d_arme][etape_recul],
-					     pbk_bb[104 + d_arme2 * 4 + etape_arme]);
+					     g_game_state.picture_banks().bb()[104 + d_arme2 * 4 + etape_arme]);
 				break;
 		}
 	}
@@ -402,9 +402,9 @@ void Couille::afficheOeil(int xtmp, int ytmp)
 			delta = 5;
 
 		if (dir <= BBLIM_DROITE)
-			draw(xtmp + 12, ytmp - 14, pbk_bb[base + delta]);
+			draw(xtmp + 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
 		else
-			draw(xtmp - 12, ytmp - 14, pbk_bb[base + delta]);
+			draw(xtmp - 12, ytmp - 14, g_game_state.picture_banks().bb()[base + delta]);
 	}
 
 }

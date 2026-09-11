@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_snorky_mage.h"
+#include "game_state.h"
 
 
 
@@ -66,9 +67,9 @@ void TirSnorkyMage::update()
 	y += dy;
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[252 + etape];
+		pic = g_game_state.picture_banks().ennemis()[252 + etape];
 	} else {
-		pic = pbk_ennemis[261 + etape];
+		pic = g_game_state.picture_banks().ennemis()[261 + etape];
 	}
 
 

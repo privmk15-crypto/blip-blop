@@ -118,16 +118,9 @@ bool		no_scroll2;
 //		Les Picture Banks
 //-----------------------------------------------------------------------------
 
-PictureBank		pbk_decor;	// pbk des décors
-PictureBank		pbk_blip;	// pbk de blip
-PictureBank		pbk_blop;
-PictureBank		pbk_bb;		// pbk commune à blip et blop
-PictureBank		pbk_misc;	// pbk globale du jeu (bonus & co)
-PictureBank		pbk_ennemis;// pbk des ennemis
-PictureBank		pbk_niveau;	// pbk du niveau (fonds animes & co)
-PictureBank		pbk_rpg;	// Gueules des RPGs du niveau
-PictureBank		pbk_rpg_bb; // Les gueules de Blip et Blop
-PictureBank		pbk_inter;	// L'interface
+// pbk_decor/pbk_blip/pbk_blop/pbk_bb/pbk_misc/pbk_ennemis/pbk_niveau/
+// pbk_rpg/pbk_rpg_bb/pbk_inter moved to picture_bank_set.cpp
+// (PictureBankSet) - Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les Sounds Banks

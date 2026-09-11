@@ -4,13 +4,14 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_snorky_base_2.h"
+#include "game_state.h"
 
 
 TirSnorkyBase2::TirSnorkyBase2(int vx, int vy)
 {
 	dy = vy;
 	dx = vx;
-	pic = pbk_ennemis[182];
+	pic = g_game_state.picture_banks().ennemis()[182];
 }
 
 

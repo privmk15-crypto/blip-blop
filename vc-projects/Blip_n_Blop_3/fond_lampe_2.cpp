@@ -1,13 +1,14 @@
 
 #include <stdlib.h>
 #include "fond_lampe_2.h"
+#include "game_state.h"
 
 #define ETAT_CLIGNOTE	100
 
 FondLumiere2::FondLumiere2() :  allume(false), wait_for_cligno(0)
 {
 	delai_cligno = 50 + rand() % 200;
-	pic = pbk_niveau[17];
+	pic = g_game_state.picture_banks().niveau()[17];
 }
 
 void FondLumiere2::update()
@@ -23,7 +24,7 @@ void FondLumiere2::update()
 			etape = 0;
 		}
 	} else {
-		pic = pbk_niveau[17 + anime(anim_cligno, 58, 3)];
+		pic = g_game_state.picture_banks().niveau()[17 + anime(anim_cligno, 58, 3)];
 
 		if (etape == 57) {
 			allume = true;

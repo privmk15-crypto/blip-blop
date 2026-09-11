@@ -72,7 +72,7 @@ void drawScrolling()
 		r.left	= xTex;
 		r.right = xTex + 2;
 
-		videoA->BltFast(next_x, 0, pbk_decor[g_game_state.level().num_decor()[n_img]]->Surf(), &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+		videoA->BltFast(next_x, 0, g_game_state.picture_banks().decor()[g_game_state.level().num_decor()[n_img]]->Surf(), &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
 		xTex += 2;
 

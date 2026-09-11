@@ -46,7 +46,7 @@ void EnnemiBulbizarreHeros::update()
 				etape ++;
 				etape %= 4;
 			}
-			pic = pbk_ennemis[272 + etape];
+			pic = g_game_state.picture_banks().ennemis()[272 + etape];
 		}
 	} else if (dorkeball == 1) {
 		ss_etape ++;
@@ -58,7 +58,7 @@ void EnnemiBulbizarreHeros::update()
 				etape = 0;
 				ss_etape = 0;
 			} else {
-				pic = pbk_ennemis[384 + etape];
+				pic = g_game_state.picture_banks().ennemis()[384 + etape];
 			}
 		}
 
@@ -104,10 +104,10 @@ void EnnemiBulbizarreHeros::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(2);
-		pic = pbk_ennemis[310 + etape];
+		pic = g_game_state.picture_banks().ennemis()[310 + etape];
 	} else {
 		marche(-2);
-		pic = pbk_ennemis[312 + etape];
+		pic = g_game_state.picture_banks().ennemis()[312 + etape];
 	}
 	colFromPic();
 }
@@ -132,9 +132,9 @@ void EnnemiBulbizarreHeros::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[322 + etape];
+			pic = g_game_state.picture_banks().ennemis()[322 + etape];
 		else
-			pic = pbk_ennemis[314 + etape];
+			pic = g_game_state.picture_banks().ennemis()[314 + etape];
 	}
 }
 

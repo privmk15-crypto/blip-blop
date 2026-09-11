@@ -35,7 +35,7 @@
 // DIK_*/ALIAS_*.
 #include "control_p1.h"
 #include "control_p2.h"
-#include "picture_bank.h"
+#include "picture_bank.h"  // kept: PictureBank type used elsewhere via transitive include
 #include "fonte.h"  // kept: Fonte type still used by game.cpp's fnt_p1/fnt_p2 pointers
 #include "super_liste.h"
 #include "sound_bank_bb.h"
@@ -152,16 +152,9 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Les Picture Banks
 //-----------------------------------------------------------------------------
 
-extern PictureBank		pbk_decor;	// pbk des décors
-extern PictureBank		pbk_blip;	// pbk de blip
-extern PictureBank		pbk_blop;
-extern PictureBank		pbk_bb;		// pbk commune à blip et blop
-extern PictureBank		pbk_misc;	// pbk "diverse"
-extern PictureBank		pbk_ennemis;// pbk des ennemis
-extern PictureBank		pbk_niveau;	// pbk du niveau (fonds animes & co)
-extern PictureBank		pbk_rpg;	// Gueules des RPGs du niveau
-extern PictureBank		pbk_rpg_bb; // Les gueules de Blip et Blop
-extern PictureBank		pbk_inter;	// L'interface
+// pbk_decor/pbk_blip/pbk_blop/pbk_bb/pbk_misc/pbk_ennemis/pbk_niveau/
+// pbk_rpg/pbk_rpg_bb/pbk_inter moved into PictureBankSet
+// (picture_bank_set.h) as part of the Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les Sounds Banks

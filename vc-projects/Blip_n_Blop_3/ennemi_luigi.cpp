@@ -192,7 +192,7 @@ void EnnemiLuigi::onAvance()
 			speed = -6;
 
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_luigi_marche_droite, 4, 14 - (2 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_droite, 4, 14 - (2 * speed))];
 
 		if (encaissement < 0) {
 			if (speed > - encaissement / MULTIPLACATEUR_VITESSE_AU_SOL) {
@@ -214,7 +214,7 @@ void EnnemiLuigi::onAvance()
 			speed = -6;
 
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_luigi_marche_gauche, 4, 14 - (2 * speed))];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_gauche, 4, 14 - (2 * speed))];
 
 		if (encaissement > 0) {
 			if (speed > encaissement / MULTIPLACATEUR_VITESSE_AU_SOL) {
@@ -320,10 +320,10 @@ void EnnemiLuigi::onMeure()
 		}
 		if (dir == SENS_DROITE) {
 			marche(3);
-			pic = pbk_ennemis[anime(anim_luigi_marche_mort_droite, 4, 8)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_mort_droite, 4, 8)];
 		} else {
 			marche(-3);
-			pic = pbk_ennemis[anime(anim_luigi_marche_mort_gauche, 4, 8)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_mort_gauche, 4, 8)];
 		}
 		if ((plat2(x, y) == 0) && (x > 1500) && (x < 1550)) {
 			dir = SENS_GAUCHE;
@@ -336,11 +336,11 @@ void EnnemiLuigi::onMeure()
 			g_game_state.game_flags()[1] = 2;
 			dir = SENS_DROITE;
 		} else {
-			pic = pbk_ennemis[anime(anim_luigi_mort, 8, 6)];
+			pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_mort, 8, 6)];
 		}
 	} else if (g_game_state.game_flags()[1] == 2) {
 		marche(3);
-		pic = pbk_ennemis[anime(anim_luigi_marche_mort_droite, 4, 8)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_marche_mort_droite, 4, 8)];
 		if (x > offset + 680) {
 			g_game_state.game_flags()[1] = 3;
 			attack_delay = 0;
@@ -392,16 +392,16 @@ void EnnemiLuigi::onAttack()
 
 	if (nb_tir < 50) {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[10];
+			pic = g_game_state.picture_banks().ennemis()[10];
 		else
-			pic = pbk_ennemis[13];
+			pic = g_game_state.picture_banks().ennemis()[13];
 
 		colFromPic();
 		return;
 	}
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[anime(anim_luigi_attaque_droite, 4, 2)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_attaque_droite, 4, 2)];
 		ss_etape_attack += 1;
 		ss_etape_attack %= 4;
 		if (ss_etape_attack == 0) {
@@ -510,7 +510,7 @@ void EnnemiLuigi::onAttack()
 			}
 		}
 	} else {
-		pic = pbk_ennemis[anime(anim_luigi_attaque_gauche, 4, 2)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_luigi_attaque_gauche, 4, 2)];
 		ss_etape_attack += 1;
 		ss_etape_attack %= 4;
 		if (ss_etape_attack == 0) {
@@ -654,11 +654,11 @@ void EnnemiLuigi::onAttack()
 	{
 		if ( dir == SENS_DROITE)
 		{
-			pic = pbk_ennemis[anime( anim_luigi_marche_droite, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_luigi_marche_droite, 4, 3)];
 		}
 		else
 		{
-			pic = pbk_ennemis[anime( anim_luigi_marche_gauche, 4, 3)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_luigi_marche_gauche, 4, 3)];
 		}
 	}
 	else
@@ -666,12 +666,12 @@ void EnnemiLuigi::onAttack()
 		if ( dir == SENS_DROITE)
 		{
 			marche(speed);
-			pic = pbk_ennemis[anime( anim_luigi_marche_droite, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_luigi_marche_droite, 4, 2)];
 		}
 		else
 		{
 			marche( -speed);
-			pic = pbk_ennemis[anime( anim_luigi_marche_gauche, 4, 2)];
+			pic = g_game_state.picture_banks().ennemis()[anime( anim_luigi_marche_gauche, 4, 2)];
 		}
 	}
 
@@ -717,9 +717,9 @@ void EnnemiLuigi::onSaute()
 			x += speed;
 
 		if (dy < 0) {
-			pic = pbk_ennemis[6];
+			pic = g_game_state.picture_banks().ennemis()[6];
 		} else {
-			pic = pbk_ennemis[7];
+			pic = g_game_state.picture_banks().ennemis()[7];
 		}
 
 		if (encaissement != 0) {
@@ -758,9 +758,9 @@ void EnnemiLuigi::onSaute()
 			x -= speed;
 
 		if (dy < 0) {
-			pic = pbk_ennemis[8];
+			pic = g_game_state.picture_banks().ennemis()[8];
 		} else {
-			pic = pbk_ennemis[9];
+			pic = g_game_state.picture_banks().ennemis()[9];
 		}
 
 		if (encaissement != 0) {
@@ -809,9 +809,9 @@ void EnnemiLuigi::onCarbonise()
 	else
 	{
 		if ( dir == SENS_DROITE)
-			pic = pbk_ennemis[100+etape];
+			pic = g_game_state.picture_banks().ennemis()[100+etape];
 		else
-			pic = pbk_ennemis[114+etape];
+			pic = g_game_state.picture_banks().ennemis()[114+etape];
 	}*/
 }
 

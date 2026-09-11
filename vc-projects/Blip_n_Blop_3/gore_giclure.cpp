@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "gore_giclure.h"
+#include "game_state.h"
 
 //implementation de la classe GoreGiclure
 
@@ -35,19 +36,19 @@ GoreGiclure::GoreGiclure(int vx, int vy): dx(vx)
 		decalage = 7;
 	}
 	if (dy >= 6) {
-		pic = pbk_misc[92 + decalage];
+		pic = g_game_state.picture_banks().misc()[92 + decalage];
 	} else if (dy >= 4) {
-		pic = pbk_misc[91 + decalage];
+		pic = g_game_state.picture_banks().misc()[91 + decalage];
 	} else if (dy >= 1) {
-		pic = pbk_misc[90 + decalage];
+		pic = g_game_state.picture_banks().misc()[90 + decalage];
 	} else if (dy >= 0) {
-		pic = pbk_misc[89 + decalage];
+		pic = g_game_state.picture_banks().misc()[89 + decalage];
 	} else if (dy >= -2) {
-		pic = pbk_misc[88 + decalage];
+		pic = g_game_state.picture_banks().misc()[88 + decalage];
 	} else if (dy >= -4) {
-		pic = pbk_misc[87 + decalage];
+		pic = g_game_state.picture_banks().misc()[87 + decalage];
 	} else {
-		pic = pbk_misc[86 + decalage];
+		pic = g_game_state.picture_banks().misc()[86 + decalage];
 	}
 }
 
@@ -62,19 +63,19 @@ void GoreGiclure::update()
 
 
 	if (dy >= 6) {
-		pic = pbk_misc[92 + decalage];
+		pic = g_game_state.picture_banks().misc()[92 + decalage];
 	} else if (dy >= 4) {
-		pic = pbk_misc[91 + decalage];
+		pic = g_game_state.picture_banks().misc()[91 + decalage];
 	} else if (dy >= 1) {
-		pic = pbk_misc[90 + decalage];
+		pic = g_game_state.picture_banks().misc()[90 + decalage];
 	} else if (dy >= 0) {
-		pic = pbk_misc[89 + decalage];
+		pic = g_game_state.picture_banks().misc()[89 + decalage];
 	} else if (dy >= -2) {
-		pic = pbk_misc[88 + decalage];
+		pic = g_game_state.picture_banks().misc()[88 + decalage];
 	} else if (dy >= -4) {
-		pic = pbk_misc[87 + decalage];
+		pic = g_game_state.picture_banks().misc()[87 + decalage];
 	} else {
-		pic = pbk_misc[86 + decalage];
+		pic = g_game_state.picture_banks().misc()[86 + decalage];
 	}
 	x += dx;
 	tombe();

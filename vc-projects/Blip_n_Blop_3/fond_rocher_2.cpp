@@ -25,13 +25,13 @@ const int rocher2_animation[] = {57, 58, 58, 59, 59, 59, 60, 60, 60, 60, 60, 59,
 
 FondRocher2::FondRocher2(): etape_levitation(0), ss_etape_levitation(0)
 {
-	pic = pbk_niveau[38];
+	pic = g_game_state.picture_banks().niveau()[38];
 	dy = 0;
 }
 
 void FondRocher2::update()
 {
-	pic = pbk_niveau[anime(rocher2_animation, 32, 4)];
+	pic = g_game_state.picture_banks().niveau()[anime(rocher2_animation, 32, 4)];
 
 
 	ss_etape_levitation++;

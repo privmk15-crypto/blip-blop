@@ -85,9 +85,9 @@ void EnnemiBisouChaman::onMeure()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[332 + etape];
+			pic = g_game_state.picture_banks().ennemis()[332 + etape];
 		else
-			pic = pbk_ennemis[345 + etape];
+			pic = g_game_state.picture_banks().ennemis()[345 + etape];
 	}
 }
 
@@ -130,19 +130,19 @@ void EnnemiBisouChaman::onTele()
 
 	if (etape <= 7) {
 		if (x < offset + 320) {
-			pic = pbk_ennemis[316 + etape];
+			pic = g_game_state.picture_banks().ennemis()[316 + etape];
 			dir = SENS_DROITE;
 		} else {
-			pic = pbk_ennemis[324 + etape];
+			pic = g_game_state.picture_banks().ennemis()[324 + etape];
 			dir = SENS_GAUCHE;
 		}
 	} else if (etape <= 10) {
 		if (ss_etape % 2 == 0) {
 			if (x < offset + 320) {
-				pic = pbk_ennemis[323];
+				pic = g_game_state.picture_banks().ennemis()[323];
 				dir = SENS_DROITE;
 			} else {
-				pic = pbk_ennemis[331];
+				pic = g_game_state.picture_banks().ennemis()[331];
 				dir = SENS_GAUCHE;
 			}
 		} else {
@@ -150,10 +150,10 @@ void EnnemiBisouChaman::onTele()
 		}
 	} else {
 		if (x < offset + 320) {
-			pic = pbk_ennemis[323 - (etape - 11)];
+			pic = g_game_state.picture_banks().ennemis()[323 - (etape - 11)];
 			dir = SENS_DROITE;
 		} else {
-			pic = pbk_ennemis[331 - (etape - 11)];
+			pic = g_game_state.picture_banks().ennemis()[331 - (etape - 11)];
 			dir = SENS_GAUCHE;
 		}
 	}
@@ -179,9 +179,9 @@ void EnnemiBisouChaman::onLeveBaton()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[358 + etape];
+		pic = g_game_state.picture_banks().ennemis()[358 + etape];
 	else
-		pic = pbk_ennemis[361 + etape];
+		pic = g_game_state.picture_banks().ennemis()[361 + etape];
 
 	colFromPic();
 }
@@ -205,9 +205,9 @@ void EnnemiBisouChaman::onBaisseBaton()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[360 - etape];
+		pic = g_game_state.picture_banks().ennemis()[360 - etape];
 	else
-		pic = pbk_ennemis[363 - etape];
+		pic = g_game_state.picture_banks().ennemis()[363 - etape];
 
 	colFromPic();
 }
@@ -302,9 +302,9 @@ void EnnemiBisouChaman::affiche()
 
 	if (etat == ETAT_TIRE) {
 		if (dir == SENS_DROITE)
-			draw(x + 18, y - 70, pbk_ennemis[405 + etape]);
+			draw(x + 18, y - 70, g_game_state.picture_banks().ennemis()[405 + etape]);
 		else
-			draw(x - 18, y - 70, pbk_ennemis[416 + etape]);
+			draw(x - 18, y - 70, g_game_state.picture_banks().ennemis()[416 + etape]);
 	}
 }
 
@@ -326,10 +326,10 @@ void EnnemiBisouChaman::onAvance()
 
 
 	if (x < offset + 320) {
-		pic = pbk_ennemis[316];
+		pic = g_game_state.picture_banks().ennemis()[316];
 		dir = SENS_DROITE;
 	} else {
-		pic = pbk_ennemis[324];
+		pic = g_game_state.picture_banks().ennemis()[324];
 		dir = SENS_GAUCHE;
 	}
 
@@ -364,9 +364,9 @@ void EnnemiBisouChaman::onCarbonise()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[573 + etape];
+		pic = g_game_state.picture_banks().ennemis()[573 + etape];
 	else
-		pic = pbk_ennemis[581 + etape];
+		pic = g_game_state.picture_banks().ennemis()[581 + etape];
 }
 
 

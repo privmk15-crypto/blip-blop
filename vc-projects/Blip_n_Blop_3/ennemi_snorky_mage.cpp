@@ -24,7 +24,7 @@ const int snorky_mage_oscilation[] = {0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 2, 
 EnnemiSnorkyMage::EnnemiSnorkyMage(): wait_for_shoot(0), shoot_delay(50 + rand() % 200), oscilation_etape(0)
 {
 	pv = 200;
-	pic = pbk_ennemis[0];
+	pic = g_game_state.picture_banks().ennemis()[0];
 	dy = 0;
 }
 
@@ -109,7 +109,7 @@ void EnnemiSnorkyMage::onAvance()
 		etape %= 6;
 	}
 
-	pic = pbk_ennemis[237 + etape];
+	pic = g_game_state.picture_banks().ennemis()[237 + etape];
 
 	if (dir == SENS_GAUCHE) {
 		x -= SNORKY_MAGE_SPEED;
@@ -170,7 +170,7 @@ void EnnemiSnorkyMage::onMeure()
 		a_detruire = true;
 //		sbk_niveau.play( 11);
 	} else {
-		pic = pbk_ennemis[266 + etape];
+		pic = g_game_state.picture_banks().ennemis()[266 + etape];
 	}
 }
 
@@ -192,7 +192,7 @@ void EnnemiSnorkyMage::onTire()
 			}
 		}
 
-		pic = pbk_ennemis[243 + etape];
+		pic = g_game_state.picture_banks().ennemis()[243 + etape];
 	} else {
 		ss_etape++;
 		ss_etape %= 4;
@@ -232,9 +232,9 @@ void EnnemiSnorkyMage::onTire()
 
 		if (etape < 3) {
 			if (dir == SENS_DROITE) {
-				pic = pbk_ennemis[249 + etape];
+				pic = g_game_state.picture_banks().ennemis()[249 + etape];
 			} else {
-				pic = pbk_ennemis[257 + etape];
+				pic = g_game_state.picture_banks().ennemis()[257 + etape];
 			}
 		}
 	}
@@ -251,7 +251,7 @@ void EnnemiSnorkyMage::onCarbonise()
 	if (etape == 7) {
 		a_detruire = true;
 	} else {
-		pic = pbk_ennemis[278 + etape];
+		pic = g_game_state.picture_banks().ennemis()[278 + etape];
 	}
 }
 

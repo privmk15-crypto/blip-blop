@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "ennemi_smurf.h"
+#include "game_state.h"
 
 const int anim_smurf_marche_droite[] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 const int anim_smurf_marche_gauche[] = { 5, 6, 7, 8, 9, 8, 7, 6 };
@@ -95,10 +96,10 @@ void EnnemiSmurf::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(speed);
-		pic = pbk_ennemis[anime(anim_smurf_marche_droite, 8, 5)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_smurf_marche_droite, 8, 5)];
 	} else {
 		marche(-speed);
-		pic = pbk_ennemis[anime(anim_smurf_marche_gauche, 8, 5)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_smurf_marche_gauche, 8, 5)];
 	}
 
 	colFromPic();
@@ -124,10 +125,10 @@ void EnnemiSmurf::onSaute()
 
 	if (dir == SENS_DROITE) {
 		x += speed ;
-		pic = pbk_ennemis[10];
+		pic = g_game_state.picture_banks().ennemis()[10];
 	} else {
 		x -= speed ;
-		pic = pbk_ennemis[11];
+		pic = g_game_state.picture_banks().ennemis()[11];
 	}
 
 	colFromPic();
@@ -154,12 +155,12 @@ void EnnemiSmurf::onMeure()
 		if (!mur_opaque(x - speed, y) && plat(x, y) == 0)
 			x -= speed;
 
-		pic = pbk_ennemis[23 + etape];
+		pic = g_game_state.picture_banks().ennemis()[23 + etape];
 	} else {
 		if (!mur_opaque(x + speed, y) && plat(x, y) == 0)
 			x += speed;
 
-		pic = pbk_ennemis[12 + etape];
+		pic = g_game_state.picture_banks().ennemis()[12 + etape];
 	}
 }
 
@@ -189,9 +190,9 @@ void EnnemiSmurf::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[34 + etape];
+			pic = g_game_state.picture_banks().ennemis()[34 + etape];
 		else
-			pic = pbk_ennemis[40 + etape];
+			pic = g_game_state.picture_banks().ennemis()[40 + etape];
 	}
 }
 

@@ -48,7 +48,7 @@ void EnnemiPikachuHeros::update()
 				etape ++;
 				etape %= 4;
 			}
-			pic = pbk_ennemis[272 + etape];
+			pic = g_game_state.picture_banks().ennemis()[272 + etape];
 		}
 	} else if (dorkeball == 1) {
 		ss_etape ++;
@@ -60,7 +60,7 @@ void EnnemiPikachuHeros::update()
 				etape = 0;
 				ss_etape = 0;
 			} else {
-				pic = pbk_ennemis[300 + etape];
+				pic = g_game_state.picture_banks().ennemis()[300 + etape];
 			}
 		}
 
@@ -106,10 +106,10 @@ void EnnemiPikachuHeros::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(3);
-		pic = pbk_ennemis[276 + etape];
+		pic = g_game_state.picture_banks().ennemis()[276 + etape];
 	} else {
 		marche(-3);
-		pic = pbk_ennemis[278 + etape];
+		pic = g_game_state.picture_banks().ennemis()[278 + etape];
 	}
 	colFromPic();
 }
@@ -134,9 +134,9 @@ void EnnemiPikachuHeros::onMeure()
 		g_game_state.game_flags()[1] --;
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[280 + etape];
+			pic = g_game_state.picture_banks().ennemis()[280 + etape];
 		else
-			pic = pbk_ennemis[290 + etape];
+			pic = g_game_state.picture_banks().ennemis()[290 + etape];
 	}
 }
 

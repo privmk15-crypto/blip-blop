@@ -15,6 +15,7 @@
 
 #include "globals.h"
 #include "fond_ecrancamera.h"
+#include "game_state.h"
 
 void FondEcrancamera::update()
 {
@@ -24,11 +25,11 @@ void FondEcrancamera::update()
 		etape += 1;
 		etape %= 3;
 	}
-	pic = pbk_niveau[50 + etape];
+	pic = g_game_state.picture_banks().niveau()[50 + etape];
 }
 
 void FondEcrancamera::affiche()
 {
 	Sprite::affiche();
-	draw(x, y + ss_etape, pbk_niveau[49]);
+	draw(x, y + ss_etape, g_game_state.picture_banks().niveau()[49]);
 }

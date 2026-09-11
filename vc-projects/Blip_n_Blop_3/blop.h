@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 #include "couille.h"
+#include "game_state.h"
 
 
 //-----------------------------------------------------------------------------
@@ -32,7 +33,7 @@ class Blop : public Couille
 {
 
 public:
-	Blop() : Couille(pbk_blop)
+	Blop() : Couille(g_game_state.picture_banks().blop())
 	{
 		id_couille = ID_BLOP;
 	};

@@ -20,6 +20,7 @@
 
 #include "tir_bb_laser.h"
 #include "ben_debug.h"
+#include "game_state.h"
 
 TirBBLaser::TirBBLaser() : base(0), hauteur(0), largeur(0)
 {
@@ -119,7 +120,7 @@ void TirBBLaser::update()
 
 void TirBBLaser::affiche()
 {
-	SDL::Surface *	surf = pbk_bb[base + etape]->Surf();
+	SDL::Surface *	surf = g_game_state.picture_banks().bb()[base + etape]->Surf();
 	Rect	r;
 	int		xx = x - offset;
 	int		nx = x;
@@ -140,19 +141,19 @@ void TirBBLaser::affiche()
 
 			backSurface->BltFast(xx, y, surf, &r, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 			if (y + hauteur < 480)
-				draw(x + 2, y + hauteur, pbk_misc[74 + etape]);
+				draw(x + 2, y + hauteur, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 1:				// Bas/droite ---------------------------
 
 			while (nx > offset - 20 && nx < offset + 660 &&
 			        ny > -50 && ny < 500 && !mur_opaque(nx, ny)) {
-				draw(nx, ny, pbk_bb[144 + etape]);
+				draw(nx, ny, g_game_state.picture_banks().bb()[144 + etape]);
 				nx += 8;
 				ny += 8;
 			}
 
-			draw(nx, ny + 5, pbk_misc[74 + etape]);
+			draw(nx, ny + 5, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 2:				// Droite -------------------------------
@@ -168,19 +169,19 @@ void TirBBLaser::affiche()
 			backSurface->BltFast(xx, y, surf, &r, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
 			if (xx + largeur < 640)
-				draw(x + largeur, y + 3, pbk_misc[74 + etape]);
+				draw(x + largeur, y + 3, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 3:				// Haut/droite --------------------------
 
 			while (nx > offset - 20 && nx < offset + 660 &&
 			        ny > -20 && ny < 500 && !mur_opaque(nx, ny)) {
-				draw(nx, ny, pbk_bb[148 + etape]);
+				draw(nx, ny, g_game_state.picture_banks().bb()[148 + etape]);
 				nx += 8;
 				ny -= 8;
 			}
 
-			draw(nx - 5, ny + 10, pbk_misc[74 + etape]);
+			draw(nx - 5, ny + 10, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 4:				// Haut ---------------------------------
@@ -198,19 +199,19 @@ void TirBBLaser::affiche()
 			backSurface->BltFast(xx, y, surf, &r, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
 			if (y > 0)
-				draw(x + 3, y, pbk_misc[74 + etape]);
+				draw(x + 3, y, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 5:				// Haut/gauche --------------------------
 
 			while (nx > offset - 20 && nx < offset + 660 &&
 			        ny > -20 && ny < 500 && !mur_opaque(nx, ny)) {
-				draw(nx, ny, pbk_bb[144 + etape]);
+				draw(nx, ny, g_game_state.picture_banks().bb()[144 + etape]);
 				nx -= 8;
 				ny -= 8;
 			}
 
-			draw(nx + 5, ny + 10, pbk_misc[74 + etape]);
+			draw(nx + 5, ny + 10, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 6:				// Gauche --------------------------------
@@ -227,19 +228,19 @@ void TirBBLaser::affiche()
 			backSurface->BltFast(xx, y, surf, &r, DDBLTFAST_NOCOLORKEY | DDBLTFAST_WAIT);
 
 			if (xx > 0)
-				draw(x + 2, y + 3, pbk_misc[74 + etape]);
+				draw(x + 2, y + 3, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 		case 7:				// Bas/gauche ---------------------------
 
 			while (nx > offset - 20 && nx < offset + 660 &&
 			        ny > -50 && ny < 500 && !mur_opaque(nx, ny)) {
-				draw(nx, ny, pbk_bb[148 + etape]);
+				draw(nx, ny, g_game_state.picture_banks().bb()[148 + etape]);
 				nx -= 8;
 				ny += 8;
 			}
 
-			draw(nx, ny + 5, pbk_misc[74 + etape]);
+			draw(nx, ny + 5, g_game_state.picture_banks().misc()[74 + etape]);
 			break;
 
 	}

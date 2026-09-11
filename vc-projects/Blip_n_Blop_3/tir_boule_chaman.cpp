@@ -1,5 +1,6 @@
 
 #include "tir_boule_chaman.h"
+#include "game_state.h"
 
 TirBouleChaman::TirBouleChaman() : ok(false), boom(false)
 {
@@ -26,9 +27,9 @@ void TirBouleChaman::update()
 		}
 
 		if (dx > 0)
-			pic = pbk_ennemis[384 + etape];
+			pic = g_game_state.picture_banks().ennemis()[384 + etape];
 		else
-			pic = pbk_ennemis[389 + etape];
+			pic = g_game_state.picture_banks().ennemis()[389 + etape];
 
 	} else if (ok) {
 		if (ss_etape == 0) {
@@ -42,9 +43,9 @@ void TirBouleChaman::update()
 		}
 
 		if (dx > 0)
-			pic = pbk_ennemis[374 + etape];
+			pic = g_game_state.picture_banks().ennemis()[374 + etape];
 		else
-			pic = pbk_ennemis[379 + etape];
+			pic = g_game_state.picture_banks().ennemis()[379 + etape];
 	} else {
 		if (ss_etape == 0) {
 			etape += 1;
@@ -56,9 +57,9 @@ void TirBouleChaman::update()
 		}
 
 		if (dx > 0)
-			pic = pbk_ennemis[364 + etape];
+			pic = g_game_state.picture_banks().ennemis()[364 + etape];
 		else
-			pic = pbk_ennemis[369 + etape];
+			pic = g_game_state.picture_banks().ennemis()[369 + etape];
 	}
 
 	colFromPic();

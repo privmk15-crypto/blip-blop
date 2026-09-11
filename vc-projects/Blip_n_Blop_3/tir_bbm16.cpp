@@ -21,6 +21,7 @@
 
 
 #include "tir_bbm16.h"
+#include "game_state.h"
 
 const int dx_tirbb_m16 [] = { 0, 3, 6, 8, 9, 8, 6, 3, 0, -3, -6, -8, -9, -8, -6, -3 };
 const int dy_tirbb_m16 [] = { 9, 8, 6, 3, 0, -2, -6, -8, -9, -8, -6, -3, 0, 3, 6, 8 };
@@ -37,7 +38,7 @@ void TirBBM16::update()
 		noCol();
 		a_detruire = true;
 	} else {
-		pic = pbk_bb[72 + dir];
+		pic = g_game_state.picture_banks().bb()[72 + dir];
 		colFromPic();
 	}
 }

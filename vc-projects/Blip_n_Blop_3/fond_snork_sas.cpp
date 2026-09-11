@@ -24,7 +24,7 @@ int FondSnorkSas1::etat = 0; // 0 pour etat du sas 1 ouvert , 1 pour fermé
 FondSnorkSas1::FondSnorkSas1(): nb_joueur(0)
 {
 	etape = 0;
-	//pic = pbk_niveau[53];
+	//pic = g_game_state.picture_banks().niveau()[53];
 }
 
 void FondSnorkSas1::update()
@@ -79,9 +79,9 @@ void FondSnorkSas1::affiche()
 	int						largeur;
 	int                     decalage = 0;
 
-	surf = pbk_niveau[1]->Surf();
-	xs = pbk_niveau[1]->xSize();
-	ys = pbk_niveau[1]->ySize();
+	surf = g_game_state.picture_banks().niveau()[1]->Surf();
+	xs = g_game_state.picture_banks().niveau()[1]->xSize();
+	ys = g_game_state.picture_banks().niveau()[1]->ySize();
 
 	r.top		= 222 - etape;
 	r.left		= 0;
@@ -136,9 +136,9 @@ void FondSnorkSas2::affiche()
 	int						largeur;
 	int                     decalage = 0;
 
-	surf = pbk_niveau[1]->Surf();
-	xs = pbk_niveau[1]->xSize();
-	ys = pbk_niveau[1]->ySize();
+	surf = g_game_state.picture_banks().niveau()[1]->Surf();
+	xs = g_game_state.picture_banks().niveau()[1]->xSize();
+	ys = g_game_state.picture_banks().niveau()[1]->ySize();
 
 	r.top		= 222 - etape;
 	r.left		= 0;

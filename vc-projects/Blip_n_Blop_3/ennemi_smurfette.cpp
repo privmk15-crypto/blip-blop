@@ -58,10 +58,10 @@ void EnnemiSmurfette::onAvance()
 
 	if (dir == SENS_DROITE) {
 		marche(SPEED);
-		pic = pbk_ennemis[anime(marche_droite, 8, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(marche_droite, 8, 6)];
 	} else {
 		marche(-SPEED);
-		pic = pbk_ennemis[anime(marche_gauche, 8, 6)];
+		pic = g_game_state.picture_banks().ennemis()[anime(marche_gauche, 8, 6)];
 	}
 
 	if (etape_shoot >= wait_shoot && x > offset + 10 && x < offset + 630) {
@@ -90,9 +90,9 @@ void EnnemiSmurfette::onMeure()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[325 + etape];
+		pic = g_game_state.picture_banks().ennemis()[325 + etape];
 	else
-		pic = pbk_ennemis[337 + etape];
+		pic = g_game_state.picture_banks().ennemis()[337 + etape];
 }
 
 void EnnemiSmurfette::onTire()
@@ -125,9 +125,9 @@ void EnnemiSmurfette::onTire()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[tire_droite[etape]];
+		pic = g_game_state.picture_banks().ennemis()[tire_droite[etape]];
 	else
-		pic = pbk_ennemis[tire_gauche[etape]];
+		pic = g_game_state.picture_banks().ennemis()[tire_gauche[etape]];
 
 	colFromPic();
 }
@@ -157,8 +157,8 @@ void EnnemiSmurfette::onCarbonise()
 		a_detruire = true;
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[34 + etape];
+			pic = g_game_state.picture_banks().ennemis()[34 + etape];
 		else
-			pic = pbk_ennemis[40 + etape];
+			pic = g_game_state.picture_banks().ennemis()[40 + etape];
 	}
 }

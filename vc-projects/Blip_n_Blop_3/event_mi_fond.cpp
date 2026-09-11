@@ -10,7 +10,7 @@ void EventMiFond::doEvent()
 
 	s->x = x;
 	s->y = y;
-	s->pic = pbk_niveau[id];
+	s->pic = g_game_state.picture_banks().niveau()[id];
 
 	g_game_state.entities().list_fonds_statiques().emplace_back(s);
 }

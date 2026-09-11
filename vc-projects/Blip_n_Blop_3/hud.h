@@ -39,10 +39,10 @@ class HUD {
     void DrawCowBomb(int nb, Location location) {
         if (location == Location::Left) {
             for (int i = 0, dxt = 0; i < nb; i++, dxt += 23)
-                pbk_misc[49]->BlitTo(backSurface, 90 + dxt, 65);
+                g_game_state.picture_banks().misc()[49]->BlitTo(backSurface, 90 + dxt, 65);
         } else {
             for (int i = 0, dxt = 0; i < nb; i++, dxt += 23)
-                pbk_misc[49]->BlitTo(backSurface, 520 - dxt, 65);
+                g_game_state.picture_banks().misc()[49]->BlitTo(backSurface, 520 - dxt, 65);
         }
     }
 
@@ -66,19 +66,19 @@ class HUD {
 
         switch (weapon) {
             case ID_M16:
-                pic = pbk_misc[14];
+                pic = g_game_state.picture_banks().misc()[14];
                 break;
             case ID_PM:
-                pic = pbk_misc[8];
+                pic = g_game_state.picture_banks().misc()[8];
                 break;
             case ID_LF:
-                pic = pbk_misc[11];
+                pic = g_game_state.picture_banks().misc()[11];
                 break;
             case ID_FUSIL:
-                pic = pbk_misc[9];
+                pic = g_game_state.picture_banks().misc()[9];
                 break;
             case ID_LASER:
-                pic = pbk_misc[10];
+                pic = g_game_state.picture_banks().misc()[10];
                 break;
         }
 
@@ -126,12 +126,12 @@ class HUD {
         int y = pos[int(location)][1];
 
         for (int i = 0; i < health; i++) {
-            pbk_bb[201 - i]->BlitTo(
+            g_game_state.picture_banks().bb()[201 - i]->BlitTo(
                 backSurface, x + x_health[i], y + y_health[i]);
         }
 
         for (int i = health; i < 5; i++) {
-            pbk_bb[196 - i]->BlitTo(
+            g_game_state.picture_banks().bb()[196 - i]->BlitTo(
                 backSurface, x + x_health[i], y + y_health[i]);
         }
     }

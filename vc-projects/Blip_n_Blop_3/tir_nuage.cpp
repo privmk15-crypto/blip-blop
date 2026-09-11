@@ -1,6 +1,7 @@
 
 #include "enemy.h"
 #include "tir_nuage.h"
+#include "game_state.h"
 
 TirNuage::TirNuage() : etape_shoot(0), etat(0), eclair(0), delta_eclair(0)
 {
@@ -56,7 +57,7 @@ void TirNuage::onCreation()
 			ss_etape = etape = 0;
 			etat = 1;
 		} else {
-			pic = pbk_ennemis[250 + etape];
+			pic = g_game_state.picture_banks().ennemis()[250 + etape];
 		}
 	}
 
@@ -81,7 +82,7 @@ void TirNuage::onDestruction()
 		if (etape >= 3)
 			a_detruire = true;
 		else
-			pic = pbk_ennemis[252 - etape];
+			pic = g_game_state.picture_banks().ennemis()[252 - etape];
 	}
 
 	noCol();
@@ -100,7 +101,7 @@ void TirNuage::onNormal()
 	}
 
 
-	pic = pbk_ennemis[anime(anim, 4, 9)];
+	pic = g_game_state.picture_banks().ennemis()[anime(anim, 4, 9)];
 
 
 	if (dir == SENS_DROITE) {
@@ -153,7 +154,7 @@ void TirNuage::onTire()
 	}
 
 
-	pic = pbk_ennemis[anime(anim, 4, 9)];
+	pic = g_game_state.picture_banks().ennemis()[anime(anim, 4, 9)];
 
 	etape_shoot += 1;
 
@@ -182,7 +183,7 @@ void TirNuage::affiche()
 
 	if (etat == 3 && etape_shoot > 50) {
 		for (int yy = y - 10 + dy; yy < 480; yy += 100) {
-			draw(x, yy, pbk_ennemis[256 + de]);
+			draw(x, yy, g_game_state.picture_banks().ennemis()[256 + de]);
 
 			de = (de + 1) % 4;
 		}

@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_snorky_gouverneur.h"
+#include "game_state.h"
 
 
 
@@ -87,9 +88,9 @@ void TirSnorkyGouverneur::update()
 	y += dy;
 
 	if (dx <= 0) {
-		pic = pbk_ennemis[233 + etape];
+		pic = g_game_state.picture_banks().ennemis()[233 + etape];
 	} else {
-		pic = pbk_ennemis[236 - etape];
+		pic = g_game_state.picture_banks().ennemis()[236 - etape];
 	}
 
 	if (mur_opaque(x + dx, y + dy) != 0)

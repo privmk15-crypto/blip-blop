@@ -17,7 +17,7 @@
 #include "game_state.h"
 #include "ben_maths.h"
 
-FondPokeCaissePlateforme2::FondPokeCaissePlateforme2() { pic = pbk_niveau[87]; }
+FondPokeCaissePlateforme2::FondPokeCaissePlateforme2() { pic = g_game_state.picture_banks().niveau()[87]; }
 
 void FondPokeCaissePlateforme2::update() {
     if (y < 20) {  //-200

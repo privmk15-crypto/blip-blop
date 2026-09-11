@@ -17,6 +17,7 @@
 #define _BonusInvincible_
 
 #include "bonus.h"
+#include "game_state.h"
 
 class BonusInvincible : public Bonus
 {
@@ -24,7 +25,7 @@ public:
 
 	BonusInvincible()
 	{
-		pic = pbk_misc[12];
+		pic = g_game_state.picture_banks().misc()[12];
 		col_on = true;
 	};
 

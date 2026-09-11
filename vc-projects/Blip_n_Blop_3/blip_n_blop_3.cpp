@@ -430,7 +430,7 @@ static bool InitApp(int nCmdShow) {
     //                      Chargement de l'interface
     //------------------------------------------------------------------
 
-    if (!pbk_inter.loadGFX("data/inter.gfx", DDSURF_BEST)) {
+    if (!g_game_state.picture_banks().inter().loadGFX("data/inter.gfx", DDSURF_BEST)) {
         debug << "Cannot load interface.\n";
         return false;
     } else {

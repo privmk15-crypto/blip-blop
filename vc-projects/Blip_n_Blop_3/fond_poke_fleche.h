@@ -3,6 +3,7 @@
 #define _FondPokeFleche_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondPokeFleche : public Sprite
 {
@@ -20,7 +21,7 @@ public:
 			etape %= 6;
 		}*/
 
-		pic = pbk_niveau[anime(anim_go, 11, 3)];
+		pic = g_game_state.picture_banks().niveau()[anime(anim_go, 11, 3)];
 	};
 };
 

@@ -107,10 +107,10 @@ void EnnemiBisouZombi::onAvance()
 
 		if (dir == SENS_DROITE) {
 			marche(SPEED);
-			pic = pbk_ennemis[262 + etape];
+			pic = g_game_state.picture_banks().ennemis()[262 + etape];
 		} else {
 			marche(-SPEED);
-			pic = pbk_ennemis[270 + etape];
+			pic = g_game_state.picture_banks().ennemis()[270 + etape];
 		}
 	}
 
@@ -190,10 +190,10 @@ void EnnemiBisouZombi::onTombe()
 		etape += 1;
 
 	if (dir == SENS_DROITE) {
-		pic = pbk_ennemis[308 + etape];
+		pic = g_game_state.picture_banks().ennemis()[308 + etape];
 		x += 1;
 	} else {
-		pic = pbk_ennemis[312 + etape];
+		pic = g_game_state.picture_banks().ennemis()[312 + etape];
 		x -= 1;
 	}
 
@@ -218,9 +218,9 @@ void EnnemiBisouZombi::onMeure()
 		etape += 1;
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[292 + etape];
+		pic = g_game_state.picture_banks().ennemis()[292 + etape];
 	else
-		pic = pbk_ennemis[296 + etape];
+		pic = g_game_state.picture_banks().ennemis()[296 + etape];
 
 
 	if (etape >= 3) {
@@ -256,9 +256,9 @@ void EnnemiBisouZombi::onCoupe()
 		onTombe();
 	} else {
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[278 + etape];
+			pic = g_game_state.picture_banks().ennemis()[278 + etape];
 		else
-			pic = pbk_ennemis[282 + etape];
+			pic = g_game_state.picture_banks().ennemis()[282 + etape];
 	}
 }
 
@@ -298,9 +298,9 @@ void EnnemiBisouZombi::onRampe()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[anime(anim_droite, 4, 16)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_droite, 4, 16)];
 	else
-		pic = pbk_ennemis[anime(anim_gauche, 4, 16)];
+		pic = g_game_state.picture_banks().ennemis()[anime(anim_gauche, 4, 16)];
 }
 
 void EnnemiBisouZombi::onCarbonise()
@@ -318,9 +318,9 @@ void EnnemiBisouZombi::onCarbonise()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[605 + etape];
+		pic = g_game_state.picture_banks().ennemis()[605 + etape];
 	else
-		pic = pbk_ennemis[612 + etape];
+		pic = g_game_state.picture_banks().ennemis()[612 + etape];
 }
 
 void EnnemiBisouZombi::onCarboniseHaut()
@@ -338,7 +338,7 @@ void EnnemiBisouZombi::onCarboniseHaut()
 	}
 
 	if (dir == SENS_DROITE)
-		pic = pbk_ennemis[619 + etape];
+		pic = g_game_state.picture_banks().ennemis()[619 + etape];
 	else
-		pic = pbk_ennemis[627 + etape];
+		pic = g_game_state.picture_banks().ennemis()[627 + etape];
 }

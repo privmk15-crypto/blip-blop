@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------
 
 #include "enemy.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Constantes
@@ -71,11 +72,11 @@ public:
 
 	inline virtual void affiche()
 	{
-		draw(x, y - 50, pbk_ennemis[117]) ;
-		draw(x, y - 100, pbk_ennemis[117]) ;
-		draw(x, y - 150, pbk_ennemis[117]) ;
-		draw(x, y - 200, pbk_ennemis[117]) ;
-		draw(x, y - 250, pbk_ennemis[117]) ;
+		draw(x, y - 50, g_game_state.picture_banks().ennemis()[117]) ;
+		draw(x, y - 100, g_game_state.picture_banks().ennemis()[117]) ;
+		draw(x, y - 150, g_game_state.picture_banks().ennemis()[117]) ;
+		draw(x, y - 200, g_game_state.picture_banks().ennemis()[117]) ;
+		draw(x, y - 250, g_game_state.picture_banks().ennemis()[117]) ;
 
 		Ennemi::affiche() ;
 
@@ -84,43 +85,43 @@ public:
 			if (shooting) {
 				switch (shoot_direction) {
 					case DIAGONALE_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[137 + etape]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[137 + etape]) ;
 						break ;
 					case DIAGONALE_BAS_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[133 + etape]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[133 + etape]) ;
 						break ;
 					case BAS_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[129 + etape]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[129 + etape]) ;
 						break ;
 					case BAS_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[127 + etape]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[127 + etape]) ;
 						break ;
 					case DIAGONALE_BAS_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[131 + etape]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[131 + etape]) ;
 						break ;
 					case DIAGONALE_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[135 + etape]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[135 + etape]) ;
 						break ;
 				}
 			} else {
 				switch (shoot_direction) {
 					case DIAGONALE_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[352]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[352]) ;
 						break ;
 					case DIAGONALE_BAS_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[350]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[350]) ;
 						break ;
 					case BAS_GAUCHE :
-						draw(x + 8, y + 38, pbk_ennemis[354]) ;
+						draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[354]) ;
 						break ;
 					case BAS_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[353]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[353]) ;
 						break ;
 					case DIAGONALE_BAS_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[349]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[349]) ;
 						break ;
 					case DIAGONALE_DROITE :
-						draw(x - 5, y + 38, pbk_ennemis[351]) ;
+						draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[351]) ;
 						break ;
 				}
 			}

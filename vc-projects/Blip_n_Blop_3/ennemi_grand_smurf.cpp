@@ -1,5 +1,6 @@
 
 #include "ennemi_grand_smurf.h"
+#include "game_state.h"
 
 #define ATT_ATATA	0
 #define ATT_BOOM	1
@@ -97,10 +98,10 @@ void EnnemiGrandSmurf::onAtata()
 		attak_wanted = rand() % 2;
 	} else {
 		if (dir == SENS_GAUCHE) {
-			pic = pbk_ennemis[3 + (etape % 3)];
+			pic = g_game_state.picture_banks().ennemis()[3 + (etape % 3)];
 			dx = -1;
 		} else {
-			pic = pbk_ennemis[(etape % 3)];
+			pic = g_game_state.picture_banks().ennemis()[(etape % 3)];
 			dx = 1;
 		}
 
@@ -120,13 +121,13 @@ void EnnemiGrandSmurf::onAvance()
 
 	if (dx <= 0) {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[9];
+			pic = g_game_state.picture_banks().ennemis()[9];
 		else
-			pic = pbk_ennemis[37];
+			pic = g_game_state.picture_banks().ennemis()[37];
 	} else {
 		if (dir == SENS_GAUCHE)
-			pic = pbk_ennemis[40];
+			pic = g_game_state.picture_banks().ennemis()[40];
 		else
-			pic = pbk_ennemis[6];
+			pic = g_game_state.picture_banks().ennemis()[6];
 	}
 }

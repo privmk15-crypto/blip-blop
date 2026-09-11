@@ -3,6 +3,7 @@
 #define _GoreTeteBisouCoeur_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class GoreTeteBisouCoeur : public Sprite
 {
@@ -44,9 +45,9 @@ public:
 		}
 
 		if (dir == SENS_DROITE)
-			pic = pbk_ennemis[447 + etape];
+			pic = g_game_state.picture_banks().ennemis()[447 + etape];
 		else
-			pic = pbk_ennemis[454 + etape];
+			pic = g_game_state.picture_banks().ennemis()[454 + etape];
 	};
 };
 

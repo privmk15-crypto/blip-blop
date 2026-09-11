@@ -1,5 +1,6 @@
 
 #include "ennemi_com.h"
+#include "game_state.h"
 
 EnnemiCOM::EnnemiCOM()
 {
@@ -48,7 +49,7 @@ void EnnemiCOM::onAvance()
 	else
 		x -= 1;
 
-	pic = pbk_ennemis[98 + etape];
+	pic = g_game_state.picture_banks().ennemis()[98 + etape];
 
 	colFromPic();
 }
@@ -69,6 +70,6 @@ void EnnemiCOM::onMeure()
 	if (etape >= 22) {
 		a_detruire = true;
 	} else {
-		pic = pbk_ennemis[76 + etape];
+		pic = g_game_state.picture_banks().ennemis()[76 + etape];
 	}
 }

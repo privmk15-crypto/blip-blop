@@ -14,7 +14,7 @@ class FondEau1 : public Sprite
 public:
 	virtual void update()
 	{
-		pic = pbk_niveau[7 + water_seed];
+		pic = g_game_state.picture_banks().niveau()[7 + water_seed];
 
 		if (x < offset - 400)
 			a_detruire = true;
@@ -25,7 +25,7 @@ class FondEau2 : public Sprite
 {
 	virtual void update()
 	{
-		pic = pbk_niveau[7 + water_seed2];
+		pic = g_game_state.picture_banks().niveau()[7 + water_seed2];
 
 		if (x < offset - 400)
 			a_detruire = true;
@@ -41,7 +41,7 @@ public:
 		bool		b = false;
 
 
-		for (int i = 0; i < (((g_game_state.level().size()) / pbk_niveau[7]->xSize()) + 1); i++) {
+		for (int i = 0; i < (((g_game_state.level().size()) / g_game_state.picture_banks().niveau()[7]->xSize()) + 1); i++) {
 			if (b)
 				ptr = new FondEau1();
 			else

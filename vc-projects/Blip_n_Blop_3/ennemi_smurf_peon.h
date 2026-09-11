@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------
 
 #include "ennemi_smurf.h"
+#include "game_state.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe
@@ -42,10 +43,10 @@ public:
 		        || (etat == ETAT_MEURE && etape <= 2)) {
 			switch (dir) {
 				case SENS_GAUCHE :
-					draw(x, y - 32, pbk_ennemis[153]) ;
+					draw(x, y - 32, g_game_state.picture_banks().ennemis()[153]) ;
 					break ;
 				case SENS_DROITE :
-					draw(x, y - 32, pbk_ennemis[154]) ;
+					draw(x, y - 32, g_game_state.picture_banks().ennemis()[154]) ;
 					break ;
 			}
 		}

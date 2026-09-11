@@ -35,8 +35,11 @@ extern int		lang_type;
 extern bool		music_on;
 extern bool		sound_on;
 
-// 0-255, matching FMOD's own volume convention (FSOUND_SetSFXMasterVolume,
-// FMUSIC_SetMasterVolume). Applied via apply_volume_settings() below.
+// 0-100 (percent, shown directly in the options menu). Converted to
+// FMOD's own 0-255 volume convention only at the point of calling
+// apply_volume_settings() below - kept as a round percent everywhere
+// else so the menu never has to reverse a lossy 0-255 value back into
+// a display percentage.
 extern int		music_volume;
 extern int		sfx_volume;
 

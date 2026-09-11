@@ -34,18 +34,16 @@ void OptionsPanel::RefreshVsync() {
     items_.ChangeEntry(0, vSyncOn ? vsync_on_txt_ : vsync_off_txt_);
 }
 
-// 0-255 internally (matches FMOD's own volume range), shown as 0-100%
-// and stepped in the menu by roughly 10% per LEFT/RIGHT press.
-static const int kVolumeStep = 26;
+// music_volume/sfx_volume are already 0-100 percent, so this steps in
+// exact 10% increments with no display-side rounding.
+static const int kVolumeStep = 10;
 
 void OptionsPanel::RefreshMusicVolume() {
-    items_.ChangeEntry(2, "MUSIC VOLUME " +
-                               std::to_string(music_volume * 100 / 255) + "%");
+    items_.ChangeEntry(2, "MUSIC VOLUME " + std::to_string(music_volume) + "%");
 }
 
 void OptionsPanel::RefreshSfxVolume() {
-    items_.ChangeEntry(3, "SFX VOLUME " +
-                               std::to_string(sfx_volume * 100 / 255) + "%");
+    items_.ChangeEntry(3, "SFX VOLUME " + std::to_string(sfx_volume) + "%");
 }
 
 int OptionsPanel::ProcessEvent() {
@@ -74,13 +72,13 @@ int OptionsPanel::ProcessEvent() {
                 DDToggleFullscreen();
                 break;
             case 2:
-                music_volume = right ? std::min(255, music_volume + kVolumeStep)
+                music_volume = right ? std::min(100, music_volume + kVolumeStep)
                                       : std::max(0, music_volume - kVolumeStep);
                 apply_volume_settings();
                 RefreshMusicVolume();
                 break;
             case 3:
-                sfx_volume = right ? std::min(255, sfx_volume + kVolumeStep)
+                sfx_volume = right ? std::min(100, sfx_volume + kVolumeStep)
                                     : std::max(0, sfx_volume - kVolumeStep);
                 apply_volume_settings();
                 RefreshSfxVolume();

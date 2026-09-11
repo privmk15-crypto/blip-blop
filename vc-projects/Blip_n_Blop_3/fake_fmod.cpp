@@ -63,9 +63,17 @@ FSOUND_STREAM* FSOUND_Stream_OpenFile(const char* filename,
     }
     return stream;
 }
+// SDL_mixer only has one music "channel" (its own dedicated API,
+// separate from Mix_Chunk sample channels), so there's no real per-
+// stream channel number to return here. Use a sentinel far outside
+// the range Mix_PlayChannel ever returns (0..MIX_CHANNELS-1) so
+// FSOUND_SetVolume() below can tell "the music stream" apart from an
+// actual sample channel.
+static const int kFakeMusicChannel = -1000;
+
 int FSOUND_Stream_Play(int channel, FSOUND_STREAM* stream) {
     Mix_PlayMusic(stream->music, 0);
-    return true;
+    return kFakeMusicChannel;
 }
 signed char FSOUND_Stream_Stop(FSOUND_STREAM* stream) {
     Mix_HaltMusic();
@@ -106,5 +114,22 @@ signed char FMUSIC_SetMasterVolume(FMUSIC_MODULE* mod, int volume) {
 signed char FMUSIC_StopSong(FMUSIC_MODULE* mod) { return true; }
 signed char FMUSIC_FreeSong(FMUSIC_MODULE* mod) { return true; }
 signed char FSOUND_SetPriority(int channel, int priority) { return true; }
-void FSOUND_SetSFXMasterVolume(int volume) {}
+
+// Both of these used to be pure noops, so volume settings compiled
+// and ran but never had any audible effect on this (Linux/SDL_mixer)
+// backend. `volume` comes in on FMOD's usual 0-255 scale; SDL_mixer
+// wants 0-MIX_MAX_VOLUME (128).
+void FSOUND_SetSFXMasterVolume(int volume) {
+    Mix_Volume(-1 /* all channels */, volume * MIX_MAX_VOLUME / 255);
+}
+
+signed char FSOUND_SetVolume(int channel, int vol) {
+    int mix_vol = vol * MIX_MAX_VOLUME / 255;
+    if (channel == kFakeMusicChannel) {
+        Mix_VolumeMusic(mix_vol);
+    } else {
+        Mix_Volume(channel, mix_vol);
+    }
+    return true;
+}
 }

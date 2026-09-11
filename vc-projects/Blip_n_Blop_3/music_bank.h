@@ -49,14 +49,37 @@ class Mp3Music : public Music {
     }
 
     ~Mp3Music() override { FSOUND_Stream_Close(mp3_); }
-    void Play() const override { FSOUND_Stream_Play(0, mp3_); }
+    // Fix: this used to be a hardcoded noop, so no music track could
+    // ever have its volume changed - every .mbk in the game only uses
+    // TYPE_MP3 entries (see music_bank.cpp), so this was the entire
+    // reason "music volume" did nothing audibly, on every platform.
+    // FSOUND_Stream_Play() returns the channel the stream actually
+    // plays on (same channel space FSOUND_SetVolume operates on), so
+    // remember it and (re)apply the last requested volume once we
+    // have it - both right after Play() and whenever set_volume() is
+    // called while already playing.
+    void Play() const override {
+        channel_ = FSOUND_Stream_Play(0, mp3_);
+        FSOUND_SetVolume(channel_, volume_);
+    }
     void Stop() const override { FSOUND_Stream_Stop(mp3_); }
-    void set_volume(int) override {
-        debug << "Mp3Music::set_volume is a noop\n";
+    void set_volume(int v) override {
+        volume_ = v;
+        // -1 means "Play() hasn't run yet" - real FMOD channels are
+        // always >= 0, but the fake_fmod/SDL_mixer backend's stream
+        // "channel" is a negative sentinel (see fake_fmod.cpp), so -1
+        // is the only safe "not started" value to compare against.
+        if (channel_ != kNotStarted) {
+            FSOUND_SetVolume(channel_, volume_);
+        }
     }
 
    private:
+    static const int kNotStarted = -1;
+
     FSOUND_STREAM* mp3_;
+    mutable int channel_ = kNotStarted;
+    int volume_ = 255;
 };
 
 class MusicBank {

@@ -16,6 +16,7 @@
 ******************************************************************/
 
 #include <stdio.h>
+#include <algorithm>
 #include "dd_gfx.h"
 #include "ben_debug.h"
 #include "config.h"
@@ -36,16 +37,26 @@ int		lang_type = LANG_UK;
 bool	music_on = true;
 bool	sound_on = true;
 
-int		music_volume = 255;
-int		sfx_volume = 255;
+int		music_volume = 100;
+int		sfx_volume = 100;
 
 void apply_volume_settings()
 {
-	FSOUND_SetSFXMasterVolume(sfx_volume);
+	// Clamp first: a config file saved by an older build (back when
+	// these were 0-255 values, e.g. the old default of 255) would
+	// otherwise be read as "255%" and overflow the FMOD call below.
+	music_volume = std::min(100, std::max(0, music_volume));
+	sfx_volume = std::min(100, std::max(0, sfx_volume));
 
-	g_game_state.sound_banks().mbk_niveau().setVol(music_volume);
-	g_game_state.sound_banks().mbk_inter().setVol(music_volume);
-	g_game_state.sound_banks().mbk_interl().setVol(music_volume);
+	// music_volume/sfx_volume are 0-100 percent; FMOD's calls want 0-255.
+	int sfx_fmod = sfx_volume * 255 / 100;
+	int music_fmod = music_volume * 255 / 100;
+
+	FSOUND_SetSFXMasterVolume(sfx_fmod);
+
+	g_game_state.sound_banks().mbk_niveau().setVol(music_fmod);
+	g_game_state.sound_banks().mbk_inter().setVol(music_fmod);
+	g_game_state.sound_banks().mbk_interl().setVol(music_fmod);
 }
 
 bool	cheat_on = false;
@@ -217,7 +228,7 @@ void set_default_config(bool reset_lang)
 	in.setAlias(ALIAS_P2_JUMP, DIK_G);
 	in.setAlias(ALIAS_P2_SUPER, DIK_H);
 
-	music_volume = 255;
-	sfx_volume = 255;
+	music_volume = 100;
+	sfx_volume = 100;
 	apply_volume_settings();
 }

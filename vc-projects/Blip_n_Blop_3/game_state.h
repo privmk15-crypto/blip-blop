@@ -51,6 +51,16 @@
 
 class GameState {
    public:
+    // Declared here, defined (noexcept = default) in game_state.cpp,
+    // which pulls in the real headers for everything EntityManager holds
+    // via unique_ptr - belt-and-suspenders alongside EntityManager's own
+    // out-of-line destructor (entity_manager.h/.cpp): two attempts at
+    // deferring just EntityManager's own destructor still failed CI with
+    // the same incomplete-type error pointing at game_state.cpp, so this
+    // makes GameState's destruction explicit too rather than relying on
+    // an implicit one being generated correctly in this TU.
+    ~GameState() noexcept;
+
     ScreenShake& screen_shake() { return screen_shake_; }
     ScrollLock& scroll_lock() { return scroll_lock_; }
     Level& level() { return level_; }

@@ -17,6 +17,7 @@
 ******************************************************************/
 
 #include "event_gen_ennemi.h"
+#include "game_state.h"
 #include "gen_ennemi_tmp.h"
 #include "gen_ennemi.h"
 
@@ -36,5 +37,5 @@ void EventGenEnnemi::doEvent()
 	gen->periode = periode;
 	gen->capacite = capacite;
 
-	list_gen_ennemis.emplace_back(gen);
+	g_game_state.entities().list_gen_ennemis().emplace_back(gen);
 }

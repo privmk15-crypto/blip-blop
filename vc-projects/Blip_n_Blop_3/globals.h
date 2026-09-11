@@ -115,36 +115,20 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Les listes
 //-----------------------------------------------------------------------------
 
-// FIXME: They're all lists instead of ideally vectors because we sometimes
-// append during iterations and relocating is then STRICTLY forbidden
-class Couille;
-extern std::vector<Couille*> list_joueurs; // FIXME: make it owning?
-class TirBB;
-extern std::list<TirBB*> list_tirs_bb;
-class TirBBVache;
-extern std::list<std::unique_ptr<TirBBVache>> list_cow;
-class Explosion;
-// FIXME: should be owning by value but can't, because of circular deps
-extern std::list<std::unique_ptr<Explosion>> list_impacts; 
-
-class Vehicule;
-extern std::list<std::unique_ptr<Vehicule>> list_vehicules;
-
-class Event;
-extern std::list<std::unique_ptr<Event>> list_event_endormis;
-extern std::list<std::unique_ptr<Event>> list_event;
+// list_joueurs/list_tirs_bb/list_cow/list_impacts/list_vehicules/
+// list_event_endormis/list_event/list_gen_ennemis/list_gen_bonus/
+// list_meteo/list_bulles moved into EntityManager (entity_manager.h) as
+// part of the Stage 2 EntityManager migration (groups #1-#3: the lists
+// with the smallest spawn-site footprint). The remaining lists below are
+// not yet migrated (larger spawn-site footprint, planned as later groups).
 
 class Ennemi;
 extern std::list<std::unique_ptr<Ennemi>> list_ennemis;
 class Tir;
 extern std::list<std::unique_ptr<Tir>> list_tirs_ennemis;
-class GenEnnemi;
-extern std::list<std::unique_ptr<GenEnnemi>> list_gen_ennemis;
 
 class Bonus;
 extern std::list<std::unique_ptr<Bonus>> list_bonus;
-class GenBonus;
-extern std::list<std::unique_ptr<GenBonus>> list_gen_bonus;
 
 class Sprite;
 extern std::list<std::unique_ptr<Sprite>> list_fonds_animes;
@@ -161,10 +145,6 @@ extern std::list<std::unique_ptr<Sprite>> list_giclures;
 // FIXME all things put insite list_gore don't have a common base aside from
 // Sprite
 extern std::list<std::unique_ptr<Sprite>> list_gore;
-
-extern std::list<Sprite*> list_meteo;
-class Bulle;
-extern std::list<std::unique_ptr<Bulle>> list_bulles;
 
 
 //-----------------------------------------------------------------------------

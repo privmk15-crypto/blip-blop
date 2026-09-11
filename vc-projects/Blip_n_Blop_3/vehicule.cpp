@@ -1,5 +1,6 @@
 
 #include "vehicule.h"
+#include "game_state.h"
 
 Vehicule::Vehicule() : joueur(NULL), ctrl(NULL), can_be_used(true)
 {
@@ -37,7 +38,7 @@ Couille * Vehicule::scanne()
 	int			ddx;
 	int			ddy;
 
-        for (Couille* c: list_joueurs) {
+        for (Couille* c: g_game_state.entities().list_joueurs()) {
 		ddx = c->x - x;
 		ddy = c->y - y;
 

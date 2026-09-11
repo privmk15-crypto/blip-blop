@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "sprite.h"
+#include "game_state.h"
 #include "gen_ennemi.h"
 #include "event_ennemi.h"
 #include "couille.h"
@@ -40,7 +41,7 @@ void GenEnnemi::update()
 		Sprite *	s;
 		bool		ok = true;
 
-		for (Couille* s : list_joueurs) {
+		for (Couille* s : g_game_state.entities().list_joueurs()) {
 			ok = (s->x < x - 100 || s->x > x + 100 || s->y < y - 100 || s->y > y + 100);
 		}
 

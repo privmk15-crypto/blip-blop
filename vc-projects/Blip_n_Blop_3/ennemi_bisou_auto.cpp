@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_auto.h"
+#include "game_state.h"
 #include "gore_bisou_auto.h"
 #include "explosion.h"
 
@@ -125,7 +126,7 @@ void EnnemiBisouAuto::onMeure()
 		s->x = x - 20 + rand() % 40;
 		s->y = y - 20 + rand() % 40;
 
-		list_impacts.push_back(std::unique_ptr<Explosion>(s));
+		g_game_state.entities().list_impacts().push_back(std::unique_ptr<Explosion>(s));
 	}
 
 	updateADetruire();

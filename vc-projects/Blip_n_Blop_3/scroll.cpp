@@ -116,15 +116,15 @@ void updateScrolling(bool forceOk)
 			offset = g_game_state.scroll_lock().x();
 	} else if (scroll_speed != 0 && forceOk) {
 		offset += scroll_speed;
-	} else if (list_joueurs.size() > 0) {
+	} else if (g_game_state.entities().list_joueurs().size() > 0) {
 		Sprite *	s;
 		int			x_moy = 0;
 
-                for (Couille* s : list_joueurs) {
+                for (Couille* s : g_game_state.entities().list_joueurs()) {
 			x_moy += s->x;
 		}
 
-		x_moy /= list_joueurs.size();
+		x_moy /= g_game_state.entities().list_joueurs().size();
 		x_moy -= 320;	// Pour centrer (320=640/2)
 
 		if (x_moy > offset) {

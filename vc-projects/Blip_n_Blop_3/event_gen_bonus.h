@@ -18,6 +18,7 @@
 
 
 #include "event.h"
+#include "game_state.h"
 #include "gen_bonus.h"
 
 
@@ -36,7 +37,7 @@ public:
 		gb->type = type;
 		gb->x = x_activation;
 
-		list_gen_bonus.emplace_back(gb);
+		g_game_state.entities().list_gen_bonus().emplace_back(gb);
 	};
 };
 

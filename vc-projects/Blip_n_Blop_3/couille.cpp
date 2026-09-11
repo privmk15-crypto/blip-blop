@@ -509,7 +509,7 @@ void Couille::update()
 				ptr->etape = rand() % 8;
 				ptr->joueur = this;
 
-				list_cow.push_back(std::unique_ptr<TirBBVache>(ptr));
+				g_game_state.entities().list_cow().push_back(std::unique_ptr<TirBBVache>(ptr));
 			}
 		}
 
@@ -1100,7 +1100,7 @@ void Couille::updateArme()
 					t->dxReferentiel = 0;
 
 				t->setDir(dir);
-				list_tirs_bb.push_back(t);
+				g_game_state.entities().list_tirs_bb().push_back(t);
 				break;
 
 			case ID_PM:
@@ -1120,7 +1120,7 @@ void Couille::updateArme()
 					t->dxReferentiel = 0;
 
 				t->setDir(dir_arme);
-				list_tirs_bb.push_back(t);
+				g_game_state.entities().list_tirs_bb().push_back(t);
 				break;
 
 			case ID_FUSIL:
@@ -1144,7 +1144,7 @@ void Couille::updateArme()
 						t->dxReferentiel = 0;
 
 					t->setDir(dir);
-					list_tirs_bb.push_back(t);
+					g_game_state.entities().list_tirs_bb().push_back(t);
 				}
 				break;
 
@@ -1160,7 +1160,7 @@ void Couille::updateArme()
 				t->y = y + dy_tir_laser[d_arme] + y_recul[d_arme][etape_recul];
 				t->setDir(dir);
 				t->etape = etape_arme;
-				list_tirs_bb.push_back(t);
+				g_game_state.entities().list_tirs_bb().push_back(t);
 				break;
 
 			case ID_LF:
@@ -1174,7 +1174,7 @@ void Couille::updateArme()
 				t->y = y + dy_tir_lf[d_arme] + y_recul[d_arme][etape_recul];
 				t->setDir(dir_arme);
 
-				list_tirs_bb.push_back(t);
+				g_game_state.entities().list_tirs_bb().push_back(t);
 
 				next_lf = (next_lf + 1) % NB_TIRS_LF;
 				t = &tirs_lf[next_lf];
@@ -1186,7 +1186,7 @@ void Couille::updateArme()
 				t->y = y + dy_tir_lf[d_arme] + y_recul[d_arme][etape_recul];
 				t->setDir(dir_arme);
 
-				list_tirs_bb.push_back(t);
+				g_game_state.entities().list_tirs_bb().push_back(t);
 				break;
 		}
 

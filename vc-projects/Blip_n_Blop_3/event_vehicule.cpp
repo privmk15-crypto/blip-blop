@@ -1,5 +1,6 @@
 
 #include "event_vehicule.h"
+#include "game_state.h"
 #include "ben_debug.h"
 #include "vehicule.h"
 //#include "VehiculeHypo.h"
@@ -23,7 +24,7 @@ void EventVehicule::doEvent()
 		v->y = y;
 		v->dir = dir;
 
-		list_vehicules.push_back(std::unique_ptr<Vehicule>(v));
+		g_game_state.entities().list_vehicules().push_back(std::unique_ptr<Vehicule>(v));
 	} else {
 		debug << "Unknown vehicle ID : " << id_vehicule << "\n";
 	}

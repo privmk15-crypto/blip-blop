@@ -33,18 +33,11 @@
 #include "scroll.h"
 #include "restore.h"
 #include "fond_statique.h"
-#include "tir_bb_vache.h"
-#include "explosion.h"
-#include "vehicule.h"
-#include "event.h"
 #include "enemy.h"
-#include "gen_ennemi.h"
 #include "bonus.h"
-#include "gen_bonus.h"
 #include "sprite.h"
 #include "texte_cool.h"
 #include "giclure.h"
-#include "bulle.h"
 #include "game_state.h"
 
 #include "ben_debug.h"
@@ -93,22 +86,15 @@ bool		no_scroll2;
 //		Les listes
 //-----------------------------------------------------------------------------
 
-std::vector<Couille*> list_joueurs; // FIXME: make it owning?
-std::list<TirBB*> list_tirs_bb;
-std::list<std::unique_ptr<TirBBVache>> list_cow;
-std::list<std::unique_ptr<Explosion>> list_impacts;
-
-std::list<std::unique_ptr<Vehicule>> list_vehicules;
-
-std::list<std::unique_ptr<Event>> list_event_endormis;
-std::list<std::unique_ptr<Event>> list_event;
+// list_joueurs/list_tirs_bb/list_cow/list_impacts/list_vehicules/
+// list_event_endormis/list_event/list_gen_ennemis/list_gen_bonus/
+// list_meteo/list_bulles moved to entity_manager.h (EntityManager) -
+// Stage 2 EntityManager migration, groups #1-#3.
 
 std::list<std::unique_ptr<Ennemi>> list_ennemis;
 std::list<std::unique_ptr<Tir>> list_tirs_ennemis;
-std::list<std::unique_ptr<GenEnnemi>> list_gen_ennemis;
 
 std::list<std::unique_ptr<Bonus>> list_bonus;
-std::list<std::unique_ptr<GenBonus>> list_gen_bonus;
 
 std::list<std::unique_ptr<Sprite>> list_fonds_animes;
 std::list<std::unique_ptr<Sprite>> list_fonds_statiques;
@@ -119,9 +105,6 @@ std::list<std::unique_ptr<TexteCool>> list_txt_cool;
 
 std::list<std::unique_ptr<Sprite>> list_giclures;
 std::list<std::unique_ptr<Sprite>> list_gore;
-
-std::list<Sprite*> list_meteo;
-std::list<std::unique_ptr<Bulle>> list_bulles;
 
 
 //-----------------------------------------------------------------------------

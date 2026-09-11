@@ -18,6 +18,7 @@
 #include <cstring>
 #include "lgx_packer.h"
 #include "rpg_player.h"
+#include "game_state.h"
 #include "globals.h"
 #include "txt_data.h"
 #include "couille.h"
@@ -68,7 +69,7 @@ bool RPGPlayer::startPlay(int n)
 	ntxt[0]			= -1;
 	ntxt[1]			= -1;
 
-	nbjoueurs		= list_joueurs.size();
+	nbjoueurs		= g_game_state.entities().list_joueurs().size();
 	key_released	= false;
 	skiped			= false;
 	focus			= 0;
@@ -78,7 +79,7 @@ bool RPGPlayer::startPlay(int n)
 	Couille *	c;
 	int			i = 0;
 
-        for (Couille* c : list_joueurs) {
+        for (Couille* c : g_game_state.entities().list_joueurs()) {
 		if (c->id_couille == ID_BLIP)
 			base_joueur[i] = 0;
 		else

@@ -127,7 +127,7 @@ void Game::jouePartie(int nbj, int idj) {
         player1 = new Blop();
 
     player1->ctrl = &ctrlP1_;
-    list_joueurs.push_back(player1);
+    g_game_state.entities().list_joueurs().push_back(player1);
 
     if (nbj == 2) {
         if (idj == 0)
@@ -136,7 +136,7 @@ void Game::jouePartie(int nbj, int idj) {
             player2 = new Blip();
 
         player2->ctrl = &ctrlP2_;
-        list_joueurs.push_back(player2);
+        g_game_state.entities().list_joueurs().push_back(player2);
     }
 
     // Joue à tous les niveaux
@@ -377,8 +377,8 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     // Règle l'offset sur les joueurs
     //
     /*
-            list_joueurs.start();
-            Sprite * s = (Sprite*) list_joueurs.info();
+            g_game_state.entities().list_joueurs().start();
+            Sprite * s = (Sprite*) g_game_state.entities().list_joueurs().info();
             offset = s->x;
             offset -= (offset%640);
 
@@ -388,7 +388,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
             next_x = offset % vbuffer_wide;
             next_x = next_x - (next_x & 1);
     */
-    Sprite* s = list_joueurs[0];
+    Sprite* s = g_game_state.entities().list_joueurs()[0];
     offset = s->x;
     offset -= (offset % 640);
 
@@ -483,7 +483,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         if (player1 != NULL && p1_bringBack) {
             if (player1->a_detruire && p1_life > 0) {
                 player1->a_detruire = false;
-                list_joueurs.push_back(player1);
+                g_game_state.entities().list_joueurs().push_back(player1);
             }
 
             player1->nb_life = p1_life;
@@ -492,7 +492,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         if (player2 != NULL && p2_bringBack) {
             if (player2->a_detruire && p2_life > 0) {
                 player2->a_detruire = false;
-                list_joueurs.push_back(player2);
+                g_game_state.entities().list_joueurs().push_back(player2);
             }
 
             player2->nb_life = p2_life;
@@ -749,7 +749,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_ennemi->y = ficevent.y;
                 event_ennemi->sens = ficevent.sens;
 
-                list_event_endormis.push_back(std::move(event_ennemi));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_ennemi));
                 break;
             }
 
@@ -765,7 +765,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_gennemi->periode = ficevent.periode;
                 event_gennemi->tmp = ficevent.tmp;
 
-                list_event_endormis.push_back(std::move(event_gennemi));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_gennemi));
                 break;
             }
 
@@ -777,7 +777,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_lock->flag = ficevent.flag;
                 event_lock->val = ficevent.val;
 
-                list_event_endormis.push_back(std::move(event_lock));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_lock));
                 break;
             }
 
@@ -787,7 +787,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_scroll_speed->x_activation = ficevent.x_activation;
                 event_scroll_speed->speed = ficevent.speed;
 
-                list_event_endormis.push_back(std::move(event_scroll_speed));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_scroll_speed));
                 break;
             }
 
@@ -798,7 +798,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_set_flag->flag = ficevent.flag;
                 event_set_flag->val = ficevent.val;
 
-                list_event_endormis.push_back(std::move(event_set_flag));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_set_flag));
                 break;
             }
 
@@ -809,7 +809,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_hold_fire->flag = ficevent.flag;
                 event_hold_fire->val = ficevent.val;
 
-                list_event_endormis.push_back(std::move(event_hold_fire));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_hold_fire));
                 break;
             }
 
@@ -820,7 +820,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_gen_bonus->type = ficevent.id;
                 event_gen_bonus->periode = ficevent.periode;
 
-                list_event_endormis.push_back(std::move(event_gen_bonus));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_gen_bonus));
                 break;
             }
 
@@ -833,7 +833,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_texte->flag = ficevent.flag;
                 event_texte->val = ficevent.val;
 
-                list_event_endormis.push_back(std::move(event_texte));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_texte));
                 break;
             }
 
@@ -845,7 +845,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_fond_anime->x = ficevent.x;
                 event_fond_anime->y = ficevent.y;
 
-                list_event_endormis.push_back(std::move(event_fond_anime));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_fond_anime));
                 break;
             }
 
@@ -857,7 +857,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_mi_fond->x = ficevent.x;
                 event_mi_fond->y = ficevent.y;
 
-                list_event_endormis.push_back(std::move(event_mi_fond));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_mi_fond));
                 break;
             }
 
@@ -869,7 +869,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_pplan->x = ficevent.x;
                 event_pplan->y = ficevent.y;
 
-                list_event_endormis.push_back(std::move(event_pplan));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_pplan));
                 break;
             }
 
@@ -882,7 +882,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_rpg->flag = ficevent.flag;
                 event_rpg->val = ficevent.val;
 
-                list_event_endormis.push_back(std::move(event_rpg));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_rpg));
                 break;
             }
 
@@ -893,7 +893,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_music->id = ficevent.id;
                 event_music->play = ficevent.play;
 
-                list_event_endormis.push_back(std::move(event_music));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_music));
                 break;
             }
 
@@ -904,7 +904,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_meteo->intensite = ficevent.intensite;
                 event_meteo->type = ficevent.id;
 
-                list_event_endormis.push_back(std::move(event_meteo));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_meteo));
                 break;
             }
 
@@ -915,7 +915,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_bonus->x = ficevent.x;
                 event_bonus->y = ficevent.y;
 
-                list_event_endormis.push_back(std::move(event_bonus));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_bonus));
                 break;
             }
 
@@ -927,7 +927,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_vehicule->y = ficevent.y;
                 event_vehicule->dir = ficevent.dir;
 
-                list_event_endormis.push_back(std::move(event_vehicule));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_vehicule));
                 break;
             }
 
@@ -936,7 +936,7 @@ bool Game::chargeNiveau(const char* nom_niveau) {
                 event_son->x_activation = ficevent.x_activation;
                 event_son->nsnd = ficevent.id;
 
-                list_event_endormis.push_back(std::move(event_son));
+                g_game_state.entities().list_event_endormis().push_back(std::move(event_son));
                 break;
             }
         }
@@ -954,21 +954,21 @@ void Game::releaseNiveau() {
     // murs_sanglants) - see Level::Release().
     g_game_state.level().Release();
 
-    list_event_endormis.clear();
-    list_event.clear();
+    g_game_state.entities().list_event_endormis().clear();
+    g_game_state.entities().list_event().clear();
 
-    list_tirs_bb.clear();
-    list_cow.clear();
-    list_impacts.clear();
+    g_game_state.entities().list_tirs_bb().clear();
+    g_game_state.entities().list_cow().clear();
+    g_game_state.entities().list_impacts().clear();
 
-    list_vehicules.clear();
+    g_game_state.entities().list_vehicules().clear();
 
     list_ennemis.clear();
     list_tirs_ennemis.clear();
-    list_gen_ennemis.clear();
+    g_game_state.entities().list_gen_ennemis().clear();
 
     list_bonus.clear();
-    list_gen_bonus.clear();
+    g_game_state.entities().list_gen_bonus().clear();
 
     list_txt_cool.clear();
 
@@ -980,8 +980,8 @@ void Game::releaseNiveau() {
     list_giclures.clear();
     list_gore.clear();
 
-    list_meteo.clear();
-    list_bulles.clear();
+    g_game_state.entities().list_meteo().clear();
+    g_game_state.entities().list_bulles().clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -1038,11 +1038,11 @@ void Game::updateAll() {
     UpdateCollection(list_fonds_statiques);
     UpdateCollection(list_fonds_animes);
     UpdateCollection(list_plateformes_mobiles);
-    UpdateCollection(list_vehicules);
-    UpdateCollection(list_joueurs);
-    UpdateCollection(list_tirs_bb);
-    UpdateCollection(list_cow);
-    UpdateCollection(list_impacts);
+    UpdateCollection(g_game_state.entities().list_vehicules());
+    UpdateCollection(g_game_state.entities().list_joueurs());
+    UpdateCollection(g_game_state.entities().list_tirs_bb());
+    UpdateCollection(g_game_state.entities().list_cow());
+    UpdateCollection(g_game_state.entities().list_impacts());
     UpdateCollection(list_ennemis);
     UpdateCollection(list_gore);
     UpdateCollection(list_tirs_ennemis);
@@ -1051,8 +1051,8 @@ void Game::updateAll() {
     UpdateCollection(list_premiers_plans);
 
     UpdateCollection(list_txt_cool);
-    UpdateCollection(list_gen_ennemis);
-    UpdateCollection(list_gen_bonus);
+    UpdateCollection(g_game_state.entities().list_gen_ennemis());
+    UpdateCollection(g_game_state.entities().list_gen_bonus());
     updateLock();
     updateHoldFire();
     updateTeteTurc();
@@ -1103,22 +1103,22 @@ void Game::drawAll(bool flip) {
     DrawCollection(list_fonds_animes);
 
     if (game_flag[FLAG_BULLES]) {
-        DrawCollection(list_bulles);
+        DrawCollection(g_game_state.entities().list_bulles());
     }
 
     DrawCollection(list_plateformes_mobiles);
-    DrawCollection(list_impacts);
+    DrawCollection(g_game_state.entities().list_impacts());
     DrawCollection(list_gore);
 
     DrawCollection(list_ennemis);
     DrawCollection(list_tirs_ennemis);
     DrawCollection(list_bonus);
-    DrawCollection(list_tirs_bb);
-    DrawCollection(list_joueurs);
-    DrawCollection(list_vehicules);
-    DrawCollection(list_impacts);
-    DrawCollection(list_cow);
-    DrawCollection(list_meteo);
+    DrawCollection(g_game_state.entities().list_tirs_bb());
+    DrawCollection(g_game_state.entities().list_joueurs());
+    DrawCollection(g_game_state.entities().list_vehicules());
+    DrawCollection(g_game_state.entities().list_impacts());
+    DrawCollection(g_game_state.entities().list_cow());
+    DrawCollection(g_game_state.entities().list_meteo());
     DrawCollection(list_premiers_plans);
 
     if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0) drawDeformation();
@@ -1177,7 +1177,7 @@ void Game::gameLoop() {
 
 //-----------------------------------------------------------------------------
 
-void Game::releasePartie() { list_joueurs.clear(); }
+void Game::releasePartie() { g_game_state.entities().list_joueurs().clear(); }
 
 //-----------------------------------------------------------------------------
 
@@ -1281,22 +1281,22 @@ void Game::RemoveDestroyed(T& xs) {
 }
 
 void Game::cleanLists() {
-    RemoveDestroyed(list_joueurs);
+    RemoveDestroyed(g_game_state.entities().list_joueurs());
     RemoveDestroyed(list_fonds_statiques);
-    RemoveDestroyed(list_tirs_bb);
-    RemoveDestroyed(list_cow);
-    RemoveDestroyed(list_bulles);
-    RemoveDestroyed(list_impacts);
+    RemoveDestroyed(g_game_state.entities().list_tirs_bb());
+    RemoveDestroyed(g_game_state.entities().list_cow());
+    RemoveDestroyed(g_game_state.entities().list_bulles());
+    RemoveDestroyed(g_game_state.entities().list_impacts());
     RemoveDestroyed(list_ennemis);
     RemoveDestroyed(list_bonus);
-    RemoveDestroyed(list_gen_ennemis);
-    RemoveDestroyed(list_gen_bonus);
+    RemoveDestroyed(g_game_state.entities().list_gen_ennemis());
+    RemoveDestroyed(g_game_state.entities().list_gen_bonus());
     RemoveDestroyed(list_txt_cool);
     RemoveDestroyed(list_fonds_animes);
     RemoveDestroyed(list_premiers_plans);
     RemoveDestroyed(list_giclures);
     RemoveDestroyed(list_tirs_ennemis);
-    RemoveDestroyed(list_meteo);
+    RemoveDestroyed(g_game_state.entities().list_meteo());
     RemoveDestroyed(list_gore);
     RemoveDestroyed(list_plateformes_mobiles);
 }
@@ -1311,34 +1311,35 @@ void Game::updateEvents() {
     //
     // FIXME: These reverse iterators are WEIRD. Why are the events coming
     // in reverse order? This feels so backward.
-    for (auto it = list_event_endormis.rbegin();
-         it != list_event_endormis.rend();
+    for (auto it = g_game_state.entities().list_event_endormis().rbegin();
+         it != g_game_state.entities().list_event_endormis().rend();
          ++it) {
         auto& event = *it;
         if (!event->aReveiller()) {
             break;
         }
-        list_event.push_back(std::move(event));
+        g_game_state.entities().list_event().push_back(std::move(event));
     }
 
-    list_event_endormis.erase(
-        std::remove_if(list_event_endormis.begin(),
-                       list_event_endormis.end(),
+    g_game_state.entities().list_event_endormis().erase(
+        std::remove_if(g_game_state.entities().list_event_endormis().begin(),
+                       g_game_state.entities().list_event_endormis().end(),
                        [](auto& ev) { return !ev.get(); }),
-        list_event_endormis.end());
+        g_game_state.entities().list_event_endormis().end());
 
     // Si les évenements "en attente" doivent être activés, on les active
     //
-    for (auto& event : list_event) {
+    for (auto& event : g_game_state.entities().list_event()) {
         if (event->aActiver()) {
             event->doEvent();
             event.reset(nullptr);
         }
     }
-    list_event.erase(std::remove_if(list_event.begin(),
-                                    list_event.end(),
-                                    [](auto& ev) { return !ev.get(); }),
-                     list_event.end());
+    g_game_state.entities().list_event().erase(
+        std::remove_if(g_game_state.entities().list_event().begin(),
+                        g_game_state.entities().list_event().end(),
+                        [](auto& ev) { return !ev.get(); }),
+        g_game_state.entities().list_event().end());
 }
 
 //-----------------------------------------------------------------------------
@@ -1349,7 +1350,7 @@ void Game::manageCollisions() {
 
     // Collisions TirsBB / Ennemis
     //
-    for (Tir* tir : list_tirs_bb) {
+    for (Tir* tir : g_game_state.entities().list_tirs_bb()) {
         for (auto& ennemi : list_ennemis) {
             if (tir->collision(ennemi.get())) {
                 ennemi->estTouche(tir);
@@ -1359,7 +1360,7 @@ void Game::manageCollisions() {
 
     // Collisions Vaches / Ennemis
     //
-    for (auto& tir : list_cow) {
+    for (auto& tir : g_game_state.entities().list_cow()) {
         for (auto& ennemi : list_ennemis) {
             if (tir->collision(ennemi.get())) {
                 ennemi->estTouche(tir.get());
@@ -1370,7 +1371,7 @@ void Game::manageCollisions() {
     // Collisions Joueurs / Bonus
     //
     for (auto& bonus : list_bonus) {
-        for (Couille* couille : list_joueurs) {
+        for (Couille* couille : g_game_state.entities().list_joueurs()) {
             if (bonus->collision(couille)) {
                 bonus->estPris(couille);
             }
@@ -1381,7 +1382,7 @@ void Game::manageCollisions() {
         // Collisions Joueurs / Ennemis
         //
         for (auto& ennemi : list_ennemis) {
-            for (Couille* joueur : list_joueurs) {
+            for (Couille* joueur : g_game_state.entities().list_joueurs()) {
                 if (ennemi->collision(joueur))
                     joueur->estTouche(ennemi->degats());
             }
@@ -1390,7 +1391,7 @@ void Game::manageCollisions() {
         // Collisions Joueurs / tirs ennemis
         //
         for (auto& tir : list_tirs_ennemis) {
-            for (Couille* joueur : list_joueurs) {
+            for (Couille* joueur : g_game_state.entities().list_joueurs()) {
                 if (tir->collision(joueur)) {
                     joueur->estTouche(tir->degats());
                 }
@@ -1409,7 +1410,7 @@ void Game::updateLock() {
     int val = g_game_state.scroll_lock().val();
 
     if ((cond == 0 && list_ennemis.empty()) ||
-        (cond == 1 && list_gen_ennemis.empty()) ||
+        (cond == 1 && g_game_state.entities().list_gen_ennemis().empty()) ||
         (cond == 2 && game_flag[flag] == val) ||
         (cond == 3 && game_flag[flag] >= val)) {
         g_game_state.scroll_lock().Release();
@@ -1466,11 +1467,11 @@ void Game::drawDebugInfos() {
     /*
             if ( show_lists)
             {
-                    sprintf( buffer, "Joueurs = %d", list_joueurs.taille());
+                    sprintf( buffer, "Joueurs = %d", g_game_state.entities().list_joueurs().taille());
                     fnt_rpg.print( backSurface, 10, 150, buffer);
 
                     sprintf( buffer, "Tirs joueurs = %d",
-       list_tirs_bb.taille()); fnt_rpg.print( backSurface, 10, 170, buffer);
+       g_game_state.entities().list_tirs_bb().taille()); fnt_rpg.print( backSurface, 10, 170, buffer);
 
                     sprintf( buffer, "Ennemis = %d", list_ennemis.taille());
                     fnt_rpg.print( backSurface, 10, 190, buffer);
@@ -1480,7 +1481,7 @@ void Game::drawDebugInfos() {
        buffer);
 
                     sprintf( buffer, "Gens ennemis = %d",
-       list_gen_ennemis.taille()); fnt_rpg.print( backSurface, 10, 230, buffer);
+       g_game_state.entities().list_gen_ennemis().taille()); fnt_rpg.print( backSurface, 10, 230, buffer);
 
                     sprintf( buffer, "Nb created = %d", nb_ennemis_created);
                     fnt_rpg.print( backSurface, 10, 250, buffer);
@@ -1490,7 +1491,7 @@ void Game::drawDebugInfos() {
        buffer);
 
                     sprintf( buffer, "Meteo = %d / %d (%d)",
-       list_meteo.taille(), g_game_state.weather().intensite(), g_game_state.weather().type()); fnt_rpg.print(
+       g_game_state.entities().list_meteo().taille(), g_game_state.weather().intensite(), g_game_state.weather().type()); fnt_rpg.print(
        backSurface, 10, 290, buffer);
 
                     sprintf( buffer, "Plat. mobile = %d",
@@ -1563,7 +1564,7 @@ void Game::drawDebugInfos() {
        list_fonds_statiques.taille()); fnt_rpg.print( backSurface, 440, 445,
        buffer);
 
-                    sprintf( buffer, "Impacts = %d", list_impacts.taille());
+                    sprintf( buffer, "Impacts = %d", g_game_state.entities().list_impacts().taille());
                     fnt_rpg.print( backSurface, 440, 465, buffer);
 
                     RECT	r;
@@ -1583,7 +1584,7 @@ void Game::drawDebugInfos() {
 void Game::updateTeteTurc() {
     static int ntete_turc = 0;
 
-    if (list_joueurs.empty()) {
+    if (g_game_state.entities().list_joueurs().empty()) {
         dummyPlayer.x = offset + 320;
         dummyPlayer.y = g_game_state.level().y_plat()[0][offset + 320];
         tete_turc = &dummyPlayer;
@@ -1591,8 +1592,8 @@ void Game::updateTeteTurc() {
     }
 
     ntete_turc += 1;
-    ntete_turc %= list_joueurs.size();
-    tete_turc = list_joueurs[ntete_turc];
+    ntete_turc %= g_game_state.entities().list_joueurs().size();
+    tete_turc = g_game_state.entities().list_joueurs()[ntete_turc];
 }
 
 //-----------------------------------------------------------------------------
@@ -1623,7 +1624,7 @@ void Game::updateRPG() {
 void Game::updateVictoryAndDefeat() {
     // Defaite ?
     //
-    if (list_joueurs.empty()) {
+    if (g_game_state.entities().list_joueurs().empty()) {
         wait_for_death += 1;
 
         if (wait_for_death >= 200) joueurs_morts = true;
@@ -1649,7 +1650,7 @@ void Game::updateVictoryAndDefeat() {
 //-----------------------------------------------------------------------------
 
 void Game::updateFlags() {
-    game_flag[FLAG_NB_GEN] = list_gen_ennemis.size();
+    game_flag[FLAG_NB_GEN] = g_game_state.entities().list_gen_ennemis().size();
     game_flag[FLAG_NB_ENN] = list_ennemis.size();
     makeb_current_mode = game_flag[FLAG_BONUS];
 
@@ -1824,7 +1825,7 @@ void Game::showPE(bool bonus, bool fuckOff) {
 
     mbk_inter.play(0);
 
-    if (list_joueurs.size() == 2) {
+    if (g_game_state.entities().list_joueurs().size() == 2) {
         showp1 = showp2 = true;
         xbasep1 = 80;
         xbasep2 = 350;
@@ -2123,11 +2124,11 @@ void Game::showPE(bool bonus, bool fuckOff) {
 void Game::updateMeteo() {
     const static int speed_gouttes[] = {3, 5, 7, 8, 9, 10};
 
-    for (auto& pl : list_meteo) {
+    for (auto& pl : g_game_state.entities().list_meteo()) {
         pl->update();
     }
 
-    while (list_meteo.size() < g_game_state.weather().intensite()) {
+    while (g_game_state.entities().list_meteo().size() < g_game_state.weather().intensite()) {
         if (g_game_state.weather().type() == METEO_NEIGE) {
             //			MeteoNeige * flocon = new MeteoNeige();
 
@@ -2151,7 +2152,7 @@ void Game::updateMeteo() {
 
             if (mur_opaque(flocon->xbase, 0)) flocon->y -= 550;
 
-            list_meteo.emplace_back(flocon);
+            g_game_state.entities().list_meteo().emplace_back(flocon);
         } else if (g_game_state.weather().type() == METEO_PLUIE) {
             //			MeteoPluie * goutte = new MeteoPluie();
 
@@ -2168,7 +2169,7 @@ void Game::updateMeteo() {
 
             if (mur_opaque(goutte->x, 0)) goutte->y -= 550;
 
-            list_meteo.emplace_back(goutte);
+            g_game_state.entities().list_meteo().emplace_back(goutte);
         }
     }
 }
@@ -2266,12 +2267,12 @@ void Game::updateBulles() {
 
     // Crée de nouvelles bulles
     //
-    for (Couille* pl : list_joueurs) {
+    for (Couille* pl : g_game_state.entities().list_joueurs()) {
         creeBulle(pl);
     }
 
     for (auto& pl : list_ennemis) {
-        if (list_bulles.size() < 15) {
+        if (g_game_state.entities().list_bulles().size() < 15) {
             break;
         }
         creeBulle(pl.get());
@@ -2279,7 +2280,7 @@ void Game::updateBulles() {
 
     // Update les bulles déjà crées
     //
-    for (auto& pl : list_bulles) {
+    for (auto& pl : g_game_state.entities().list_bulles()) {
         pl->update();
     }
 }
@@ -2298,7 +2299,7 @@ void Game::creeBulle(Sprite* s) {
         b->dphi = 5 + rand() % 3;
         b->dy = -(2 + rand() % 2);
 
-        list_bulles.emplace_back(b);
+        g_game_state.entities().list_bulles().emplace_back(b);
 
         s->wait_bulle = 0;
     }

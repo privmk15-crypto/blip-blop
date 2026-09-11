@@ -25,6 +25,16 @@
 
 // #include <ddraw.h>
 #include "ben_debug.h"
+// control_p1.h/control_p2.h are no longer needed for ctrlP1/ctrlP2 (moved to
+// Game, Stage 2) but are kept here anyway: several files (character_selection
+// .cpp, restore.cpp, rpg_player.cpp, ...) reach `in` (input.h) and
+// DIK_*/ALIAS_* (control_alias.h) only transitively through this chain,
+// without including either header themselves. Confirmed by a real CI
+// failure when these were removed - do not remove again without first
+// auditing every file that includes globals.h for direct use of `in`/
+// DIK_*/ALIAS_*.
+#include "control_p1.h"
+#include "control_p2.h"
 #include "picture_bank.h"
 #include "fonte.h"
 #include "super_liste.h"

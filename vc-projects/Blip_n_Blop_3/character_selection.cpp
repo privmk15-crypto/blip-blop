@@ -8,7 +8,6 @@ CharacterSelection::CharacterSelection()
     : et_phase_(0),
       phase_(0),
       x_back1_(0),
-      x_back2_(SCREEN_W),
       y_select_(-50),
       x_name_(1040),
       y_name_(255),
@@ -29,20 +28,13 @@ CharacterSelection::Output CharacterSelection::update() {
 
     // Le fond
     //
+    // Etap 4 (Full HD prep, fix): wraps every 640 (the tile's own
+    // native width - an asset constant, NOT SCREEN_W; see the header
+    // comment on x_back1_ for why draw() now needs 3 tiles derived
+    // from this single phase instead of 2 independent positions).
     x_back1_ -= 20;
-    x_back2_ -= 20;
-
-    // Etap 4 (Full HD prep, step 3): <= rather than == -SCREEN_W - x_back
-    // steps by -20 from 0/SCREEN_W, which landed exactly on -640 when
-    // SCREEN_W was 640, but at 854 that exact value is unreachable
-    // (854 isn't a multiple of 20 away from 0), which would leave the
-    // background stuck drifting past -SCREEN_W forever. Same class of
-    // bug as GoArrow::update_coming() above.
-    if (x_back1_ <= -SCREEN_W) {
-        x_back1_ = SCREEN_W;
-    }
-    if (x_back2_ <= -SCREEN_W) {
-        x_back2_ = SCREEN_W;
+    if (x_back1_ <= -640) {
+        x_back1_ += 640;
     }
 
     // Gestion du texte
@@ -121,12 +113,17 @@ CharacterSelection::Output CharacterSelection::update() {
 void CharacterSelection::draw() {
     // Le fond
     //
+    // Etap 4 (Full HD prep, fix): 3 tiles (not 2) so the tiled
+    // 640-wide background stays gapless across the whole 854-wide
+    // SCREEN_W regardless of the current phase - see the header
+    // comment on x_back1_.
     g_game_state.picture_banks().inter()[6]->PasteTo(backSurface, x_back1_, 0);
-    g_game_state.picture_banks().inter()[7]->PasteTo(backSurface, x_back2_, 0);
+    g_game_state.picture_banks().inter()[7]->PasteTo(backSurface, x_back1_ + 640, 0);
+    g_game_state.picture_banks().inter()[6]->PasteTo(backSurface, x_back1_ + 1280, 0);
 
     // Gestion du texte
     //
-    g_game_state.picture_banks().inter()[pic_select_]->BlitTo(backSurface, 320, y_select_);
+    g_game_state.picture_banks().inter()[pic_select_]->BlitTo(backSurface, SCREEN_W / 2, y_select_);
 
     // Le perso + le nom
     //

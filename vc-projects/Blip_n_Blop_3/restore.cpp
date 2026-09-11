@@ -17,7 +17,7 @@ bool RestoreAll()
 
 	// Affiche un "LOADING..."
 	//
-	g_game_state.font_bank().menu().printC(backSurface, 320, 210, "PLEASE WAIT");
+	g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2, 210, "PLEASE WAIT");
 	//primSurface->Flip(NULL, DDFLIP_WAIT);
 	graphicInstance->Flip();
 

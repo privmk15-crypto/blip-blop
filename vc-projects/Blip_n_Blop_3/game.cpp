@@ -181,9 +181,9 @@ void Game::jouePartie(int nbj, int idj) {
         cine.playScene("data/end.cin", primSurface, backSurface);
         mbk.stop();
 
-        pbk[1]->PasteTo(backSurface, 0, 0);
+        pbk[1]->PasteTo(backSurface, (SCREEN_W - pbk[1]->xSize()) / 2, 0);
         DDFlip();
-        pbk[1]->PasteTo(backSurface, 0, 0);
+        pbk[1]->PasteTo(backSurface, (SCREEN_W - pbk[1]->xSize()) / 2, 0);
         DDFlip();
 
         if (!in.anyKeyPressed()) mbk2.play(0);
@@ -196,9 +196,9 @@ void Game::jouePartie(int nbj, int idj) {
         mbk.play(0);
         showCredits(true);
 
-        pbk[0]->PasteTo(backSurface, 0, 0);
+        pbk[0]->PasteTo(backSurface, (SCREEN_W - pbk[0]->xSize()) / 2, 0);
         DDFlip();
-        pbk[0]->PasteTo(backSurface, 0, 0);
+        pbk[0]->PasteTo(backSurface, (SCREEN_W - pbk[0]->xSize()) / 2, 0);
         DDFlip();
 
         in.waitClean();
@@ -434,7 +434,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
         // &ddfx);
         backSurface->FillRect(&r, 0);
 
-        pbk_briefing[0]->PasteTo(backSurface, 0, 0);
+        pbk_briefing[0]->PasteTo(backSurface, (SCREEN_W - pbk_briefing[0]->xSize()) / 2, 0);
         g_game_state.font_bank().rpg().printC(backSurface, SCREEN_W / 2, 460, "Press a key to start.");
         DDFlip();
 
@@ -1946,7 +1946,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
 
         x -= 20;
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
 
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
@@ -1974,7 +1974,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
             name[i] = '\0';
         }
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2, 260, name);
@@ -1985,7 +1985,7 @@ void Game::getName(Joueur* joueur, int ijoueur) {
     while (!app_killed && x < SCREEN_W) {
         x += 20;
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
 
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 - x, 160, buff);
         g_game_state.font_bank().menu().printC(backSurface, SCREEN_W / 2 + x, 210, "PLEASE ENTER YOUR NAME :");
@@ -2008,7 +2008,7 @@ void Game::showGameOver() {
         manageMsg();
         checkRestore();
 
-        g_game_state.picture_banks().inter()[0]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[0]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[0]->xSize()) / 2, 0);
         /*
                         g_game_state.font_bank().menu().printR( backSurface, 320-x, 220, "GAME");
                         g_game_state.font_bank().menu().print( backSurface, 320+x, 220, "OVER");
@@ -2054,7 +2054,7 @@ void Game::showHighScores() {
         manageMsg();
         checkRestore();
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
 
         for (int i = 0; i < HS_NB_SCORES; i++) {
             if (x[i] > 0) x[i] -= 20;
@@ -2073,7 +2073,7 @@ void Game::showHighScores() {
         manageMsg();
         checkRestore();
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
 
         for (int i = 0; i < HS_NB_SCORES; i++) {
             if (i == 0 || x[i - 1] >= 160) x[i] += 20;
@@ -2171,7 +2171,7 @@ void Game::go() {
                     in.waitClean();
                 }
             } else {
-                g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+                g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
 
                 r = menu.update();
                 menu.draw(backSurface);
@@ -2236,7 +2236,7 @@ void Game::showBriefing(char* fn) {
 
     backSurface->Blt(&r, NULL, NULL, DDBLT_WAIT | DDBLT_COLORFILL, &ddfx);
 
-    pbk_briefing[0]->PasteTo(backSurface, 0, 0);
+    pbk_briefing[0]->PasteTo(backSurface, (SCREEN_W - pbk_briefing[0]->xSize()) / 2, 0);
     g_game_state.font_bank().rpg().printC(backSurface, SCREEN_W / 2, 460, "Loading...");
     DDFlip();
 }
@@ -2252,7 +2252,7 @@ void Game::showMainScreen() {
 
         in.update();
 
-        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, 0, 0);
+        g_game_state.picture_banks().inter()[1]->PasteTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
         DDFlipV();  // primSurface->Flip(NULL, DDFLIP_WAIT );
     }
 }
@@ -2324,9 +2324,9 @@ void Game::showCredits(bool theEnd) {
         }
 
         if (theEnd) {
-            pbk_cred[npage]->PasteTo(backSurface, 0, 0);
+            pbk_cred[npage]->PasteTo(backSurface, (SCREEN_W - pbk_cred[npage]->xSize()) / 2, 0);
         } else {
-            g_game_state.picture_banks().inter()[1]->BlitTo(backSurface, 0, 0);
+            g_game_state.picture_banks().inter()[1]->BlitTo(backSurface, (SCREEN_W - g_game_state.picture_banks().inter()[1]->xSize()) / 2, 0);
         }
 
         g_game_state.font_bank().rpg().printC(backSurface, xcred, y + ILIGNE, "Credits");

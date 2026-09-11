@@ -21,7 +21,7 @@
  *		collision grid). This migration keeps those exact direct
  *		read/write sites working unchanged in shape - they now go
  *		through g_game_state.level().y_plat()/.murs_opaques()
- *		(returning the raw int**/bool** pointer, same as before)
+ *		(returning the raw int** or bool** pointer, same as before)
  *		instead of a bare global name; still direct pointer/array
  *		access after that, not hidden behind new accessor methods,
  *		to keep this a mechanical rename rather than a behavior

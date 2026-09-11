@@ -32,10 +32,16 @@ CharacterSelection::Output CharacterSelection::update() {
     x_back1_ -= 20;
     x_back2_ -= 20;
 
-    if (x_back1_ == -640) {
+    // Etap 4 (Full HD prep, step 3): <= rather than == -SCREEN_W - x_back
+    // steps by -20 from 0/SCREEN_W, which landed exactly on -640 when
+    // SCREEN_W was 640, but at 854 that exact value is unreachable
+    // (854 isn't a multiple of 20 away from 0), which would leave the
+    // background stuck drifting past -SCREEN_W forever. Same class of
+    // bug as GoArrow::update_coming() above.
+    if (x_back1_ <= -SCREEN_W) {
         x_back1_ = SCREEN_W;
     }
-    if (x_back2_ == -640) {
+    if (x_back2_ <= -SCREEN_W) {
         x_back2_ = SCREEN_W;
     }
 

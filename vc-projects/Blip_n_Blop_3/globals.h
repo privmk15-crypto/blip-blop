@@ -91,20 +91,33 @@ extern SDL::Surface  *	videoA;			// cache video
 extern int			offset;				// offset courant du scroll
 extern int			scr_offset;			// = offset % 640
 
-// Etap 4 (Full HD prep, step 2): single named constant for the width of
-// the visible screen/camera viewport (backSurface is still 640x480 -
-// see picture.h's XPIC_MAX/YPIC_MAX, untouched at this step). Replaces
-// scattered literal 640 at "is this actor past the right/left edge of
-// the visible screen" call sites (enemy/shot AI turnaround checks,
-// fond_* edge clipping, the camera clamp in scroll.cpp/game.cpp).
-// Deliberately NOT used yet for: XPIC_MAX/YPIC_MAX (picture.h),
-// CreatePrimary()/backSurface/win_size (graphics.cpp/blip_n_blop_3.cpp,
-// reserved for a later step), vbuffer_wide's 840-wide scroll cache
-// buffer (scroll.cpp - a different, already-named concept, mixed with
-// literal 640 in ways that need separate, careful review), or any of
-// cine_player/rpg_player/character_selection/screen_shake/menus/HUD
-// (not yet audited for this constant).
-constexpr int		SCREEN_W = 640;
+// Etap 4 (Full HD prep): single named constant for the width of the
+// visible screen/camera viewport. Height stays a plain 480 literal
+// everywhere - only the width is being widened for 16:9.
+//
+// step 2/2b/2c: introduced at 640 (no behavior change) and threaded
+// through every "is this actor past the right/left edge of the
+// visible screen" site (enemy/shot AI turnaround checks, fond_* edge
+// clipping, the camera clamp in scroll.cpp/game.cpp, and the
+// intro/HUD-adjacent screens in cine_player/rpg_player/
+// character_selection/screen_shake/menus/game.cpp).
+//
+// step 3: bumped to 854 (480*16/9, rounded) - the first actual visual
+// change. This requires vbuffer_wide's cache buffer (scroll.h's
+// WANTED_VBUFFER_WIDE) to stay comfortably wider than SCREEN_W - see
+// the comment there.
+//
+// Still NOT covered by this constant: XPIC_MAX/YPIC_MAX (picture.h -
+// dead since step 1 fixed BlitTo/PasteTo to read the real target
+// surface size instead), tir_bb_laser.cpp's own local, offset-free
+// 640 clip bound (one of the 5 "hard" RenderSystem classes,
+// deliberately never touched by this whole effort - needs its own
+// dedicated step), updateTeteTurc()'s offset+320 (AI-adjacent, same
+// deferred category as the enemy turnaround sites but not yet done),
+// and whether the background tile art itself has enough content to
+// fill the extra ~214px on screen (an asset question, not a code one -
+// unverified).
+constexpr int		SCREEN_W = 854;
 
 extern int			scroll_speed;
 

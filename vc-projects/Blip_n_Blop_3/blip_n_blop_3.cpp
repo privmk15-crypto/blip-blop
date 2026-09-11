@@ -139,10 +139,16 @@ static void analyseCmdLine(char* cmd) {
 }
 
 static bool InitApp(int nCmdShow) {
+    // Etap 4 (Full HD prep, step 3): actual window/display resolution.
+    // Independent of SCREEN_W (globals.h, = 854) - the internal viewport
+    // stays SCREEN_W x 480 and gets scaled onto whatever this is via
+    // SDL_RenderSetLogicalSize (Graphics::SetGfxMode). Chosen as a real
+    // 16:9 target (1920/1080 = 1.7778, matching SCREEN_W/480 = 1.7792
+    // closely enough that the scale is uniform with no visible letterbox).
     struct {
         int height;
         int width;
-    } win_size = {480, 640};
+    } win_size = {1080, 1920};
 
     //------------------------------------------------------------------
     //                      Histoire d'avoir un joli fichier log
@@ -332,8 +338,16 @@ static bool InitApp(int nCmdShow) {
     //                      Surface système
     //------------------------------------------------------------------
     debug << "Creating systemSurface\n";
+    // Etap 4 (Full HD prep, step 3): must match backSurface's size
+    // (SCREEN_W x 480), NOT the window size (win_size) - showPE() does
+    // a full, no-src-rect BltFast from systemSurface onto backSurface,
+    // which requires both to be the same size. This used to be safe
+    // only because win_size and backSurface happened to both be
+    // 640x480; now that win_size is the real window resolution
+    // (1920x1080) while backSurface stays SCREEN_W x 480, the two are
+    // no longer the same value and must be requested independently.
     systemSurface =
-        DDCreateSurface(win_size.width, win_size.height, DDSURF_SYSTEM);
+        DDCreateSurface(SCREEN_W, 480, DDSURF_SYSTEM);
 
     if (systemSurface == NULL) {
         Bug("Not enough memory. Blip'n Blop needs 32 Mo of free memory. Try to "

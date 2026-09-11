@@ -52,7 +52,7 @@ void drawScrolling()
 		offset = g_game_state.level().size() - SCREEN_W;
 
 	int	x1 = offset % vbuffer_wide;
-	int x2 = (offset + 640) % vbuffer_wide;
+	int x2 = (offset + SCREEN_W) % vbuffer_wide;	// SCREEN_W: this is the visible-viewport width, not a tile-image width
 	int x3 = (offset + vbuffer_wide - 2) % vbuffer_wide;
 
 	r.top	= 0;
@@ -60,6 +60,7 @@ void drawScrolling()
 
 	
 
+	// 640 below: width of one decor tile image (asset format), not SCREEN_W - do not change
 	while (n_img < ((offset + vbuffer_wide - 2) / 640) || (n_img < g_game_state.level().scr_size() && (next_x != ((x3 + 1) % vbuffer_wide)) && (next_x != ((x3) % vbuffer_wide)))) {
 
 		/*static int counter = 0;
@@ -76,7 +77,7 @@ void drawScrolling()
 
 		xTex += 2;
 
-		if (xTex == 640) {
+		if (xTex == 640) {	// 640: width of one decor tile image (asset format), not SCREEN_W - do not change
 			xTex = 0;
 			n_img += 1;
 		}
@@ -89,9 +90,9 @@ void drawScrolling()
 		}
 	}
 
-	if (x1 <= vbuffer_wide - 640) {
+	if (x1 <= vbuffer_wide - SCREEN_W) {	// SCREEN_W: visible-viewport width
 		r.left	= x1;
-		r.right = x1 + 640;
+		r.right = x1 + SCREEN_W;
 
 		backSurface->BltFast(0, 0, videoA, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 	} else {

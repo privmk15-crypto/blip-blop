@@ -68,7 +68,11 @@ class GoArrow {
     void update_coming() {
         update_anim();
         x_ += 10;
-        if (x_ == 640) {
+        // Etap 4 (Full HD prep, step 3): >= rather than == SCREEN_W -
+        // x_ steps by 10 from -10, which lands exactly on 640 but
+        // would overshoot the new SCREEN_W (854) and never satisfy an
+        // exact equality, leaving the arrow stuck in Coming forever.
+        if (x_ >= SCREEN_W) {
             phase_ = Phase::Bouncing;
             theta_ = 0;
         }
@@ -84,13 +88,16 @@ class GoArrow {
             x = -x;
         }
 
-        x_ = 640 - x;
+        x_ = SCREEN_W - x;
     }
 
     void update_leaving() {
         update_anim();
         x_ += 10;
-        if (x_ > 800) {
+        // Etap 4 (Full HD prep, step 3): was a bare 800 (640 + 160
+        // margin) - kept the same margin past the new SCREEN_W so the
+        // arrow still fully leaves the visible area before resetting.
+        if (x_ > SCREEN_W + 160) {
             Reset();
         }
     }

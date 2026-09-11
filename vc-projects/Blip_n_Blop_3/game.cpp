@@ -1775,7 +1775,7 @@ void Game::drawDeformation() {
 
         if (x < 0) {
             r.left = -x;
-            r.right = 640;
+            r.right = SCREEN_W;
             x = 0;
         } /*else {
             // I'm overwriting my own mem!
@@ -1787,8 +1787,8 @@ void Game::drawDeformation() {
             x, y, backSurface, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
         if (xt < 0) {
-            r.left = 640 + xt;
-            r.right = 640;
+            r.left = SCREEN_W + xt;
+            r.right = SCREEN_W;
         } else {
             r.left = 0;
             r.right = xt;

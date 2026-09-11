@@ -1,6 +1,7 @@
 #include "graphics.h"
 
 #include "errors.h"
+#include "globals.h"  // for SCREEN_W
 
 extern SDL::Surface* backSurface;
 
@@ -17,10 +18,14 @@ void Graphics::SetGfxMode(int x, int y, int d, bool fullscreen) {
     y_ = y;
     d_ = d;
     fullscreen_ = fullscreen;
+    // Etap 4 (Full HD prep, step 3): window position deliberately no
+    // longer reuses x/y (the size) as the position - now that win_size
+    // can be much larger than the old 640x480 (e.g. 1920x1080), doing
+    // so could place the window mostly off-screen on smaller monitors.
     window_.reset(SDL_ErrWrap(SDL_CreateWindow(
         "Blip&Blop",
-        x,
-        y,
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
         x,
         y,
         SDL_WINDOW_SHOWN | (fullscreen * SDL_WINDOW_FULLSCREEN))));
@@ -29,22 +34,29 @@ void Graphics::SetGfxMode(int x, int y, int d, bool fullscreen) {
         window_.get(),
         -1,
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)));
+
+    // Etap 4 (Full HD prep, step 3): backSurface/primSurface/systemSurface
+    // are SCREEN_W x 480 regardless of the window size chosen above -
+    // this tells SDL to scale that fixed logical size onto the actual
+    // window/renderer output, preserving aspect ratio (letterboxing if
+    // the window's own aspect doesn't match SCREEN_W:480 exactly).
+    SDL_RenderSetLogicalSize(renderer_.get(), SCREEN_W, 480);
 }
 
 SDL::Surface* Graphics::CreatePrimary() {
     /**/
-    debug << "CreatePrimary() - Creating a 640 x 480 Surface"
+    debug << "CreatePrimary() - Creating a " << SCREEN_W << " x 480 Surface"
           << "\n";
-    return CreateSurface(640, 480, 0);
+    return CreateSurface(SCREEN_W, 480, 0);
     // return 0;
 }
 
 SDL::Surface* Graphics::CreatePrimary(SDL::Surface*& back) {
     debug << "Graphics::CreatePrimary(SDL::Surface * & back) - Creating a "
-             "640x480 surface"
+          << SCREEN_W << "x480 surface"
           << "\n";
-    SDL::Surface* tmp = CreateSurface(640, 480);
-    back = CreateSurface(640, 480);
+    SDL::Surface* tmp = CreateSurface(SCREEN_W, 480);
+    back = CreateSurface(SCREEN_W, 480);
     tmp->SetBackBuffer(back);
     return tmp;
     // return 0;

@@ -192,7 +192,7 @@ void Couille::affiche()
 
 	// Si on est invincible, on clignote (2 vitesses)
 	//
-	if (invincible > 50 && etape_cli == 0 && phase && !inv_cow)
+	if (invincible > 50 && etape_cli == 0 && g_game_state.phase_clock().phase() && !inv_cow)
 		return;
 
 	// Redirigons le travail...
@@ -433,7 +433,7 @@ void Couille::afficheSaute()
 
 void Couille::update()
 {
-	if (phase) {
+	if (g_game_state.phase_clock().phase()) {
 		etape_cli += 1;
 		etape_cli %= 4;
 	}

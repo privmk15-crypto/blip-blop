@@ -295,7 +295,7 @@ void EnnemiMariotapette::onMeure()
 		dir = SENS_DROITE;
 		Ennemi * luigi = new EnnemiLuigi();
 
-		nb_ennemis_created++;
+		g_game_state.enemy_stats().Add();
 
 		luigi->x = 1960;
 		luigi->y = y;

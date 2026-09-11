@@ -370,7 +370,7 @@ void EventEnnemi::doEvent()
 		g_game_state.entities().list_ennemis().emplace_back(enn);
 
 		if (enn->count())
-			nb_ennemis_created += 1;
+			g_game_state.enemy_stats().Add();
 	} else {
 		debug << "Erreur : identité d'ennemi inconnue (" << id_ennemi << ")\n";
 	}

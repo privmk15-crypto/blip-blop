@@ -110,7 +110,7 @@ void EnnemiPrincesse::onAvance()
 				g_game_state.entities().list_ennemis().emplace_back(guard);
 
 			}
-			nb_ennemis_created += 3;
+			g_game_state.enemy_stats().Add(3);
 		}
 		/*if (x < offset + 580)
 		{

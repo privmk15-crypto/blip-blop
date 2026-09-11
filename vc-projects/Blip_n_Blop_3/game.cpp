@@ -321,7 +321,7 @@ bool Game::joueNiveau(const char* nom_niveau, int type) {
     //
     if (type == LVL_BONUS || type == LVL_COMPLETE || type == LVL_FIRST ||
         type == LVL_END) {
-        nb_ennemis_created = 0;
+        g_game_state.enemy_stats().Reset();
 
         if (player1 != NULL) {
             player1->setKilled(0);
@@ -996,9 +996,7 @@ void Game::updateAll() {
 
     if (checkRestore()) update_regulator_.Skip();
 
-    phase = !phase;
-
-    if (phase) slow_phase = !slow_phase;
+    g_game_state.phase_clock().Tick();
 
     // Met à jour les touches
     //
@@ -1081,11 +1079,10 @@ void Game::drawAll(bool flip) {
     if (checkRestore()) update_regulator_.Skip();
 
     if (!flip) {
-        phase = false;
-        slow_phase = false;
+        g_game_state.phase_clock().Reset();
     }
 
-    fps_current_count += 1;
+    g_game_state.debug_stats().IncrementFpsCurrent();
 
     /*if (mustFixGforceBug) {
             RECT	r;
@@ -1461,7 +1458,7 @@ void Game::drawDebugInfos() {
     char buffer[40];
 
     if (show_fps) {
-        sprintf(buffer, "FPS = %d", fps_count);
+        sprintf(buffer, "FPS = %d", g_game_state.debug_stats().fps_count());
         fnt_rpg.print(backSurface, 10, 130, buffer);
     }
     /*
@@ -1857,11 +1854,11 @@ void Game::showPE(bool bonus, bool fuckOff) {
             fnt_p2 = &fnt_score_blop;
     }
 
-    if (nb_ennemis_created > 0) {
+    if (g_game_state.enemy_stats().created() > 0) {
         if (showp1)
-            killed_p1 = (100 * player1->getKilled()) / nb_ennemis_created;
+            killed_p1 = (100 * player1->getKilled()) / g_game_state.enemy_stats().created();
         if (showp2)
-            killed_p2 = (100 * player2->getKilled()) / nb_ennemis_created;
+            killed_p2 = (100 * player2->getKilled()) / g_game_state.enemy_stats().created();
     }
 
     if (!bonus || (game_flag[FLAG_TIMER] > 0 && !joueurs_morts)) {

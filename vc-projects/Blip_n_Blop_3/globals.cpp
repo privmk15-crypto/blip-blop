@@ -45,8 +45,8 @@
 //		Données sur la configuration
 //-----------------------------------------------------------------------------
 
-int			fps_count			= 0;
-int			fps_current_count	= 0;
+// fps_count/fps_current_count/total_debug moved to debug_stats.cpp
+// (DebugStats) - Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Surfaces
@@ -91,8 +91,8 @@ bool		no_scroll2;
 //		Données sur les actions à faire
 //-----------------------------------------------------------------------------
 
-bool			phase;			// Pour les clignotements
-bool			slow_phase;
+// phase/slow_phase moved to phase_clock.cpp (PhaseClock) - Stage 2
+// ownership migration.
 
 int				game_flag[11];
 
@@ -100,15 +100,14 @@ int				game_flag[11];
 
 // rpg_to_play moved to rpg_trigger.cpp (RpgTrigger).
 
-int				nb_ennemis_created;
+// nb_ennemis_created moved to enemy_stats.cpp (EnemyStats) - Stage 2
+// ownership migration.
 
 // intensite_meteo/type_meteo moved to weather.cpp (Weather).
 
 // dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement and
 // tremblement() moved to screen_shake.cpp (ScreenShake) - Stage 2 ownership
 // migration.
-
-bool			total_debug = false;
 
 // okBonus/cowBombOn/okLanceFlame moved to player_toggles.cpp
 // (PlayerToggles) - Stage 2 ownership migration.

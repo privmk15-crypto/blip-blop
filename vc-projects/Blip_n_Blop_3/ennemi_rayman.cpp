@@ -62,7 +62,7 @@ void EnnemiRayman::onAvance()
 			bulbizarre->dir = SENS_GAUCHE;
 			g_game_state.entities().list_ennemis().emplace_back(bulbizarre);
 
-			nb_ennemis_created++;
+			g_game_state.enemy_stats().Add();
 
 			mbk_niveau.play(1);
 			game_flag[FLAG_TIMER] = 70;
@@ -77,7 +77,7 @@ void EnnemiRayman::onAvance()
 			g_game_state.entities().list_ennemis().emplace_back(flameche);
 
 
-			nb_ennemis_created++;
+			g_game_state.enemy_stats().Add();
 
 			EnnemiComHeros * Com = new EnnemiComHeros();
 
@@ -91,7 +91,7 @@ void EnnemiRayman::onAvance()
 		} else if (game_flag[1] == 1) {
 			EnnemiPikachuHeros * pika = new EnnemiPikachuHeros();
 
-			nb_ennemis_created++;
+			g_game_state.enemy_stats().Add();
 
 			pika->x = x - 10;
 			pika->y = y - 25;

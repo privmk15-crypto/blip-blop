@@ -71,8 +71,8 @@
 //		Données sur la configuration
 //-----------------------------------------------------------------------------
 
-extern int			fps_count;
-extern int			fps_current_count;
+// fps_count/fps_current_count/total_debug moved into DebugStats
+// (debug_stats.h) as part of the Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Surfaces
@@ -128,8 +128,8 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Données sur les actions à faire
 //-----------------------------------------------------------------------------
 
-extern bool			phase;				// Pour les clignotements
-extern bool			slow_phase;
+// phase/slow_phase moved into PhaseClock (phase_clock.h) as part of the
+// Stage 2 ownership migration.
 
 extern int			game_flag[11];
 
@@ -138,15 +138,14 @@ extern int			game_flag[11];
 
 // rpg_to_play moved into RpgTrigger (rpg_trigger.h).
 
-extern int			nb_ennemis_created;
+// nb_ennemis_created moved into EnemyStats (enemy_stats.h) as part of the
+// Stage 2 ownership migration.
 
 // intensite_meteo/type_meteo moved into Weather (weather.h).
 
 // dy_tremblement/etape_tremblement/amplitude_tremblement/ddy_tremblement
 // moved into ScreenShake (screen_shake.h) as part of the Stage 2 ownership
 // migration. tremblement() below still forwards to it, unchanged.
-
-extern bool			total_debug;
 
 //-----------------------------------------------------------------------------
 //		Les Picture Banks

@@ -355,7 +355,7 @@ void EnnemiLuigi::onMeure()
 			sonic->dir = SENS_GAUCHE;
 			g_game_state.entities().list_ennemis().emplace_back(sonic);
 
-			nb_ennemis_created++;
+			g_game_state.enemy_stats().Add();
 
 
 			sonic = new EnnemiSonic();

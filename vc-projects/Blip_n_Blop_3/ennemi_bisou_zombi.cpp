@@ -33,7 +33,7 @@ void EnnemiBisouZombi::update()
 			etat = ETAT_CARBONISE;
 	}
 
-	if (local_phase != phase && game_flag[2] == 0) {
+	if (local_phase != g_game_state.phase_clock().phase() && game_flag[2] == 0) {
 		etape_moan += 1;
 		etape_moan %= 200;
 
@@ -44,7 +44,7 @@ void EnnemiBisouZombi::update()
 			sbk_niveau.play(10 + num_moan);
 		}
 
-		local_phase = phase;
+		local_phase = g_game_state.phase_clock().phase();
 	}
 
 	switch (etat) {

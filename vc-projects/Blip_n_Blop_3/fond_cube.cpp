@@ -15,6 +15,7 @@
 
 #include "sprite.h"
 #include "fond_cube.h"
+#include "game_state.h"
 
 int FondCube::etape_synchro = 0;
 bool FondCube::synchro = false;
@@ -22,8 +23,8 @@ int FondCube::ss_etape_synchro = 0;
 
 void FondCube::update()
 {
-	if (phase != synchro) {
-		synchro = phase;
+	if (g_game_state.phase_clock().phase() != synchro) {
+		synchro = g_game_state.phase_clock().phase();
 
 		ss_etape_synchro += 1;
 		ss_etape_synchro %= 5;

@@ -17,9 +17,9 @@ EnnemiToad::EnnemiToad(): speed(0), etape_speed(0), charge_delay(50 + rand() % 2
 
 void EnnemiToad::update()
 {
-	if (local_phase != phase) {
+	if (local_phase != g_game_state.phase_clock().phase()) {
 		wait_brain_hurts++;
-		local_phase = phase;
+		local_phase = g_game_state.phase_clock().phase();
 	}
 
 	if (blood > 0)

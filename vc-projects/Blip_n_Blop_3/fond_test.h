@@ -3,13 +3,14 @@
 #define _FondTest_
 
 #include "sprite.h"
+#include "game_state.h"
 
 class FondTest : public Sprite
 {
 public:
 	virtual void update()
 	{
-		if (phase)
+		if (g_game_state.phase_clock().phase())
 			pic = pbk_niveau[0];
 		else
 			pic = pbk_niveau[1];

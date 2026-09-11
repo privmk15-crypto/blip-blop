@@ -16,6 +16,7 @@
 #include "fmod.h"
 #include "fonte.h"
 #include "game.h"
+#include "game_state.h"
 #include "globals.h"
 #include "input.h"
 #include "lgx_packer.h"
@@ -106,8 +107,7 @@ long WINAPI WinProc(HWND WinHandle, UINT Msg, WPARAM wParam, LPARAM lParam) {
             break;
 
         case WM_TIMER:
-            fps_count = fps_current_count;
-            fps_current_count = 0;
+            g_game_state.debug_stats().RolloverFps();
             break;
     }
 

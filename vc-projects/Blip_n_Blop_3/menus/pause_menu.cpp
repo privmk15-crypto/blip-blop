@@ -27,4 +27,12 @@ int PauseMenu::ProcessEvent() {
         }
         return MenuType::Main;
     }
+    // Fix: fell off the end here when neither key was pressed, returning
+    // whatever garbage happened to be on the stack (-Wreturn-type),
+    // which MenuGame::Update() then fed into a switch on MenuType.
+    // MenuType::Main is what MenuGame::Update() already treats as "stay
+    // in the pause menu" (case MenuType::Main: active_ = &pause_menu_;),
+    // matching the same fallback-to-self pattern every sibling menu
+    // (StartMenu/MainMenu/KeysMenu) already uses.
+    return MenuType::Main;
 }

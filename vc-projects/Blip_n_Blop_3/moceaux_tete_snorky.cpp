@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #include "morceaux_tete_snorky.h"
+#include "game_state.h"
 #include "enemy.h"
 
 
@@ -56,7 +57,7 @@ void MorceauSnorkyBaseTeteEntiere::update()
 		s->y = y - 26;
 
 
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 	}
 
 	if (etape == 3 && ss_etape == 0) {
@@ -74,7 +75,7 @@ void MorceauSnorkyBaseTeteEntiere::update()
 		s->y = y + 10;
 
 
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 	}
 
 	if (etape == 6) {

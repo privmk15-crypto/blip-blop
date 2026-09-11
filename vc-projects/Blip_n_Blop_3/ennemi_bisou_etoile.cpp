@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_etoile.h"
+#include "game_state.h"
 #include "gore_pieds_bisou_etoile.h"
 #include "tir_etoile.h"
 
@@ -65,7 +66,7 @@ void EnnemiBisouEtoile::onMeureEntier()
 		pieds->dir = dir;
 		pieds->y = y;
 
-		list_gore.emplace_back(pieds);
+		g_game_state.entities().list_gore().emplace_back(pieds);
 
 		y -= 19;
 		dy = 0;
@@ -178,7 +179,7 @@ void EnnemiBisouEtoile::onAvance()
 		s->y = y - 30;
 		s->dir = dir;
 
-		list_tirs_ennemis.emplace_back(s);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 
 		ss_etape = 0;
 		etat = ETAT_TIRE;

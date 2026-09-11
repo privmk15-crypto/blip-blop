@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_snorky_base_1.h"
+#include "game_state.h"
 #include "morceaux_tete_snorky.h"
 #include "tir_snorkybase.h"
 
@@ -129,7 +130,7 @@ void EnnemiSnorkyBase1::onMeure()
 		s->y = y - 22;
 		s->x = x;
 
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		dy = 0;
 	}
@@ -176,7 +177,7 @@ void EnnemiSnorkyBase1::onTire()
 			tir->x = x + 35;
 			tir->y = y - 42;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		} else {
 			TirSnorkybase *	tir = new TirSnorkybase(-1);
@@ -185,7 +186,7 @@ void EnnemiSnorkyBase1::onTire()
 			tir->x = x - 35;
 			tir->y = y - 42;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		}
 
 		sbk_niveau.play(17);

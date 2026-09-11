@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_snorky_base_2.h"
+#include "game_state.h"
 #include "tir_snorky_base_2.h"
 
 const int anim_snorky_base_marche_droite[] = { 114, 115, 116, 117, 118, 117, 116, 115 };
@@ -190,7 +191,7 @@ void EnnemiSnorkyBase2::onTire()
 				tir->x = x + 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 			} else {
 				TirSnorkyBase2 *	tir = new TirSnorkyBase2(6, 1);
@@ -198,7 +199,7 @@ void EnnemiSnorkyBase2::onTire()
 				tir->x = x + 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
 			pic = pbk_ennemis[124];
 		} else {
@@ -215,7 +216,7 @@ void EnnemiSnorkyBase2::onTire()
 				tir->x = x - 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 			} else {
 				TirSnorkyBase2 *	tir = new TirSnorkyBase2(-6, 1);
@@ -223,7 +224,7 @@ void EnnemiSnorkyBase2::onTire()
 				tir->x = x - 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
 			pic = pbk_ennemis[134];
 		}

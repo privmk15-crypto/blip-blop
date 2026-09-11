@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_ciel.h"
+#include "game_state.h"
 #include "gore_pieds_bisou_ciel.h"
 #include "tir_arc_ciel.h"
 
@@ -65,7 +66,7 @@ void EnnemiBisouCiel::onMeureEntier()
 		pieds->dir = dir;
 		pieds->y = y;
 
-		list_gore.emplace_back(pieds);
+		g_game_state.entities().list_gore().emplace_back(pieds);
 
 		y -= 19;
 		dy = 0;
@@ -182,7 +183,7 @@ void EnnemiBisouCiel::onAvance()
 						s->y = y - 25;
 						s->dir = SENS_GAUCHE;
 
-						list_tirs_ennemis.emplace_back(s);
+						g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 
 						ss_etape = 0;
 						etat = ETAT_TIRE;
@@ -195,7 +196,7 @@ void EnnemiBisouCiel::onAvance()
 						s->y = y - 25;
 						s->dir = SENS_DROITE;
 
-						list_tirs_ennemis.emplace_back(s);
+						g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 
 						ss_etape = 0;
 						etat = ETAT_TIRE;

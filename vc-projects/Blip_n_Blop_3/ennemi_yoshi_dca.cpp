@@ -117,7 +117,7 @@ void EnnemiYoshiDCA::onTire()
 		tir->y = y - 23;
 
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		etape = 0;
 		etat = ETAT_AVANCE;

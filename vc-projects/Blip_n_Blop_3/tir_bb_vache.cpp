@@ -19,6 +19,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_bb_vache.h"
+#include "game_state.h"
 #include "gore_giclure.h"
 
 void TirBBVache::update()
@@ -49,7 +50,7 @@ void TirBBVache::update()
 			s = new GoreGiclure(rand() % 11 - 5, -2 - rand() % 6);
 			s->x = x + rand() % 11 - 5;
 			s->y = y - rand() % 30 - 10;
-			list_gore.emplace_back(s);
+			g_game_state.entities().list_gore().emplace_back(s);
 		}
 
 		sbk_misc.play(11);

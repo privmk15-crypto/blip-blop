@@ -1,4 +1,5 @@
 #include "ennemi_voiture_pacman.h"
+#include "game_state.h"
 #include "ennemi_pacman.h"
 
 
@@ -71,7 +72,7 @@ void EnnemiVoiturePacman::update()
 				pacman->x = x - 30;
 				pacman->y = y - 40;
 				pacman->dir = SENS_DROITE;
-				list_ennemis.ajoute( (void*) pacman);
+				g_game_state.entities().list_ennemis().ajoute( (void*) pacman);
 
 				invoc_pacman = true;
 			}*/

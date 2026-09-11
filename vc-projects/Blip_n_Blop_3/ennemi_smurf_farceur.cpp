@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "ennemi_smurf_farceur.h"
+#include "game_state.h"
 #include "tir_cadeau.h"
 
 const int anim_smurf_farceur_marche_droite[] = { 46, 47, 48, 49, 50, 49, 48, 47 };
@@ -104,7 +105,7 @@ void EnnemiSmurfFarceur::onPoseCadeau()
 		else
 			tir->x = x - 26 ;
 		tir->y = y ;
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		// et on réinitialise etape et ss_etape
 		etape = 0 ;
@@ -183,7 +184,7 @@ void EnnemiSmurfFarceur::onMeure()
 		} else {
 			tir->x = x - 26 ;
 		}
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		onCarbonise() ;
 	} else {
 		ss_etape += 1;

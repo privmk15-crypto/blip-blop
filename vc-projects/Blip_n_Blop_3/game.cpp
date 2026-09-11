@@ -963,22 +963,22 @@ void Game::releaseNiveau() {
 
     g_game_state.entities().list_vehicules().clear();
 
-    list_ennemis.clear();
-    list_tirs_ennemis.clear();
+    g_game_state.entities().list_ennemis().clear();
+    g_game_state.entities().list_tirs_ennemis().clear();
     g_game_state.entities().list_gen_ennemis().clear();
 
-    list_bonus.clear();
+    g_game_state.entities().list_bonus().clear();
     g_game_state.entities().list_gen_bonus().clear();
 
-    list_txt_cool.clear();
+    g_game_state.entities().list_txt_cool().clear();
 
-    list_fonds_animes.clear();
-    list_fonds_statiques.clear();
-    list_premiers_plans.clear();
-    list_plateformes_mobiles.clear();
+    g_game_state.entities().list_fonds_animes().clear();
+    g_game_state.entities().list_fonds_statiques().clear();
+    g_game_state.entities().list_premiers_plans().clear();
+    g_game_state.entities().list_plateformes_mobiles().clear();
 
-    list_giclures.clear();
-    list_gore.clear();
+    g_game_state.entities().list_giclures().clear();
+    g_game_state.entities().list_gore().clear();
 
     g_game_state.entities().list_meteo().clear();
     g_game_state.entities().list_bulles().clear();
@@ -1035,22 +1035,22 @@ void Game::updateAll() {
 
     if (g_game_state.weather().type() == METEO_PLUIE || g_game_state.weather().type() == METEO_NEIGE) updateMeteo();
 
-    UpdateCollection(list_fonds_statiques);
-    UpdateCollection(list_fonds_animes);
-    UpdateCollection(list_plateformes_mobiles);
+    UpdateCollection(g_game_state.entities().list_fonds_statiques());
+    UpdateCollection(g_game_state.entities().list_fonds_animes());
+    UpdateCollection(g_game_state.entities().list_plateformes_mobiles());
     UpdateCollection(g_game_state.entities().list_vehicules());
     UpdateCollection(g_game_state.entities().list_joueurs());
     UpdateCollection(g_game_state.entities().list_tirs_bb());
     UpdateCollection(g_game_state.entities().list_cow());
     UpdateCollection(g_game_state.entities().list_impacts());
-    UpdateCollection(list_ennemis);
-    UpdateCollection(list_gore);
-    UpdateCollection(list_tirs_ennemis);
-    UpdateCollection(list_giclures);
-    UpdateCollection(list_bonus);
-    UpdateCollection(list_premiers_plans);
+    UpdateCollection(g_game_state.entities().list_ennemis());
+    UpdateCollection(g_game_state.entities().list_gore());
+    UpdateCollection(g_game_state.entities().list_tirs_ennemis());
+    UpdateCollection(g_game_state.entities().list_giclures());
+    UpdateCollection(g_game_state.entities().list_bonus());
+    UpdateCollection(g_game_state.entities().list_premiers_plans());
 
-    UpdateCollection(list_txt_cool);
+    UpdateCollection(g_game_state.entities().list_txt_cool());
     UpdateCollection(g_game_state.entities().list_gen_ennemis());
     UpdateCollection(g_game_state.entities().list_gen_bonus());
     updateLock();
@@ -1099,27 +1099,27 @@ void Game::drawAll(bool flip) {
     }*/
 
     drawScrolling();
-    DrawCollection(list_fonds_statiques);
-    DrawCollection(list_fonds_animes);
+    DrawCollection(g_game_state.entities().list_fonds_statiques());
+    DrawCollection(g_game_state.entities().list_fonds_animes());
 
     if (game_flag[FLAG_BULLES]) {
         DrawCollection(g_game_state.entities().list_bulles());
     }
 
-    DrawCollection(list_plateformes_mobiles);
+    DrawCollection(g_game_state.entities().list_plateformes_mobiles());
     DrawCollection(g_game_state.entities().list_impacts());
-    DrawCollection(list_gore);
+    DrawCollection(g_game_state.entities().list_gore());
 
-    DrawCollection(list_ennemis);
-    DrawCollection(list_tirs_ennemis);
-    DrawCollection(list_bonus);
+    DrawCollection(g_game_state.entities().list_ennemis());
+    DrawCollection(g_game_state.entities().list_tirs_ennemis());
+    DrawCollection(g_game_state.entities().list_bonus());
     DrawCollection(g_game_state.entities().list_tirs_bb());
     DrawCollection(g_game_state.entities().list_joueurs());
     DrawCollection(g_game_state.entities().list_vehicules());
     DrawCollection(g_game_state.entities().list_impacts());
     DrawCollection(g_game_state.entities().list_cow());
     DrawCollection(g_game_state.entities().list_meteo());
-    DrawCollection(list_premiers_plans);
+    DrawCollection(g_game_state.entities().list_premiers_plans());
 
     if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0) drawDeformation();
 
@@ -1128,7 +1128,7 @@ void Game::drawAll(bool flip) {
     drawHUB();
     drawTimer();
     go_.Draw();
-    DrawCollection(list_txt_cool);
+    DrawCollection(g_game_state.entities().list_txt_cool());
 
     drawDebugInfos();
 
@@ -1282,23 +1282,23 @@ void Game::RemoveDestroyed(T& xs) {
 
 void Game::cleanLists() {
     RemoveDestroyed(g_game_state.entities().list_joueurs());
-    RemoveDestroyed(list_fonds_statiques);
+    RemoveDestroyed(g_game_state.entities().list_fonds_statiques());
     RemoveDestroyed(g_game_state.entities().list_tirs_bb());
     RemoveDestroyed(g_game_state.entities().list_cow());
     RemoveDestroyed(g_game_state.entities().list_bulles());
     RemoveDestroyed(g_game_state.entities().list_impacts());
-    RemoveDestroyed(list_ennemis);
-    RemoveDestroyed(list_bonus);
+    RemoveDestroyed(g_game_state.entities().list_ennemis());
+    RemoveDestroyed(g_game_state.entities().list_bonus());
     RemoveDestroyed(g_game_state.entities().list_gen_ennemis());
     RemoveDestroyed(g_game_state.entities().list_gen_bonus());
-    RemoveDestroyed(list_txt_cool);
-    RemoveDestroyed(list_fonds_animes);
-    RemoveDestroyed(list_premiers_plans);
-    RemoveDestroyed(list_giclures);
-    RemoveDestroyed(list_tirs_ennemis);
+    RemoveDestroyed(g_game_state.entities().list_txt_cool());
+    RemoveDestroyed(g_game_state.entities().list_fonds_animes());
+    RemoveDestroyed(g_game_state.entities().list_premiers_plans());
+    RemoveDestroyed(g_game_state.entities().list_giclures());
+    RemoveDestroyed(g_game_state.entities().list_tirs_ennemis());
     RemoveDestroyed(g_game_state.entities().list_meteo());
-    RemoveDestroyed(list_gore);
-    RemoveDestroyed(list_plateformes_mobiles);
+    RemoveDestroyed(g_game_state.entities().list_gore());
+    RemoveDestroyed(g_game_state.entities().list_plateformes_mobiles());
 }
 
 //-----------------------------------------------------------------------------
@@ -1351,7 +1351,7 @@ void Game::manageCollisions() {
     // Collisions TirsBB / Ennemis
     //
     for (Tir* tir : g_game_state.entities().list_tirs_bb()) {
-        for (auto& ennemi : list_ennemis) {
+        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
             if (tir->collision(ennemi.get())) {
                 ennemi->estTouche(tir);
             }
@@ -1361,7 +1361,7 @@ void Game::manageCollisions() {
     // Collisions Vaches / Ennemis
     //
     for (auto& tir : g_game_state.entities().list_cow()) {
-        for (auto& ennemi : list_ennemis) {
+        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
             if (tir->collision(ennemi.get())) {
                 ennemi->estTouche(tir.get());
             }
@@ -1370,7 +1370,7 @@ void Game::manageCollisions() {
 
     // Collisions Joueurs / Bonus
     //
-    for (auto& bonus : list_bonus) {
+    for (auto& bonus : g_game_state.entities().list_bonus()) {
         for (Couille* couille : g_game_state.entities().list_joueurs()) {
             if (bonus->collision(couille)) {
                 bonus->estPris(couille);
@@ -1381,7 +1381,7 @@ void Game::manageCollisions() {
     if (wait_for_victory <= 0) {
         // Collisions Joueurs / Ennemis
         //
-        for (auto& ennemi : list_ennemis) {
+        for (auto& ennemi : g_game_state.entities().list_ennemis()) {
             for (Couille* joueur : g_game_state.entities().list_joueurs()) {
                 if (ennemi->collision(joueur))
                     joueur->estTouche(ennemi->degats());
@@ -1390,7 +1390,7 @@ void Game::manageCollisions() {
 
         // Collisions Joueurs / tirs ennemis
         //
-        for (auto& tir : list_tirs_ennemis) {
+        for (auto& tir : g_game_state.entities().list_tirs_ennemis()) {
             for (Couille* joueur : g_game_state.entities().list_joueurs()) {
                 if (tir->collision(joueur)) {
                     joueur->estTouche(tir->degats());
@@ -1409,7 +1409,7 @@ void Game::updateLock() {
     int flag = g_game_state.scroll_lock().flag();
     int val = g_game_state.scroll_lock().val();
 
-    if ((cond == 0 && list_ennemis.empty()) ||
+    if ((cond == 0 && g_game_state.entities().list_ennemis().empty()) ||
         (cond == 1 && g_game_state.entities().list_gen_ennemis().empty()) ||
         (cond == 2 && game_flag[flag] == val) ||
         (cond == 3 && game_flag[flag] >= val)) {
@@ -1473,11 +1473,11 @@ void Game::drawDebugInfos() {
                     sprintf( buffer, "Tirs joueurs = %d",
        g_game_state.entities().list_tirs_bb().taille()); fnt_rpg.print( backSurface, 10, 170, buffer);
 
-                    sprintf( buffer, "Ennemis = %d", list_ennemis.taille());
+                    sprintf( buffer, "Ennemis = %d", g_game_state.entities().list_ennemis().taille());
                     fnt_rpg.print( backSurface, 10, 190, buffer);
 
                     sprintf( buffer, "Tirs ennemis = %d",
-       list_tirs_ennemis.taille()); fnt_rpg.print( backSurface, 10, 210,
+       g_game_state.entities().list_tirs_ennemis().taille()); fnt_rpg.print( backSurface, 10, 210,
        buffer);
 
                     sprintf( buffer, "Gens ennemis = %d",
@@ -1487,7 +1487,7 @@ void Game::drawDebugInfos() {
                     fnt_rpg.print( backSurface, 10, 250, buffer);
 
                     sprintf( buffer, "Fonds animes = %d",
-       list_fonds_animes.taille()); fnt_rpg.print( backSurface, 10, 270,
+       g_game_state.entities().list_fonds_animes().taille()); fnt_rpg.print( backSurface, 10, 270,
        buffer);
 
                     sprintf( buffer, "Meteo = %d / %d (%d)",
@@ -1495,10 +1495,10 @@ void Game::drawDebugInfos() {
        backSurface, 10, 290, buffer);
 
                     sprintf( buffer, "Plat. mobile = %d",
-       list_plateformes_mobiles.taille()); fnt_rpg.print( backSurface, 10, 310,
+       g_game_state.entities().list_plateformes_mobiles().taille()); fnt_rpg.print( backSurface, 10, 310,
        buffer);
 
-                    sprintf( buffer, "Giclures = %d", list_giclures.taille());
+                    sprintf( buffer, "Giclures = %d", g_game_state.entities().list_giclures().taille());
                     fnt_rpg.print( backSurface, 10, 330, buffer);
 
                     sprintf( buffer, "xTex = %d", xTex);
@@ -1557,11 +1557,11 @@ void Game::drawDebugInfos() {
        FSOUND_GetChannelsPlaying()); fnt_rpg.print( backSurface, 440, 405,
        buffer);
 
-                    sprintf( buffer, "Gore = %d", list_gore.taille());
+                    sprintf( buffer, "Gore = %d", g_game_state.entities().list_gore().taille());
                     fnt_rpg.print( backSurface, 440, 425, buffer);
 
                     sprintf( buffer, "Fonds stat. = %d",
-       list_fonds_statiques.taille()); fnt_rpg.print( backSurface, 440, 445,
+       g_game_state.entities().list_fonds_statiques().taille()); fnt_rpg.print( backSurface, 440, 445,
        buffer);
 
                     sprintf( buffer, "Impacts = %d", g_game_state.entities().list_impacts().taille());
@@ -1651,7 +1651,7 @@ void Game::updateVictoryAndDefeat() {
 
 void Game::updateFlags() {
     game_flag[FLAG_NB_GEN] = g_game_state.entities().list_gen_ennemis().size();
-    game_flag[FLAG_NB_ENN] = list_ennemis.size();
+    game_flag[FLAG_NB_ENN] = g_game_state.entities().list_ennemis().size();
     makeb_current_mode = game_flag[FLAG_BONUS];
 
     // Le TIMER
@@ -2271,7 +2271,7 @@ void Game::updateBulles() {
         creeBulle(pl);
     }
 
-    for (auto& pl : list_ennemis) {
+    for (auto& pl : g_game_state.entities().list_ennemis()) {
         if (g_game_state.entities().list_bulles().size() < 15) {
             break;
         }

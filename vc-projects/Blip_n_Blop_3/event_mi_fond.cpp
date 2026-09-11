@@ -1,5 +1,6 @@
 
 #include "globals.h"
+#include "game_state.h"
 #include "event_mi_fond.h"
 #include "fond_statique.h"
 
@@ -11,5 +12,5 @@ void EventMiFond::doEvent()
 	s->y = y;
 	s->pic = pbk_niveau[id];
 
-	list_fonds_statiques.emplace_back(s);
+	g_game_state.entities().list_fonds_statiques().emplace_back(s);
 }

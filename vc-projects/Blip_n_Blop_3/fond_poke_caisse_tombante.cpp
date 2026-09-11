@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "fond_poke_caisse_tombante.h"
+#include "game_state.h"
 #include "fond_poke_caisse.h"
 #include "fond_poke_caisse_plateforme.h"
 #include "fond_poke_caisse_plateforme_2.h"
@@ -43,14 +44,14 @@ void FondPokeCaisseTombante::update()
 				s2->x = x - 250;
 				s2->y = -150;
 
-				list_plateformes_mobiles.emplace_back(s2);
+				g_game_state.entities().list_plateformes_mobiles().emplace_back(s2);
 
 
 				s2 = new FondPokeCaissePlateforme(180);
 				s2->x = x - 470;
 				s2->y = - 150;
 
-				list_plateformes_mobiles.emplace_back(s2);
+				g_game_state.entities().list_plateformes_mobiles().emplace_back(s2);
 			}
 
 			if (etape > UNLOCK_DELAY + 4) {
@@ -66,14 +67,14 @@ void FondPokeCaisseTombante::update()
 					s->x = x;
 					s->y = y + 150;
 
-					list_fonds_animes.emplace_back(s);
+					g_game_state.entities().list_fonds_animes().emplace_back(s);
 
 					//plateforme qui bouge...
 					FondPokeCaissePlateforme2 * s3 = new FondPokeCaissePlateforme2();
 					s3->x = x;
 					s3->y = -150;
 
-                                        list_plateformes_mobiles.emplace_back(s3);
+                                        g_game_state.entities().list_plateformes_mobiles().emplace_back(s3);
 				}
 			}
 		}

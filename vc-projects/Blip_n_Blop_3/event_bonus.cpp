@@ -1,5 +1,6 @@
 
 #include "event_bonus.h"
+#include "game_state.h"
 #include "bonus_pm.h"
 #include "bonus_fusil.h"
 #include "bonus_laser.h"
@@ -56,6 +57,6 @@ void EventBonus::doEvent()
 		bonus->x = x;
 		bonus->y = y;
 
-		list_bonus.emplace_back(bonus);
+		g_game_state.entities().list_bonus().emplace_back(bonus);
 	}
 }

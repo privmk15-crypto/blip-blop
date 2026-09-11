@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "event_premier_plan.h"
+#include "game_state.h"
 #include "sprite.h"
 
 class PPlan : public Sprite
@@ -32,6 +33,6 @@ void EventPremierPlan::doEvent()
 	s->y = y;
 	s->pic = pbk_niveau[id_fond];
 
-	list_premiers_plans.emplace_back(s);
+	g_game_state.entities().list_premiers_plans().emplace_back(s);
 
 }

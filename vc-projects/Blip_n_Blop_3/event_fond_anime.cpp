@@ -16,6 +16,7 @@
 // Configuration
 //
 #include "config.h"
+#include "game_state.h"
 
 // Header classe
 //
@@ -348,9 +349,9 @@ void EventFondAnime::doEvent()
 		s->y = y;
 
 		if (plat_mobile)
-			list_plateformes_mobiles.emplace_back(s);
+			g_game_state.entities().list_plateformes_mobiles().emplace_back(s);
 		else
-			list_fonds_animes.emplace_back(s);
+			g_game_state.entities().list_fonds_animes().emplace_back(s);
 	} else {
 		debug << "Erreur : identité de fond animé inconnue (" << id_fond << ")\n";
 	}

@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_lemmings.h"
+#include "game_state.h"
 #include "bonus_vache.h"
 
 static int wait_no = 0;
@@ -139,7 +140,7 @@ void EnnemiLemmings::onMeure()
 			bonus->x = 1500;
 			bonus->y = -50;
 
-			list_bonus.emplace_back(bonus);
+			g_game_state.entities().list_bonus().emplace_back(bonus);
 			game_flag[0] = 1;
 		}
 	} else {

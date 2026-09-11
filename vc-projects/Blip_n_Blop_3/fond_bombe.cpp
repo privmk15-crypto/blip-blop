@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "globals.h"
+#include "game_state.h"
 #include "fond_bombe.h"
 #include "enemy.h"
 #include "bonus_fusil.h"
@@ -55,7 +56,7 @@ void FondBombe::update()
 				}
 				bonus->x = x;
 				bonus->y = 0;
-				list_bonus.emplace_back(bonus);
+				g_game_state.entities().list_bonus().emplace_back(bonus);
 
 				sbk_niveau.play(1);
 			}

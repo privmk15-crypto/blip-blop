@@ -17,6 +17,7 @@
 ******************************************************************/
 
 #include "event_ennemi.h"
+#include "game_state.h"
 #include "enemy.h"
 
 #include "ennemi_smurf.h"
@@ -366,7 +367,7 @@ void EventEnnemi::doEvent()
 		enn->y = y;
 		enn->dir = sens;
 
-		list_ennemis.emplace_back(enn);
+		g_game_state.entities().list_ennemis().emplace_back(enn);
 
 		if (enn->count())
 			nb_ennemis_created += 1;

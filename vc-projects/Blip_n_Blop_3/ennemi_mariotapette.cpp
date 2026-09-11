@@ -1,5 +1,6 @@
 
 #include "ennemi_mariotapette.h"
+#include "game_state.h"
 #include "ennemi_luigi.h"
 #include "gore_giclure.h"
 #include "event_hold_fire.h"
@@ -299,7 +300,7 @@ void EnnemiMariotapette::onMeure()
 		luigi->x = 1960;
 		luigi->y = y;
 		luigi->dir = SENS_GAUCHE;
-		list_ennemis.emplace_back(luigi);
+		g_game_state.entities().list_ennemis().emplace_back(luigi);
 
 		EventHoldFire e;
 
@@ -543,7 +544,7 @@ void EnnemiMariotapette::estTouche(Tir * tir)
 		s->x = x + rand() % 11 - 5;
 		s->y = y - rand() % 30 - 10;
 
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 	}
 
 	if ((tir->dir >= 2) && (tir->dir <= 6)) {

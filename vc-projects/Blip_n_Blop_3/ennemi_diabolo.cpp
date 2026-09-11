@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_diabolo.h"
+#include "game_state.h"
 #include "ben_debug.h"
 #include "tir_tornade.h"
 
@@ -214,7 +215,7 @@ void EnnemiDiabolo::onMeure()
 		s->y = y-22;
 		s->x = x;
 
-		list_giclures.ajoute( (void*) s);
+		g_game_state.entities().list_giclures().ajoute( (void*) s);
 
 		dy=0;
 	}
@@ -270,7 +271,7 @@ void EnnemiDiabolo::onAttack()
 				tir->x = x+35;
 				tir->y = y-42;
 
-				list_tirs_ennemis.ajoute( (void*) tir);
+				g_game_state.entities().list_tirs_ennemis().ajoute( (void*) tir);
 
 			}
 			else
@@ -281,7 +282,7 @@ void EnnemiDiabolo::onAttack()
 				tir->x = x-35;
 				tir->y = y-42;
 
-				list_tirs_ennemis.ajoute( (void*) tir);
+				g_game_state.entities().list_tirs_ennemis().ajoute( (void*) tir);
 			}
 		}
 
@@ -384,7 +385,7 @@ void EnnemiDiabolo::onTornade()
 
 		tornade->setDir(dir);
 		tornade->y = y;
-		list_tirs_ennemis.emplace_back(tornade);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tornade);
 	}
 
 	if (dir == SENS_DROITE) {

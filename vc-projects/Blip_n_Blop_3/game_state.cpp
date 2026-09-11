@@ -23,11 +23,16 @@
 
 #include "game_state.h"
 
+#include "bonus.h"
 #include "bulle.h"
+#include "enemy.h"
 #include "event.h"
 #include "explosion.h"
 #include "gen_bonus.h"
 #include "gen_ennemi.h"
+#include "sprite.h"
+#include "texte_cool.h"
+#include "tir.h"
 #include "tir_bb_vache.h"
 #include "vehicule.h"
 

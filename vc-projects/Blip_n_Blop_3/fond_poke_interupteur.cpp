@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "sprite.h"
+#include "game_state.h"
 #include "fond_poke_interupteur.h"
 #include "enemy.h"
 #include "texte_cool.h"
@@ -64,23 +65,23 @@ void FondPokeInterupteur::update()
 		wait_msg = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 104;
-		list_txt_cool.emplace_back(txt);
+		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	}
 
 	if (!ascenc_msg && wait_msg && game_flag[2] == 1) {
 		ascenc_msg = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 105;
-		list_txt_cool.emplace_back(txt);
+		g_game_state.entities().list_txt_cool().emplace_back(txt);
 		txt = new TexteCool();
 		txt->ntxt = 106;
-		list_txt_cool.emplace_back(txt);
+		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	}
 
 	if (!bravo && ascenc_msg && game_flag[0] == 1) {
 		bravo = true;
 		TexteCool * txt = new TexteCool();
 		txt->ntxt = 107;
-		list_txt_cool.emplace_back(txt);
+		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	}
 };

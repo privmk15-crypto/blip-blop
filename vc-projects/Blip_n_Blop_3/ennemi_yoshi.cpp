@@ -220,7 +220,7 @@ void EnnemiYoshi::onTire()
 
 		//tirEnCloche( tir->x, tir->y, xcible, ycible, tir->dx, tir->dy);
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		etat = ETAT_AVANCE;
 		etape = 0;

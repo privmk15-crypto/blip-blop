@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_nuage.h"
+#include "game_state.h"
 #include "tir_nuage.h"
 
 EnnemiBisouNuage::EnnemiBisouNuage() : etape_shoot(0)
@@ -123,7 +124,7 @@ void EnnemiBisouNuage::onNormal()
 		s->y = y - 17;
 		s->dir = dir;
 
-		list_tirs_ennemis.emplace_back(s);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 
 		etape_shoot = 0;
 		wait_shoot = 250 + rand() % 250;

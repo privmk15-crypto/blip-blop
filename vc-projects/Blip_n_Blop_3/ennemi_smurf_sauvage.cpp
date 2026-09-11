@@ -25,6 +25,7 @@ const int tir_dy[] = { 4, 5, 6, 6, 5, 4 } ;
 //-----------------------------------------------------------------------------
 
 #include "ennemi_smurf_sauvage.h"
+#include "game_state.h"
 #include "tir_smurf_sauvage.h"
 
 
@@ -213,7 +214,7 @@ void EnnemiSmurfSauvage::onTire()
 		tir->y = y + tir_position_depart_y[shoot_direction] ;
 		tir->dx = tir_dx[shoot_direction] ;
 		tir->dy = tir_dy[shoot_direction] ;
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		if (nb_shoot == 0)
 			sbk_niveau.play(18);
@@ -251,7 +252,7 @@ void EnnemiSmurfSauvage::onMeure()
 		colFromPic();
 		y1 = 0;
 
-                for (auto& s : list_fonds_statiques) {
+                for (auto& s : g_game_state.entities().list_fonds_statiques()) {
 			ok = ok && !collision(s.get());
 		}
 

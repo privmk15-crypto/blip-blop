@@ -33,10 +33,7 @@
 #include "scroll.h"
 #include "restore.h"
 #include "fond_statique.h"
-#include "enemy.h"
-#include "bonus.h"
 #include "sprite.h"
-#include "texte_cool.h"
 #include "giclure.h"
 #include "game_state.h"
 
@@ -86,25 +83,8 @@ bool		no_scroll2;
 //		Les listes
 //-----------------------------------------------------------------------------
 
-// list_joueurs/list_tirs_bb/list_cow/list_impacts/list_vehicules/
-// list_event_endormis/list_event/list_gen_ennemis/list_gen_bonus/
-// list_meteo/list_bulles moved to entity_manager.h (EntityManager) -
-// Stage 2 EntityManager migration, groups #1-#3.
-
-std::list<std::unique_ptr<Ennemi>> list_ennemis;
-std::list<std::unique_ptr<Tir>> list_tirs_ennemis;
-
-std::list<std::unique_ptr<Bonus>> list_bonus;
-
-std::list<std::unique_ptr<Sprite>> list_fonds_animes;
-std::list<std::unique_ptr<Sprite>> list_fonds_statiques;
-std::list<std::unique_ptr<Sprite>> list_premiers_plans;
-std::list<std::unique_ptr<Sprite>> list_plateformes_mobiles;
-
-std::list<std::unique_ptr<TexteCool>> list_txt_cool;
-
-std::list<std::unique_ptr<Sprite>> list_giclures;
-std::list<std::unique_ptr<Sprite>> list_gore;
+// All 21 entity lists moved to entity_manager.h/.cpp (EntityManager) -
+// Stage 2 EntityManager migration, complete.
 
 
 //-----------------------------------------------------------------------------
@@ -301,12 +281,12 @@ bool grave(int x, int y, Picture * pic)
 
 	s.colFromPic();
 
-        for (auto& s2 : list_fonds_animes) {
+        for (auto& s2 : g_game_state.entities().list_fonds_animes()) {
 		if (s.collision(s2.get()))
 			return false;
 	}
 
-	for (auto& s2 : list_plateformes_mobiles) {
+	for (auto& s2 : g_game_state.entities().list_plateformes_mobiles()) {
 		if (s.collision(s2.get()))
 			return false;
 	}

@@ -54,7 +54,7 @@ public:
 			b = !b;
 
 
-			list_fonds_animes.emplace_back(ptr);
+			g_game_state.entities().list_fonds_animes().emplace_back(ptr);
 		}
 	};
 

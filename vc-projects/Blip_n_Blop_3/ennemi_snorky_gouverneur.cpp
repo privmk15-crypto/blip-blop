@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_snorky_gouverneur.h"
+#include "game_state.h"
 #include "tir_snorky_gouverneur.h"
 
 
@@ -165,7 +166,7 @@ void EnnemiSnorkyGouverneur::onTire()
 			tir->x = x;
 			tir->y = y - 71;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			nb_tir++;
 		}
 

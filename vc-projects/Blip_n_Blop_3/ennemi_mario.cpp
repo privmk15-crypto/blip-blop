@@ -1,5 +1,6 @@
 
 #include "ennemi_mario.h"
+#include "game_state.h"
 #include "tir_mario_fireball.h"
 #include "tir_mario_fireball_vertical.h"
 #include "ennemi_mario_hologramme.h"
@@ -150,7 +151,7 @@ void EnnemiMario::onAvance()
 			{
 				holo->dir = SENS_DROITE;
 			}
-			list_ennemis.ajoute( (void*) holo);
+			g_game_state.entities().list_ennemis().ajoute( (void*) holo);
 
 			hologramme = 0;
 		}
@@ -598,7 +599,7 @@ void EnnemiMario::onTireverticale()
 		}
 		tir->y = y - 38;
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 	} else if (attack_etape == 60) {
 		etat = ETAT_AVANCE;
 		etape = 0;
@@ -775,7 +776,7 @@ void EnnemiMario::onRafaleverticale()
 			tir->x = x + 38;
 			tir->y = y - 38;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		} else {
 			int x_cible = x - attack_etape * 100 - rand() % 20;
 			if (x_cible < offset - 100) {
@@ -793,7 +794,7 @@ void EnnemiMario::onRafaleverticale()
 			tir->x = x - 38;
 			tir->y = y - 38;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		}
 	}
 	colFromPic();
@@ -882,7 +883,7 @@ void EnnemiMario::onRafaleverticaleinverser()
 			tir->x = x + 38;
 			tir->y = y - 38;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		} else {
 			int x_cible = offset + 640 - attack_etape * 100 - rand() % 20;
 			if (x_cible > x - 20) {
@@ -900,7 +901,7 @@ void EnnemiMario::onRafaleverticaleinverser()
 			tir->x = x - 38;
 			tir->y = y - 38;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		}
 	}
 	colFromPic();
@@ -1142,7 +1143,7 @@ inline void EnnemiMario::boule_de_feu(int vitesse)
 		tir->x = x + 38;
 		tir->y = y - 31;
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 	} else {
 		TirMarioFireball *	tir = new TirMarioFireball(-vitesse);
 
@@ -1150,7 +1151,7 @@ inline void EnnemiMario::boule_de_feu(int vitesse)
 		tir->x = x - 38;
 		tir->y = y - 31;
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 	}
 }
 

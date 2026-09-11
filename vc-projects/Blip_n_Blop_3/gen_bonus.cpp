@@ -15,6 +15,7 @@
 
 #include <cstdlib>
 #include "globals.h"
+#include "game_state.h"
 #include "gen_bonus.h"
 #include "make_bonus.h"
 
@@ -24,7 +25,7 @@ GenBonus::GenBonus() : t(0), a_detruire(false)
 
 void GenBonus::update()
 {
-	if (list_bonus.size() < 3) {
+	if (g_game_state.entities().list_bonus().size() < 3) {
 		t += 1;
 		t %= periode;
 

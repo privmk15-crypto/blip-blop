@@ -13,6 +13,7 @@
 ******************************************************************/
 
 #include "ennemi_snork_in_black.h"
+#include "game_state.h"
 #include "tir_epine.h"
 
 const int anim_snork_in_black_marche_droite[] = { 344, 345, 346, 345};
@@ -177,7 +178,7 @@ void EnnemiSnorkInBlack::onTire()
 			tir->x = x + 49;
 			tir->y = y - 15;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		} else {
 			int vx = -5 - rand() % 2;
 			int vy = rand() % 5 - 2;
@@ -188,7 +189,7 @@ void EnnemiSnorkInBlack::onTire()
 			tir->x = x - 49;
 			tir->y = y - 15;
 
-			list_tirs_ennemis.emplace_back(tir);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		}
 
 		sbk_niveau.play(24);

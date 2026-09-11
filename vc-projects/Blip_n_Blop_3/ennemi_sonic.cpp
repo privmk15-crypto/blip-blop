@@ -692,7 +692,7 @@ void EnnemiSonic::onAttackeclair()
 		tir->setDir(dir);
 		tir->x = tete_turc->x;
 		tir->y = 0;
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 		nb_tir += 1;
 	}
 
@@ -729,42 +729,42 @@ void EnnemiSonic::onBalancering()
 		s = new MorceauSonicRing(1 * mx , 10 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(3 * mx , 9 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(4 * mx , 7 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(5 * mx , 6 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(6 * mx , 5 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(7 * mx, 4 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(9 * mx , 3 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 
 		s = new MorceauSonicRing(10 * mx, 1 * my);
 		s->x = x;
 		s->y = y - 40;
-		list_giclures.emplace_back(s);
+		g_game_state.entities().list_giclures().emplace_back(s);
 	}
 
 }
@@ -778,7 +778,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 23;
 			tir->y = y - 13;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 1:
@@ -786,7 +786,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 23;
 			tir->y = y - 18;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 2:
@@ -794,7 +794,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 18;
 			tir->y = y - 23;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 3:
@@ -802,7 +802,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 13;
 			tir->y = y - 23;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 4:
@@ -810,7 +810,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 0;
 			tir->y = y - 23;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 5:
@@ -818,7 +818,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 13;
 			tir->y = y - 23;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 6:
@@ -826,7 +826,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 18;
 			tir->y = y - 23;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 7:
@@ -834,7 +834,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 23;
 			tir->y = y - 18;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 8:
@@ -842,7 +842,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 23;
 			tir->y = y - 13;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 9:
@@ -850,7 +850,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 23;
 			tir->y = y - 8;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 10:
@@ -858,7 +858,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 18;
 			tir->y = y - 3;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 11:
@@ -866,7 +866,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 13;
 			tir->y = y - 3;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 12:
@@ -874,7 +874,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x - 0;
 			tir->y = y - 0;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 13:
@@ -882,7 +882,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 13;
 			tir->y = y - 3;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 14:
@@ -890,7 +890,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 18;
 			tir->y = y - 8;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 
 		case 15:
@@ -898,7 +898,7 @@ void EnnemiSonic::balance_epines()
 			tir->setDir(dir);
 			tir->x = x + 18;
 			tir->y = y - 13;
-                        list_tirs_ennemis.emplace_back(tir);
+                        g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			break;
 	}
 }

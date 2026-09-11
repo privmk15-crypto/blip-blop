@@ -69,7 +69,7 @@ void FondMonolite::update()
 	}
 
 
-        for (auto& ennemis : list_ennemis) {
+        for (auto& ennemis : g_game_state.entities().list_ennemis()) {
 		xtmp = ennemis->x;
 
 		if (xtmp >= x - 138 && xtmp < x + pic->xSize() - 118 && plat(xtmp, ennemis->y) == y - 20) {

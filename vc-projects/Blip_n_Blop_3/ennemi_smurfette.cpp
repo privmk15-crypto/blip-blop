@@ -1,5 +1,6 @@
 
 #include "ennemi_smurfette.h"
+#include "game_state.h"
 #include "tir_bisou_mortel.h"
 
 EnnemiSmurfette::EnnemiSmurfette() : etape_shoot(0)
@@ -113,7 +114,7 @@ void EnnemiSmurfette::onTire()
 			t->setDir(dir);
 			t->cible = tete_turc;
 
-			list_tirs_ennemis.emplace_back(t);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(t);
 		} else if (etape >= 9) {
 			etat = ETAT_AVANCE;
 			etape = ss_etape = etape_shoot = 0;

@@ -88,7 +88,7 @@ void EnnemiPrincesse::onAvance()
 		if (x  > offset + 820) {
 			TexteCool * txt = new TexteCool();
 			txt->ntxt = 517;
-			list_txt_cool.emplace_back(txt);
+			g_game_state.entities().list_txt_cool().emplace_back(txt);
 
 			a_detruire  = true;
 		}
@@ -96,7 +96,7 @@ void EnnemiPrincesse::onAvance()
 			/*
 							TexteCool * txt = new TexteCool();
 							txt->ntxt = 518;
-							list_txt_cool.ajoute( (void*) txt);
+							g_game_state.entities().list_txt_cool().ajoute( (void*) txt);
 			*/
 			aide = true;
 			Ennemi* guard;
@@ -107,7 +107,7 @@ void EnnemiPrincesse::onAvance()
 				guard->x = offset + 720 - i * 20;
 				guard->y = y - 20;
 				guard->dir = SENS_GAUCHE;
-				list_ennemis.emplace_back(guard);
+				g_game_state.entities().list_ennemis().emplace_back(guard);
 
 			}
 			nb_ennemis_created += 3;
@@ -184,7 +184,7 @@ void EnnemiPrincesse::onMeure()
 			grave(x, y, pic);
 			TexteCool * txt = new TexteCool();
 			txt->ntxt = 519;
-			list_txt_cool.emplace_back(txt);
+			g_game_state.entities().list_txt_cool().emplace_back(txt);
 			a_detruire = true;
 			if (game_flag[3] > 0) {
 				game_flag[2] = 1;
@@ -193,7 +193,7 @@ void EnnemiPrincesse::onMeure()
 			Bonus * bonus = new BonusVache();
 			bonus->x = x;
 			bonus->y = y;
-			list_bonus.emplace_back(bonus);
+			g_game_state.entities().list_bonus().emplace_back(bonus);
 		}
 	} else {
 		//if ( !mur_opaque( x + speed, y) && plat( x, y) == 0)

@@ -17,6 +17,7 @@
 #define _EventTexte_
 
 #include "event.h"
+#include "game_state.h"
 #include "texte_cool.h"
 #include "ben_debug.h"
 
@@ -45,7 +46,7 @@ public:
 
 		txt->ntxt = ntxt;
 
-		list_txt_cool.emplace_back(txt);
+		g_game_state.entities().list_txt_cool().emplace_back(txt);
 	};
 };
 

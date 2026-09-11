@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_coeur.h"
+#include "game_state.h"
 #include "gore_tete_bisou_coeur.h"
 #include "tir_coeur_bisou.h"
 
@@ -70,7 +71,7 @@ void EnnemiBisouCoeur::onAvance()
 
 		tir->y = y;
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 	}
 
 	colFromPic();
@@ -102,7 +103,7 @@ void EnnemiBisouCoeur::onMeure()
 			else
 				tete->x = x - 11;
 
-			list_gore.emplace_back(tete);
+			g_game_state.entities().list_gore().emplace_back(tete);
 		}
 	}
 

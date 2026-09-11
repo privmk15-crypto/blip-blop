@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_chaman.h"
+#include "game_state.h"
 #include "tir_boule_chaman.h"
 #include "tir_colonne_chaman.h"
 #include <math.h>
@@ -268,7 +269,7 @@ void EnnemiBisouChaman::onTire()
 					s->dx = (ddx * 4) / 3;
 					s->dy = (ddy * 4) / 3;
 
-					list_tirs_ennemis.emplace_back(s);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 				} else {
 					TirColonneChaman * s = new TirColonneChaman();
 
@@ -281,7 +282,7 @@ void EnnemiBisouChaman::onTire()
 
 					s->setDir(dir);
 
-					list_tirs_ennemis.emplace_back(s);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(s);
 				}
 
 

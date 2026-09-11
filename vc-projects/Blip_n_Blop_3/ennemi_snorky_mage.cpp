@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_snorky_mage.h"
+#include "game_state.h"
 #include "tir_snorky_mage.h"
 
 
@@ -206,7 +207,7 @@ void EnnemiSnorkyMage::onTire()
 				tir->x = x + 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			} else {
 				TirSnorkyMage *	tir = new TirSnorkyMage();
 
@@ -214,7 +215,7 @@ void EnnemiSnorkyMage::onTire()
 				tir->x = x - 35;
 				tir->y = y - 42;
 
-				list_tirs_ennemis.emplace_back(tir);
+				g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 			}
 
 			sbk_niveau.play(12);

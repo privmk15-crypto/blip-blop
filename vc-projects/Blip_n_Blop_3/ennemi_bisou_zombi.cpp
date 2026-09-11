@@ -1,5 +1,6 @@
 
 #include "ennemi_bisou_zombi.h"
+#include "game_state.h"
 #include "gore_pied_bisou_zombi.h"
 
 #define ETAT_CARBONISE_HAUT	102
@@ -245,7 +246,7 @@ void EnnemiBisouZombi::onCoupe()
 		pieds->dir = dir;
 		pieds->y = y;
 
-		list_gore.emplace_back(pieds);
+		g_game_state.entities().list_gore().emplace_back(pieds);
 
 		y -= 19;
 		dy = 0;

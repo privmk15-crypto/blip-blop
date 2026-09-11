@@ -115,36 +115,13 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Les listes
 //-----------------------------------------------------------------------------
 
-// list_joueurs/list_tirs_bb/list_cow/list_impacts/list_vehicules/
-// list_event_endormis/list_event/list_gen_ennemis/list_gen_bonus/
-// list_meteo/list_bulles moved into EntityManager (entity_manager.h) as
-// part of the Stage 2 EntityManager migration (groups #1-#3: the lists
-// with the smallest spawn-site footprint). The remaining lists below are
-// not yet migrated (larger spawn-site footprint, planned as later groups).
-
-class Ennemi;
-extern std::list<std::unique_ptr<Ennemi>> list_ennemis;
-class Tir;
-extern std::list<std::unique_ptr<Tir>> list_tirs_ennemis;
-
-class Bonus;
-extern std::list<std::unique_ptr<Bonus>> list_bonus;
-
-class Sprite;
-extern std::list<std::unique_ptr<Sprite>> list_fonds_animes;
-extern std::list<std::unique_ptr<Sprite>> list_fonds_statiques;
-extern std::list<std::unique_ptr<Sprite>> list_premiers_plans;
-extern std::list<std::unique_ptr<Sprite>> list_plateformes_mobiles;
-
-class TexteCool;
-extern std::list<std::unique_ptr<TexteCool>> list_txt_cool;
-
-// FIXME: should prolly be a list of Giclure, but GoreGiclure doesn't inherit
-// Giclure
-extern std::list<std::unique_ptr<Sprite>> list_giclures;
-// FIXME all things put insite list_gore don't have a common base aside from
-// Sprite
-extern std::list<std::unique_ptr<Sprite>> list_gore;
+// All 21 entity lists (list_joueurs, list_tirs_bb, list_cow, list_impacts,
+// list_vehicules, list_event_endormis, list_event, list_gen_ennemis,
+// list_gen_bonus, list_meteo, list_bulles, list_ennemis,
+// list_tirs_ennemis, list_bonus, list_fonds_animes, list_fonds_statiques,
+// list_premiers_plans, list_plateformes_mobiles, list_txt_cool,
+// list_giclures, list_gore) moved into EntityManager (entity_manager.h)
+// as part of the Stage 2 EntityManager migration.
 
 
 //-----------------------------------------------------------------------------

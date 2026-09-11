@@ -15,6 +15,7 @@
 
 
 #include "ben_debug.h"
+#include "game_state.h"
 #include "ennemi_lara.h"
 #include "tir_epine.h"
 #include "ennemi_pic.h"
@@ -89,7 +90,7 @@ void EnnemiLara::onAvance()
 				}
 
 				pic->dir = SENS_GAUCHE;
-				list_ennemis.emplace_back(pic);
+				g_game_state.entities().list_ennemis().emplace_back(pic);
 //				nb_ennemis_created += 1;
 			}
 		}
@@ -99,7 +100,7 @@ void EnnemiLara::onAvance()
 		pic->y = -50;
 		pic->dir = SENS_GAUCHE;
 		pic->etat = ETAT_AVANCE;
-		list_ennemis.ajoute( (void*) pic);
+		g_game_state.entities().list_ennemis().ajoute( (void*) pic);
 
 		nb_ennemis_created += 1;*/
 
@@ -115,7 +116,7 @@ void EnnemiLara::onAvance()
 				tete->y = tete_turc->y - 30;
 				tete->dy = -8;
 				tete->dir = SENS_GAUCHE;
-				list_ennemis.emplace_back(tete);
+				g_game_state.entities().list_ennemis().emplace_back(tete);
 				tete_rayman = true;
 			}
 		}
@@ -173,7 +174,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 60;
 					tir->y = y - 144;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 					numero_image_buste = 150;//127
 					ss_etape = 0;
@@ -199,7 +200,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 58;
 					tir->y = y - 154;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 					ss_etape = 0;
 					etape = 1;
 					etat = ETAT_TIRE;
@@ -223,7 +224,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 57;
 					tir->y = y - 165;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 					numero_image_buste = 138;//150
 					ss_etape = 0;
 					etape = 1;
@@ -248,7 +249,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 53;
 					tir->y = y - 175;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 					ss_etape = 0;
 					etape = 1;
 					etat = ETAT_TIRE;
@@ -275,7 +276,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 59;
 					tir->y = y - 129;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 					//angle de tir: -10°
 					numero_image_buste = 156;
 
@@ -301,7 +302,7 @@ void EnnemiLara::onAvance()
 					tir->x = x - 60;
 					tir->y = y - 144;
 					tir->traverse = true;
-					list_tirs_ennemis.emplace_back(tir);
+					g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 					numero_image_buste = 150;
 					ss_etape = 0;
 					etape = 1;
@@ -315,7 +316,7 @@ void EnnemiLara::onAvance()
 				/*TirEpine * tir  =new TirEpine(163,-9,0);
 				tir->x = x;
 				tir->y = y-150;
-				list_tirs_ennemis.ajoute( (void*) tir);
+				g_game_state.entities().list_tirs_ennemis().ajoute( (void*) tir);
 				numero_image_buste = 150;*/
 			}
 		}

@@ -1,5 +1,6 @@
 
 #include "ennemi_smurf_costaud.h"
+#include "game_state.h"
 #include "tir_hadoken.h"
 
 #define ETAT_TIRE_HADOKEN	1000
@@ -170,7 +171,7 @@ void EnnemiSmurfCostaud::onTireHadoken()
 			t->y = y - 30;
 			t->setDir(dir);
 
-			list_tirs_ennemis.emplace_back(t);
+			g_game_state.entities().list_tirs_ennemis().emplace_back(t);
 		}
 
 		if (etape > 7) {

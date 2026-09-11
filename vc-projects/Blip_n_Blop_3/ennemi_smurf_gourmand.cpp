@@ -15,6 +15,7 @@
 ******************************************************************/
 
 #include "ennemi_smurf_gourmand.h"
+#include "game_state.h"
 #include "tir_gateau.h"
 
 #define	ETAT_HOLD		15
@@ -118,7 +119,7 @@ void EnnemiSmurfGourmand::onTire()
 
 		tirEnCloche(tir->x, tir->y, xcible, ycible, tir->dx, tir->dy);
 
-		list_tirs_ennemis.emplace_back(tir);
+		g_game_state.entities().list_tirs_ennemis().emplace_back(tir);
 
 		etape = 0;
 		etat = ETAT_HOLD;

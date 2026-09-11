@@ -15,6 +15,7 @@
 
 #include "ennemi_tete___rayman.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiTeteRayman::EnnemiTeteRayman(): dx(3)

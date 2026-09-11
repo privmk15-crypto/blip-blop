@@ -21,6 +21,7 @@
 #include "morceaux_tete_snorky.h"
 #include "game_state.h"
 #include "enemy.h"
+#include "globals.h"
 
 
 //-----------------------------------------------------------------------------

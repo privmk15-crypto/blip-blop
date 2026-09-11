@@ -15,6 +15,7 @@
 
 #include "ennemi_snorky_base_1.h"
 #include "game_state.h"
+#include "globals.h"
 #include "morceaux_tete_snorky.h"
 #include "tir_snorkybase.h"
 

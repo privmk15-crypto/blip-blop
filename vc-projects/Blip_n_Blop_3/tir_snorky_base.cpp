@@ -20,6 +20,7 @@
 
 #include "tir_snorkybase.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int tir_snorky_oscilation[] = {0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0};
 

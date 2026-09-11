@@ -1,5 +1,6 @@
 #include "ennemi_pacman.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiPacman::EnnemiPacman(): ss_etape_tir(0), etape_tir(0), tir(false), dx(-2)

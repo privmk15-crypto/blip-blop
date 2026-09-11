@@ -5,6 +5,7 @@
 
 #include "tir_sonic_eclair.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirSoniceclair::TirSoniceclair()
 {

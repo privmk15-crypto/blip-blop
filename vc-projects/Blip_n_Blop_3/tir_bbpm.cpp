@@ -22,6 +22,7 @@
 
 #include "tir_bbpm.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int dx_tirbb_PM [] = { 0, 5, 8, 11, 12, 11, 8, 5, 0, -5, -8, -11, -12, -11, -8, -5 };
 const int dy_tirbb_PM [] = { 12, 11, 8, 5, 0, -5, -8, -11, -12, -11, -8, -5, 0, 5, 8, 11 };

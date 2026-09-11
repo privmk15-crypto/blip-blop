@@ -2,6 +2,7 @@
 #include "enemy.h"
 #include "tir_nuage.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirNuage::TirNuage() : etape_shoot(0), etat(0), eclair(0), delta_eclair(0)
 {

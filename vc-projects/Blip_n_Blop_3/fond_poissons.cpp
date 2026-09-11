@@ -16,6 +16,7 @@
 #include "sprite.h"
 #include "fond_poissons.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 FondPoissonRouge::FondPoissonRouge()

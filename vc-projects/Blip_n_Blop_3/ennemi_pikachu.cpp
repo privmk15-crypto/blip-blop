@@ -1,6 +1,7 @@
 
 #include "ennemi_pikachu.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiPikachu::EnnemiPikachu()

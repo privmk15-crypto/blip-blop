@@ -21,8 +21,19 @@
 //		Headers
 //-----------------------------------------------------------------------------
 
-#include "picture.h"
-#include "globals.h"
+// Etap 3 (Sprite/Renderer separation, step 0): forward-declared, not
+// included. Sprite only ever holds a Picture* (pointer), never
+// dereferences it inline in this header - the three methods that used
+// to need Picture/globals.h complete inline (estSurMur/affiche/
+// updateADetruire, see below) are now declared here and defined
+// out-of-line in sprite.cpp, which includes the real headers. This is
+// what lets every one of the ~170 Sprite-derived gameplay classes stop
+// transitively requiring <SDL2/SDL.h> just to parse their own header -
+// see the Sprite/Renderer audit for the full include-chain trace
+// (sprite.h -> picture.h -> dd_gfx.h -> graphics.h -> SDL2/SDL.h, and
+// sprite.h -> globals.h -> control_p1.h -> input.h -> SDL2/SDL.h).
+// Behavior is unchanged; this is a pure code-motion, not a redesign.
+class Picture;
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe Sprite
@@ -73,10 +84,9 @@ public:
 		return a_detruire;
 	};
 
-	inline virtual bool estSurMur() const   // (sanglant)
-	{
-		return mur_sanglant(x, y);
-	}
+	// Moved out-of-line to sprite.cpp - see the forward-declaration
+	// comment above.
+	virtual bool estSurMur() const;   // (sanglant)
 
 	inline virtual int anime(const int * tab, int nb_etapes, int latence)
 	{
@@ -93,16 +103,13 @@ public:
 		return tab[etape];
 	};
 
-	inline virtual void affiche()
-	{
-		draw(x, y, pic);
-	};
+	// Moved out-of-line to sprite.cpp - see the forward-declaration
+	// comment above.
+	virtual void affiche();
 
-	inline virtual void updateADetruire()
-	{
-		if (x < offset - 250 || x > offset + 900 || y < -200 || y > 600)
-			a_detruire = true;
-	};
+	// Moved out-of-line to sprite.cpp - see the forward-declaration
+	// comment above.
+	virtual void updateADetruire();
 
 	virtual void update() = 0;
 

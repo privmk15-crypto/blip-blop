@@ -5,6 +5,7 @@
 
 #include "tir_snorky_base_2.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 TirSnorkyBase2::TirSnorkyBase2(int vx, int vy)

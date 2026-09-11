@@ -1,6 +1,7 @@
 #include "ennemi_poid.h"
 #include "game_state.h"
 #include "gore_giclure.h"
+#include "globals.h"
 
 
 EnnemiPoid::EnnemiPoid(): nb_colision(0)

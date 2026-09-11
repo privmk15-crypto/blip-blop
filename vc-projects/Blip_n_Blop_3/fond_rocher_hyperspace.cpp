@@ -16,6 +16,7 @@
 #include "fond_rocher_hyperspace.h"
 #include "ben_maths.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int rocher_levitation[] = {0, 0, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 0, 0};
 

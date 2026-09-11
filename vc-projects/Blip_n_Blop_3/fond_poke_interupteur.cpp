@@ -18,6 +18,7 @@
 #include "fond_poke_interupteur.h"
 #include "enemy.h"
 #include "texte_cool.h"
+#include "globals.h"
 
 const int anim_interupteur_on[] = {84 , 85, 86, 84};
 const int anim_interupteur_off[] = {81 , 82, 83, 82};

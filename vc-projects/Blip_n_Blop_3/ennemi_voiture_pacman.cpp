@@ -1,6 +1,7 @@
 #include "ennemi_voiture_pacman.h"
 #include "game_state.h"
 #include "ennemi_pacman.h"
+#include "globals.h"
 
 
 EnnemiVoiturePacman::EnnemiVoiturePacman(): invoc_pacman(false)

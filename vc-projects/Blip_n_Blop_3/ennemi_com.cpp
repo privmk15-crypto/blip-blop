@@ -1,6 +1,7 @@
 
 #include "ennemi_com.h"
 #include "game_state.h"
+#include "globals.h"
 
 EnnemiCOM::EnnemiCOM()
 {

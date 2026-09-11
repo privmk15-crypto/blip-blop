@@ -16,6 +16,7 @@
 #include "ennemi_snorky_base_2.h"
 #include "game_state.h"
 #include "tir_snorky_base_2.h"
+#include "globals.h"
 
 const int anim_snorky_base_marche_droite[] = { 114, 115, 116, 117, 118, 117, 116, 115 };
 const int anim_snorky_base_marche_gauche[] = { 119, 120, 121, 122, 123, 122, 121, 120 };

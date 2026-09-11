@@ -4,6 +4,7 @@
 
 #include "tir_smurf_sauvage.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirSmurfSauvage::TirSmurfSauvage()
 {

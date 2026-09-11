@@ -2,6 +2,7 @@
 #include "ennemi_smurf_costaud.h"
 #include "game_state.h"
 #include "tir_hadoken.h"
+#include "globals.h"
 
 #define ETAT_TIRE_HADOKEN	1000
 #define ETAT_TIRE_DPUNCH	1001

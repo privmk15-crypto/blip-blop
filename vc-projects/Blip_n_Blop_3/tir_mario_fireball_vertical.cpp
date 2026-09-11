@@ -19,6 +19,7 @@
 
 #include "tir_mario_fireball_vertical.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirMarioFireballVertical::TirMarioFireballVertical(int vx, int xc): x_cible(xc), dx(vx)
 {

@@ -2,6 +2,7 @@
 #include "tir_epee_laser.h"
 #include "ennemi_bisou_jedi.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 TirEpeeLaser::TirEpeeLaser() : isdead(false), cible(NULL), retour(false), lanceur(NULL), accel(1)

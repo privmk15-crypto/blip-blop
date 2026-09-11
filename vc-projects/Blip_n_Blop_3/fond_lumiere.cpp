@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "fond_lumiere.h"
 #include "game_state.h"
+#include "globals.h"
 
 #define ETAT_CLIGNOTE	100
 

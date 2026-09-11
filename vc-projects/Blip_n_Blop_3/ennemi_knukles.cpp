@@ -1,5 +1,6 @@
 #include "ennemi_knukles.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiKnukles::EnnemiKnukles(): speed(1), etape_speed(0), charge_delay(100 + rand() % 150), wait_for_charge(0)

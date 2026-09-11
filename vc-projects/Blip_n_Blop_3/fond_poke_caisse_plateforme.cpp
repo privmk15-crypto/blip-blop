@@ -16,6 +16,7 @@
 
 #include "fond_poke_caisse_plateforme.h"
 #include "game_state.h"
+#include "globals.h"
 
 FondPokeCaissePlateforme::FondPokeCaissePlateforme(int niveau_y): y_cible(niveau_y)
 {

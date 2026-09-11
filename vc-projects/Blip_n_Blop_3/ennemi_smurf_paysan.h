@@ -24,6 +24,7 @@
 
 #include "enemy.h"
 #include "game_state.h"
+#include "globals.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe EnnemiSmurf
@@ -39,16 +40,9 @@ public:
 
 	EnnemiSmurfPaysan();
 
-	inline virtual void affiche()
-	{
-		Ennemi::affiche() ;
-		if (etat == ETAT_MEURE && tete_etape < 5) {
-			if (dir == SENS_GAUCHE)
-				draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[169 + tete_etape]) ;
-			else
-				draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[164 + tete_etape]) ;
-		}
-	}
+	// Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line to
+	// ennemi_smurf_paysan.cpp. Unchanged otherwise.
+	virtual void affiche();
 
 	virtual void update();
 	virtual void onAvance();

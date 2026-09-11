@@ -18,6 +18,7 @@
 #include "game_state.h"
 
 #include "couille.h"
+#include "globals.h"
 
 const int monolite_levitation[] = {0, 0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 0, 0, 0};
 const int monolite_animation[] = {50, 51, 51, 52, 52, 52, 53, 53, 53, 53, 53, 52, 52, 52, 51, 51, 50, 54, 54, 55, 55, 55, 56, 56, 56, 56, 56, 55, 55, 55, 54, 54};

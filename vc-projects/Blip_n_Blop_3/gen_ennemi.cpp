@@ -16,6 +16,7 @@
 
 #include "sprite.h"
 #include "game_state.h"
+#include "globals.h"
 #include "gen_ennemi.h"
 #include "event_ennemi.h"
 #include "couille.h"

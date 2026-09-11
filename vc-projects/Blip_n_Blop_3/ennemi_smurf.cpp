@@ -16,6 +16,7 @@
 
 #include "ennemi_smurf.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int anim_smurf_marche_droite[] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 const int anim_smurf_marche_gauche[] = { 5, 6, 7, 8, 9, 8, 7, 6 };

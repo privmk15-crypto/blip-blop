@@ -21,6 +21,7 @@
 #include "tir_gateau.h"
 #include "ben_debug.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirGateau::TirGateau()
 {

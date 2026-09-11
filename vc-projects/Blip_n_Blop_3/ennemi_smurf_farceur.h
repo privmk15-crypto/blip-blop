@@ -23,6 +23,7 @@
 
 #include "enemy.h"
 #include "game_state.h"
+#include "globals.h"
 
 //-----------------------------------------------------------------------------
 //		Constantes
@@ -50,17 +51,9 @@ public:
 
 	EnnemiSmurfFarceur();
 
-	inline virtual void affiche()
-	{
-		if (porte_bomb) {
-			if (dir == SENS_DROITE)
-				draw(x + 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
-			else
-				draw(x - 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
-		}
-
-		draw(x, y, pic) ;
-	};
+	// Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line to
+	// ennemi_smurf_farceur.cpp. Unchanged otherwise.
+	virtual void affiche();
 
 	virtual void update();
 	virtual void onAvance();

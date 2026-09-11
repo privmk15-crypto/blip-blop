@@ -5,6 +5,7 @@
 
 #include "tir_debouche_chiote.h"
 #include "game_state.h"
+#include "globals.h"
 //#include "bendebug.h"
 
 TirDebouchechiote::TirDebouchechiote(int n_pbk_ennemis, int vx, int vy)

@@ -16,6 +16,7 @@
 
 #include "ennemi_smurf_paysan.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int smurf_paysan_charge_droite[] = { 156, 157, 158, 159 };
 const int smurf_paysan_charge_gauche[] = { 160, 161, 162, 163 };
@@ -29,6 +30,19 @@ EnnemiSmurfPaysan::EnnemiSmurfPaysan()
 	etat = ETAT_AVANCE ;
 	tete_etape = 0 ;
 	tete_ss_etape = 0 ;
+}
+
+// Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line from
+// ennemi_smurf_paysan.h, unchanged.
+void EnnemiSmurfPaysan::affiche()
+{
+	Ennemi::affiche() ;
+	if (etat == ETAT_MEURE && tete_etape < 5) {
+		if (dir == SENS_GAUCHE)
+			draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[169 + tete_etape]) ;
+		else
+			draw(x_mort, y_mort, g_game_state.picture_banks().ennemis()[164 + tete_etape]) ;
+	}
 }
 
 void EnnemiSmurfPaysan::update()

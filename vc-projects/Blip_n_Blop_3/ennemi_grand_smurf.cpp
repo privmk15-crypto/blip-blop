@@ -1,6 +1,7 @@
 
 #include "ennemi_grand_smurf.h"
 #include "game_state.h"
+#include "globals.h"
 
 #define ATT_ATATA	0
 #define ATT_BOOM	1

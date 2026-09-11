@@ -21,6 +21,7 @@
 #include "tir_bb_vache.h"
 #include "game_state.h"
 #include "gore_giclure.h"
+#include "globals.h"
 
 void TirBBVache::update()
 {

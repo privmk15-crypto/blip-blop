@@ -22,6 +22,7 @@
 #include "ennemi_poid.h"
 #include "ennemi_tete___rayman.h"
 #include <math.h>
+#include "globals.h"
 
 
 

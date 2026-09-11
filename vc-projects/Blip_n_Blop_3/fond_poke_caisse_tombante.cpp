@@ -18,6 +18,7 @@
 #include "fond_poke_caisse.h"
 #include "fond_poke_caisse_plateforme.h"
 #include "fond_poke_caisse_plateforme_2.h"
+#include "globals.h"
 
 const int anim_lock[] = {88 , 89, 90, 91, 92, 93, 92, 91, 90, 89};
 

@@ -3,6 +3,7 @@
 #include "game_state.h"
 #include "gore_bisou_auto.h"
 #include "explosion.h"
+#include "globals.h"
 
 
 static const int GO_LEFT  = 0;

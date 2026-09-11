@@ -1,6 +1,7 @@
 
 #include "ennemi_bulbizarre.h"
 #include "game_state.h"
+#include "globals.h"
 
 EnnemiBulbizarre::EnnemiBulbizarre()
 {

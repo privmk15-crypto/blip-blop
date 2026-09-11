@@ -16,6 +16,7 @@
 
 #include "morceau_sonic_ring.h"
 #include "game_state.h"
+#include "globals.h"
 
 //implementation de la classe MorceauSonicRing
 

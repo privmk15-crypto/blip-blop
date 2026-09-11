@@ -1,6 +1,7 @@
 
 #include "ennemi_flameche.h"
 #include "game_state.h"
+#include "globals.h"
 
 EnnemiFlameche::EnnemiFlameche()
 {

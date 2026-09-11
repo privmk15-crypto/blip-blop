@@ -17,6 +17,7 @@
 #include "game_state.h"
 #include "ben_debug.h"
 #include "tir_tornade.h"
+#include "globals.h"
 
 
 

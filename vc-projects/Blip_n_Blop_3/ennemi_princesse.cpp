@@ -18,6 +18,7 @@
 #include "ennemi_princesseguard.h"
 #include "texte_cool.h"
 #include "bonus_vache.h"
+#include "globals.h"
 
 
 

@@ -19,6 +19,7 @@
 
 #include "tir_mario_fireball.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 TirMarioFireball::TirMarioFireball(int vx): speed_etape(0)

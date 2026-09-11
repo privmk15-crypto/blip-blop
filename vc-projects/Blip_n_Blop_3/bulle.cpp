@@ -1,6 +1,7 @@
 #include "bulle.h"
 
 #include "ben_maths.h"
+#include "globals.h"
 
 Bulle::Bulle() : phi(0) {}
 

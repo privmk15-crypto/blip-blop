@@ -16,6 +16,7 @@
 #include "sprite.h"
 #include "fond_poke_caisse.h"
 #include "game_state.h"
+#include "globals.h"
 
 FondPokeCaisse::FondPokeCaisse()
 {

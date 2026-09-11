@@ -3,6 +3,7 @@
 #include "game_state.h"
 #include "tir_mario_fireball.h"
 #include "tir_mario_fireball_vertical.h"
+#include "globals.h"
 
 const int anim_mario_marche_droite[] = { 0, 1, 2, 1};
 const int anim_mario_marche_gauche[] = { 3, 4, 5, 4};

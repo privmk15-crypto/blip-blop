@@ -16,6 +16,7 @@
 
 #include "morceau_rayman.h"
 #include "game_state.h"
+#include "globals.h"
 
 //implementation de la classe MorceauxRayman
 

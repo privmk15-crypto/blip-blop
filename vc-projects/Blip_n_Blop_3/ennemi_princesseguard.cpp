@@ -16,6 +16,7 @@
 #include "ennemi_princesseguard.h"
 #include "game_state.h"
 #include "ennemi_princesse.h"
+#include "globals.h"
 
 const int anim_guard_marche_gauche[] = { 135, 136, 137, 136};
 

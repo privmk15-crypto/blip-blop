@@ -3,6 +3,7 @@
 
 #include "sprite.h"
 #include "game_state.h"
+#include "globals.h"
 
 class GoreBisouAuto : public Sprite
 {

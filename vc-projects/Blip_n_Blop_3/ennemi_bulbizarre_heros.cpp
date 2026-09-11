@@ -16,6 +16,7 @@
 
 #include "ennemi_bulbizarre_heros.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiBulbizarreHeros::EnnemiBulbizarreHeros(): dorkeball(2)

@@ -16,6 +16,7 @@
 #include "ennemi_lemmings.h"
 #include "game_state.h"
 #include "bonus_vache.h"
+#include "globals.h"
 
 static int wait_no = 0;
 

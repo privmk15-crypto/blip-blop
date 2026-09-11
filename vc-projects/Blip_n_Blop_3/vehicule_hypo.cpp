@@ -1,5 +1,6 @@
 
 #include "vehicule_hypo.h"
+#include "globals.h"
 
 void VehiculeHypo::affiche()
 {

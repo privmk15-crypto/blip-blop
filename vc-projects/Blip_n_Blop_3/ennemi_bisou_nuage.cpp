@@ -2,6 +2,7 @@
 #include "ennemi_bisou_nuage.h"
 #include "game_state.h"
 #include "tir_nuage.h"
+#include "globals.h"
 
 EnnemiBisouNuage::EnnemiBisouNuage() : etape_shoot(0)
 {

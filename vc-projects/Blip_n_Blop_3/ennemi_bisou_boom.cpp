@@ -2,6 +2,7 @@
 #include "ennemi_bisou_boom.h"
 #include "game_state.h"
 #include "gore_bisou_boom.h"
+#include "globals.h"
 
 EnnemiBisouBoom::EnnemiBisouBoom()
 {

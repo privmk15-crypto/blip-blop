@@ -3,6 +3,7 @@
 #include "game_state.h"
 #include "gore_pieds_bisou_ciel.h"
 #include "tir_arc_ciel.h"
+#include "globals.h"
 
 
 EnnemiBisouCiel::EnnemiBisouCiel() : wait_for_pisser(0)

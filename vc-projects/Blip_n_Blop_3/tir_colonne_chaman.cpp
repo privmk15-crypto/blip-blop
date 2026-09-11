@@ -1,6 +1,7 @@
 
 #include "tir_colonne_chaman.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirColonneChaman::TirColonneChaman() : etat(0)
 {

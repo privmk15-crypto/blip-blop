@@ -16,6 +16,7 @@
 
 #include "ennemi_pikashu_heros.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiPikachuHeros::EnnemiPikachuHeros(): dorkeball(2)

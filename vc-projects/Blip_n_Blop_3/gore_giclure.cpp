@@ -16,6 +16,7 @@
 
 #include "gore_giclure.h"
 #include "game_state.h"
+#include "globals.h"
 
 //implementation de la classe GoreGiclure
 

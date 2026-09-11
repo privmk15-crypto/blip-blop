@@ -4,6 +4,7 @@
 #include "ennemi_luigi.h"
 #include "gore_giclure.h"
 #include "event_hold_fire.h"
+#include "globals.h"
 
 
 const int anim_mario_marche_droite[] = { 75, 76, 77, 76};

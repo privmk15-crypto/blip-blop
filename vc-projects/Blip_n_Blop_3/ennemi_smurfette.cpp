@@ -2,6 +2,7 @@
 #include "ennemi_smurfette.h"
 #include "game_state.h"
 #include "tir_bisou_mortel.h"
+#include "globals.h"
 
 EnnemiSmurfette::EnnemiSmurfette() : etape_shoot(0)
 {

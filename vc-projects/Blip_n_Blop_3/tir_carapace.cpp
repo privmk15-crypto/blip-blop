@@ -6,6 +6,7 @@
 #include "tir_carapace.h"
 #include "ben_debug.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirCarapace::TirCarapace()
 {

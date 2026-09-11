@@ -1,6 +1,7 @@
 
 #include "ennemi_toad.h"
 #include "game_state.h"
+#include "globals.h"
 
 const int anim_toad_marche_droite[] = { 0, 1, 2, 1};
 const int anim_toad_marche_gauche[] = { 4, 5, 6, 5};

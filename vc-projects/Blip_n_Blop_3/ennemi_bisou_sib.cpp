@@ -1,6 +1,7 @@
 
 #include "ennemi_bisou_sib.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 #define ETAT_ATTENDS_MAL	100

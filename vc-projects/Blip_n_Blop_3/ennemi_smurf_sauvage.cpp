@@ -27,10 +27,71 @@ const int tir_dy[] = { 4, 5, 6, 6, 5, 4 } ;
 #include "ennemi_smurf_sauvage.h"
 #include "game_state.h"
 #include "tir_smurf_sauvage.h"
+#include "globals.h"
 
 
 int	EnnemiSmurfSauvage::wait_shoot;
 int	EnnemiSmurfSauvage::etape_wait;
+
+// Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line from
+// ennemi_smurf_sauvage.h, unchanged.
+void EnnemiSmurfSauvage::affiche()
+{
+	draw(x, y - 50, g_game_state.picture_banks().ennemis()[117]) ;
+	draw(x, y - 100, g_game_state.picture_banks().ennemis()[117]) ;
+	draw(x, y - 150, g_game_state.picture_banks().ennemis()[117]) ;
+	draw(x, y - 200, g_game_state.picture_banks().ennemis()[117]) ;
+	draw(x, y - 250, g_game_state.picture_banks().ennemis()[117]) ;
+
+	Ennemi::affiche() ;
+
+	// Si on est pas mort, on affiche l'arme suivant la direction du tir
+	if (pv > 0) {
+		if (shooting) {
+			switch (shoot_direction) {
+				case DIAGONALE_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[137 + etape]) ;
+					break ;
+				case DIAGONALE_BAS_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[133 + etape]) ;
+					break ;
+				case BAS_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[129 + etape]) ;
+					break ;
+				case BAS_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[127 + etape]) ;
+					break ;
+				case DIAGONALE_BAS_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[131 + etape]) ;
+					break ;
+				case DIAGONALE_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[135 + etape]) ;
+					break ;
+			}
+		} else {
+			switch (shoot_direction) {
+				case DIAGONALE_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[352]) ;
+					break ;
+				case DIAGONALE_BAS_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[350]) ;
+					break ;
+				case BAS_GAUCHE :
+					draw(x + 8, y + 38, g_game_state.picture_banks().ennemis()[354]) ;
+					break ;
+				case BAS_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[353]) ;
+					break ;
+				case DIAGONALE_BAS_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[349]) ;
+					break ;
+				case DIAGONALE_DROITE :
+					draw(x - 5, y + 38, g_game_state.picture_banks().ennemis()[351]) ;
+					break ;
+			}
+		}
+	}
+}
 
 EnnemiSmurfSauvage::EnnemiSmurfSauvage() : etape_shoot(0), position(false)
 {

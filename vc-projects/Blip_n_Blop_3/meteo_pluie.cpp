@@ -1,5 +1,6 @@
 
 #include "meteo_pluie.h"
+#include "globals.h"
 
 void MeteoPluie::update()
 {

@@ -3,6 +3,7 @@
 #include "game_state.h"
 
 #include "couille.h"
+#include "globals.h"
 
 
 FondPokeAscenceur::FondPokeAscenceur()

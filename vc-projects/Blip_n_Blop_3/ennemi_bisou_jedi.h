@@ -4,6 +4,7 @@
 
 #include "enemy.h"
 #include "game_state.h"
+#include "globals.h"
 
 class EnnemiBisouJedi : public Ennemi
 {

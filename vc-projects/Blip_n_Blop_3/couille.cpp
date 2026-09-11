@@ -23,6 +23,7 @@
 #include "tir_bb_fusil.h"
 #include "tir_bb_laser.h"
 #include "tir_bb_vache.h"
+#include "globals.h"
 
 //-----------------------------------------------------------------------------
 //		Animes
@@ -228,17 +229,22 @@ void Couille::affiche()
 
 void Couille::afficheNormal()
 {
-	int yback = y;	// Sauvegarde la valeur de y
-	y -= anime_sautille[sauti];
+	// Etap 3 (Sprite/Renderer separation, step 2): used to temporarily
+	// mutate `y` (the gameplay position field) for the duration of this
+	// call, then restore it - the only place in the whole Sprite
+	// hierarchy where affiche() ever wrote gameplay state, even
+	// transiently (see the Sprite/Renderer audit, section B). Calling
+	// draw() directly with a local y_render instead of going through
+	// Sprite::affiche() (which reads `y` off `this`) achieves the exact
+	// same rendered result without ever touching `y`.
+	int y_render = y - anime_sautille[sauti];
 
-	Sprite::affiche();
+	draw(x, y_render, pic);
 
 	// Affiche les accessoires
 	//
-	afficheOeil(x, y);
-	afficheArme(x, y);
-
-	y = yback;
+	afficheOeil(x, y_render);
+	afficheArme(x, y_render);
 }
 
 

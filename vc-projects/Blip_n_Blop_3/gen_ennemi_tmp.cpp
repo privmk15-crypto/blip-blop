@@ -18,6 +18,7 @@
 #include "gen_ennemi_tmp.h"
 #include "event_ennemi.h"
 #include "game_state.h"
+#include "globals.h"
 
 #ifndef SENS_GAUCHE
 #define SENS_GAUCHE		0

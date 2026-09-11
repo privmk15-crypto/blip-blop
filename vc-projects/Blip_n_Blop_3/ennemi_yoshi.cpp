@@ -1,6 +1,7 @@
 #include "ennemi_yoshi.h"
 #include "game_state.h"
 #include "tir_carapace.h"
+#include "globals.h"
 
 const int anim_yoshi_marche_droite[] = { 28, 29, 30, 29};
 const int anim_yoshi_marche_gauche[] = { 31, 32, 33, 32};

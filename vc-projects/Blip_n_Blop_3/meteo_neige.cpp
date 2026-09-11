@@ -1,6 +1,7 @@
 
 #include "meteo_neige.h"
 #include "ben_maths.h"
+#include "globals.h"
 
 void MeteoNeige::update() {
     // Update angle

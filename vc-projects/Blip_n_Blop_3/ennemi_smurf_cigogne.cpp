@@ -2,6 +2,7 @@
 #include "ennemi_smurf_cigogne.h"
 #include "ben_maths.h"
 #include "game_state.h"
+#include "globals.h"
 
 EnnemiSmurfCigogne::EnnemiSmurfCigogne() {
     pic = g_game_state.picture_banks().ennemis()[355];

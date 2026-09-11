@@ -2,6 +2,7 @@
 #include "tir_coeur_bisou.h"
 #include "ben_maths.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirCoeurBisou::TirCoeurBisou() : ok(false) { phi = rand() % 360; }
 

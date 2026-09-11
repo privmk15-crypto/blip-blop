@@ -1,6 +1,7 @@
 #include "ennemi_yoshi_dca.h"
 #include "game_state.h"
 #include "tir_carapace.h"
+#include "globals.h"
 
 
 EnnemiYoshiDCA::EnnemiYoshiDCA(): attack_delay(50 + rand() % 150), wait_for_attack(0)

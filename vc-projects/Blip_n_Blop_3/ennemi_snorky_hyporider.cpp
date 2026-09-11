@@ -16,6 +16,7 @@
 #include "ennemi_snorky_hyporider.h"
 #include "game_state.h"
 #include "morceaux_tete_snorky.h"
+#include "globals.h"
 
 EnnemiSnorkyHyporider::EnnemiSnorkyHyporider(): wait_for_charge(0), charge_delay(50 + rand() % 200), nageoire(1), attack_etape(0)
 {

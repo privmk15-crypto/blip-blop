@@ -17,6 +17,7 @@
 #include "ennemi_smurf_gourmand.h"
 #include "game_state.h"
 #include "tir_gateau.h"
+#include "globals.h"
 
 #define	ETAT_HOLD		15
 

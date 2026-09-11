@@ -30,6 +30,12 @@ void FondAssembleur::update()
 	//colFromPic();
 }
 
+// Etap 3 (Sprite/Renderer separation) audit finding: bypasses
+// Picture/draw() and manipulates SDL::Surface/Rect/BltFast directly
+// (clipped blit). Deliberately left untouched - flagged in the audit
+// (section C: "niejasne / wymaga decyzji") as needing a real design
+// decision before any future Renderer extraction, not a mechanical
+// move like the rest of the Sprite/Renderer step-1 migration.
 void FondAssembleur::affiche()
 {
 	//Sprite::affiche();

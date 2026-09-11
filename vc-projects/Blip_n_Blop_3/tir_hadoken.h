@@ -22,6 +22,7 @@
 
 #include "tir.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 #define DELAY_ACCELERATION 20

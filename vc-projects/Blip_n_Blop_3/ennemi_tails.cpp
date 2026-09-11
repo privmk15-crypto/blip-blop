@@ -1,5 +1,6 @@
 #include "ennemi_tails.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiTails::EnnemiTails(): speed(1), etape_speed(0), fly_delay(100 + rand() % 350), wait_for_fly(0), fly(false)

@@ -2,6 +2,7 @@
 #include "ennemi_bisou_zombi.h"
 #include "game_state.h"
 #include "gore_pied_bisou_zombi.h"
+#include "globals.h"
 
 #define ETAT_CARBONISE_HAUT	102
 

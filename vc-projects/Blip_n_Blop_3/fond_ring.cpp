@@ -16,6 +16,7 @@
 #include "sprite.h"
 #include "fond_ring.h"
 #include "game_state.h"
+#include "globals.h"
 
 int FondRing::etape_synchro = 0;
 int FondRing::ss_etape_synchro = 0;

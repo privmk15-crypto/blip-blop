@@ -20,6 +20,7 @@
 #include <cmath>
 #include "tir_tornade.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 

@@ -1,6 +1,7 @@
 
 #include "tir_boule_chaman.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirBouleChaman::TirBouleChaman() : ok(false), boom(false)
 {

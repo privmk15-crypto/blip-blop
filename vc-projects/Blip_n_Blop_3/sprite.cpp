@@ -20,12 +20,38 @@
 
 #include "sprite.h"
 
+// Etap 3 (Sprite/Renderer separation, step 0): these two are the ones
+// sprite.h itself used to include (see the forward-declaration comment
+// there) - needed here for estSurMur()/affiche()/updateADetruire()
+// below, and for colFromPic()'s use of Picture further down.
+#include "globals.h"
+#include "picture.h"
+
 //-----------------------------------------------------------------------------
 //		Constructeur
 
 Sprite::Sprite() : pic(NULL), dy(0), dir(0), a_detruire(false), etape(0), ss_etape(0),
 	lat_grav(0), x(0), y(0), x1(-1000), y1(-1000), x2(-2000), y2(-2000), col_on(false), wait_bulle(0)
 {
+}
+
+//-----------------------------------------------------------------------------
+//		Moved out of sprite.h (Etap 3, step 0) - unchanged bodies
+
+bool Sprite::estSurMur() const   // (sanglant)
+{
+	return mur_sanglant(x, y);
+}
+
+void Sprite::affiche()
+{
+	draw(x, y, pic);
+}
+
+void Sprite::updateADetruire()
+{
+	if (x < offset - 250 || x > offset + 900 || y < -200 || y > 600)
+		a_detruire = true;
 }
 
 //-----------------------------------------------------------------------------

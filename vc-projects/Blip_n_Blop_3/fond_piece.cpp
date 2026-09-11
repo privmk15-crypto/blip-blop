@@ -16,6 +16,7 @@
 #include "sprite.h"
 #include "fond_piece.h"
 #include "game_state.h"
+#include "globals.h"
 
 int FondPiece::etape_synchro = 0;
 int FondPiece::ss_etape_synchro = 0;

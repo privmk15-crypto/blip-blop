@@ -21,6 +21,7 @@
 #include "tir_bb_laser.h"
 #include "ben_debug.h"
 #include "game_state.h"
+#include "globals.h"
 
 TirBBLaser::TirBBLaser() : base(0), hauteur(0), largeur(0)
 {
@@ -118,6 +119,16 @@ void TirBBLaser::update()
 }
 
 
+// Etap 3 (Sprite/Renderer separation) audit finding: the hardest of
+// the 5 flagged cases - bypasses Picture/draw() with direct
+// SDL::Surface/Rect/BltFast calls AND queries mur_opaque() (level
+// collision geometry) inside the render loop to determine how far to
+// draw the laser beam, i.e. this affiche() does real gameplay-adjacent
+// computation, not just conditional drawing. Read-only (no state
+// mutation found), but deliberately left untouched - flagged in the
+// audit (section C) as needing a real design decision (e.g. moving
+// the raycast into update(), storing a beam-length field, and letting
+// affiche() only draw it) before any future Renderer extraction.
 void TirBBLaser::affiche()
 {
 	SDL::Surface *	surf = g_game_state.picture_banks().bb()[base + etape]->Surf();

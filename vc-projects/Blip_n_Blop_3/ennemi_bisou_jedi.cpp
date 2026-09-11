@@ -2,6 +2,7 @@
 #include "ennemi_bisou_jedi.h"
 #include "game_state.h"
 #include "tir_epee_laser.h"
+#include "globals.h"
 
 EnnemiBisouJedi::EnnemiBisouJedi() : etape_shoot(0), a_epee(true)
 {

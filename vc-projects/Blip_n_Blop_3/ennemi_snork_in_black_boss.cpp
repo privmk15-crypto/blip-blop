@@ -16,6 +16,7 @@
 #include "game_state.h"
 #include "tir_epine.h"
 #include "ben_debug.h"
+#include "globals.h"
 
 const int anim_snork_in_black_boss_saute_droite[] = { 414, 415, 416, 415};
 const int anim_snork_in_black_boss_saute_gauche[] = { 417, 418, 419, 418};

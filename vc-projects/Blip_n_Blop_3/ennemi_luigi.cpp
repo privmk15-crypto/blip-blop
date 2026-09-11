@@ -6,6 +6,7 @@
 #include "ennemi_sonic.h"
 #include "ennemi_voiture_pacman.h"
 #include "event_hold_fire.h"
+#include "globals.h"
 
 
 const int anim_luigi_marche_droite[] = { 0, 1, 2, 1};

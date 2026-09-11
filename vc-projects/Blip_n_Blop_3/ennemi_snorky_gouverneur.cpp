@@ -16,6 +16,7 @@
 #include "ennemi_snorky_gouverneur.h"
 #include "game_state.h"
 #include "tir_snorky_gouverneur.h"
+#include "globals.h"
 
 
 const int anim_gouverneur_marche_droite[] = { 183, 184, 185, 186, 185, 184};

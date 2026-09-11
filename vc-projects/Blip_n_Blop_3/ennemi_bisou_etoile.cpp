@@ -3,6 +3,7 @@
 #include "game_state.h"
 #include "gore_pieds_bisou_etoile.h"
 #include "tir_etoile.h"
+#include "globals.h"
 
 
 EnnemiBisouEtoile::EnnemiBisouEtoile() : etape_shoot(0)

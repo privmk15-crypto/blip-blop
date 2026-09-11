@@ -1,6 +1,7 @@
 
 #include "ennemi_com_volant.h"
 #include "game_state.h"
+#include "globals.h"
 
 EnnemiCOMVolant::EnnemiCOMVolant(): speed(0), attack(true)
 {

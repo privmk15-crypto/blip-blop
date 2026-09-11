@@ -15,6 +15,7 @@
 
 #include "morceau_tete_rayman.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 MorceauTeteRayman::MorceauTeteRayman(int vx, int vy): dx(vx)

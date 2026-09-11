@@ -20,6 +20,7 @@
 #include "couille.h"
 #include "sprite.h"
 #include "game_state.h"
+#include "globals.h"
 
 #define DIST_BITONIO 25
 
@@ -53,26 +54,10 @@ class Bonus : public Sprite {
         y += 15;
     };
 
-    virtual void affiche() {
-        int base;
-
-        y -= 15;
-        Sprite::affiche();
-
-        if (local_phase)
-            base = 0;
-        else
-            base = 4;
-
-        int d = sini(8, phi);
-
-        draw(x - DIST_BITONIO - d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 3]);
-        draw(x + DIST_BITONIO + d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 2]);
-        draw(x + DIST_BITONIO + d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base]);
-        draw(x - DIST_BITONIO - d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base + 1]);
-
-        y += 15;
-    };
+    // Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line to
+    // bonus.cpp - was the last of 4 affiche() bodies still inline in a
+    // header across the whole Sprite hierarchy. Unchanged otherwise.
+    virtual void affiche();
 
     virtual void colFromPic() {
         Sprite::colFromPic();

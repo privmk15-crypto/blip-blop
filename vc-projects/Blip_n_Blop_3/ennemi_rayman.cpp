@@ -7,6 +7,7 @@
 #include "ennemi_com_heros.h"
 #include "ennemi_flameche_heros.h"
 #include "morceau_tete_rayman.h"
+#include "globals.h"
 
 
 EnnemiRayman::EnnemiRayman(): dorkemon(4), attack_delay(100 + rand() % 250), wait_for_attack(0), tir_poing(NULL), poing1(1), poing2(1), pieds(1)

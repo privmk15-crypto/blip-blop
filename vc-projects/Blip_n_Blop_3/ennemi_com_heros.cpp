@@ -17,6 +17,7 @@
 
 #include "ennemi_com_heros.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiComHeros::EnnemiComHeros(): dorkeball(2)

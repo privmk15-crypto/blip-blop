@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "game_state.h"
 #include "sprite.h"
+#include "globals.h"
 
 #ifndef _FondEau_
 #define _FondEau_

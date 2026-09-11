@@ -16,6 +16,7 @@
 
 #include "ennemi_flameche_heros.h"
 #include "game_state.h"
+#include "globals.h"
 
 
 EnnemiFlamecheHeros::EnnemiFlamecheHeros(): dorkeball(2)

@@ -177,17 +177,22 @@ void Picture::BlitTo(SDL::Surface * s, int x, int y) const
 	int x2 = x + xsize;
 	int y2 = y + ysize;
 
+	// Etap 1 (Full HD prep): bornes de clipping prises depuis la
+	// surface cible réelle, au lieu des constantes XPIC_MAX/YPIC_MAX
+	// (qui supposaient une Primary Surface figée à 640x480).
+	int target_w = s->Get()->w;
+	int target_h = s->Get()->h;
 
 	// S'il n'y a rien à afficher, on se casse tout de suite!
-	if (x > XPIC_MAX || x2 < 0 || y > YPIC_MAX || y2 < 0)
+	if (x > target_w || x2 < 0 || y > target_h || y2 < 0)
 		return;
 
 	Rect	r;
 
 	r.left	= (x < 0) ? -x : 0;
 	r.top	= (y < 0) ? -y : 0;
-	r.right	= (x2 > XPIC_MAX) ? XPIC_MAX - x : xsize;
-	r.bottom = (y2 > YPIC_MAX) ? YPIC_MAX - y : ysize;
+	r.right	= (x2 > target_w) ? target_w - x : xsize;
+	r.bottom = (y2 > target_h) ? target_h - y : ysize;
 
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;
@@ -220,17 +225,22 @@ void Picture::PasteTo(SDL::Surface * s, int x, int y) const
 	int x2 = x + xsize;
 	int y2 = y + ysize;
 
+	// Etap 1 (Full HD prep): bornes de clipping prises depuis la
+	// surface cible réelle, au lieu des constantes XPIC_MAX/YPIC_MAX
+	// (qui supposaient une Primary Surface figée à 640x480).
+	int target_w = s->Get()->w;
+	int target_h = s->Get()->h;
 
 	// S'il n'y a rien à afficher, on se casse tout de suite!
-	if (x > XPIC_MAX || x2 < 0 || y > YPIC_MAX || y2 < 0)
+	if (x > target_w || x2 < 0 || y > target_h || y2 < 0)
 		return;
 
 	Rect	r;
 
 	r.left	= (x < 0) ? -x : 0;
 	r.top	= (y < 0) ? -y : 0;
-	r.right	= (x2 > XPIC_MAX) ? XPIC_MAX - x : xsize;
-	r.bottom = (y2 > YPIC_MAX) ? YPIC_MAX - y : ysize;
+	r.right	= (x2 > target_w) ? target_w - x : xsize;
+	r.bottom = (y2 > target_h) ? target_h - y : ysize;
 
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;

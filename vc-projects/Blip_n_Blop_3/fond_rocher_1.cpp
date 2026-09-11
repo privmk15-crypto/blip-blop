@@ -15,6 +15,7 @@
 
 
 #include "fond_rocher_1.h"
+#include "game_state.h"
 
 #include "couille.h"
 
@@ -78,7 +79,7 @@ void FondRocher1::update()
 	}
 
 	for (int i = x - 45; i < x + pic->xSize() - 45; i++)
-		y_plat[4][i] = y - 30;
+		g_game_state.level().y_plat()[4][i] = y - 30;
 
 	colFromPic();
 

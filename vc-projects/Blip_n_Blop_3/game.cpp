@@ -700,10 +700,9 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     //
     // Plateformes
     //
-    y_plat = new int*[NB_MAX_PLAT];
+    int** y_plat = g_game_state.level().AllocYPlat(g_game_state.level().size());
 
     for (int i = 0; i < NB_MAX_PLAT; i++) {
-        y_plat[i] = new int[g_game_state.level().size()];
         fic.read(reinterpret_cast<char*>(y_plat[i]),
                  (g_game_state.level().size()) * sizeof(int));
     }
@@ -712,10 +711,9 @@ bool Game::chargeNiveau(const char* nom_niveau) {
     // Murs opaques
     //
     int level_size_8 = g_game_state.level().size() / 8;
-    murs_opaques = new bool*[60];
+    bool** murs_opaques = g_game_state.level().AllocMursOpaques(level_size_8);
 
     for (int i = 0; i < 60; i++) {
-        murs_opaques[i] = new bool[level_size_8];
         fic.read(reinterpret_cast<char*>(murs_opaques[i]),
                  (level_size_8) * sizeof(bool));
     }
@@ -952,21 +950,9 @@ bool Game::chargeNiveau(const char* nom_niveau) {
 //-----------------------------------------------------------------------------
 
 void Game::releaseNiveau() {
+    // Also frees y_plat/murs_opaques (in addition to num_decor/
+    // murs_sanglants) - see Level::Release().
     g_game_state.level().Release();
-
-    if (y_plat != NULL) {
-        for (int i = 0; i < NB_MAX_PLAT; i++) delete[] y_plat[i];
-
-        delete[] y_plat;
-        y_plat = NULL;
-    }
-
-    if (murs_opaques != NULL) {
-        for (int i = 0; i < 60; i++) delete[] murs_opaques[i];
-
-        delete[] murs_opaques;
-        murs_opaques = NULL;
-    }
 
     list_event_endormis.clear();
     list_event.clear();
@@ -1599,7 +1585,7 @@ void Game::updateTeteTurc() {
 
     if (list_joueurs.empty()) {
         dummyPlayer.x = offset + 320;
-        dummyPlayer.y = y_plat[0][offset + 320];
+        dummyPlayer.y = g_game_state.level().y_plat()[0][offset + 320];
         tete_turc = &dummyPlayer;
         return;
     }

@@ -14,6 +14,7 @@
  ******************************************************************/
 
 #include "fond_poke_caisse_plateforme_2.h"
+#include "game_state.h"
 #include "ben_maths.h"
 
 FondPokeCaissePlateforme2::FondPokeCaissePlateforme2() { pic = pbk_niveau[87]; }
@@ -66,22 +67,22 @@ void FondPokeCaissePlateforme2::update() {
         /*int i;
         for (i = 1920; i < x - 90 ; i++)
         {
-                y_plat[3][i] = 0;
+                g_game_state.level().y_plat()[3][i] = 0;
         }*/
 
         if (y + 28 != 0) {
             for (int i = x - 90; i < x + 140; i++) {
-                y_plat[3][i] = y + 28;
+                g_game_state.level().y_plat()[3][i] = y + 28;
             }
         } else {
             for (int i = x - 90; i < x + 140; i++) {
-                y_plat[3][i] = y + 29;
+                g_game_state.level().y_plat()[3][i] = y + 29;
             }
         }
 
         /*for (i = x + 140; i < 2560 ; i++)
         {
-                y_plat[3][i] = 0;
+                g_game_state.level().y_plat()[3][i] = 0;
         }*/
     }
 };

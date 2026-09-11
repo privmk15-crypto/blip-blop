@@ -15,6 +15,7 @@
 
 
 #include "ennemi_pikashu_heros.h"
+#include "game_state.h"
 
 
 EnnemiPikachuHeros::EnnemiPikachuHeros(): dorkeball(2)
@@ -126,7 +127,7 @@ void EnnemiPikachuHeros::onMeure()
 	if (etape >= 10) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x])
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x])
 			grave(x, y, pic);
 
 		a_detruire = true;

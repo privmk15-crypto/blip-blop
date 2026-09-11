@@ -15,6 +15,7 @@
 
 
 #include "ennemi_bulbizarre_heros.h"
+#include "game_state.h"
 
 
 EnnemiBulbizarreHeros::EnnemiBulbizarreHeros(): dorkeball(2)
@@ -124,7 +125,7 @@ void EnnemiBulbizarreHeros::onMeure()
 	if (etape >= 8) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x])
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x])
 			grave(x, y, pic);
 
 		game_flag[1] --;

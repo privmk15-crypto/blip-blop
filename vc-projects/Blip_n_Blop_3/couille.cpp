@@ -554,10 +554,10 @@ void Couille::update()
 		x = offset + 320;
 		int i = 0;
 
-		while (i < NB_MAX_PLAT && y_plat[i][x] == 0xFFFF)
+		while (i < NB_MAX_PLAT && g_game_state.level().y_plat()[i][x] == 0xFFFF)
 			i++;
 
-		y_to_go = y_plat[i][x];
+		y_to_go = g_game_state.level().y_plat()[i][x];
 
 		y = -50;
 		col_on = true;
@@ -643,8 +643,8 @@ void Couille::update()
 		int nplat = plat2(x, y);
 
 		if (nplat >= 6 && x > 10 && x > offset + 30 && x < offset + 610) {
-			int ytmp1 = y_plat[nplat][x + 10] - y;
-			int ytmp2 = y_plat[nplat][x - 10] - y;
+			int ytmp1 = g_game_state.level().y_plat()[nplat][x + 10] - y;
+			int ytmp2 = g_game_state.level().y_plat()[nplat][x - 10] - y;
 
 			if (ytmp1 < 10 && ytmp1 > -10)
 				latence_glisse += ytmp1;

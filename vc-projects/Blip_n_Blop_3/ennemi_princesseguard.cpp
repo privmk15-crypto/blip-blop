@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_princesseguard.h"
+#include "game_state.h"
 #include "ennemi_princesse.h"
 
 const int anim_guard_marche_gauche[] = { 135, 136, 137, 136};
@@ -131,7 +132,7 @@ void EnnemiPrincesseguard::onMeure()
 	if (etape >= 10) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x]) {
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x]) {
 			grave(x, y, pic);
 			a_detruire = true;
 			game_flag[3] -= 1;

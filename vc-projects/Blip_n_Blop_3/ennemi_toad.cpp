@@ -1,5 +1,6 @@
 
 #include "ennemi_toad.h"
+#include "game_state.h"
 
 const int anim_toad_marche_droite[] = { 0, 1, 2, 1};
 const int anim_toad_marche_gauche[] = { 4, 5, 6, 5};
@@ -141,7 +142,7 @@ void EnnemiToad::onMeure()
 	if (etape >= 10) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x]) {
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x]) {
 			grave(x, y, pic);
 			a_detruire = true;
 		}

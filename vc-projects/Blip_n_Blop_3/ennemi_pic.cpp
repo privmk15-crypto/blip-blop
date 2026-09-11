@@ -1,4 +1,5 @@
 #include "ennemi_pic.h"
+#include "game_state.h"
 
 
 EnnemiPic::EnnemiPic(): y_origine(0)
@@ -57,7 +58,7 @@ void EnnemiPic::update()
 		} else {
 			//les pics sont rentrés donc on peut les detruires....
 			for (int i = 28; i <= 55; i++)
-				murs_opaques[i][108] = false;
+				g_game_state.level().murs_opaques()[i][108] = false;
 
 			a_detruire = true;
 		}

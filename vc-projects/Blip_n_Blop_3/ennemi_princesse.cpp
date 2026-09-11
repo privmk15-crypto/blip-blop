@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "ennemi_princesse.h"
+#include "game_state.h"
 #include "ennemi_princesseguard.h"
 #include "texte_cool.h"
 #include "bonus_vache.h"
@@ -179,7 +180,7 @@ void EnnemiPrincesse::onMeure()
 	if (etape >= 5) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x]) {
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x]) {
 			grave(x, y, pic);
 			TexteCool * txt = new TexteCool();
 			txt->ntxt = 519;

@@ -1,4 +1,5 @@
 #include "ennemi_yoshi.h"
+#include "game_state.h"
 #include "tir_carapace.h"
 
 const int anim_yoshi_marche_droite[] = { 28, 29, 30, 29};
@@ -167,7 +168,7 @@ void EnnemiYoshi::onMeure()
 	if (etape >= 9) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x])
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x])
 			grave(x, y, pic);
 
 		a_detruire = true;

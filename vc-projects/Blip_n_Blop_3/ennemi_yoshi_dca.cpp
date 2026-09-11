@@ -1,4 +1,5 @@
 #include "ennemi_yoshi_dca.h"
+#include "game_state.h"
 #include "tir_carapace.h"
 
 
@@ -82,7 +83,7 @@ void EnnemiYoshiDCA::onMeure()
 	if (etape >= 9) {
 		int		yy = plat(x, y);
 
-		if (yy != 0 && yy != y_plat[4][x])
+		if (yy != 0 && yy != g_game_state.level().y_plat()[4][x])
 			grave(x, y, pic);
 
 		a_detruire = true;

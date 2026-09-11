@@ -15,6 +15,7 @@
 
 
 #include "globals.h"
+#include "game_state.h"
 #include "fond_snork_sas.h"
 #include "enemy.h"
 
@@ -50,18 +51,18 @@ void FondSnorkSas1::update()
 
 
 		if (etape % 8 == 0) {
-			murs_opaques [(y + etape) / 8][(x + 8) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 16) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 24) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 32) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 40) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 48) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 56) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 64) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 72) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 80) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 88) / 8] = true;
-			murs_opaques [(y + etape) / 8][(x + 96) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 8) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 16) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 24) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 32) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 40) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 48) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 56) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 64) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 72) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 80) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 88) / 8] = true;
+			g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 96) / 8] = true;
 
 		}
 	}
@@ -115,12 +116,12 @@ void FondSnorkSas2::update()
 
 
 	if (etape % 8 == 0) {
-		murs_opaques[(y + etape) / 8][(x + 8) / 8] = false;
-		murs_opaques[(y + etape) / 8][(x + 16) / 8] = false;
-		murs_opaques[(y + etape) / 8][(x + 24) / 8] = false;
-		murs_opaques[(y + etape) / 8][(x + 32) / 8] = false;
-		murs_opaques[(y + etape) / 8][(x + 40) / 8] = false;
-		murs_opaques[(y + etape) / 8][(x + 48) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 8) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 16) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 24) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 32) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 40) / 8] = false;
+		g_game_state.level().murs_opaques()[(y + etape) / 8][(x + 48) / 8] = false;
 	}
 }
 

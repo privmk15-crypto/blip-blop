@@ -1,4 +1,5 @@
 #include "ennemi_pacman.h"
+#include "game_state.h"
 
 
 EnnemiPacman::EnnemiPacman(): ss_etape_tir(0), etape_tir(0), tir(false), dx(-2)
@@ -58,8 +59,8 @@ void EnnemiPacman::update()
 	} else if (game_flag[2] == 7) {
 		pic = pbk_ennemis[223];
 		tombe2();
-		if (y + 2 * dy > y_plat[0][x]) {
-			y = y_plat[0][x];
+		if (y + 2 * dy > g_game_state.level().y_plat()[0][x]) {
+			y = g_game_state.level().y_plat()[0][x];
 			game_flag[2] = 8;
 			etape = 0;
 			ss_etape = 0;

@@ -86,12 +86,8 @@ bool		no_scroll2;
 //		Données sur le niveau
 //-----------------------------------------------------------------------------
 
-// scr_level_size/level_size/num_decor/murs_sanglants moved to level.cpp
-// (Level) - Stage 2 ownership migration. y_plat/murs_opaques stay here.
-
-int	**		y_plat		= NULL;	// Plateformes (ordonnées)
-
-bool **		murs_opaques;		// Murs opaques (=true)
+// scr_level_size/level_size/num_decor/murs_sanglants/y_plat/murs_opaques
+// all moved to level.cpp (Level) - Stage 2 ownership migration.
 
 //-----------------------------------------------------------------------------
 //		Les listes
@@ -215,7 +211,7 @@ int	plat(int x, int y)
 	int	tmp;
 
 	for (int i = 0; i < NB_MAX_PLAT; i++) {
-		tmp = y_plat[i][x];
+		tmp = g_game_state.level().y_plat()[i][x];
 
 		if (y >= tmp && y <= tmp + 10)
 			return tmp;
@@ -235,7 +231,7 @@ int	plat2(int x, int y)
 	int	tmp;
 
 	for (int i = 0; i < NB_MAX_PLAT; i++) {
-		tmp = y_plat[i][x];
+		tmp = g_game_state.level().y_plat()[i][x];
 
 		if (y >= tmp && y <= tmp + 10)
 			return i;
@@ -249,7 +245,7 @@ bool mur_opaque(int x, int y)
 	if (x < 0 || x >= g_game_state.level().size() || y < 0 || y >= 480)
 		return false;
 
-	return murs_opaques[y / 8][x / 8];
+	return g_game_state.level().murs_opaques()[y / 8][x / 8];
 }
 
 

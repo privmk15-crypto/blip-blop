@@ -1,5 +1,6 @@
 
 #include "fond_poke_ascenceur.h"
+#include "game_state.h"
 
 #include "couille.h"
 
@@ -36,7 +37,7 @@ void FondPokeAscenceur::update()
 		y += dy;
 
 		for (int i = x; i < x + pic->xSize(); i++)
-			y_plat[4][i] = y + 20;
+			g_game_state.level().y_plat()[4][i] = y + 20;
 
 		colFromPic();
 

@@ -18,6 +18,7 @@
 //-----------------------------------------------------------------------------
 
 #include "tir_mario_fireball_vertical.h"
+#include "game_state.h"
 
 TirMarioFireballVertical::TirMarioFireballVertical(int vx, int xc): x_cible(xc), dx(vx)
 {
@@ -70,7 +71,7 @@ void TirMarioFireballVertical::update()
 
 	colFromPic();
 
-	if ((y_plat[0][0] < y + dy) && (y_plat[0][0] > y)) {
+	if ((g_game_state.level().y_plat()[0][0] < y + dy) && (g_game_state.level().y_plat()[0][0] > y)) {
 		tremblement(7);
 	}
 }

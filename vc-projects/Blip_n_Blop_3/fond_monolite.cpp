@@ -15,6 +15,7 @@
 
 
 #include "fond_monolite.h"
+#include "game_state.h"
 
 #include "couille.h"
 #include "enemy.h"
@@ -91,7 +92,7 @@ void FondMonolite::update()
 	}
 
 	for (int i = x - 118; i < x + pic->xSize() - 138; i++)
-		y_plat[4][i] = y - 20;
+		g_game_state.level().y_plat()[4][i] = y - 20;
 
 	colFromPic();
 

@@ -1,4 +1,5 @@
 #include "ennemi_knukles.h"
+#include "game_state.h"
 
 
 EnnemiKnukles::EnnemiKnukles(): speed(1), etape_speed(0), charge_delay(100 + rand() % 150), wait_for_charge(0)
@@ -40,9 +41,9 @@ void EnnemiKnukles::update()
 
 	}
 	/*
-		if (y > y_plat[0][x])
+		if (y > g_game_state.level().y_plat()[0][x])
 		{
-			y = y_plat[0][x];
+			y = g_game_state.level().y_plat()[0][x];
 		}
 	*/
 	updateADetruire();
@@ -167,7 +168,7 @@ void EnnemiKnukles::onMeure()
 		if (etape >= 10) {
 			int		yy = plat(x, y);
 
-			if (yy != 0 /*&& yy != y_plat[4][x]*/) {
+			if (yy != 0 /*&& yy != g_game_state.level().y_plat()[4][x]*/) {
 				grave(x, y, pic);
 				a_detruire = true;
 			} else {

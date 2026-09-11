@@ -1,4 +1,5 @@
 #include "ennemi_tails.h"
+#include "game_state.h"
 
 
 EnnemiTails::EnnemiTails(): speed(1), etape_speed(0), fly_delay(100 + rand() % 350), wait_for_fly(0), fly(false)
@@ -36,9 +37,9 @@ void EnnemiTails::update()
 			break;
 	}
 	/*
-		if (y > y_plat[0][x])
+		if (y > g_game_state.level().y_plat()[0][x])
 		{
-			y = y_plat[0][x];
+			y = g_game_state.level().y_plat()[0][x];
 		}
 	*/
 	updateADetruire();
@@ -153,7 +154,7 @@ void EnnemiTails::onMeure()
 		if (etape >= 11) {
 			int		yy = plat(x, y);
 
-			if (yy != 0 && yy != y_plat[4][x]) {
+			if (yy != 0 && yy != g_game_state.level().y_plat()[4][x]) {
 				grave(x, y, pic);
 				a_detruire = true;
 			} else {
@@ -225,7 +226,7 @@ void EnnemiTails::onVolle()
 	}
 
 	if (attack) {
-		if ((y_cible <= y) || (y >= y_plat[0][x])) {
+		if ((y_cible <= y) || (y >= g_game_state.level().y_plat()[0][x])) {
 			speed = TAILS_FLY_SPEED;
 		} else if ((y_cible - 80 > y) && (y > y_cible - 110)) {
 			y += 4;

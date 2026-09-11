@@ -106,13 +106,9 @@ extern bool			no_scroll2;			// blip ou blop meure
 //		Données sur le niveau
 //-----------------------------------------------------------------------------
 
-// scr_level_size/level_size/num_decor/murs_sanglants moved into Level
-// (level.h) as part of the Stage 2 ownership migration. y_plat/murs_opaques
-// stay here deliberately - see level.h for why.
-
-extern int	**		y_plat;				// Plateformes (ordonnées)
-
-extern bool **		murs_opaques;		// Murs opaques (=true)
+// scr_level_size/level_size/num_decor/murs_sanglants/y_plat/murs_opaques
+// all moved into Level (level.h) as part of the Stage 2 ownership
+// migration.
 
 
 //-----------------------------------------------------------------------------

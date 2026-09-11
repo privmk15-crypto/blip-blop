@@ -15,6 +15,7 @@
 
 
 #include "fond_poke_caisse_plateforme.h"
+#include "game_state.h"
 
 FondPokeCaissePlateforme::FondPokeCaissePlateforme(int niveau_y): y_cible(niveau_y)
 {
@@ -47,11 +48,11 @@ void FondPokeCaissePlateforme::update()
 
 	if (y + 28 != 0) {
 		for (i = x - 90 ; i < x + 140 ; i++) {
-			y_plat[4][i] = y + 28;
+			g_game_state.level().y_plat()[4][i] = y + 28;
 		}
 	} else {
 		for (i = x - 90 ; i < x + 140 ; i++) {
-			y_plat[4][i] = y + 29;
+			g_game_state.level().y_plat()[4][i] = y + 29;
 		}
 	}
 

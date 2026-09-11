@@ -4,6 +4,7 @@
 #include "tir_sonic_eclair.h"
 #include "morceau_sonic_ring.h"
 #include "ben_debug.h"
+#include "game_state.h"
 #include "globals.h"
 
 const int sonic_anim_boule_droite[] = {	46,	47,	50,	48,	49,	50};
@@ -576,9 +577,9 @@ void EnnemiSonic::onAttackvertical()
 			//y+=dy;
 			// Et si on arrêtait de tomber ?
 			//
-			if (y + dy > y_plat[0][y]) {
+			if (y + dy > g_game_state.level().y_plat()[0][y]) {
 				tombe();
-				y = y_plat[0][y];
+				y = g_game_state.level().y_plat()[0][y];
 				//if ((dy > 0) && (yp=plat( x, y+dy)) != 0)
 				//{
 				dy = 0;

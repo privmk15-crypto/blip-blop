@@ -15,6 +15,7 @@
 
 #include "sprite.h"
 #include "fond_poke_caisse.h"
+#include "game_state.h"
 
 FondPokeCaisse::FondPokeCaisse()
 {
@@ -37,7 +38,7 @@ void FondPokeCaisse::update()
 		int i;
 
 		for (i = x - 90 ; i < x + 140 ; i++) {
-			y_plat[4][i] = y - 125;
+			g_game_state.level().y_plat()[4][i] = y - 125;
 		}
 
 		colFromPic();

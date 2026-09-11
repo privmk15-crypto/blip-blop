@@ -33,7 +33,13 @@
 // (sprite.h -> picture.h -> dd_gfx.h -> graphics.h -> SDL2/SDL.h, and
 // sprite.h -> globals.h -> control_p1.h -> input.h -> SDL2/SDL.h).
 // Behavior is unchanged; this is a pure code-motion, not a redesign.
+//
+// RenderSystem migration, step 2: affiche() now takes a RenderQueue&.
+// Forward-declared here for the same reason as Picture above - Sprite
+// only ever passes this reference through, never needs the complete
+// RenderQueue type itself.
 class Picture;
+class RenderQueue;
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe Sprite
@@ -104,8 +110,14 @@ public:
 	};
 
 	// Moved out-of-line to sprite.cpp - see the forward-declaration
-	// comment above.
-	virtual void affiche();
+	// comment above. RenderSystem migration step 2: pushes a
+	// RenderCommand into rq instead of calling draw()/SDL directly -
+	// every override across the hierarchy gains this same parameter
+	// for polymorphic dispatch to keep working (see render_system.h's
+	// design note); most bodies aren't migrated to use rq yet (still
+	// call the old free draw() function internally), only their
+	// signature changed so they keep overriding this method.
+	virtual void affiche(RenderQueue& rq);
 
 	// Moved out-of-line to sprite.cpp - see the forward-declaration
 	// comment above.

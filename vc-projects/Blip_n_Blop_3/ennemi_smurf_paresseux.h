@@ -22,6 +22,7 @@
 
 #include "ennemi_smurf.h"
 #include "game_state.h"
+#include "render_queue.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe
@@ -36,9 +37,9 @@ public:
 		dy_saut = -4 ;
 	}
 
-	inline virtual void affiche()
+	inline virtual void affiche(RenderQueue& rq)
 	{
-		EnnemiSmurf::affiche() ;
+		EnnemiSmurf::affiche(rq) ;
 		/*
 				if(etat != ETAT_MEURE && etat != ETAT_CARBONISE)
 				{

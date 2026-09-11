@@ -63,7 +63,7 @@ public:
 	virtual void onTombe();
 	virtual void onMeure();
 	virtual void onTire();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 
 
 	virtual void estTouche(Tir * tir);

@@ -37,9 +37,9 @@ void TirSoniceclair::update()
 
 }
 
-void TirSoniceclair::affiche()
+void TirSoniceclair::affiche(RenderQueue& rq)
 {
 	if (etape == 0 || etape > 30) {
-		Sprite::affiche();
+		Sprite::affiche(rq);
 	}
 }

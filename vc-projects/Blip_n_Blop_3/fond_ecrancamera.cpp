@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "globals.h"
+#include "render_queue.h"
 #include "fond_ecrancamera.h"
 #include "game_state.h"
 
@@ -28,8 +29,8 @@ void FondEcrancamera::update()
 	pic = g_game_state.picture_banks().niveau()[50 + etape];
 }
 
-void FondEcrancamera::affiche()
+void FondEcrancamera::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
-	draw(x, y + ss_etape, g_game_state.picture_banks().niveau()[49]);
+	Sprite::affiche(rq);
+	rq.Push(x, y + ss_etape, g_game_state.picture_banks().niveau()[49]);
 }

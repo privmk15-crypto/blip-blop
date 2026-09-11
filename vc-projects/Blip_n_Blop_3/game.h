@@ -35,12 +35,15 @@
 #include "event_system.h"
 #include "level_loader.h"
 #include "player_manager.h"
+#include "render_system.h"
 #include "update_regulator.h"
 #include "go_arrow.h"
 #include "hud.h"
 
 #include "meteo_neige.h"
 #include "meteo_pluie.h"
+
+class RenderQueue;
 
 #define	NB_GOUTTES	500
 #define NB_FLOCONS	500
@@ -73,6 +76,7 @@ protected:
         EventSystem event_system_;
         LevelLoader level_loader_;
         PlayerManager player_manager_;
+        RenderSystem render_system_;
 	PictureBank	pbk_briefing;
 	bool	briefing;
 
@@ -203,7 +207,7 @@ public:
         void RemoveDestroyed(T& xs);
 
         template <class T>
-        void DrawCollection(const T& xs);
+        void DrawCollection(const T& xs, RenderQueue& rq);
 	void drawTremblements();
 	void drawHUB();
 	void drawHUBpv(int x, int y, int pv);

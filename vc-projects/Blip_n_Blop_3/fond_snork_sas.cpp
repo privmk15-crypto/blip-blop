@@ -75,7 +75,7 @@ void FondSnorkSas1::update()
 // "niejasne / wymaga decyzji") as needing a real design decision
 // before any future Renderer extraction, not a mechanical move like
 // the rest of the Sprite/Renderer step-1 migration.
-void FondSnorkSas1::affiche()
+void FondSnorkSas1::affiche(RenderQueue& rq)
 {
 	//Sprite::affiche();
 
@@ -132,7 +132,7 @@ void FondSnorkSas2::update()
 	}
 }
 
-void FondSnorkSas2::affiche()
+void FondSnorkSas2::affiche(RenderQueue& rq)
 {
 	//Sprite::affiche();
 

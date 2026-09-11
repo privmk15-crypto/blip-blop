@@ -52,7 +52,7 @@ public:
 	virtual void onTire();
 
 
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void estTouche(Tir * tir);
 };
 

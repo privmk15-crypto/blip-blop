@@ -57,7 +57,7 @@ class Bonus : public Sprite {
     // Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line to
     // bonus.cpp - was the last of 4 affiche() bodies still inline in a
     // header across the whole Sprite hierarchy. Unchanged otherwise.
-    virtual void affiche();
+    virtual void affiche(RenderQueue& rq);
 
     virtual void colFromPic() {
         Sprite::colFromPic();

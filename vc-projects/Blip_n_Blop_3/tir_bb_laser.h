@@ -69,7 +69,7 @@ public:
 	{
 	};
 
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void setDir(int d);
 	virtual void update();
 	virtual bool collision(const Sprite * s) const;

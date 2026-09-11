@@ -15,9 +15,9 @@ VehiculeCigogne::VehiculeCigogne()
 	first = true;
 };
 
-void VehiculeCigogne::affiche()
+void VehiculeCigogne::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 }
 
 void VehiculeCigogne::updateUsed()

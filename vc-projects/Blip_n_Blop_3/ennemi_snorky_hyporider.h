@@ -48,7 +48,7 @@ public:
 	virtual void onAvance();
 	virtual void onMeure();
 	virtual void onCharge();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void onCarbonise();
 
 	virtual void estTouche(Tir * tir);

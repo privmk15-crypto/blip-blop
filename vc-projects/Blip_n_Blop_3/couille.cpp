@@ -184,7 +184,7 @@ Couille::Couille(const PictureBank& pbk) : sauti(0), ctrl(NULL), id_arme(ID_M16)
 
 //-----------------------------------------------------------------------------
 
-void Couille::affiche()
+void Couille::affiche(RenderQueue& rq)
 {
 	// On n'est pas mort au moins ?
 	//
@@ -206,20 +206,20 @@ void Couille::affiche()
 
 		case ETAT_SALETO:
 		case ETAT_COME_BACK:
-			Sprite::affiche();
+			Sprite::affiche(rq);
 			break;
 
 		case ETAT_SAUTE:
 		case ETAT_TOMBE:
-			afficheSaute();
+			afficheSaute(rq);
 			break;
 
 		case ETAT_MEURE:
-			afficheMeure();
+			afficheMeure(rq);
 			break;
 
 		case ETAT_LOCKEDV:
-			afficheVehicule();
+			afficheVehicule(rq);
 			break;
 	}
 }
@@ -417,11 +417,11 @@ void Couille::afficheOeil(int xtmp, int ytmp)
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheSaute()
+void Couille::afficheSaute(RenderQueue& rq)
 {
 	// Affiche le corps
 	//
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	// Sauter n'est pas tomber
 	//
@@ -1316,10 +1316,10 @@ void Couille::onMeure()
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheMeure()
+void Couille::afficheMeure(RenderQueue& rq)
 {
 	if (etape < 5)
-		Sprite::affiche();
+		Sprite::affiche(rq);
 }
 
 
@@ -1497,7 +1497,7 @@ void Couille::onVehicule()
 
 //-----------------------------------------------------------------------------
 
-void Couille::afficheVehicule()
+void Couille::afficheVehicule(RenderQueue& rq)
 {
 	// Pour l'affichage (NORMAL)
 	//
@@ -1506,7 +1506,7 @@ void Couille::afficheVehicule()
 	else
 		pic = pbk_own[3];
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 	afficheOeil(x, y);
 
 	afficheArme(x, y);

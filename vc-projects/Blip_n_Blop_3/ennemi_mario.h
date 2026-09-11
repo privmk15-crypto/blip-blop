@@ -86,7 +86,7 @@ public:
 	//balance des boules de feu pour eviter de recopier ca partout(horizontale seulement...)
 	virtual inline void boule_de_feu(int vitesse);
 
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void estTouche(Tir * tir);
 };
 

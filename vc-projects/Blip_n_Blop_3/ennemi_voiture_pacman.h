@@ -37,7 +37,7 @@ public:
 	virtual void update();
 	virtual int degats();
 	virtual void tombeVoiture();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void estTouche(Tir * tir);
 };
 

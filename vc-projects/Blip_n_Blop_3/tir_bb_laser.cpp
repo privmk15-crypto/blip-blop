@@ -129,7 +129,7 @@ void TirBBLaser::update()
 // audit (section C) as needing a real design decision (e.g. moving
 // the raycast into update(), storing a beam-length field, and letting
 // affiche() only draw it) before any future Renderer extraction.
-void TirBBLaser::affiche()
+void TirBBLaser::affiche(RenderQueue& rq)
 {
 	SDL::Surface *	surf = g_game_state.picture_banks().bb()[base + etape]->Surf();
 	Rect	r;

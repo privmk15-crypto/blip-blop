@@ -54,7 +54,7 @@ void TexteCool::update()
 
 }
 
-void TexteCool::affiche()
+void TexteCool::affiche(RenderQueue& rq)
 {
 	g_game_state.font_bank().cool().printC(backSurface, x, y, txt_data[ntxt].c_str());
 }

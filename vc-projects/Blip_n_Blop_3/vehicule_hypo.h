@@ -28,7 +28,7 @@ public:
 
 	virtual void updateUsed();
 	virtual void updateNotUsed();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 #endif

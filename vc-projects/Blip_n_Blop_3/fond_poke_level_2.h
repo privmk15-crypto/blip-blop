@@ -37,7 +37,7 @@ public:
 	FondPokeLevel2();
 
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 
 };
 

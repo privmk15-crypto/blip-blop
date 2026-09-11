@@ -19,7 +19,7 @@ public:
 	virtual void estTouche(Tir * tir);
 	virtual void update();
 	virtual void onCarbonise();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 class EnnemiBisouJediHeros : public EnnemiBisouJedi

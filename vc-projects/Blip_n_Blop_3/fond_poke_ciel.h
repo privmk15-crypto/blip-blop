@@ -9,7 +9,7 @@ class FondPokeCiel : public Sprite
 public:
 	FondPokeCiel();
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 #endif

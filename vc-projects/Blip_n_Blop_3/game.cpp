@@ -68,6 +68,7 @@
 #include "menu_game.h"
 #include "menu_main.h"
 #include "meteo_neige.h"
+#include "render_queue.h"
 #include "meteo_pluie.h"
 #include "restore.h"
 #include "scroll.h"
@@ -706,28 +707,44 @@ void Game::drawAll(bool flip) {
             backSurface->Blt(&r, videoA, NULL, DDBLT_WAIT, 0);
     }*/
 
+    // RenderSystem migration, step 2: gameplay's affiche(rq) calls only
+    // push RenderCommands into rq below - render_system_.Execute()
+    // (the only place that actually touches SDL for entity rendering)
+    // is called at two points, not once at the very end, to preserve
+    // the exact draw order the old direct-SDL code had: drawHUB()/
+    // drawTimer()/go_.Draw() (Game's own direct-SDL calls, unaffected
+    // by this migration) already render strictly between
+    // list_premiers_plans and list_txt_cool today, so the queue must
+    // flush before them and again after list_txt_cool to keep that
+    // interleaving identical.
+    RenderQueue rq;
+
     drawScrolling();
-    DrawCollection(g_game_state.entities().list_fonds_statiques());
-    DrawCollection(g_game_state.entities().list_fonds_animes());
+    DrawCollection(g_game_state.entities().list_fonds_statiques(), rq);
+    DrawCollection(g_game_state.entities().list_fonds_animes(), rq);
 
     if (g_game_state.game_flags()[FLAG_BULLES]) {
-        DrawCollection(g_game_state.entities().list_bulles());
+        DrawCollection(g_game_state.entities().list_bulles(), rq);
     }
 
-    DrawCollection(g_game_state.entities().list_plateformes_mobiles());
-    DrawCollection(g_game_state.entities().list_impacts());
-    DrawCollection(g_game_state.entities().list_gore());
+    DrawCollection(g_game_state.entities().list_plateformes_mobiles(), rq);
+    DrawCollection(g_game_state.entities().list_impacts(), rq);
+    DrawCollection(g_game_state.entities().list_gore(), rq);
 
-    DrawCollection(g_game_state.entities().list_ennemis());
-    DrawCollection(g_game_state.entities().list_tirs_ennemis());
-    DrawCollection(g_game_state.entities().list_bonus());
-    DrawCollection(g_game_state.entities().list_tirs_bb());
-    DrawCollection(g_game_state.entities().list_joueurs());
-    DrawCollection(g_game_state.entities().list_vehicules());
-    DrawCollection(g_game_state.entities().list_impacts());
-    DrawCollection(g_game_state.entities().list_cow());
-    DrawCollection(g_game_state.entities().list_meteo());
-    DrawCollection(g_game_state.entities().list_premiers_plans());
+    DrawCollection(g_game_state.entities().list_ennemis(), rq);
+    DrawCollection(g_game_state.entities().list_tirs_ennemis(), rq);
+    DrawCollection(g_game_state.entities().list_bonus(), rq);
+    DrawCollection(g_game_state.entities().list_tirs_bb(), rq);
+    DrawCollection(g_game_state.entities().list_joueurs(), rq);
+    DrawCollection(g_game_state.entities().list_vehicules(), rq);
+    DrawCollection(g_game_state.entities().list_impacts(), rq);
+    DrawCollection(g_game_state.entities().list_cow(), rq);
+    DrawCollection(g_game_state.entities().list_meteo(), rq);
+    DrawCollection(g_game_state.entities().list_premiers_plans(), rq);
+
+    // Flush point 1/2 - see the comment above.
+    render_system_.Execute(rq, backSurface, offset);
+    rq.Clear();
 
     if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0) drawDeformation();
 
@@ -736,7 +753,11 @@ void Game::drawAll(bool flip) {
     drawHUB();
     drawTimer();
     go_.Draw();
-    DrawCollection(g_game_state.entities().list_txt_cool());
+    DrawCollection(g_game_state.entities().list_txt_cool(), rq);
+
+    // Flush point 2/2 - see the comment above.
+    render_system_.Execute(rq, backSurface, offset);
+    rq.Clear();
 
     drawDebugInfos();
 
@@ -873,9 +894,9 @@ bool Game::chargePartie() {
 //-----------------------------------------------------------------------------
 
 template <class T>
-void Game::DrawCollection(const T& xs) {
+void Game::DrawCollection(const T& xs, RenderQueue& rq) {
     for (auto& pl : xs) {
-        pl->affiche();
+        pl->affiche(rq);
     }
 }
 

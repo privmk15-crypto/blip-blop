@@ -27,6 +27,11 @@
 #include "globals.h"
 #include "picture.h"
 
+// RenderSystem migration, step 2: affiche()'s body now pushes into a
+// RenderQueue instead of calling draw() directly - needs the complete
+// type to call Push().
+#include "render_queue.h"
+
 //-----------------------------------------------------------------------------
 //		Constructeur
 
@@ -43,9 +48,9 @@ bool Sprite::estSurMur() const   // (sanglant)
 	return mur_sanglant(x, y);
 }
 
-void Sprite::affiche()
+void Sprite::affiche(RenderQueue& rq)
 {
-	draw(x, y, pic);
+	rq.Push(x, y, pic);
 }
 
 void Sprite::updateADetruire()

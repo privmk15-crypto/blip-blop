@@ -19,6 +19,7 @@
 #include "fond_poke_caisse_plateforme.h"
 #include "fond_poke_caisse_plateforme_2.h"
 #include "globals.h"
+#include "render_queue.h"
 
 const int anim_lock[] = {88 , 89, 90, 91, 92, 93, 92, 91, 90, 89};
 
@@ -84,17 +85,17 @@ void FondPokeCaisseTombante::update()
 	}
 }
 
-void FondPokeCaisseTombante::affiche()
+void FondPokeCaisseTombante::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 	if (etape > UNLOCK_DELAY + 4) {
-		draw(x, y, g_game_state.picture_banks().niveau()[94]);
-		draw(x , y + 63, g_game_state.picture_banks().niveau()[115]);
+		rq.Push(x, y, g_game_state.picture_banks().niveau()[94]);
+		rq.Push(x , y + 63, g_game_state.picture_banks().niveau()[115]);
 	} else if (etape > UNLOCK_DELAY - 1) {
-		draw(x , y + 63, g_game_state.picture_banks().niveau()[111 + etape - UNLOCK_DELAY]);
+		rq.Push(x , y + 63, g_game_state.picture_banks().niveau()[111 + etape - UNLOCK_DELAY]);
 	} else if (etape > 0) {
-		draw(x, y, g_game_state.picture_banks().niveau()[anim_lock[etape % 10]]);
+		rq.Push(x, y, g_game_state.picture_banks().niveau()[anim_lock[etape % 10]]);
 		//draw(x, y, g_game_state.picture_banks().niveau()[88 + etape % 6]);
-		draw(x, y + 63, g_game_state.picture_banks().niveau()[95 + etape % 16]);
+		rq.Push(x, y + 63, g_game_state.picture_banks().niveau()[95 + etape % 16]);
 	}
 }

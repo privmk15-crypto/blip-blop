@@ -73,7 +73,7 @@ public:
 
 	// Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line to
 	// ennemi_smurf_sauvage.cpp. Unchanged otherwise.
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 
 	virtual void update();
 	virtual void onTombe() ;

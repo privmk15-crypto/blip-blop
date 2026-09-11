@@ -23,7 +23,7 @@ class FondAssembleur : public Sprite
 public:
 	FondAssembleur();
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 #endif

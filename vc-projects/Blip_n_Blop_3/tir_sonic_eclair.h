@@ -48,7 +48,7 @@ public:
 	};
 
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 
 };
 

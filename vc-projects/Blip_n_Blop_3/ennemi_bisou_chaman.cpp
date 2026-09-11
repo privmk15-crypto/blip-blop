@@ -5,6 +5,7 @@
 #include "tir_colonne_chaman.h"
 #include <math.h>
 #include "globals.h"
+#include "render_queue.h"
 
 static const int xtel [] = { 8144,		// Haut droite
                              8082,		// Droite
@@ -297,15 +298,15 @@ void EnnemiBisouChaman::onTire()
 }
 
 
-void EnnemiBisouChaman::affiche()
+void EnnemiBisouChaman::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	if (etat == ETAT_TIRE) {
 		if (dir == SENS_DROITE)
-			draw(x + 18, y - 70, g_game_state.picture_banks().ennemis()[405 + etape]);
+			rq.Push(x + 18, y - 70, g_game_state.picture_banks().ennemis()[405 + etape]);
 		else
-			draw(x - 18, y - 70, g_game_state.picture_banks().ennemis()[416 + etape]);
+			rq.Push(x - 18, y - 70, g_game_state.picture_banks().ennemis()[416 + etape]);
 	}
 }
 

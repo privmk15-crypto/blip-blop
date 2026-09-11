@@ -36,7 +36,7 @@ void FondAssembleur::update()
 // (section C: "niejasne / wymaga decyzji") as needing a real design
 // decision before any future Renderer extraction, not a mechanical
 // move like the rest of the Sprite/Renderer step-1 migration.
-void FondAssembleur::affiche()
+void FondAssembleur::affiche(RenderQueue& rq)
 {
 	//Sprite::affiche();
 

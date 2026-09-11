@@ -23,6 +23,7 @@
 #include "ennemi_tete___rayman.h"
 #include <math.h>
 #include "globals.h"
+#include "render_queue.h"
 
 
 
@@ -355,13 +356,13 @@ void EnnemiLara::onMeure()
 }
 
 
-void EnnemiLara::affiche()
+void EnnemiLara::affiche(RenderQueue& rq)
 {
 	if (g_game_state.game_flags()[0] < 6) {
-		draw(x, y - 102, g_game_state.picture_banks().ennemis()[numero_image_buste]);
+		rq.Push(x, y - 102, g_game_state.picture_banks().ennemis()[numero_image_buste]);
 	}
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 }
 
 

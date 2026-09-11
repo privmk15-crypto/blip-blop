@@ -18,22 +18,23 @@
 #include "game_state.h"
 #include "tir_cadeau.h"
 #include "globals.h"
+#include "render_queue.h"
 
 const int anim_smurf_farceur_marche_droite[] = { 46, 47, 48, 49, 50, 49, 48, 47 };
 const int anim_smurf_farceur_marche_gauche[] = { 51, 52, 53, 54, 55, 54, 53, 52 };
 
 // Etap 3 (Sprite/Renderer separation, step 1): moved out-of-line from
 // ennemi_smurf_farceur.h, unchanged.
-void EnnemiSmurfFarceur::affiche()
+void EnnemiSmurfFarceur::affiche(RenderQueue& rq)
 {
 	if (porte_bomb) {
 		if (dir == SENS_DROITE)
-			draw(x + 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
+			rq.Push(x + 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
 		else
-			draw(x - 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
+			rq.Push(x - 26, y - decalage_y_cadeau, g_game_state.picture_banks().ennemis()[56]);
 	}
 
-	draw(x, y, pic) ;
+	rq.Push(x, y, pic) ;
 }
 
 EnnemiSmurfFarceur::EnnemiSmurfFarceur()

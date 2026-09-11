@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "globals.h"
+#include "render_queue.h"
 #include "fond_electronics.h"
 #include "game_state.h"
 
@@ -28,10 +29,10 @@ void FondElectronic1::update()
 	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
-void FondElectronic1::affiche()
+void FondElectronic1::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
-	draw(x, y, g_game_state.picture_banks().niveau()[42]);
+	Sprite::affiche(rq);
+	rq.Push(x, y, g_game_state.picture_banks().niveau()[42]);
 }
 
 
@@ -46,10 +47,10 @@ void FondElectronic2::update()
 	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
-void FondElectronic2::affiche()
+void FondElectronic2::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
-	draw(x, y, g_game_state.picture_banks().niveau()[44]);
+	Sprite::affiche(rq);
+	rq.Push(x, y, g_game_state.picture_banks().niveau()[44]);
 }
 
 
@@ -65,10 +66,10 @@ void FondElectronic3::update()
 	pic = g_game_state.picture_banks().niveau()[27 + etape];
 }
 
-void FondElectronic3::affiche()
+void FondElectronic3::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
-	draw(x, y, g_game_state.picture_banks().niveau()[43]);
+	Sprite::affiche(rq);
+	rq.Push(x, y, g_game_state.picture_banks().niveau()[43]);
 }
 
 

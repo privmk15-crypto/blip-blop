@@ -14,6 +14,7 @@
 ******************************************************************/
 
 #include "globals.h"
+#include "render_queue.h"
 #include "game_state.h"
 #include "fond_bombe.h"
 #include "enemy.h"
@@ -118,43 +119,43 @@ void FondBombe::update()
 
 }
 
-void FondBombe::affiche()
+void FondBombe::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 	if (armed) {
-		draw(x, y, g_game_state.picture_banks().niveau()[121 + etape]);
+		rq.Push(x, y, g_game_state.picture_banks().niveau()[121 + etape]);
 
 
-		draw(x, y, g_game_state.picture_banks().niveau()[anim_nuke[etape_nuke]]);
+		rq.Push(x, y, g_game_state.picture_banks().niveau()[anim_nuke[etape_nuke]]);
 
 
 		if (g_game_state.game_flags()[FLAG_TIMER] >= 100) {
-			draw(x + 6, y - 27, g_game_state.picture_banks().niveau()[80]);
-			draw(x + 11, y - 27, g_game_state.picture_banks().niveau()[80]);
-			draw(x + 16, y - 27, g_game_state.picture_banks().niveau()[80]);
-			draw(x + 21, y - 27, g_game_state.picture_banks().niveau()[80]);
+			rq.Push(x + 6, y - 27, g_game_state.picture_banks().niveau()[80]);
+			rq.Push(x + 11, y - 27, g_game_state.picture_banks().niveau()[80]);
+			rq.Push(x + 16, y - 27, g_game_state.picture_banks().niveau()[80]);
+			rq.Push(x + 21, y - 27, g_game_state.picture_banks().niveau()[80]);
 		} else {
-			draw(x + 6, y - 27, g_game_state.picture_banks().niveau()[71 + g_game_state.game_flags()[FLAG_TIMER] / 10]);
-			draw(x + 11, y - 27, g_game_state.picture_banks().niveau()[71 + g_game_state.game_flags()[FLAG_TIMER] % 10]);
-			draw(x + 16, y - 27, g_game_state.picture_banks().niveau()[80 - etape_compteur / 10]);
-			draw(x + 21, y - 27, g_game_state.picture_banks().niveau()[80 - etape_compteur % 10]);
+			rq.Push(x + 6, y - 27, g_game_state.picture_banks().niveau()[71 + g_game_state.game_flags()[FLAG_TIMER] / 10]);
+			rq.Push(x + 11, y - 27, g_game_state.picture_banks().niveau()[71 + g_game_state.game_flags()[FLAG_TIMER] % 10]);
+			rq.Push(x + 16, y - 27, g_game_state.picture_banks().niveau()[80 - etape_compteur / 10]);
+			rq.Push(x + 21, y - 27, g_game_state.picture_banks().niveau()[80 - etape_compteur % 10]);
 		}
 
 		if (g_game_state.game_flags()[FLAG_TIMER] < 40) {
-			draw(x, y - 35, g_game_state.picture_banks().niveau()[anim_warning[etape_warning]]);
+			rq.Push(x, y - 35, g_game_state.picture_banks().niveau()[anim_warning[etape_warning]]);
 		}
 		/*else if (g_game_state.game_flags()[FLAG_TIMER] < 40)
 		{
 			draw(x, y -35, g_game_state.picture_banks().niveau()[anim_warning[etape_warning]]);
 		}*/
 		else if (g_game_state.game_flags()[FLAG_TIMER] < 60) {
-			draw(x , y - 35, g_game_state.picture_banks().niveau()[118]);
+			rq.Push(x , y - 35, g_game_state.picture_banks().niveau()[118]);
 		}
 	} else {
-		draw(x, y, g_game_state.picture_banks().niveau()[anim_nuke[etape_nuke]]);
-		draw(x + 6, y - 27, g_game_state.picture_banks().niveau()[71 + seconde / 10]);
-		draw(x + 11, y - 27, g_game_state.picture_banks().niveau()[71 + seconde % 10]);
-		draw(x + 16, y - 27, g_game_state.picture_banks().niveau()[80 - centieme / 10]);
-		draw(x + 21, y - 27, g_game_state.picture_banks().niveau()[80 - centieme % 10]);
+		rq.Push(x, y, g_game_state.picture_banks().niveau()[anim_nuke[etape_nuke]]);
+		rq.Push(x + 6, y - 27, g_game_state.picture_banks().niveau()[71 + seconde / 10]);
+		rq.Push(x + 11, y - 27, g_game_state.picture_banks().niveau()[71 + seconde % 10]);
+		rq.Push(x + 16, y - 27, g_game_state.picture_banks().niveau()[80 - centieme / 10]);
+		rq.Push(x + 21, y - 27, g_game_state.picture_banks().niveau()[80 - centieme % 10]);
 	}
 }

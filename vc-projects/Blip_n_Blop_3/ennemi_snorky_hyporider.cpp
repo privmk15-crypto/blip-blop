@@ -17,6 +17,7 @@
 #include "game_state.h"
 #include "morceaux_tete_snorky.h"
 #include "globals.h"
+#include "render_queue.h"
 
 EnnemiSnorkyHyporider::EnnemiSnorkyHyporider(): wait_for_charge(0), charge_delay(50 + rand() % 200), nageoire(1), attack_etape(0)
 {
@@ -216,23 +217,23 @@ void EnnemiSnorkyHyporider::onCarbonise()
 
 }
 
-void EnnemiSnorkyHyporider::affiche()
+void EnnemiSnorkyHyporider::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	if ((etat == ETAT_CARBONISE) && (etape < 9)) {
 		if (dir == SENS_DROITE) {
-			draw(x, y, g_game_state.picture_banks().ennemis()[326 + etape]);
+			rq.Push(x, y, g_game_state.picture_banks().ennemis()[326 + etape]);
 		} else {
-			draw(x, y, g_game_state.picture_banks().ennemis()[335 + etape]);
+			rq.Push(x, y, g_game_state.picture_banks().ennemis()[335 + etape]);
 		}
 	}
 
 	if (nageoire) {
 		if (dir == SENS_DROITE) {
-			draw(x + 15, y + 20, g_game_state.picture_banks().ennemis()[287 + etape % 4]);
+			rq.Push(x + 15, y + 20, g_game_state.picture_banks().ennemis()[287 + etape % 4]);
 		} else {
-			draw(x - 15, y + 20, g_game_state.picture_banks().ennemis()[292 + etape % 4]);
+			rq.Push(x - 15, y + 20, g_game_state.picture_banks().ennemis()[292 + etape % 4]);
 		}
 	}
 }

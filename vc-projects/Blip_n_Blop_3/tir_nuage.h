@@ -19,7 +19,7 @@ public:
 	virtual void onDestruction();
 	virtual void onNormal();
 	virtual void onTire();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 #endif

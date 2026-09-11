@@ -2,6 +2,7 @@
 #include "game_state.h"
 #include "ennemi_pacman.h"
 #include "globals.h"
+#include "render_queue.h"
 
 
 EnnemiVoiturePacman::EnnemiVoiturePacman(): invoc_pacman(false)
@@ -107,12 +108,12 @@ int EnnemiVoiturePacman::degats()
 	return 0;
 };
 
-void EnnemiVoiturePacman::affiche()
+void EnnemiVoiturePacman::affiche(RenderQueue& rq)
 {
 	if (g_game_state.game_flags()[2] >= 4) {
-		draw(x + 48, y - 82, g_game_state.picture_banks().ennemis()[217 + etape]);
+		rq.Push(x + 48, y - 82, g_game_state.picture_banks().ennemis()[217 + etape]);
 	}
-	Sprite::affiche();
+	Sprite::affiche(rq);
 }
 
 void EnnemiVoiturePacman::estTouche(Tir * tir)

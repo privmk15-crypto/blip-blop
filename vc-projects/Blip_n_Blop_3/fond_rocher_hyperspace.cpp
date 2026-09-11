@@ -103,8 +103,8 @@ void FondRocherHyperspace::update() {
     }
 }
 
-void FondRocherHyperspace::affiche() {
+void FondRocherHyperspace::affiche(RenderQueue& rq) {
     if (!placer) {
-        Sprite::affiche();
+        Sprite::affiche(rq);
     }
 }

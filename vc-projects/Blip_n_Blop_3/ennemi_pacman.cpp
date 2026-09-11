@@ -1,6 +1,7 @@
 #include "ennemi_pacman.h"
 #include "game_state.h"
 #include "globals.h"
+#include "render_queue.h"
 
 
 EnnemiPacman::EnnemiPacman(): ss_etape_tir(0), etape_tir(0), tir(false), dx(-2)
@@ -90,13 +91,13 @@ int EnnemiPacman::degats()
 	return 0;
 };
 
-void EnnemiPacman::affiche()
+void EnnemiPacman::affiche(RenderQueue& rq)
 {
 	if (tir) {
-		draw(x + 30, y - 20, g_game_state.picture_banks().ennemis()[232 + etape_tir]);
+		rq.Push(x + 30, y - 20, g_game_state.picture_banks().ennemis()[232 + etape_tir]);
 	}
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 }
 
 void EnnemiPacman::estTouche(Tir * tir)

@@ -23,6 +23,7 @@
 
 #include "ennemi_smurf.h"
 #include "game_state.h"
+#include "render_queue.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe
@@ -37,23 +38,23 @@ public:
 		pv = 75 ;
 	}
 
-	inline virtual void affiche()
+	inline virtual void affiche(RenderQueue& rq)
 	{
 		if (etat != ETAT_MEURE && etat != ETAT_CARBONISE) {
 			switch (dir) {
 				case SENS_GAUCHE :
-					draw(x + 7, y - 18, g_game_state.picture_banks().ennemis()[147]) ;
-					EnnemiSmurf::affiche() ;
-					draw(x, y - 20, g_game_state.picture_banks().ennemis()[149]) ;
+					rq.Push(x + 7, y - 18, g_game_state.picture_banks().ennemis()[147]) ;
+					EnnemiSmurf::affiche(rq) ;
+					rq.Push(x, y - 20, g_game_state.picture_banks().ennemis()[149]) ;
 					break ;
 				case SENS_DROITE :
-					draw(x - 7, y - 18, g_game_state.picture_banks().ennemis()[148]) ;
-					EnnemiSmurf::affiche() ;
-					draw(x, y - 20, g_game_state.picture_banks().ennemis()[150]) ;
+					rq.Push(x - 7, y - 18, g_game_state.picture_banks().ennemis()[148]) ;
+					EnnemiSmurf::affiche(rq) ;
+					rq.Push(x, y - 20, g_game_state.picture_banks().ennemis()[150]) ;
 					break ;
 			}
 		} else
-			EnnemiSmurf::affiche() ;
+			EnnemiSmurf::affiche(rq) ;
 	}
 
 	virtual void onAvance()

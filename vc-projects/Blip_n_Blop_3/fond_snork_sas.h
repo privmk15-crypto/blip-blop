@@ -30,7 +30,7 @@ public:
 
 	FondSnorkSas1();
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 class FondSnorkSas2 : public Sprite
@@ -38,7 +38,7 @@ class FondSnorkSas2 : public Sprite
 public:
 	FondSnorkSas2();
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 };
 
 #endif

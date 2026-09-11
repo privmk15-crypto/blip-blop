@@ -22,6 +22,7 @@
 
 #include "ennemi_smurf.h"
 #include "game_state.h"
+#include "render_queue.h"
 
 //-----------------------------------------------------------------------------
 //		Définition de la classe
@@ -31,16 +32,16 @@ class EnnemiSmurfALunettes : public EnnemiSmurf
 {
 public:
 
-	inline virtual void affiche()
+	inline virtual void affiche(RenderQueue& rq)
 	{
-		EnnemiSmurf::affiche() ;
+		EnnemiSmurf::affiche(rq) ;
 		if (etat != ETAT_MEURE && etat != ETAT_CARBONISE) {
 			switch (dir) {
 				case SENS_GAUCHE :
-					draw(x - 4, y - 27, g_game_state.picture_banks().ennemis()[145]) ;
+					rq.Push(x - 4, y - 27, g_game_state.picture_banks().ennemis()[145]) ;
 					break ;
 				case SENS_DROITE :
-					draw(x + 4, y - 27, g_game_state.picture_banks().ennemis()[146]) ;
+					rq.Push(x + 4, y - 27, g_game_state.picture_banks().ennemis()[146]) ;
 					break ;
 			}
 		}

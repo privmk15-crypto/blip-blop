@@ -17,6 +17,7 @@
 #include "ben_debug.h"
 #include "game_state.h"
 #include "globals.h"
+#include "render_queue.h"
 
 const int anim_clignotement [] = {2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0, 0};
 
@@ -47,20 +48,20 @@ void FondPokeLevel3::update()
 	}
 }
 
-void FondPokeLevel3::affiche()
+void FondPokeLevel3::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	if (etape_E1 < 57) {
-		draw(x + 12, y - 19, g_game_state.picture_banks().niveau()[PBK_E + anim_clignotement[etape_E1]]);
+		rq.Push(x + 12, y - 19, g_game_state.picture_banks().niveau()[PBK_E + anim_clignotement[etape_E1]]);
 	}
 	if (etape_V < 57) {
-		draw(x + 23, y - 19, g_game_state.picture_banks().niveau()[PBK_V + anim_clignotement[etape_V]]);
+		rq.Push(x + 23, y - 19, g_game_state.picture_banks().niveau()[PBK_V + anim_clignotement[etape_V]]);
 	}
 	if (etape_E2 < 57) {
-		draw(x + 36, y - 19, g_game_state.picture_banks().niveau()[PBK_E + anim_clignotement[etape_E2]]);
+		rq.Push(x + 36, y - 19, g_game_state.picture_banks().niveau()[PBK_E + anim_clignotement[etape_E2]]);
 	}
 	if (etape_L2 < 57) {
-		draw(x + 47, y - 19, g_game_state.picture_banks().niveau()[PBK_L + anim_clignotement[etape_L2]]);
+		rq.Push(x + 47, y - 19, g_game_state.picture_banks().niveau()[PBK_L + anim_clignotement[etape_L2]]);
 	}
 }

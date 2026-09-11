@@ -23,9 +23,9 @@ void FondPokeCiel::update()
 // decyzji") as needing a real design decision before any future
 // Renderer extraction, not a mechanical move like the rest of the
 // Sprite/Renderer step-1 migration.
-void FondPokeCiel::affiche()
+void FondPokeCiel::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	SDL::Surface *	surf;
 	int						xs;

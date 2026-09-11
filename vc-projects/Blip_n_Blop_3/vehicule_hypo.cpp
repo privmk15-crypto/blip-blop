@@ -2,12 +2,12 @@
 #include "vehicule_hypo.h"
 #include "globals.h"
 
-void VehiculeHypo::affiche()
+void VehiculeHypo::affiche(RenderQueue& rq)
 {
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	if (joueur != NULL)
-		joueur->affiche();
+		joueur->affiche(rq);
 }
 
 void VehiculeHypo::updateUsed()

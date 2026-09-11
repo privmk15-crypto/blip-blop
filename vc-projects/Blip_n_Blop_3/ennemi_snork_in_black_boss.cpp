@@ -17,6 +17,7 @@
 #include "tir_epine.h"
 #include "ben_debug.h"
 #include "globals.h"
+#include "render_queue.h"
 
 const int anim_snork_in_black_boss_saute_droite[] = { 414, 415, 416, 415};
 const int anim_snork_in_black_boss_saute_gauche[] = { 417, 418, 419, 418};
@@ -852,16 +853,16 @@ void EnnemiSnorkInBlackBoss::estTouche(Tir * tir)
 	gicle(tir, dx_giclure_snorkbase1, dy_giclure_snorkbase1);
 }
 
-void EnnemiSnorkInBlackBoss::affiche()
+void EnnemiSnorkInBlackBoss::affiche(RenderQueue& rq)
 {
 	if (x_shark < 5904) {
-		Sprite::affiche();
+		Sprite::affiche(rq);
 	}
 	if (shark) {
 		if (x_shark < 5904) {
-			draw(x_shark, y_shark, g_game_state.picture_banks().ennemis()[441]);
+			rq.Push(x_shark, y_shark, g_game_state.picture_banks().ennemis()[441]);
 		} else {
-			draw(x_shark, y_shark, g_game_state.picture_banks().ennemis()[440]);
+			rq.Push(x_shark, y_shark, g_game_state.picture_banks().ennemis()[440]);
 		}
 	}
 }

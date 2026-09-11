@@ -56,7 +56,7 @@ public:
 	virtual void onTireverticale();
 	virtual void tombe_mario();
 	virtual inline void boule_de_feu();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void estTouche(Tir * tir);
 };
 

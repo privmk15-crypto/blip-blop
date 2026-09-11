@@ -35,7 +35,7 @@ public:
 	EnnemiPacman();
 	virtual void update();
 	virtual int degats();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void estTouche(Tir * tir);
 
 	virtual bool count()

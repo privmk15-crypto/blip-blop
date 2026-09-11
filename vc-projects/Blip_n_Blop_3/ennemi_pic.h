@@ -31,7 +31,7 @@ private:
 public:
 	EnnemiPic();
 	virtual void update();
-	virtual void affiche();
+	virtual void affiche(RenderQueue& rq);
 	virtual void colFromPic();
 	virtual void estTouche(Tir * tir);
 	virtual int degats()

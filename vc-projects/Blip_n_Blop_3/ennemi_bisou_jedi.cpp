@@ -3,6 +3,7 @@
 #include "game_state.h"
 #include "tir_epee_laser.h"
 #include "globals.h"
+#include "render_queue.h"
 
 EnnemiBisouJedi::EnnemiBisouJedi() : etape_shoot(0), a_epee(true)
 {
@@ -185,18 +186,18 @@ void EnnemiBisouJedi::onCarbonise()
 		pic = g_game_state.picture_banks().ennemis()[597 + etape];
 }
 
-void EnnemiBisouJedi::affiche()
+void EnnemiBisouJedi::affiche(RenderQueue& rq)
 {
 	static const int dx_epee [] = { 8, 4, -1, -6, -6, -6, -1, 3};
 	static const int dy_epee [] = { -19, -19, -19, -19, -18, -18, -19, -19 };
 	static const int etape_epee [] = { 0, 1, 2, 3, 4, 3, 2, 1};
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 
 	if (a_epee) {
 		if (dir == SENS_DROITE)
-			draw(x + dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[549 + etape_epee[etape]]);
+			rq.Push(x + dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[549 + etape_epee[etape]]);
 		else
-			draw(x - dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[554 + etape_epee[etape]]);
+			rq.Push(x - dx_epee[etape], y + dy_epee[etape], g_game_state.picture_banks().ennemis()[554 + etape_epee[etape]]);
 	}
 }

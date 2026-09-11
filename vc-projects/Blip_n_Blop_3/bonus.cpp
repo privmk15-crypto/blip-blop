@@ -16,12 +16,13 @@
 #include "ben_maths.h"
 #include "game_state.h"
 #include "globals.h"
+#include "render_queue.h"
 
-void Bonus::affiche() {
+void Bonus::affiche(RenderQueue& rq) {
     int base;
 
     y -= 15;
-    Sprite::affiche();
+    Sprite::affiche(rq);
 
     if (local_phase)
         base = 0;
@@ -30,10 +31,10 @@ void Bonus::affiche() {
 
     int d = sini(8, phi);
 
-    draw(x - DIST_BITONIO - d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 3]);
-    draw(x + DIST_BITONIO + d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 2]);
-    draw(x + DIST_BITONIO + d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base]);
-    draw(x - DIST_BITONIO - d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base + 1]);
+    rq.Push(x - DIST_BITONIO - d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 3]);
+    rq.Push(x + DIST_BITONIO + d, y - DIST_BITONIO - d, g_game_state.picture_banks().misc()[base + 2]);
+    rq.Push(x + DIST_BITONIO + d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base]);
+    rq.Push(x - DIST_BITONIO - d, y + DIST_BITONIO + d, g_game_state.picture_banks().misc()[base + 1]);
 
     y += 15;
 }

@@ -3,6 +3,7 @@
 #include "tir_nuage.h"
 #include "game_state.h"
 #include "globals.h"
+#include "render_queue.h"
 
 TirNuage::TirNuage() : etape_shoot(0), etat(0), eclair(0), delta_eclair(0)
 {
@@ -178,17 +179,17 @@ void TirNuage::onTire()
 	dy = rand() % 20;
 }
 
-void TirNuage::affiche()
+void TirNuage::affiche(RenderQueue& rq)
 {
 	int de = eclair;
 
 	if (etat == 3 && etape_shoot > 50) {
 		for (int yy = y - 10 + dy; yy < 480; yy += 100) {
-			draw(x, yy, g_game_state.picture_banks().ennemis()[256 + de]);
+			rq.Push(x, yy, g_game_state.picture_banks().ennemis()[256 + de]);
 
 			de = (de + 1) % 4;
 		}
 	}
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 }

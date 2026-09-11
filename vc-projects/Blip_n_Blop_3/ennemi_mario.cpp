@@ -5,6 +5,7 @@
 #include "tir_mario_fireball_vertical.h"
 #include "ennemi_mario_hologramme.h"
 #include "globals.h"
+#include "render_queue.h"
 
 
 const int anim_mario_marche_droite[] = { 0, 1, 2, 1};
@@ -481,16 +482,16 @@ void EnnemiMario::onCarbonise()
 	}*/
 }
 
-void EnnemiMario::affiche()
+void EnnemiMario::affiche(RenderQueue& rq)
 {
 
 
-	Sprite::affiche();
+	Sprite::affiche(rq);
 	if ((fireball) && (etape < 3)) {
 		if (dir == SENS_DROITE) {
-			draw(x + 29, y - 33, g_game_state.picture_banks().ennemis()[48 + etape]);
+			rq.Push(x + 29, y - 33, g_game_state.picture_banks().ennemis()[48 + etape]);
 		} else {
-			draw(x - 29, y - 33, g_game_state.picture_banks().ennemis()[51 + etape]);
+			rq.Push(x - 29, y - 33, g_game_state.picture_banks().ennemis()[51 + etape]);
 		}
 
 	}

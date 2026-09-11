@@ -17,12 +17,13 @@
 *
 ******************************************************************/
 
-// Etap 4 (Full HD prep, step 3): must stay comfortably wider than
-// globals.h's SCREEN_W (854) - this is a lookahead cache buffer for
-// drawScrolling()'s tile pre-rendering, not the visible width itself.
-// Was 840 (640 + 200 margin) before SCREEN_W widened to 854; kept the
-// same ~200px margin here (854 + 200 = 1054).
-#define WANTED_VBUFFER_WIDE	1054
+// Must stay comfortably wider than globals.h's SCREEN_W - this is a
+// lookahead cache buffer for drawScrolling()'s tile pre-rendering,
+// not the visible width itself. Was briefly 1054 while SCREEN_W was
+// widened to 854 for a since-reverted true-widescreen experiment
+// (see the SCREEN_W comment in globals.h); back to its original 840
+// (640 + 200 margin) now that SCREEN_W is 640 again.
+#define WANTED_VBUFFER_WIDE	840
 
 extern int	vbuffer_wide;
 extern int	next_x;

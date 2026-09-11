@@ -139,12 +139,15 @@ static void analyseCmdLine(char* cmd) {
 }
 
 static bool InitApp(int nCmdShow) {
-    // Etap 4 (Full HD prep, step 3): actual window/display resolution.
-    // Independent of SCREEN_W (globals.h, = 854) - the internal viewport
-    // stays SCREEN_W x 480 and gets scaled onto whatever this is via
-    // SDL_RenderSetLogicalSize (Graphics::SetGfxMode). Chosen as a real
-    // 16:9 target (1920/1080 = 1.7778, matching SCREEN_W/480 = 1.7792
-    // closely enough that the scale is uniform with no visible letterbox).
+    // Etap 4 (Full HD prep): actual window/display resolution.
+    // Independent of SCREEN_W (globals.h, = 640) - the internal viewport
+    // stays a classic SCREEN_W x 480 (4:3) and gets scaled onto whatever
+    // this is via SDL_RenderSetLogicalSize (Graphics::SetGfxMode), which
+    // preserves aspect ratio rather than stretching - a real 16:9 window
+    // like this pillarboxes the 4:3 game area (black bars left/right)
+    // instead of distorting it. A true-widescreen SCREEN_W was tried and
+    // reverted (see the comment in globals.h) - this is the deliberate
+    // "sharp Full HD window, classic pillarboxed game area" compromise.
     struct {
         int height;
         int width;

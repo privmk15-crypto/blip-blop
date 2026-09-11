@@ -93,7 +93,7 @@ extern int			scr_offset;			// = offset % 640
 
 // Etap 4 (Full HD prep): single named constant for the width of the
 // visible screen/camera viewport. Height stays a plain 480 literal
-// everywhere - only the width is being widened for 16:9.
+// everywhere - only the width was ever a candidate for widening.
 //
 // step 2/2b/2c: introduced at 640 (no behavior change) and threaded
 // through every "is this actor past the right/left edge of the
@@ -102,22 +102,34 @@ extern int			scr_offset;			// = offset % 640
 // intro/HUD-adjacent screens in cine_player/rpg_player/
 // character_selection/screen_shake/menus/game.cpp).
 //
-// step 3: bumped to 854 (480*16/9, rounded) - the first actual visual
-// change. This requires vbuffer_wide's cache buffer (scroll.h's
-// WANTED_VBUFFER_WIDE) to stay comfortably wider than SCREEN_W - see
-// the comment there.
+// step 3 (later reverted): tried 854 (480*16/9) for a genuinely wider
+// play area. Backed out - not a code problem, a level-*content* one:
+// every level's binary event data hardcodes how far ahead of the
+// camera trigger point each enemy/decoration/bonus is placed (almost
+// always exactly 750px, tuned so it sits just past the old 640-wide
+// edge and gets revealed by scrolling). At 854 wide, a 750px gap is
+// *inside* the visible area, so things popped into view already on
+// screen instead of scrolling in - true for the large majority of
+// spawn events across all 12 levels, not fixable by a code constant,
+// and only safely fixable per-level by editing each level's binary
+// event data (attempted for data/snuf1.lvl alone; real, but not worth
+// repeating 12 times for a cosmetic pop-in-timing issue).
 //
-// Still NOT covered by this constant: XPIC_MAX/YPIC_MAX (picture.h -
-// dead since step 1 fixed BlitTo/PasteTo to read the real target
-// surface size instead), tir_bb_laser.cpp's own local, offset-free
-// 640 clip bound (one of the 5 "hard" RenderSystem classes,
-// deliberately never touched by this whole effort - needs its own
-// dedicated step), updateTeteTurc()'s offset+320 (AI-adjacent, same
-// deferred category as the enemy turnaround sites but not yet done),
-// and whether the background tile art itself has enough content to
-// fill the extra ~214px on screen (an asset question, not a code one -
-// unverified).
-constexpr int		SCREEN_W = 854;
+// Back to 640 - the window itself still renders at whatever
+// win_size (blip_n_blop_3.cpp) is set to (e.g. real 1920x1080), with
+// SDL_RenderSetLogicalSize (Graphics::SetGfxMode) pillarboxing the
+// classic 640x480 game area inside it instead of stretching or
+// distorting it. Every site this constant touches keeps working
+// exactly as it did before this whole effort - it's just a name for
+// 640 now, not a lever.
+//
+// Still NOT covered by this constant, and no longer relevant while
+// it's 640: XPIC_MAX/YPIC_MAX (picture.h - dead since step 1 fixed
+// BlitTo/PasteTo to read the real target surface size instead, which
+// remains a genuine improvement independent of this value),
+// tir_bb_laser.cpp's own local, offset-free 640 clip bound (one of
+// the 5 "hard" RenderSystem classes), updateTeteTurc()'s offset+320.
+constexpr int		SCREEN_W = 640;
 
 extern int			scroll_speed;
 

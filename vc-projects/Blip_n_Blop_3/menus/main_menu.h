@@ -6,7 +6,7 @@
 class MainMenu : public AbstractMenu {
    public:
     MainMenu();
-    void Draw(SDL::Surface* surf) const override { items_.Draw(surf); }
+    void Draw(SDL::Surface* surf) const override;
     int ProcessEvent();
 
    private:

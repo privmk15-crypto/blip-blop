@@ -592,7 +592,16 @@ int Input::scanKey(unsigned int k) const
 
 		return z;
 	}*/
-	if ((k >> 10) & 0xFF > 0)
+	// Fix: operator precedence bug - `&` binds looser than `>` in C++,
+	// so this used to parse as `(k >> 10) & (0xFF > 0)`, i.e.
+	// `(k >> 10) & 1` - only the LOWEST BIT of the encoded joystick
+	// index, not "is there a joystick index at all". Encoded keys are
+	// (joy_idx + 1) * 1024 + code (see below), so this only happened
+	// to work for odd-numbered joystick slots (1st, 3rd, ...) - the
+	// 2nd, 4th, ... controller fell through to be misread as a
+	// keyboard scancode instead, effectively never registering any
+	// input at all.
+	if (((k >> 10) & 0xFF) > 0)
 	{
 		/*
 		REMEMBER

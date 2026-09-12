@@ -59,6 +59,24 @@ class GoArrow {
 
    private:
     void update_no() {
+        // Fix: this used to tick delay_ unconditionally, so the "been
+        // idle a while, here's a hint arrow" timeout could (and did)
+        // fire while an active scroll lock's real release condition
+        // still hadn't been met - showing the arrow well before the
+        // screen could actually move, only for the real scroll to
+        // start later once the lock genuinely released. Reported as
+        // the GO arrow appearing, then the screen only advancing
+        // "po chwili" (after a moment). While a lock is active, hold
+        // this timer at 0 instead - Come() (called from
+        // Game::updateLock() the instant the lock's real condition is
+        // met) is the only thing that should ever show the arrow in
+        // that case; the idle-nudge timeout is only meaningful when
+        // there's no lock gating progress at all.
+        if (g_game_state.scroll_lock().active()) {
+            delay_ = 0;
+            return;
+        }
+
         delay_ += 1;
         if (delay_ >= 300) {
             phase_ = Phase::Coming;

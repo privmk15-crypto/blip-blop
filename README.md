@@ -1,7 +1,74 @@
+# Blip & Blop: Rearmed Edition
+
+A patched, actively-maintained continuation of the 2002 freeware game
+*Blip'n Blop* (see the "Blip'n Blop" section below for the original
+project's own history). Same jank, same charm — minus the bugs that
+made parts of it genuinely unplayable on a modern PC.
+
 GitHub Actions (Linux + Windows): [![Build](https://github.com/benkaraban/blip-blop/actions/workflows/build.yml/badge.svg)](https://github.com/benkaraban/blip-blop/actions/workflows/build.yml)
 
 Linux (legacy Travis): ![linux](https://travis-ci.org/Vermeille/blip-blop.svg?branch=master)
 Windows (legacy AppVeyor): [![Build status](https://ci.appveyor.com/api/projects/status/n8rv6hstgmlx4j0a/branch/master?svg=true)](https://ci.appveyor.com/project/Vermeille/blip-blop/branch/master)
+
+## What changed in this pass
+
+Real, verified bugs fixed — not just modernization:
+
+- **Screen shake was silently disabled** ("works unproperly at least on
+  Linux") over a self-overlapping surface blit, not anything
+  Linux-specific. Root-caused and re-enabled.
+- **Rain/weather distortion** had the same self-overlap bug, plus an
+  independent second bug — a whole direction branch had been commented
+  out, corrupting the effect on roughly half of all frames.
+- **The "GO" arrow could appear before its scroll lock actually
+  released** — an idle-nudge timer that fired independently of the
+  real unlock condition, making it look like the screen froze for a
+  moment right after clearing a locked arena.
+- **Music volume did nothing, on any platform** — `Mp3Music::set_volume()`
+  was a hardcoded no-op. Real, working volume controls added (music
+  and SFX independently, 0–100% in steps of 10, in Options).
+- **A malformed config file left key bindings showing as "UNDEFINED"**
+  instead of falling back to sane defaults.
+- **Rebinding RETURN or ESCAPE to a movement key in the Keys menu could
+  corrupt every menu in the game at once** (both are also checked
+  directly for confirm/cancel everywhere else) — now rejected outright,
+  and an already-corrupted saved config file self-heals on load.
+- **The 2nd/4th/… gamepad never worked at all** — a one-character
+  operator-precedence bug (`&` vs `>`) in the input layer.
+- A couple of menu-navigation bugs: leaving P1/P2 Keys could land you
+  back in the wrong screen, and cancelling out of certain setup flows
+  could leave stray input that fired the wrong item on the next menu.
+
+Quality of life:
+
+- **Runs in a proper Full HD window by default** (1920×1080, fullscreen,
+  borderless) instead of the old DirectDraw-era resolution dance — no
+  more fighting the taskbar/Alt-Tab just to minimize. The game area
+  itself is still the original 640×480 4:3 playfield, pillarboxed
+  rather than stretched — see "Explored and reverted" below for why.
+- A real application icon instead of the SDL default.
+- Removed the in-game "Toggle Fullscreen" option — it kept glitching no
+  matter how it was implemented, so it's gone rather than shipped
+  broken. The game still starts in fullscreen by default; there's just
+  no live in-game toggle anymore.
+
+Explored and reverted (kept here for transparency, and because the
+work is still sitting in git history if anyone wants to pick it back
+up):
+
+- A full peer-to-peer network multiplayer implementation — ENet
+  transport, a Host/Join UI, mid-match disconnect handling, a trimmed
+  player-position/RNG-seed sync layer — got as far as actually working
+  over a LAN before being reverted as too large a scope for this pass.
+  Reliable full world-state sync (enemies, bonuses, level events, not
+  just the two players) would need substantially more work than a
+  drive-by pass could responsibly deliver.
+- A true widescreen internal resolution (854×480 instead of 640×480).
+  Enemy/object spawn timing turned out to be baked into the level
+  files as raw pixel offsets tuned for the original 640px screen, so
+  widening it broke spawn timing across every level in ways that
+  couldn't be fixed without hand-editing binary level data — reverted
+  in favor of the pillarboxed Full HD window described above.
 
 ## Building
 
@@ -116,4 +183,3 @@ A few things to keep in mind:
 - this was writen when we were still students so the code quality and the (lack of) architecture can be disturbing
 - the code is mostly written in a terrible mix of french and english, which should be kind of akward to read for non french speaking people (actually, it's kind of awkward even for french people! :p )
 - the various editors can be quite complicated to get working because they relied on various cryptic INI files
-

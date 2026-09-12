@@ -67,7 +67,6 @@ class Graphics {
    public:
     void Init();
     void SetGfxMode(int x, int y, int d, bool fullscreen = true);
-    void ToggleFullscreen();
     SDL::Surface* CreatePrimary();
     SDL::Surface* CreatePrimary(SDL::Surface*& back);
     SDL::Surface* CreateSurface(int x, int y);

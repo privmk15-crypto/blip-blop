@@ -12,20 +12,6 @@ void Graphics::Init() {
     }
 }
 
-// Fix: this used to call SetGfxMode() again, which unconditionally
-// destroys and recreates BOTH the window and the renderer from
-// scratch (SDL_CreateWindow + SDL_CreateRenderer) just to flip one
-// flag - visible as flicker/glitching every time fullscreen was
-// toggled from the Options menu ("toggle fullscreen się buguje w
-// pizdu"). SDL2 has a dedicated call for exactly this - flip the
-// window's fullscreen state in place, touching neither the window nor
-// the renderer (and everything the renderer owns, like the logical
-// size set below in SetGfxMode()) at all.
-void Graphics::ToggleFullscreen() {
-    fullscreen_ = !fullscreen_;
-    SDL_SetWindowFullscreen(
-        window_.get(), fullscreen_ ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
-}
 void Graphics::SetGfxMode(int x, int y, int d, bool fullscreen) {
     x_ = x;
     y_ = y;

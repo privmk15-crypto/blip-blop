@@ -8,14 +8,17 @@
 #include "../txt_data.h"
 #include "txt_defines.h"
 
-#include "../dd_gfx.h"
-
 OptionsPanel::OptionsPanel() {
     vsync_on_txt_ = txt_data[TXT_VSYNC] + " " + txt_data[TXT_ON];
     vsync_off_txt_ = txt_data[TXT_VSYNC] + " " + txt_data[TXT_OFF];
 
     items_.AddEntry("VSYNC");
-    items_.AddEntry(txt_data[TXT_FULLSCREEN]);
+    // Fix: the Fullscreen toggle was removed entirely - toggling it
+    // live kept glitching no matter how the underlying Graphics code
+    // did it (SDL_SetWindowFullscreen didn't fix it either). The game
+    // still starts in fullscreen by default (config.cpp) - there's
+    // just no in-game way to flip it anymore.
+    //
     // txt_data[TXT_MUSICVOL]/[TXT_SOUNDVOL] (812/813) exist in
     // data/uk.dat but are blank entries - nothing was ever written
     // there. Hardcoded here instead, same as "VSYNC" just above (for
@@ -39,11 +42,11 @@ void OptionsPanel::RefreshVsync() {
 static const int kVolumeStep = 10;
 
 void OptionsPanel::RefreshMusicVolume() {
-    items_.ChangeEntry(2, "MUSIC VOLUME " + std::to_string(music_volume) + "%");
+    items_.ChangeEntry(1, "MUSIC VOLUME " + std::to_string(music_volume) + "%");
 }
 
 void OptionsPanel::RefreshSfxVolume() {
-    items_.ChangeEntry(3, "SFX VOLUME " + std::to_string(sfx_volume) + "%");
+    items_.ChangeEntry(2, "SFX VOLUME " + std::to_string(sfx_volume) + "%");
 }
 
 int OptionsPanel::ProcessEvent() {
@@ -58,9 +61,9 @@ int OptionsPanel::ProcessEvent() {
 
     // Fix: this used to toggle VSYNC on LEFT/RIGHT unconditionally, no
     // matter which item was focused - pressing LEFT/RIGHT while on
-    // Fullscreen or P1/P2 Keys silently flipped VSYNC in the
-    // background. Needed fixing anyway to add volume (LEFT/RIGHT on
-    // those items must adjust volume, not touch VSYNC).
+    // P1/P2 Keys silently flipped VSYNC in the background. Needed
+    // fixing anyway to add volume (LEFT/RIGHT on those items must
+    // adjust volume, not touch VSYNC).
     if (left || right) {
         switch (items_.focused()) {
             case 0:
@@ -68,16 +71,12 @@ int OptionsPanel::ProcessEvent() {
                 RefreshVsync();
                 break;
             case 1:
-                fullscreen = !fullscreen;
-                DDToggleFullscreen();
-                break;
-            case 2:
                 music_volume = right ? std::min(100, music_volume + kVolumeStep)
                                       : std::max(0, music_volume - kVolumeStep);
                 apply_volume_settings();
                 RefreshMusicVolume();
                 break;
-            case 3:
+            case 2:
                 sfx_volume = right ? std::min(100, sfx_volume + kVolumeStep)
                                     : std::max(0, sfx_volume - kVolumeStep);
                 apply_volume_settings();
@@ -92,15 +91,11 @@ int OptionsPanel::ProcessEvent() {
                 vSyncOn = !vSyncOn;
                 RefreshVsync();
                 break;
-            case 1:
-                fullscreen = !fullscreen;
-                DDToggleFullscreen();
-                break;
-            case 4:
+            case 3:
                 return MenuType::Keys_1;
-            case 5:
+            case 4:
                 return MenuType::Keys_2;
-            case 6:
+            case 5:
                 return MenuType::Main;
         }
     }

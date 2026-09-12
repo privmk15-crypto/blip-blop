@@ -127,5 +127,3 @@ void DDFlipV() {
     // debug << "DDFlipV ()" << "\n";
     graphicInstance->FlipV();
 }
-
-void DDToggleFullscreen() { graphicInstance->ToggleFullscreen(); }

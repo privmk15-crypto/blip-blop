@@ -22,13 +22,23 @@ void Graphics::SetGfxMode(int x, int y, int d, bool fullscreen) {
     // longer reuses x/y (the size) as the position - now that win_size
     // can be much larger than the old 640x480 (e.g. 1920x1080), doing
     // so could place the window mostly off-screen on smaller monitors.
+    //
+    // Fix: SDL_WINDOW_FULLSCREEN (exclusive) actually switches the
+    // display's video mode - on Windows this fights the taskbar/Alt-Tab/
+    // minimize in ways that don't behave like a normal application
+    // ("nie dało się zwijać do paska normalnie jak człowiek"), and can
+    // leave the desktop at the wrong resolution if the game crashes
+    // before restoring it. SDL_WINDOW_FULLSCREEN_DESKTOP instead borrows
+    // the desktop's current resolution and behaves like any other
+    // maximized borderless window - normal minimize/restore/Alt-Tab,
+    // no display mode switch at all.
     window_.reset(SDL_ErrWrap(SDL_CreateWindow(
         "Blip&Blop",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         x,
         y,
-        SDL_WINDOW_SHOWN | (fullscreen * SDL_WINDOW_FULLSCREEN))));
+        SDL_WINDOW_SHOWN | (fullscreen * SDL_WINDOW_FULLSCREEN_DESKTOP))));
 
     renderer_.reset(SDL_ErrWrap(SDL_CreateRenderer(
         window_.get(),

@@ -42,7 +42,13 @@ if(WIN32)
         set(BLIPBLOP_WIN32_LINK_FLAGS "/ENTRY:mainCRTStartup")
     endif()
 
-    add_executable(blipblop WIN32 ${SRC} ${MENUS_SRC})
+    # app.rc embeds blipblop.ico as the .exe's icon (Explorer/taskbar/
+    # Alt-Tab). enable_language(RC) isn't needed for the Visual Studio
+    # generator (used by CI) but is cheap insurance for other Windows
+    # generators (e.g. Ninja) that need it told explicitly.
+    enable_language(RC)
+
+    add_executable(blipblop WIN32 ${SRC} ${MENUS_SRC} app.rc)
     target_link_libraries(blipblop PUBLIC ${SDL2_LIBRARIES})
     if(BLIPBLOP_WIN32_LINK_FLAGS)
         set_target_properties(blipblop PROPERTIES LINK_FLAGS "${BLIPBLOP_WIN32_LINK_FLAGS}")

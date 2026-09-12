@@ -1,0 +1,9 @@
+// Windows resource file: embeds blipblop.ico as the executable's icon
+// (shown in Explorer, the taskbar, and Alt-Tab). Placeholder art - see
+// blipblop.ico's own generation notes; swap the .ico file for real art
+// whenever it's ready, no other changes needed here.
+//
+// Plain numeric ID (not a symbolic #define'd one) - Windows picks the
+// lowest-numbered ICON resource in the module as the exe's own icon,
+// and a bare number here avoids needing an accompanying resource.h.
+101 ICON "blipblop.ico"

@@ -64,7 +64,10 @@ bool	cheat_on = false;
 HiScores	hi_scores;
 
 bool	winSet;
-bool fullscreen = false; // THIS IS UGLY AS FUCK. WAY TOO MANY GLOBALS
+// Default to fullscreen on a fresh install (no bb.cfg yet) or after a
+// reset to defaults (set_default_config() below) - an existing saved
+// config's own value always wins over this once one exists.
+bool fullscreen = true; // THIS IS UGLY AS FUCK. WAY TOO MANY GLOBALS
 
 
 void load_BB3_config(const char * cfg_file)
@@ -244,6 +247,8 @@ void set_default_config(bool reset_lang)
 {
 	if (reset_lang)
 		lang_type = LANG_UK;
+
+	fullscreen = true;
 
 	in.setAlias(ALIAS_P1_UP, DIK_UP);
 	in.setAlias(ALIAS_P1_DOWN, DIK_DOWN);

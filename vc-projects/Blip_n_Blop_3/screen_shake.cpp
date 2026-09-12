@@ -18,6 +18,7 @@
 
 #include <cstring>
 
+#include "dd_gfx.h"  // for graphicInstance (Draw()'s scratch surface)
 #include "game_state.h"
 #include "globals.h"  // for tremblement()'s declaration
 #include "graphics.h"
@@ -77,7 +78,29 @@ void ScreenShake::Draw(SDL::Surface* surf) {
         y = dy_;
     }
 
-    surf->BltFast(0, y, surf, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+    // Fix: BltFast()/SDL_BlitSurface() don't support overlapping
+    // source/destination on the same surface - blitting `surf` onto
+    // itself shifted vertically (exactly what this shake effect
+    // needs) could read pixels the copy had already overwritten,
+    // corrupting the image. This was disabled entirely for a long
+    // time over exactly this ("works unproperly at least on Linux" -
+    // game.cpp) rather than fixed. Route the shifted copy through a
+    // scratch surface instead, so the read and write never alias.
+    if (!scratch_) {
+        scratch_ = graphicInstance->CreateSurface(SCREEN_W, 480);
+    }
+
+    int strip_height = r.bottom - r.top;
+    scratch_->BltFast(0, 0, surf, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+
+    Rect scratch_rect;
+    scratch_rect.left = 0;
+    scratch_rect.top = 0;
+    scratch_rect.right = SCREEN_W;
+    scratch_rect.bottom = strip_height;
+
+    surf->BltFast(0, y, scratch_, &scratch_rect,
+                  DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
     DDBLTFX ddfx;
 

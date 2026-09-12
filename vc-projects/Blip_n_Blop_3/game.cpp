@@ -748,8 +748,12 @@ void Game::drawAll(bool flip) {
 
     if (g_game_state.weather().type() == METEO_DEFORME && g_game_state.weather().intensite() != 0) drawDeformation();
 
-    // FIXME: Disable it for now as it works unproperly at least on Linux
-    // drawTremblements();
+    // Re-enabled: was disabled ("works unproperly at least on Linux")
+    // because ScreenShake::Draw() blitted the target surface onto
+    // itself with an overlapping shifted region - not supported by
+    // SDL_BlitSurface, and corrupted the image. Fixed in
+    // screen_shake.cpp by routing the copy through a scratch surface.
+    drawTremblements();
     drawHUB();
     drawTimer();
     go_.Draw();
@@ -1756,6 +1760,17 @@ void Game::drawDeformation() {
     pas = 2;
     dphi = 1;
 
+    // Fix: BltFast()/SDL_BlitSurface() don't support overlapping
+    // source/destination on the same surface - blitting backSurface
+    // onto itself shifted a few pixels (exactly what this per-strip
+    // wobble effect needs) could read pixels the copy had already
+    // overwritten, corrupting the image. Route each strip's copy
+    // through a small scratch surface instead, so the read and write
+    // never alias.
+    if (!deform_scratch_) {
+        deform_scratch_ = graphicInstance->CreateSurface(SCREEN_W, 480);
+    }
+
     for (int y = 0; y < 480; y += pas) {
         phi += dphi;
         phi %= 360;
@@ -1765,26 +1780,36 @@ void Game::drawDeformation() {
 
         x = xt = sini(5, phi);
 
-        // FIXME: This is absolutely wrong. We are copying a memory location to
-        // another that is overlapping (moving a line a few pixels). Depending
-        // on the order of overlap, we might be (and are) overwriting the data
-        // we're copying from and screwing everything up.  A temp satisfying
-        // fix would involve allocating a third surface to safely copy or doing
-        // it ourselves by locking the surface into host memory. A long term
-        // and much better fix is using pixel shaders.
-
         if (x < 0) {
             r.left = -x;
             r.right = SCREEN_W;
             x = 0;
-        } /*else {
-            // I'm overwriting my own mem!
+        } else {
+            // Fix: this branch used to be commented out ("I'm
+            // overwriting my own mem!" - the same self-blit-overlap
+            // concern noted above), leaving r.left/r.right holding
+            // whatever a PREVIOUS iteration's x<0 branch last set (or
+            // uninitialized garbage on the very first iteration)
+            // roughly half the time, since sini() alternates sign.
+            // Restored now that the scratch-surface copy below makes
+            // it safe: clip the source so writing at a positive x
+            // offset doesn't try to copy past the right edge.
             r.left = 0;
-            r.right = 640 - x;
-        }*/
+            r.right = SCREEN_W - x;
+        }
 
-        backSurface->BltFast(
-            x, y, backSurface, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+        int strip_width = r.right - r.left;
+        deform_scratch_->BltFast(
+            0, 0, backSurface, &r, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+
+        Rect scratch_rect;
+        scratch_rect.left = 0;
+        scratch_rect.top = 0;
+        scratch_rect.right = strip_width;
+        scratch_rect.bottom = pas;
+
+        backSurface->BltFast(x, y, deform_scratch_, &scratch_rect,
+                             DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
         if (xt < 0) {
             r.left = SCREEN_W + xt;

@@ -60,6 +60,13 @@ class ScreenShake {
     int etape_ = 0;
     int amplitude_ = 0;
     int ddy_ = 0;
+
+    // Fix for Draw()'s self-blit-overlap bug: a reusable scratch
+    // surface the shifted copy is routed through instead of blitting
+    // the target surface onto itself. Lazily created on first Draw()
+    // call (this class doesn't otherwise know the target surface's
+    // size at construction time).
+    SDL::Surface* scratch_ = nullptr;
 };
 
 // Owned by GameState (game_state.h) as g_game_state.screen_shake() - no

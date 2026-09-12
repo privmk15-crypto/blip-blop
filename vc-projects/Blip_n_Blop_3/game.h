@@ -131,6 +131,13 @@ protected:
 
 	int		phi_deform;
 
+	// Fix for drawDeformation()'s self-blit-overlap bug (see game.cpp):
+	// a reusable scratch surface each strip's shifted copy is routed
+	// through instead of blitting backSurface onto itself. Lazily
+	// created on first use (drawDeformation() only runs during
+	// METEO_DEFORME weather).
+	SDL::Surface* deform_scratch_ = nullptr;
+
 	MeteoNeige	neige[NB_FLOCONS];
 	int			next_flocon;
 
